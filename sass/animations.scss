@@ -1,0 +1,256 @@
+
+
+/* --------------------
+    Animations
+    ------------------- */  
+
+.animate-t {
+    @include transition(all, 1.3s, ease-out);
+    letter-spacing: 20px;
+    opacity: 0;
+
+    .loaded &, .start & {
+        opacity: 1;
+        letter-spacing: 0;
+    }
+}     
+
+.animate-slide {
+    @include transition(all, 1s, ease-out);
+    opacity: 0;
+    //@include transform(translateY(20px));
+   
+
+    .loaded &, .start & {
+        //@include transform(translateY(0px));
+        @include animation(animateSlide, 1s, ease-out);
+        //opacity: 1;
+    }
+}
+
+.animate-fade {
+    // @include transition(opacity, 0.8s, linear);
+    opacity: 0;
+
+    .loaded &, .start & {
+        @include animation(animateFade, 1.5s, ease-out);
+    }
+}
+
+@keyframes animateSlide {
+    0% {
+        transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        -ms-transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes animateFade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes animateSlide {
+    0% {
+        transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        -ms-transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes animateFade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+////////////// TIMING /////////
+
+.footer {
+    @include a-delay(0.9s);
+}
+
+// Main Page
+.page-main {
+
+    .btn {
+        @include a-delay(0.5s);
+    }
+
+    .quote-wrap {
+        @include a-delay(0.55s);
+    }
+
+    .lic-wrap {
+        @include a-delay(0.7s);
+    }
+
+    .scroll-helper {
+        @include delay(0.3s);
+    }
+
+    .ico-mouse, .ico-swipe {
+        @include delay(1.2s);
+    }
+
+    .object-main {
+        @include a-delay(0.3s);
+    }
+}
+
+// Assort 
+.assort-slider, .assort-slider-ind {
+    @include a-delay(0.3s);
+}
+
+.cubes-b {
+    li:nth-child(2) { @include a-delay(0.10s) }
+    li:nth-child(3) { @include a-delay(0.15s) }
+    li:nth-child(4) { @include a-delay(0.20s) }
+    li:nth-child(5) { @include a-delay(0.22s) }
+    li:nth-child(6) { @include a-delay(0.28s) }
+    li:nth-child(7) { @include a-delay(0.32s) }
+    li:nth-child(8) { @include a-delay(0.35s) }
+}
+
+// Product Table
+.product-image {
+
+    .title-2 {
+        @include a-delay(0.3s);
+    }
+    
+    p {
+        @include a-delay(0.5s);
+    }
+
+    .product-table-block .btn {
+        @include a-delay(0.6s);
+    }
+}
+
+// Product
+.product-view-block {
+
+    &:nth-child(2) {
+        @include a-delay(0.15s);
+    }
+
+    &:nth-child(3) {
+        @include a-delay(0.3s);
+    }
+
+    &:nth-child(4) {
+        @include a-delay(0.45s);
+    }
+}
+
+.cd-product-viewer-handle {
+    @include a-delay(0.5s);
+}
+
+.object-360-wrap {
+
+    .btn-circle {
+        @include a-delay(0.5s);
+    }
+}
+
+.object-title-row {
+    @include a-delay(0.2s);
+}
+
+.consist-table-body {
+    @include a-delay(0.15s);
+}
+
+.btn-prev {
+    @include a-delay(0.25s);
+}
+
+// Consultation
+.consult-top {
+
+    p {
+        @include a-delay(0.15s);
+    }
+
+    .tabs-panel {
+        @include a-delay(0.25s);
+    }
+}
+
+.consult-form-left {
+    @include a-delay(0.3s);
+}
+
+.consult-form-right {
+    @include a-delay(0.5s);
+}
+
+.page-consult {
+
+    .checkbox {
+        @include a-delay(0.6s);
+    }
+    
+    .btn-send {
+        @include a-delay(0.65s);
+    }
+
+    .contacts-column:last-child {
+        @include a-delay(0.2s);
+    }
+}
+
+// Mission
+.mission-text {
+
+    p {
+        @include a-delay(0.2s);
+    }
+}
+
+.mission-text-slider {
+    @include a-delay(0.25s);
+}
+
+.mission-tabs {
+    @include a-delay(0.4s);
+}
+
+// Advantaged
+.page-adv .point {
+    @include a-delay(0.7s);
+}
+
+// No Javascript
+.no-js {
+
+    .animate-title, .animate-text, .animate-fade, .assort-slider {
+        @include transform(translate(0) scale(1));
+        opacity: 1 !important;
+        letter-spacing: 0px !important;
+    }
+}

@@ -1,0 +1,207 @@
+
+/* ---------------
+    Buttons
+    -------------- */
+
+.main {
+
+    .btn {
+        @extend .btn-style;
+        @extend .not-blurry;
+        //min-width: 200px;
+        cursor: pointer;  
+        border: none;
+        outline: none;
+        text-align: left;
+        line-height: 47px;
+
+        &.btn-inline {
+            min-width: auto;
+            line-height: 49px;
+
+            &:hover span {
+                color: $textCol;
+            }
+        }
+
+        span {
+            @extend .transDef;
+            @extend .not-blurry;
+            color: $textCol;
+            font-size: 10px;
+            font-family: $fontMed;
+            text-transform: uppercase;
+            white-space: nowrap;
+            letter-spacing: 0.7px;
+        }
+
+        img {
+            @include transition(all, 0.4s, ease-out);
+            @include transform(translateY(-48%));
+            top: 50%;
+            position: absolute;
+            display: block;
+        }
+
+        &.btn-next {
+            padding-right: 45px;
+
+            img {
+                right: 16px;
+            }
+
+            &:hover {
+                
+                img {
+                    @include transform(translateY(-48%) translateX(-5px));
+                }
+            }
+        }
+
+        &.btn-prev {
+            padding-left: 45px;
+            text-align: right;
+
+            img {
+                @include transform(rotate(180deg) translateY(-48%));
+                @include origin(top, center);
+                left: 16px;
+            }
+
+            &:hover {
+                
+                img {
+                    @include transform(rotate(180deg) translateY(-48%) translateX(5px));
+                }
+            }
+        }
+    }
+
+
+    .btn-circle {
+        @include border-rad(50%);
+        display: block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        background-color: #fff;
+        box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
+        -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
+
+        &:after {
+            @extend .ps;
+            height: 65px;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            top: auto;
+        }
+
+        .btn-text {
+            @extend .not-blurry;
+            display: block;
+            position: absolute;
+            white-space: nowrap;
+            width: 90px;
+            left: 50%;
+            margin-left: -45px;
+            top: 76px;
+            text-align: center;
+        }
+
+        .ico {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -10px 0 0 -8px;
+            width: 16px;
+            height: 20px;
+            display: block;
+            z-index: 1;
+
+            img {
+                @include transition(all, 0.3s, ease-out);
+                @include origin(center, center);
+            }
+        }
+
+        &.btn-comp:hover .ico img {
+            @include transform(rotate(180deg));
+        }
+    }
+
+    .btn-consist {
+
+        .dots {
+            @include transform(translateY(-50%));
+            position: absolute;
+            top: 50%;
+            z-index: 1;
+            left: 10px;
+            right: 10px;
+            text-align: center;
+            font-size: 0;
+            overflow: hidden;
+            
+            li {
+                @include border-rad(50%);
+                @include transition(all, 0.35s, ease-out);
+                display: inline-block;
+                vertical-align: top;
+                margin: 0 2px 0 3px;
+                width: 4px;
+                height: 4px;
+                background-color: #7caadb;
+
+                &:nth-child(2) {
+                    @include origin(center, center);
+                }
+            }
+        }
+
+        &:hover {
+            
+            li:nth-child(1) {
+                @include transform(translateX(-50px));
+            }
+
+            li:nth-child(3) {
+                @include transform(translateX(50px));
+            }
+
+            li:nth-child(2) {
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
+}
+
+.no-touchevents {
+
+    .main .btn {
+
+        &:hover {
+            box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.25);
+            -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.25);
+        }
+    }
+}
+
+.like {
+    width: 19px;
+    height: 17px;
+    background: url(../images/heart.png) no-repeat 0 0;
+}
+
+.btn-wrap {
+    font-size: 0;
+
+    > span {
+        display: inline-block;
+        margin-right: 18px;
+        line-height: 47px;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+}
