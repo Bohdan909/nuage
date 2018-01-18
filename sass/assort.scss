@@ -690,19 +690,19 @@ ul.desc-list {
     }
 
     .assort-slider-wrap {
-        position: static;
+        position: relative;
         float: none;
         // width: calc(100% - 34px);
         // width: -webkit-calc(100% - 34px);
         width: 100%;
-        height: 360px;
+        height: 290px;
         padding: 30px 17px 35px;
 
-        overflow: hidden;
+        //overflow: hidden;
 
         .slick-arrow.slick-next, 
         .slick-arrow.slick-prev {
-            bottom: 5px;
+            bottom: -72px;
         }
 
         .slick-arrow.slick-prev {
@@ -732,9 +732,13 @@ ul.desc-list {
         }
     }
 
-
     div.assort-desc-item {
         position: static;
+
+        .title-2 {
+            margin-bottom: 17px;
+            padding-right: 120px;
+        }
     }
 
     .page-assort .socket {
