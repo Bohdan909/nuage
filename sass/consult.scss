@@ -380,6 +380,14 @@ ul.tabs.tabs-panel {
         }
     }
 
+    .consult-top {
+        padding-top: 25px;
+    }
+
+    .consult-form-wrap {
+        margin-bottom: 20px;
+    }
+
     @include port {
 
         .contacts-column {
@@ -393,12 +401,22 @@ ul.tabs.tabs-panel {
             }
         }
     }
+
+    @include land {
+
+        .contacts-block {
+            padding-top: 0;
+            
+            .contacts-item:first-child {
+                margin-bottom: 35px;
+            }
+        }
+    }
 }
 
 @include mobile {
 
     .consult-top {
-        padding-top: 25px;
         padding-right: 0;
 
         ul.tabs.tabs-panel {

@@ -428,7 +428,7 @@ body {
     overflow: hidden;
 }    
 
-@media (max-height: 601px) and (min-width: 1025px){
+@media (max-height: 601px) and (min-width: 768px){
 
     html, body {
         height: 600px !important;
@@ -442,6 +442,20 @@ body {
     #content {
         height: calc( 600px - #{$header-height});
         height: -webkit-calc( 600px - #{$header-height});
+    }
+
+    @media (max-width: 1024px){
+        #content {
+            height: calc( 600px - #{$header-height-tbl});
+            height: -webkit-calc( 600px - #{$header-height-tbl});
+        }
+    }
+
+    @media (max-width: 960px){
+        #content {
+            height: calc( 600px - #{$header-height-mob});
+            height: -webkit-calc( 600px - #{$header-height-mob});
+        }
     }
 }
 

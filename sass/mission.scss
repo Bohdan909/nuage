@@ -70,7 +70,7 @@
     }
 }
 
-.mission-text {
+div.mission-text {
     height: 60%;
     padding-top: 15px;
     padding-right: 50px;
@@ -78,8 +78,11 @@
 
     p {
         max-height: 145px;
-        margin-bottom: 0;
         overflow: hidden;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 
