@@ -242,6 +242,7 @@ div.scroll-helper {
     right: 0;
     top: 0;
     bottom: 0;
+    z-index: 100;
 
     .slide {
         position: absolute;
@@ -314,6 +315,7 @@ div.scroll-helper {
 
     > div {
         @include transition(opacity, 0.55s, linear);
+        @extend .not-blurry;
         opacity: 0;
 
         &.show {
@@ -327,6 +329,7 @@ div.scroll-helper {
             @include transition(all, 0.7s, ease-out);
             @include delay(0.3s);
             @include transform(translateY(10px));
+            @extend .not-blurry;
             opacity: 0;  
         }
 
@@ -723,8 +726,76 @@ ul.cubes-main {
     .object-main-wrap {
         @include transform(scale(1) translateY(0) translateX(-50%));
         top: auto;
-        left: 54%;
-        bottom: 60px;
+        left: 55%;
+        bottom: 80px;
+    }
+
+    ul.cubes-main {
+        right: 0;
+
+        &.top li {
+            
+            &:nth-child(3) {
+                @include transform(translateY(23vh));
+            }
+
+            &:nth-child(4) {
+                @include transform(translateY(25vh));
+            }
+        }
+
+        &.mid li {
+            
+            &:nth-child(1) {
+                @include transform(translateY(24vh));
+            }
+
+            &:nth-child(2) {
+                @include transform(translateY(27vh));
+            }
+
+            &:nth-child(3) {
+                @include transform(translateY(29vh));
+            }
+
+            &:nth-child(4) {
+                @include transform(translateY(31vh));
+            }
+        }
+
+        &.btm li {
+            
+            &:nth-child(1) {
+                @include transform(translateY(30vh));
+            }
+
+            &:nth-child(2) {
+                @include transform(translateY(33vh));
+            }
+
+            &:nth-child(3) {
+                @include transform(translateY(35vh));
+            }
+
+            &:nth-child(4) {
+                @include transform(translateY(37vh));
+            }
+        }
+    }
+
+    .quote-wrap .slide {
+
+        &:nth-child(1) {
+            top: 8vh;
+        }
+
+        &:nth-child(2) {
+            top: 14vh;
+        }
+
+        &:nth-child(3) {
+            top: 20vh;
+        }
     }
 
     div.scroll-helper {
@@ -776,7 +847,6 @@ ul.cubes-main {
             }
         }
     }
-    
 
     @media screen and (max-height: 740px){
 
@@ -787,7 +857,6 @@ ul.cubes-main {
         .page-main {
 
             .text-block {
-                
 
                 p {
                     display: none;
@@ -829,92 +898,32 @@ ul.cubes-main {
         height: 413px;
     }
 
+    div.scroll-helper {
+        width: 370px;
+        height: 370px;
+        bottom: -185px;
+    }
+
     .ico-mouse {
         top: 70px;
     }
 
-    .quote-wrap .slide {
+    // .quote-wrap .slide {
 
-        &:nth-child(1) {
-            top: 8vh;
-        }
+    //     &:nth-child(1) {
+    //         top: 8vh;
+    //     }
 
-        &:nth-child(2) {
-            top: 20vh;
-        }
+    //     &:nth-child(2) {
+    //         top: 20vh;
+    //     }
 
-        &:nth-child(3) {
-            top: 30vh;
-        }
-    }
-
-    ul.cubes-main {
-
-        &.top {
-
-            li:nth-child(1) {
-                @include transform(translateY(9vh));
-            }
-
-            li:nth-child(2) {
-                @include transform(translateY(12vh));
-            }
-
-            li:nth-child(3) {
-                @include transform(translateY(15vh));
-            }
-
-            li:nth-child(4) {
-                @include transform(translateY(17vh));
-            }
-        }
-
-        &.mid {
-
-            li:nth-child(1) {
-                @include transform(translateY(21vh));
-            }
-
-            li:nth-child(2) {
-                @include transform(translateY(25vh));
-            }
-
-            li:nth-child(3) {
-                @include transform(translateY(27vh));
-            }
-
-            li:nth-child(4) {
-                @include transform(translateY(30vh));
-            }
-        }
-
-        &.btm {
-
-            li:nth-child(1) {
-                @include transform(translateY(32vh));
-            }
-
-            li:nth-child(2) {
-                @include transform(translateY(34vh));
-            }
-
-            li:nth-child(3) {
-                @include transform(translateY(37vh));
-            }
-
-            li:nth-child(4) {
-                @include transform(translateY(39vh));
-            }
-        }
-    }
+    //     &:nth-child(3) {
+    //         top: 30vh;
+    //     }
+    // }
 }
 
-
-
-
-//////////////////////////////////////////////////////
-// ------------------- MOBILE  ------------------- //
-////////////////////////////////////////////////////
 
 @include mobile {
 
@@ -948,6 +957,7 @@ ul.cubes-main {
             @include notCenter;
             width: auto;
             position: static;
+            padding-bottom: 70px;
 
             p {
                 display: block;
@@ -1034,5 +1044,15 @@ ul.cubes-main {
 
     .footer, .scroll-helper, .quote-wrap.rotator, .cubes {
         display: none;
+    }
+}
+
+@include mobile-min {
+
+    .page-main {
+        
+        .text-block {
+            padding-bottom: 0;
+        }
     }
 }
