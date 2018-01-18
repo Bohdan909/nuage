@@ -51,7 +51,7 @@ body {
 #header {
     @include socket;
     padding-top: 51px;
-    position: relative;
+    position: fixed;
     height: $header-height;
     text-align: center;
     z-index: 998;
