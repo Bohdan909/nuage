@@ -6015,4 +6015,9 @@ div.mission-text-slider {
   .mission-tabs li {
     margin-right: 10px; } }
 
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=main.css.map */

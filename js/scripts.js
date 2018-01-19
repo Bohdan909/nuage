@@ -210,6 +210,83 @@ document.documentElement.className = document.documentElement.className.replace(
 
         windowSize();   
         $(window).resize(windowSize); 
+
+        /* ================
+            CUSTOM SCROLL
+        =================== */
+        // TODO: 
+        // 1) handle other scroll events
+        // 2) remove "loaded" class when navigating to other block
+        // 3) animated underline for menu
+
+        $(".main").addClass("stop-scrolling");
+
+        // left: 37, up: 38, right: 39, down: 40,
+        // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+        var keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
+        var keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
+
+        var navLinks = [
+            "main",
+            "advantages",
+            "assortment",
+            "mission",
+            "faq",
+            "buy",
+            "consultation"
+        ];
+        var baseHashUrl = "index1.htm#";
+
+        // TODO: initialize variable by hashtag from url if it present
+        var currentHashtag = window.location.hash.substr(1);
+        
+        var currentBlockIndex = 0;
+        if (navLinks.indexOf(currentHashtag) != -1) {
+            currentBlockIndex = navLinks.indexOf(currentHashtag);
+        }
+        
+        function navigateToBlock(blockIndex){
+            var currentBlockId = navLinks[currentBlockIndex];
+            window.location.href = baseHashUrl + currentBlockId;
+            var elem = document.getElementById(currentBlockId);
+            elem.className += " loaded";
+        }
+        
+        navigateToBlock(currentBlockIndex);
+
+        function scrollToNextBlock() {
+            if (currentBlockIndex == navLinks.length - 1) {
+                return;
+            }
+            console.log("scroll to next block");
+            currentBlockIndex += 1;
+            navigateToBlock(currentBlockIndex);
+        }
+        function scrollToPrevBlock() {
+            if (currentBlockIndex == 0) {
+                return;
+            }
+            console.log("scroll to previous block");
+            currentBlockIndex -= 1;
+            navigateToBlock(currentBlockIndex);
+        }
+
+        function customScrollHandler(e) {
+            console.log("custom scroll handler");
+        }
+        function customScrollKeysHandler(e) {
+            if (keysPrev[e.keyCode]) {
+                e.preventDefault();
+                scrollToPrevBlock();
+            } else if (keysNext[e.keyCode]) {
+                e.preventDefault();
+                scrollToNextBlock();
+            }
+        }
+        window.onmousewheel = document.onmousewheel = customScrollHandler; 
+        window.onwheel = customScrollHandler; 
+        window.ontouchmove = customScrollHandler;  
+        document.onkeydown = customScrollKeysHandler;
         
     });
 
@@ -267,5 +344,21 @@ document.documentElement.className = document.documentElement.className.replace(
         if ( typeof NodeList.prototype.forEach === "function" ) return false;
         NodeList.prototype.forEach = Array.prototype.forEach;
     }());
+
+
+    var lastScrollTop = 0;
+	$(window).scroll(function(event){
+        var st = $(this).scrollTop();
+        if (st > lastScrollTop){
+            // downscroll code
+            console.log("scroll down");
+            
+        } else {
+            // upscroll code
+            console.log("scroll up");
+            
+        }
+        lastScrollTop = st;
+	});
     
 }(jQuery))
