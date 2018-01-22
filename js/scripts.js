@@ -219,8 +219,11 @@ document.documentElement.className = document.documentElement.className.replace(
         // 1) handle other scroll events
         // 3) animated underline for menu
         // 4) fix animation for some pages
+        // 5) handle defailt navigation by clicking on links
 
-        $(".main").addClass("stop-scrolling");
+        //$(".main").addClass("stop-scrolling");
+        let mainElem = document.querySelector(".main");
+        mainElem.classList.add("stop-scrolling");
 
         // left: 37, up: 38, right: 39, down: 40,
         // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
@@ -247,12 +250,32 @@ document.documentElement.className = document.documentElement.className.replace(
         if (navLinks.indexOf(currentHashtag) != -1) {
             currentBlockIndex = navLinks.indexOf(currentHashtag);
         }
-        
+        let movingMenuUnderline = document.querySelector(".menu .moving-underline");
         function navigateToBlock(blockIndex){
             let currentBlockId = navLinks[currentBlockIndex];
             let prevBlockId = navLinks[prevBlockIndex];
+            let currentNavElement = document.querySelector("li." + currentBlockId);
+            let prevNavElement = document.querySelector("li." + prevBlockId);
+            
+            if (currentNavElement) {
+                movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
+            movingMenuUnderline.style.transform = `translateX(${currentNavElement.offsetLeft - 61}px)`;
+            }
+            
 
+            if (prevNavElement) {
+                prevNavElement.classList.remove("active");
+            }
+            
+            if (currentNavElement) {
+                currentNavElement.classList.add("active");
+            }
+            
             let elem = document.getElementById(currentBlockId);
+            mainElem.style.height = elem.scrollHeight + "px";
+            
+            console.log("scroll height " + elem.scrollHeight);
+            
             elem.classList.remove("loaded");
             window.location.href = baseHashUrl + currentBlockId;
             elem.classList.add("loaded");
@@ -282,12 +305,25 @@ document.documentElement.className = document.documentElement.className.replace(
             navigateToBlock(currentBlockIndex);
         }
 
-        let lastScrollTime = 0 
-        function customScrollHandler(e) {
-            console.log("custom scroll handler");
+        
 
+        function customScrollKeysHandler(e) {
+            if (keysPrev[e.keyCode]) {
+                e.preventDefault();
+                scrollToPrevBlock();
+            } else if (keysNext[e.keyCode]) {
+                e.preventDefault();
+                scrollToNextBlock();
+            }
+        }
+
+        let lastScrollTime = 0 
+        function customScrollWheelHandler(e) {
+            console.log("custom wheel handler");
+            
+            
             // limit handling rate to prevent scrolling trough all pages
-            if (Date.now() - lastScrollTime > 1500) {
+            if (Date.now() - lastScrollTime > 1000) {
 
                 console.log(e.deltaY);
                 if (e.deltaY > 0) {
@@ -300,21 +336,18 @@ document.documentElement.className = document.documentElement.className.replace(
             }
         }
 
-        function customScrollKeysHandler(e) {
-            if (keysPrev[e.keyCode]) {
-                e.preventDefault();
-                scrollToPrevBlock();
-            } else if (keysNext[e.keyCode]) {
-                e.preventDefault();
-                scrollToNextBlock();
-            }
+        function customScrollTouchHandler(e) {
+            console.log("custom touch handler");
+            console.log(e);
+
         }
 
-        // handler for wheel event 
-        addWheelListener( window, customScrollHandler );
-
-        window.ontouchmove = customScrollHandler;  
         document.onkeydown = customScrollKeysHandler;
+        // handler for wheel event 
+        addWheelListener( window, customScrollWheelHandler );
+
+        window.ontouchmove = customScrollTouchHandler;  
+        
         
     });
 
@@ -373,7 +406,7 @@ document.documentElement.className = document.documentElement.className.replace(
         NodeList.prototype.forEach = Array.prototype.forEach;
     }());
 
-    
+
     /*********************************
      * UNIVERSAL MOUSE WHEEL HANDLER 
      *********************************/
