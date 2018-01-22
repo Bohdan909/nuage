@@ -217,7 +217,6 @@ document.documentElement.className = document.documentElement.className.replace(
         =================== */
         // TODO: 
         // 1) handle other scroll events
-        // 3) animated underline for menu
         // 4) fix animation for some pages
         // 5) handle defailt navigation by clicking on links
 
@@ -251,24 +250,29 @@ document.documentElement.className = document.documentElement.className.replace(
             currentBlockIndex = navLinks.indexOf(currentHashtag);
         }
         let movingMenuUnderline = document.querySelector(".menu .moving-underline");
+        let menuListElem = document.querySelector(".menu ul");
         function navigateToBlock(blockIndex){
             let currentBlockId = navLinks[currentBlockIndex];
             let prevBlockId = navLinks[prevBlockIndex];
             let currentNavElement = document.querySelector("li." + currentBlockId);
             let prevNavElement = document.querySelector("li." + prevBlockId);
             
+
             if (currentNavElement) {
+                let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
                 movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
-            movingMenuUnderline.style.transform = `translateX(${currentNavElement.offsetLeft - 61}px)`;
+                movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
+            } else {
+                movingMenuUnderline.style.width = 0;
             }
             
 
             if (prevNavElement) {
-                prevNavElement.classList.remove("active");
+                //prevNavElement.classList.remove("active");
             }
             
             if (currentNavElement) {
-                currentNavElement.classList.add("active");
+                //currentNavElement.classList.add("active");
             }
             
             let elem = document.getElementById(currentBlockId);
