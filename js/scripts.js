@@ -18,7 +18,7 @@ document.documentElement.className = document.documentElement.className.replace(
         // }
 
         // $("a").on("click", function(){
-        //     var href = $(this).attr('href');
+        //     let href = $(this).attr('href');
 
         //     // $(".preloader svg, .preloader-logo-wrap").hide();
         //     // $(".preloader").fadeIn(1000);
@@ -140,7 +140,7 @@ document.documentElement.className = document.documentElement.className.replace(
            TABS
         ================= */
 
-        var tabs = document.querySelectorAll(".tabs > .tab");
+        let tabs = document.querySelectorAll(".tabs > .tab");
 
         function tabsClick(tabClickEvent) {
 
@@ -148,20 +148,20 @@ document.documentElement.className = document.documentElement.className.replace(
                 tabs[i].classList.remove("active");
             }
 
-            var clickedTab = tabClickEvent.currentTarget; 
+            let clickedTab = tabClickEvent.currentTarget; 
 
             clickedTab.classList.add("active");
             tabClickEvent.preventDefault();
 
-            var contentPanes = document.querySelectorAll(".tab-pane");
+            let contentPanes = document.querySelectorAll(".tab-pane");
 
             for (let i = 0; i < contentPanes.length; i++) {
                 contentPanes[i].classList.remove("active");
             }
 
-            var anchorReference = tabClickEvent.target;
-            var activePaneId = anchorReference.getAttribute("data-tab");
-            var activePane = document.querySelector("#" + activePaneId);
+            let anchorReference = tabClickEvent.target;
+            let activePaneId = anchorReference.getAttribute("data-tab");
+            let activePane = document.querySelector("#" + activePaneId);
 
             console.log(activePane);
 
@@ -216,17 +216,17 @@ document.documentElement.className = document.documentElement.className.replace(
         =================== */
         // TODO: 
         // 1) handle other scroll events
-        // 2) remove "loaded" class when navigating to other block
         // 3) animated underline for menu
+        // 4) fix animation for some pages
 
         $(".main").addClass("stop-scrolling");
 
         // left: 37, up: 38, right: 39, down: 40,
         // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-        var keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
-        var keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
+        let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
+        let keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
 
-        var navLinks = [
+        let navLinks = [
             "main",
             "advantages",
             "assortment",
@@ -235,21 +235,29 @@ document.documentElement.className = document.documentElement.className.replace(
             "buy",
             "consultation"
         ];
-        var baseHashUrl = "index1.htm#";
+        let baseHashUrl = "index1.htm#";
 
         // TODO: initialize variable by hashtag from url if it present
-        var currentHashtag = window.location.hash.substr(1);
+        let currentHashtag = window.location.hash.substr(1);
         
-        var currentBlockIndex = 0;
+        let currentBlockIndex = 0;
+        let prevBlockIndex = 0;
+
         if (navLinks.indexOf(currentHashtag) != -1) {
             currentBlockIndex = navLinks.indexOf(currentHashtag);
         }
         
         function navigateToBlock(blockIndex){
-            var currentBlockId = navLinks[currentBlockIndex];
+            let currentBlockId = navLinks[currentBlockIndex];
+            let prevBlockId = navLinks[prevBlockIndex];
+
+            let elem = document.getElementById(currentBlockId);
+            elem.classList.remove("loaded");
             window.location.href = baseHashUrl + currentBlockId;
-            var elem = document.getElementById(currentBlockId);
-            elem.className += " loaded";
+            elem.classList.add("loaded");
+            
+            let prevElement = document.getElementById(prevBlockId);
+            prevElement.classList.remove("loaded");
         }
         
         navigateToBlock(currentBlockIndex);
@@ -259,6 +267,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 return;
             }
             console.log("scroll to next block");
+            prevBlockIndex = currentBlockIndex;
             currentBlockIndex += 1;
             navigateToBlock(currentBlockIndex);
         }
@@ -267,6 +276,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 return;
             }
             console.log("scroll to previous block");
+            prevBlockIndex = currentBlockIndex;
             currentBlockIndex -= 1;
             navigateToBlock(currentBlockIndex);
         }
@@ -291,10 +301,10 @@ document.documentElement.className = document.documentElement.className.replace(
     });
 
 
-    var cachedWidth = window.innerWidth;
+    let cachedWidth = window.innerWidth;
 
     function windowSize(){
-        var winWidth = window.innerWidth,
+        let winWidth = window.innerWidth,
             docWidth = $(document).width();
 
         scrollBar(true);
@@ -310,7 +320,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
     // ScrollBar
     function scrollBar(update){
-        var $scroll = $(".scroll-block");
+        let $scroll = $(".scroll-block");
 
         if ($scroll.length && window.innerWidth > 767){
             
@@ -346,9 +356,9 @@ document.documentElement.className = document.documentElement.className.replace(
     }());
 
 
-    var lastScrollTop = 0;
+    let lastScrollTop = 0;
 	$(window).scroll(function(event){
-        var st = $(this).scrollTop();
+        let st = $(this).scrollTop();
         if (st > lastScrollTop){
             // downscroll code
             console.log("scroll down");
