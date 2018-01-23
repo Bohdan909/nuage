@@ -127,6 +127,7 @@ $heightPanel: 90px;
 
         .point-btn {
             @include trans(0.5s);
+            @include border-rad(35px);
             position: absolute;
             left: 20px;
             background-image: -moz-linear-gradient( -90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 19%, rgb(255,255,255) 100%);
@@ -224,8 +225,15 @@ ul.feedback-filter {
 }
 
 .feedback-item {
+    opacity: 0;
+    display: none;
     padding: 34px 15px 10px 40px;
     border-bottom: 1px solid $borColor;
+
+    &.show {
+        display: block;
+        opacity: 1;
+    }
 
     &:last-child {
         border-bottom: none;
@@ -388,6 +396,10 @@ ul.feedback-filter {
     .feedback-bottom {
         height: auto;
         padding:40px 0 20px !important;
+
+        .btn-wrap > span {
+            display: block;
+        }
     }
 
     .feedback-item {

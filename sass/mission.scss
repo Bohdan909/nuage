@@ -8,6 +8,10 @@
     
     #content > .socket {
         padding: 50px 0 30px;
+
+        @media (max-height: 750px) and (min-width: 768px){
+            padding: 20px 0;
+        }
     }
 
     .cubes {
@@ -374,7 +378,7 @@ div.mission-text-slider {
     }
 
     div.mission-text-slider p {
-        height: 65px;
+        height: 35px;
     }
 
     @include port {

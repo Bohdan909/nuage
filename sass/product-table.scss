@@ -15,7 +15,12 @@
 
     .image {
         max-width: 480px;
-        margin-bottom: 20px;
+        margin:0 auto 20px;
+        text-align: center;
+
+        img {
+            max-width: 100%;
+        }
     }
 
     .product-text {
@@ -333,8 +338,8 @@
 
     .product-image {
 
-        .image {
-            @include transform(scale(0.80));
+        .image img {
+            @include transform(scale(0.8));
             @include origin(center, bottom);
         }
     }
@@ -354,7 +359,7 @@
 
     .product-image {
 
-        .image {
+        .image img {
             @include transform(scale(0.7));
         }
 

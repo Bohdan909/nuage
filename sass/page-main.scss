@@ -813,9 +813,20 @@ ul.cubes-main {
         }
     }
 
-    .page-main .text-block {
-        @include transform(translateY(0));
-        top: 50px;
+    .page-main {
+
+        .text-block {
+            @include transform(translateY(0));
+            top: 50px;
+        }
+
+        .circle-main {
+            top: 50vh;
+        }
+
+        .strip {
+            top: 28vh;
+        }
     }
 
     @include land {
