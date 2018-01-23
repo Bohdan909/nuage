@@ -218,7 +218,6 @@ document.documentElement.className = document.documentElement.className.replace(
         // TODO: 
         // 1) handle other scroll events
         // 4) fix animation for some pages
-        // 5) handle default navigation by clicking on links
 
         //$(".main").addClass("stop-scrolling");
         let mainElem = document.querySelector(".main");
@@ -284,8 +283,6 @@ document.documentElement.className = document.documentElement.className.replace(
             let elem = document.getElementById(currentBlockId);
             mainElem.style.height = elem.scrollHeight + "px";
             
-            console.log("scroll height " + elem.scrollHeight);
-            
             elem.classList.remove("loaded");
             window.location.href = baseHashUrl + currentBlockId;
             elem.classList.add("loaded");
@@ -300,7 +297,6 @@ document.documentElement.className = document.documentElement.className.replace(
             if (currentBlockIndex == navLinks.length - 1) {
                 return;
             }
-            console.log("scroll to next block");
             prevBlockIndex = currentBlockIndex;
             currentBlockIndex += 1;
             navigateToBlock(currentBlockIndex);
@@ -309,7 +305,6 @@ document.documentElement.className = document.documentElement.className.replace(
             if (currentBlockIndex == 0) {
                 return;
             }
-            console.log("scroll to previous block");
             prevBlockIndex = currentBlockIndex;
             currentBlockIndex -= 1;
             navigateToBlock(currentBlockIndex);
@@ -327,12 +322,10 @@ document.documentElement.className = document.documentElement.className.replace(
 
         let lastScrollTime = 0 
         function customScrollWheelHandler(e) {
-            console.log("custom wheel handler");
             
             // limit handling rate to prevent scrolling trough all pages
             if (Date.now() - lastScrollTime > 1000) {
 
-                console.log(e.deltaY);
                 if (e.deltaY > 0) {
                     scrollToNextBlock();
                 } else if (e.deltaY < 0) {
@@ -344,8 +337,6 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         function customScrollTouchHandler(e) {
-            console.log("custom touch handler");
-            console.log(e);
             // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
         }
 
@@ -356,11 +347,7 @@ document.documentElement.className = document.documentElement.className.replace(
             // extract hashtag from link
             let hashtag = event.target.hash.substr(1);
             setCurrentBlockIndexByHashtag(hashtag)
-            navigateToBlock(currentBlockIndex);
-
-            console.log(`Nav menu clicked: ${event.target}`);
-            console.log(event);
-            
+            navigateToBlock(currentBlockIndex);            
         } 
 
         document.onkeydown = customScrollKeysHandler;
@@ -370,7 +357,7 @@ document.documentElement.className = document.documentElement.className.replace(
         window.ontouchmove = customScrollTouchHandler;
         
         // Handle direct click on havigation links  
-        let navigationMenuElement = document.querySelector(".menu");
+        let navigationMenuElement = document.querySelector(".main");
         navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
         
     });
@@ -437,7 +424,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
     // creates a global "addWheelListener" method
     // example: addWheelListener( elem, function( e ) { console.log( e.deltaY ); e.preventDefault(); } );
-    var prefix = "", _addEventListener, support;
+    let prefix = "", _addEventListener, support;
 
     // detect event model
     if ( window.addEventListener ) {
@@ -466,7 +453,7 @@ document.documentElement.className = document.documentElement.className.replace(
             !originalEvent && ( originalEvent = window.event );
 
             // create a normalized event object
-            var event = {
+            let event = {
                 // keep a ref to the original event object
                 originalEvent: originalEvent,
                 target: originalEvent.target || originalEvent.srcElement,
