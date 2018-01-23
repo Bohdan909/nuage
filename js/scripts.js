@@ -218,7 +218,7 @@ document.documentElement.className = document.documentElement.className.replace(
         // TODO: 
         // 1) handle other scroll events
         // 4) fix animation for some pages
-        // 5) handle defailt navigation by clicking on links
+        // 5) handle default navigation by clicking on links
 
         //$(".main").addClass("stop-scrolling");
         let mainElem = document.querySelector(".main");
@@ -238,7 +238,7 @@ document.documentElement.className = document.documentElement.className.replace(
             "buy",
             "consultation"
         ];
-        let baseHashUrl = "index1.htm#";
+        let baseHashUrl = "#";
 
         // TODO: initialize variable by hashtag from url if it present
         let currentHashtag = window.location.hash.substr(1);
@@ -246,18 +246,25 @@ document.documentElement.className = document.documentElement.className.replace(
         let currentBlockIndex = 0;
         let prevBlockIndex = 0;
 
-        if (navLinks.indexOf(currentHashtag) != -1) {
-            currentBlockIndex = navLinks.indexOf(currentHashtag);
+        
+        setCurrentBlockIndexByHashtag(currentHashtag);
+
+        function setCurrentBlockIndexByHashtag(hashtag) {
+            let hashtagIndex = navLinks.indexOf(hashtag);
+            if ( hashtagIndex != -1 ) {
+                currentBlockIndex = hashtagIndex;
+            }
         }
+
         let movingMenuUnderline = document.querySelector(".menu .moving-underline");
         let menuListElem = document.querySelector(".menu ul");
+
         function navigateToBlock(blockIndex){
             let currentBlockId = navLinks[currentBlockIndex];
             let prevBlockId = navLinks[prevBlockIndex];
             let currentNavElement = document.querySelector("li." + currentBlockId);
             let prevNavElement = document.querySelector("li." + prevBlockId);
             
-
             if (currentNavElement) {
                 let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
                 movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
@@ -266,7 +273,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 movingMenuUnderline.style.width = 0;
             }
             
-
             if (prevNavElement) {
                 //prevNavElement.classList.remove("active");
             }
@@ -309,8 +315,6 @@ document.documentElement.className = document.documentElement.className.replace(
             navigateToBlock(currentBlockIndex);
         }
 
-        
-
         function customScrollKeysHandler(e) {
             if (keysPrev[e.keyCode]) {
                 e.preventDefault();
@@ -324,7 +328,6 @@ document.documentElement.className = document.documentElement.className.replace(
         let lastScrollTime = 0 
         function customScrollWheelHandler(e) {
             console.log("custom wheel handler");
-            
             
             // limit handling rate to prevent scrolling trough all pages
             if (Date.now() - lastScrollTime > 1000) {
@@ -343,15 +346,32 @@ document.documentElement.className = document.documentElement.className.replace(
         function customScrollTouchHandler(e) {
             console.log("custom touch handler");
             console.log(e);
-
+            // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
         }
+
+        function handleDirectClickOnNavLinks (event) {
+            if (!event.target.matches('a[href^="#"]')) return;
+            event.preventDefault();
+
+            // extract hashtag from link
+            let hashtag = event.target.hash.substr(1);
+            setCurrentBlockIndexByHashtag(hashtag)
+            navigateToBlock(currentBlockIndex);
+
+            console.log(`Nav menu clicked: ${event.target}`);
+            console.log(event);
+            
+        } 
 
         document.onkeydown = customScrollKeysHandler;
         // handler for wheel event 
         addWheelListener( window, customScrollWheelHandler );
 
-        window.ontouchmove = customScrollTouchHandler;  
+        window.ontouchmove = customScrollTouchHandler;
         
+        // Handle direct click on havigation links  
+        let navigationMenuElement = document.querySelector(".menu");
+        navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
         
     });
 
