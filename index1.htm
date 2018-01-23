@@ -4,43 +4,43 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Nuage</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" /> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" /> 
 		<meta name="format-detection" content="telephone=no">
 		<meta name="format-detection" content="address=no">
 		<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"  />
 		
-        <link type="text/css" rel="stylesheet" href="css/perfect-scrollbar.min.css" />
-        <link type="text/css" rel="stylesheet" href="css/main.css" />
+		<link type="text/css" rel="stylesheet" href="css/perfect-scrollbar.min.css" />
+		<link type="text/css" rel="stylesheet" href="css/main.css" />
 	</head>
 	
 	<body onload="initialize()">
 		<div class="main">
-            <!-- Header -->
-            <header id="header"> 
-                <nav class="menu">
-                    <a href="#main" class="logo">
-                        <img src="images/logo.png" alt="logo">
-                    </a>
-                        
-                    <ul>
-                        <li class="advantages"><a href="#advantages">преимущества</a></li>
-                        <li class="assortment"><a href="#assortment">ассортимент</a></li>
-                        <li class="mission"><a href="#mission">миссия</a></li>
-                        <li class="faq"><a href="#faq">вопрос-ответ</a></li>
-                        <li class="buy"><a href="#buy">где купить?</a></li>
+			<!-- Header -->
+			<header id="header"> 
+				<nav class="menu">
+					<a href="#main" class="logo">
+						<img src="images/logo.png" alt="logo">
+					</a>
+						
+					<ul>
+						<li class="advantages"><a href="#advantages">преимущества</a></li>
+						<li class="assortment"><a href="#assortment">ассортимент</a></li>
+						<li class="mission"><a href="#mission">миссия</a></li>
+						<li class="faq"><a href="#faq">вопрос-ответ</a></li>
+						<li class="buy"><a href="#buy">где купить?</a></li>
 						<li class="consultation"><a href="#consultation">консультация</a></li>
 						<li class="moving-underline"></li>
 					</ul>
 					
 
-                    <button class="btn-menu">
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                    </button>
-                </nav>
-            </header><!-- / Header -->
+					<button class="btn-menu">
+						<i></i>
+						<i></i>
+						<i></i>
+					</button>
+				</nav>
+			</header><!-- / Header -->
 			<div id="main" class="page page-main loaded">
 
 				<!-- Content -->
@@ -52,7 +52,7 @@
 							<div class="object-main object-auto animate-slide"></div>
 						</div>
 
-					    <!-- Text Block -->
+						<!-- Text Block -->
 						<div class="text-block">
 							<div class="title-main animate-t">Nuage</div>
 							<p class="animate-slide">
@@ -193,7 +193,7 @@
 				<div id="content">
 					<div class="socket">
 
- 						<!-- Scheme -->
+						 <!-- Scheme -->
 						<div class="object-scheme-block to-right">
 							<div class="object-scheme-wrap">
 								<div class="object-scheme object-auto"></div>	
@@ -1091,8 +1091,8 @@
 					
 				</div><!-- / Content -->
 
-            </div>
-            <div id="faq" class="page page-feedback loaded">
+			</div>
+			<div id="faq" class="page page-feedback loaded">
 				
 				<!-- Content -->
 				<div id="content">
@@ -1379,8 +1379,8 @@
 
 				</div><!-- / Content -->
 
-            </div>
-            <div id="buy" class="page page-map loaded">
+			</div>
+			<div id="buy" class="page page-map loaded">
 
 				<!-- Map -->
 				<div class="map-block">
@@ -1431,8 +1431,8 @@
 					
 				</div><!-- / Content -->
 
-            </div>
-            <div id="consultation" class="page page-consult loaded">
+			</div>
+			<div id="consultation" class="page page-consult loaded">
 				
 				<!-- Content -->
 				<div id="content">
@@ -1745,14 +1745,14 @@
 
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        
-        <script src="./js/modernizr-custom.js"></script> 
+		
+		<script src="./js/modernizr-custom.js"></script> 
 		<script src="./js/jquery.mousewheel.min.js"></script>
-        <script src="./js/perfect-scrollbar.jquery.min.js"></script>
-        <script src="./js/jquery.threesixty.js"></script> 
-        <script src="./js/rotate.js"></script> 
-        <script src="./js/scripts.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<script src="./js/perfect-scrollbar.jquery.min.js"></script>
+		<script src="./js/jquery.threesixty.js"></script> 
+		<script src="./js/rotate.js"></script> 
+		<script src="./js/scripts.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 		<script src="./js/map.js"></script> 
 
 
@@ -1762,7 +1762,7 @@
 				// 3D Model
 				var $object = $('.object-main');
 
-        		$object.rotate3d({
+				$object.rotate3d({
 					'source': 'images/object-1/1_',
 					'count' : 39,
 					'auto'  : false
@@ -1778,10 +1778,10 @@
 				function nextSlide(){
 					slides[currentSlide].className = "slide";
 					cubes.className = "cubes cubes-main";
-				 	currentSlide = (currentSlide + 1) % slides.length;
-				 	
-				 	slides[currentSlide].className = "slide show";
-				 	cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
+					 currentSlide = (currentSlide + 1) % slides.length;
+					 
+					 slides[currentSlide].className = "slide show";
+					 cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
 				}
 
 				// Lic
@@ -1803,8 +1803,8 @@
 
 		</script>
 		<script>
-        	$(function() {
-        		var $scheme = $('.object-scheme');
+			$(function() {
+				var $scheme = $('.object-scheme');
 
 				$scheme.rotate3d({
 					'source': 'images/object-2/Vzruv_02.Alpha_',
@@ -1814,86 +1814,86 @@
 			});
 		</script>
 		<script>
-        	$(function(){
-        		var $slider = $(".assort-slider");
-        		var $slide = $slider.find(".slide");
-        		var $sliderLoader = $(".assort-slider-loader");
-        		var $bgItem = $(".assort-bg-list li");
-        		var $curSlideInd = $(".assort-slider-ind span");
-        		var $slideItems = $(".assort-slider-ind i");
-        		var items = $(".assort-slider > div").length;
-        		var $cubes = $(".cubes-b");
+			$(function(){
+				var $slider = $(".assort-slider");
+				var $slide = $slider.find(".slide");
+				var $sliderLoader = $(".assort-slider-loader");
+				var $bgItem = $(".assort-bg-list li");
+				var $curSlideInd = $(".assort-slider-ind span");
+				var $slideItems = $(".assort-slider-ind i");
+				var items = $(".assort-slider > div").length;
+				var $cubes = $(".cubes-b");
 
-        		
+				
 
 				$slider.slick({
 					centerMode: false,
-			        infinite: true,
-			        slidesToShow: 3,
-			        slidesToScroll: 1,
-			        speed: 500,
-			        focusOnSelect: false,
-			        swipe: false,
-			        useTransform: true,
+					infinite: true,
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					speed: 500,
+					focusOnSelect: false,
+					swipe: false,
+					useTransform: true,
 					cssEase: 'cubic-bezier(0.28, 0.63, 0.76, 0.96)',
 
-			        responsive: [{
-			        	breakpoint: 1025,
-			        	settings: {
-			        		slidesToShow: 1,
-			        		fade: true
-			        	}
-			        }]
-			    });
+					responsive: [{
+						breakpoint: 1025,
+						settings: {
+							slidesToShow: 1,
+							fade: true
+						}
+					}]
+				});
 				
 				// Setup Classes
 				$slideItems.text(items);
-			    $(".figures-1").addClass("show");
-			    setTimeout(function(){
-			    	$(".assort-bg-list").addClass("bg-1");
-			    }, 1000);
-			    
+				$(".figures-1").addClass("show");
+				setTimeout(function(){
+					$(".assort-bg-list").addClass("bg-1");
+				}, 1000);
+				
 
 				// Loader		
-			    $(".slick-arrow").on("click", function(event){
-			    	let target = $(event.target);
-			    	let curIndex = parseInt($curSlideInd.text());
+				$(".slick-arrow").on("click", function(event){
+					let target = $(event.target);
+					let curIndex = parseInt($curSlideInd.text());
 
-			    	if (target.is(".slick-next")){
-			    		if (curIndex == 1) loader()
-			    	} else {
-			    		if (curIndex == items) loader()
-			    	}
+					if (target.is(".slick-next")){
+						if (curIndex == 1) loader()
+					} else {
+						if (curIndex == items) loader()
+					}
 			
-			    	$(".figures").removeClass("show");	
-			    	$(".figures-" + curIndex).addClass("show");	
-			    });
+					$(".figures").removeClass("show");	
+					$(".figures-" + curIndex).addClass("show");	
+				});
 
-			    function loader(){
-			    	$(".slick-list").addClass("hide");
-			    	$sliderLoader.addClass("show");
+				function loader(){
+					$(".slick-list").addClass("hide");
+					$sliderLoader.addClass("show");
 
-			    	setTimeout(function(){
+					setTimeout(function(){
 						$(".slick-list").removeClass("hide");
-		    			$sliderLoader.removeClass("show");
+						$sliderLoader.removeClass("show");
 					}, 700);
-			    }
+				}
 				
 				// Change
-			    $slider.on("beforeChange", function(event, slick, currentSlide, nextSlide){
+				$slider.on("beforeChange", function(event, slick, currentSlide, nextSlide){
 
-			    	currentSlide = nextSlide;
+					currentSlide = nextSlide;
 
-			    	var $curSlide = $bgItem.eq(currentSlide);
+					var $curSlide = $bgItem.eq(currentSlide);
 
 					$bgItem.removeClass("show");
-			    	$curSlide.addClass("show");
+					$curSlide.addClass("show");
 
-			    	setTimeout(function(){
-			    		$(".assort-bg-list").attr("class", "assort-bg-list");
-			    		$(".assort-bg-list").addClass("bg-" + (currentSlide + 1));
+					setTimeout(function(){
+						$(".assort-bg-list").attr("class", "assort-bg-list");
+						$(".assort-bg-list").addClass("bg-" + (currentSlide + 1));
 						//$bgItem.not(":eq(" + currentSlide + ")").removeClass("show");
-			    	}, 900);
+					}, 900);
 
 					$curSlideInd.text(currentSlide + 1);
 
@@ -1924,9 +1924,9 @@
 						console.log("click");
 						$(".drop-block").removeClass("show");
 						$(".drop-inner").attr("style", "max-height: 0px;");	
-			    });
-        	});
-        </script>
+				});
+			});
+		</script>
 		
 		<!-- Live Reload -->
 		<script src="http://localhost:35729/livereload.js"></script>
