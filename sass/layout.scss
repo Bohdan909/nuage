@@ -54,12 +54,17 @@ body {
     position: fixed;
     height: $header-height;
     text-align: center;
-    z-index: 998;
+    z-index: 999;
 
     .logo {
         position: absolute;
         left: 88px;
         top: 25px;
+
+        img {
+            width: 86px;
+            height: 27px;
+        }
 
         @include laptop {
             left: 65px;
@@ -115,6 +120,7 @@ body {
 .menu {
     @include border-rad(50px);
     position: absolute;
+    z-index: 999;
     padding-left: 12%;
     top: 50px;
     left: 0;
@@ -451,7 +457,7 @@ body {
     overflow: hidden;
 }    
 
-@media (max-height: 601px) and (min-width: 1025px){
+@media (max-height: 601px) and (min-width: 768px){
 
     html, body {
         height: 600px !important;
@@ -465,6 +471,20 @@ body {
     #content {
         height: calc( 600px - #{$header-height});
         height: -webkit-calc( 600px - #{$header-height});
+    }
+
+    @media (max-width: 1024px){
+        #content {
+            height: calc( 600px - #{$header-height-tbl});
+            height: -webkit-calc( 600px - #{$header-height-tbl});
+        }
+    }
+
+    @media (max-width: 960px){
+        #content {
+            height: calc( 600px - #{$header-height-mob});
+            height: -webkit-calc( 600px - #{$header-height-mob});
+        }
     }
 }
 
@@ -482,7 +502,7 @@ body {
     left: 0;
     right: 0;
     height: 55px;
-    z-index: 998;
+    z-index: 997;
 
     .like, .logo-f {
         @extend .transDef;
@@ -496,6 +516,13 @@ body {
     .like {
         left: 0;
         top: 6px;
+
+        span {
+            left: 27px;
+            top: 4px;
+            position: absolute;
+            color: #697c94;
+        }
     }
 
     .logo-f {

@@ -3,16 +3,70 @@
     Advantages
     ------------------- */  
 
+.page-adv {
+
+	.figures {
+		left: 0;
+		right: auto;
+		top: 35px;
+		
+		li {
+			@include transform(translateX(-110px));
+		}
+
+		li:nth-child(1) {
+			left: -15px;
+			top: 0;
+		}
+
+		li:nth-child(2) {
+			left: -7px;
+			top: 42px;
+		}
+
+		li:nth-child(3) {
+			left: 25px;
+			top: 68px;
+		}
+
+		li:nth-child(4) {
+			left: 35px;
+			top: 23px;
+		}
+
+		li:nth-child(5) {
+			left: 78px;
+			top: 80px;
+		}
+
+		li:nth-child(6) {
+			left: 20px;
+			top: 120px;
+		}
+
+		li:nth-child(6) {
+			left: 15px;
+			top: 115px;
+		}
+
+		li:nth-child(7) {
+			left: 70px;
+			top: -10px;
+		}
+	}
+}
+
+.loaded.page-adv .figures li {
+	@include transform(translateX(0));
+}
+
 .object-scheme-wrap {
 	 @include Center;
 }
 
 .object-scheme-block {
 	width: 60%;
-}
-
-.object-scheme {
-   
+	z-index: 997;
 }
 
 .to-right, .to-left,
@@ -45,17 +99,35 @@
 }
 
 .point-btn {
-	@include border-rad(30px);
+	@include transition(color, 0.3s, linear);
 	position: absolute;
 	width: 66px;
 	height: 48px; 
-	background-color: #fff;
 	cursor: pointer;
+	text-align: center;
+	font-family: $fontMed;
+	line-height: 48px;
+	font-size: 10px;
+
+	&:after {
+		@extend .ps;
+		@include border-rad(30px);
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: -1;
+		background-color: #fff;
+	}
 	
-	.active & {
-		background-image: -moz-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
-        background-image: -webkit-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
-        background-image: -ms-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
+	.active:not(.plus) > & {
+		color: #fff;
+
+		&:after {
+		    background-image: -moz-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
+            background-image: -webkit-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
+            background-image: -ms-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
+			
+		}
 	}
 }
 
@@ -69,6 +141,7 @@
 
 		img {
 			@include transition(all, 0.8s, ease-out);
+			@extend .sm;
 			position: absolute;
 		}
 	}
@@ -137,9 +210,12 @@
 }
 
 .no-touchevents .point-btn {
-	@extend .transDef;
 
-	&:hover {
+	&:after {
+		@extend .transDef;
+	}
+
+	&:not(.plus):hover:after {
 		@include transform(scaleX(1.1) scaleY(1.05));
 	}
 }
@@ -370,9 +446,14 @@
 .scheme-desc-wrap {
 	width: 40%;
 	float: left;
+	z-index: 998;
 }
 
 .scheme-desc {
+
+	.title-1 {
+		line-height: 47px;
+	}
 	
 	.title-1, p {
 		@include animation(textAnimateOut, 0.3s, ease-out);
@@ -458,6 +539,12 @@
 	display: none;
 }
 
+@media screen and (min-width: 2000px), screen and (max-height: 650px), screen and (max-width: 767px){
+	.page-adv .figures {
+		display: none;
+	}
+}
+
 @media (min-width: 1025px) and (max-height: 770px){
 
 	.object-scheme-wrap {
@@ -503,9 +590,6 @@
 	}
 }
 
-@include laptop {
-	
-}
 
 @include tablet {
 
@@ -525,7 +609,6 @@
 		}
 	}
 
-
 	.object-scheme {
 		@include transform(scale(0.7));
 	}
@@ -541,8 +624,43 @@
 	.object-scheme-block {
 		width: 55%;
 	}
+
+	.scheme-desc-inner {
+		@include transform(translateY(0));
+		top: 200px;
+	}
+
+	.scheme-desc .title-1 {
+		font-size: 35px;
+		line-height: 43px;
+	}
+
+	@media (max-height: 720px){
+
+		.page-adv .footer {
+			display: none;
+		}
+	}
+
+	@include port {
+
+		.scheme-desc-inner {
+			top: 205px;
+
+			@media (min-width: 767px) and (min-height: 850px){
+				@include transform(translateY(-50%));
+				top: 50%;
+			}
+		}
+	}
 }
 
+@media (max-width: 1024px) and (min-width: 767px) and (max-height: 650px){
+
+	.scheme-desc-inner {
+		top: 55px;
+	}
+}
 
 @include mobile {
 
@@ -582,7 +700,6 @@
 	}
 
 	.scheme-desc-inner {
-		@include transform(translateY(0));
 		top: 0;
 		padding-bottom: 20px;
 	}
@@ -618,6 +735,10 @@
 }
 
 @include mobile-min {
+
+	.point-name span {
+		display: none;
+	}
 	
 	.page-adv {
 		background: none;

@@ -15,7 +15,12 @@
 
     .image {
         max-width: 480px;
-        margin-bottom: 20px;
+        margin:0 auto 20px;
+        text-align: center;
+
+        img {
+            max-width: 100%;
+        }
     }
 
     .product-text {
@@ -113,15 +118,15 @@
 
         span {
             @include border-rad(2px);
-            padding: 10px 11px;
-            background-color: #fff;
+            padding: 10px 11px 9px;
             background-image: -moz-linear-gradient( -90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 19%, rgb(255,255,255) 100%);
             background-image: -webkit-linear-gradient( -90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 19%, rgb(255,255,255) 100%);
             background-image: -ms-linear-gradient( -90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 19%, rgb(255,255,255) 100%);
+            box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.55);
+            -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.55);
         }
     }
 }
-
 
 .vol-item {
     position: relative;
@@ -174,8 +179,8 @@
 }
 
 .cubes-p {
-    left: 305px;
     top: auto;
+    left: 250px;
 
     li:nth-child(1) {
         left: 0;
@@ -333,10 +338,14 @@
 
     .product-image {
 
-        .image {
-            @include transform(scale(0.80));
+        .image img {
+            @include transform(scale(0.8));
             @include origin(center, bottom);
         }
+    }
+
+    .cubes-p {
+        left: 70px;
     }
 
 }
@@ -350,7 +359,7 @@
 
     .product-image {
 
-        .image {
+        .image img {
             @include transform(scale(0.7));
         }
 

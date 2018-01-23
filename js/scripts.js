@@ -7,24 +7,26 @@ document.documentElement.className = document.documentElement.className.replace(
             document.querySelector(".page").classList.add("loaded");
         }, 500);
 
-        // if (window.performance) {
-        //   console.info("window.performance work's fine on this browser");
-        // }
+        /* ==============
+           Consultation 
+        ================= */   
 
-        // if (performance.navigation.type == 1) {
-        //     console.info( "This page is reloaded" );
-        // } else {
-        //     console.info( "This page is not reloaded");
-        // }
+        let formWrap = $(".consult-form-wrap, .consult-top");
+        let mesConsult = $(".message-consult");
 
-        // $("a").on("click", function(){
-        //     let href = $(this).attr('href');
+        $(".btn-send").length && $(".btn-send").on("click", function(e){
+            formWrap.fadeOut(200);
+            mesConsult.fadeIn(300);
 
-        //     // $(".preloader svg, .preloader-logo-wrap").hide();
-        //     // $(".preloader").fadeIn(1000);
+            e.preventDefault();
+        });
 
-        //     setTimeout(function() {window.location = href}, 1200);
-        // });
+        $(".btn-back-form") && $(".btn-back-form").on("click", function(e){
+            formWrap.fadeIn(200);
+            mesConsult.fadeOut(300);
+
+            e.preventDefault();
+        });;
         
 
         /* ==============
@@ -33,7 +35,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
         let $body    = document.querySelector("body");
         let $btnMenu = document.querySelector(".btn-menu");
-
 
         $btnMenu.addEventListener("click", function(){
 
@@ -110,7 +111,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 } else {
                     $dropInner.setAttribute("style", "max-height: 0px");
                 }
-
             });  
         }  
 
@@ -135,6 +135,38 @@ document.documentElement.className = document.documentElement.className.replace(
                 });
             });
         }
+
+        /* ==================
+           NAVIGATION SCHEME
+        ==================== */
+
+        var btnScheme = document.querySelectorAll(".scheme-nav button");
+
+        btnScheme.forEach(function(btn){
+
+            btn.addEventListener("click", function(e){
+                var pane = document.querySelectorAll(".scheme-desc");
+                var point = document.querySelectorAll(".point");
+                var activePane = document.querySelector(".scheme-desc.active");
+                var pointActive = document.querySelector(".point.active");
+                var wrap = pointActive.parentNode;
+                var list = wrap.children;
+                var lastPoint = list.length - 1;
+                var indexActive = Array.prototype.indexOf.call(list, pointActive);
+                
+                pointActive.classList.remove("active");
+                activePane.classList.remove("active");
+
+                if (e.target.classList.contains("btn-nav-right")){
+                    (indexActive == lastPoint) ? indexActive = 0 : indexActive++;
+                } else {
+                    (indexActive == 0) ? indexActive = lastPoint : indexActive--;
+                }
+
+                point[indexActive].classList.add("active");
+                pane[indexActive].classList.add("active");
+            });
+        });
 
         /* ==============
            TABS
@@ -163,8 +195,6 @@ document.documentElement.className = document.documentElement.className.replace(
             let activePaneId = anchorReference.getAttribute("data-tab");
             let activePane = document.querySelector("#" + activePaneId);
 
-            console.log(activePane);
-
             activePane.classList.add("active");
         }
 
@@ -188,13 +218,41 @@ document.documentElement.className = document.documentElement.className.replace(
                 let offsetLeft = $tabsLiAct.position().left;
 
                 $line.css("left", offsetLeft + (($tabsLiAct.innerWidth() - 35)/2));
-
-                console.log($tabsLiAct.innerWidth());
             }
 
             $(".tabs-panel li").on("click", tabsLineMove);
         }
         
+        /* ================
+           FILTER FEEDBACK
+        =================== */ 
+
+        var ffItem = document.querySelectorAll(".feedback-filter li");
+        var feedback = document.querySelectorAll(".feedback-item");
+
+        ffItem.forEach(function(item){
+            item.addEventListener("click", function(){
+                var filterPar = item.getAttribute("data-filter");
+                console.log(filterPar);
+                
+                for (let i = 0; i < ffItem.length; i++){
+                    ffItem[i].classList.remove("active");
+                }
+
+                item.classList.remove("active");
+                this.classList.add("active");
+
+                for (let i = 0; i < feedback.length; i++){
+                    feedback[i].classList.remove("show");
+
+                    if (filterPar == "all"){
+                        feedback[i].classList.add("show");
+                    } else if (feedback[i].getAttribute("data-feedback") === filterPar) {
+                        feedback[i].classList.add("show");
+                    }
+                }
+            });
+        });
 
         /* ==============
            FORMS

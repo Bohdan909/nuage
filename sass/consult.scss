@@ -66,7 +66,7 @@ ul.tabs.tabs-panel {
     color: #a4caef;
 }
 
-.consult-form-wrap {
+.consult-form-block {
     @include clearfix;
     margin-bottom: 50px;
 
@@ -310,6 +310,35 @@ ul.tabs.tabs-panel {
     }
 }
 
+// Message
+.message {
+    @include vertCenter;
+    position: absolute;
+    z-index: 1;
+    display: none;
+    width: 500px;
+    left: 50%;
+    margin-left: -235px;
+    text-align: center;
+
+    .title-1 {
+        font-size: 35px;
+        line-height: 51px;
+    }
+
+    .title-m {
+        font-family: $fontMed;
+    }
+
+    @include mobile {
+        @include transform(translateY(0));
+        position: static;
+        padding-top: 50px;
+        width: auto;
+        margin: 0;
+    }
+}
+
 @media (min-width: 1025px) and (max-height: 700px){
     
     .consult-top {
@@ -325,7 +354,7 @@ ul.tabs.tabs-panel {
         }
     }
 
-    .consult-form-wrap {
+    .consult-form-block {
         margin-bottom: 15px;
     }
 
@@ -343,7 +372,7 @@ ul.tabs.tabs-panel {
 
     }
 
-    .consult-form-wrap {
+    .consult-form-block {
 
         .consult-form-left, .consult-form-right {
             width: 49%;
@@ -380,6 +409,14 @@ ul.tabs.tabs-panel {
         }
     }
 
+    .consult-top {
+        padding-top: 25px;
+    }
+
+    .consult-form-block {
+        margin-bottom: 20px;
+    }
+
     @include port {
 
         .contacts-column {
@@ -393,12 +430,22 @@ ul.tabs.tabs-panel {
             }
         }
     }
+
+    @include land {
+
+        .contacts-block {
+            padding-top: 0;
+            
+            .contacts-item:first-child {
+                margin-bottom: 35px;
+            }
+        }
+    }
 }
 
 @include mobile {
 
     .consult-top {
-        padding-top: 25px;
         padding-right: 0;
 
         ul.tabs.tabs-panel {
@@ -409,7 +456,7 @@ ul.tabs.tabs-panel {
         }
     }
 
-    .consult-form-wrap {
+    .consult-form-block {
         margin-bottom: 25px;
 
         .consult-form-left, .consult-form-right {
