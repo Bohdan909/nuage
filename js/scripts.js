@@ -270,9 +270,9 @@ document.documentElement.className = document.documentElement.className.replace(
         $(window).resize(windowSize); 
 
 
-        /* ================
-            CUSTOM SCROLL
-        =================== */
+        /* =============================
+            CUSTOM SCROLL AND NAVIGATION
+        ================================ */
         // TODO: 
         // 1) handle other scroll events
         // 4) fix animation for some pages
@@ -330,16 +330,17 @@ document.documentElement.className = document.documentElement.className.replace(
                 movingMenuUnderline.style.width = 0;
             }
             
-            if (prevNavElement) {
-                //prevNavElement.classList.remove("active");
+            /*if (prevNavElement) {
+                prevNavElement.classList.remove("active");
             }
             
             if (currentNavElement) {
-                //currentNavElement.classList.add("active");
-            }
+                currentNavElement.classList.add("active");
+            }*/
             
             let elem = document.getElementById(currentBlockId);
-            mainElem.style.height = elem.scrollHeight + "px";
+
+            //mainElem.style.height = elem.scrollHeight + "px";
             
             elem.classList.remove("loaded");
             window.location.href = baseHashUrl + currentBlockId;
@@ -347,6 +348,8 @@ document.documentElement.className = document.documentElement.className.replace(
             
             let prevElement = document.getElementById(prevBlockId);
             prevElement.classList.remove("loaded");
+
+            playBlockAnimations(currentBlockId);
         }
         
         navigateToBlock(currentBlockIndex);
@@ -417,7 +420,72 @@ document.documentElement.className = document.documentElement.className.replace(
         // Handle direct click on havigation links  
         let navigationMenuElement = document.querySelector(".main");
         navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
+
+ 
+        /* ==================
+            3D ANIMATION
+          =================== */
         
+        
+
+        function playBlockAnimations(blockId) {
+            var $object = $('.object-main');
+            var $scheme = $('.object-scheme');
+
+            switch (blockId) {
+                case "main":
+                    $object.rotate3d({
+                        'source': 'images/object-1/1_',
+                        'count' : 39,
+                        'auto'  : true
+                    });
+                    break;
+                case "advantages":
+                    $scheme.rotate3d({
+                        'source': 'images/object-2/Vzruv_02.Alpha_',
+                        'count' : 70,
+                        'auto'  : true
+                    });
+                    break;
+                default:
+                    break;
+            }
+
+            // 3D Model
+
+            // Rotator
+            var slides = document.querySelectorAll(".rotator > div");
+            var cubes  = document.querySelector(".cubes");
+            var currentSlide  = 0;
+            var slideInterval = setInterval(nextSlide, 5000);
+            var cubesClasses  = ["top", "mid", "btm"];
+
+            function nextSlide(){
+                slides[currentSlide].className = "slide";
+                cubes.className = "cubes cubes-main";
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    
+                    slides[currentSlide].className = "slide show";
+                    cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
+            }
+
+            // Lic
+            var $licDesc = document.querySelector(".lic-desc");
+            var $licItem = document.querySelectorAll(".lic-list li");
+            
+            for (let i = 0; i < $licItem.length; i++){
+                
+                $licItem[i].addEventListener("mouseover", function(){
+                    $licDesc.classList.add("show");
+                    $licDesc.innerHTML = this.getAttribute("data-desc");
+                });
+
+                $licItem[i].addEventListener("mouseleave", function(){
+                    $licDesc.classList.remove("show");
+                });
+            }
+        }
+
     });
 
 

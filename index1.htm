@@ -1755,64 +1755,6 @@
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 		<script src="./js/map.js"></script> 
 
-
-		<script>
-			window.addEventListener("load", function(){
-				
-				// 3D Model
-				var $object = $('.object-main');
-
-				$object.rotate3d({
-					'source': 'images/object-1/1_',
-					'count' : 39,
-					'auto'  : false
-				});
-
-				// Rotator
-				var slides = document.querySelectorAll(".rotator > div");
-				var cubes  = document.querySelector(".cubes");
-				var currentSlide  = 0;
-				var slideInterval = setInterval(nextSlide, 5000);
-				var cubesClasses  = ["top", "mid", "btm"];
-
-				function nextSlide(){
-					slides[currentSlide].className = "slide";
-					cubes.className = "cubes cubes-main";
-					 currentSlide = (currentSlide + 1) % slides.length;
-					 
-					 slides[currentSlide].className = "slide show";
-					 cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
-				}
-
-				// Lic
-				var $licDesc = document.querySelector(".lic-desc");
-				var $licItem = document.querySelectorAll(".lic-list li");
-				
-				for (let i = 0; i < $licItem.length; i++){
-					
-					$licItem[i].addEventListener("mouseover", function(){
-						$licDesc.classList.add("show");
-						$licDesc.innerHTML = this.getAttribute("data-desc");
-					});
-
-					$licItem[i].addEventListener("mouseleave", function(){
-						$licDesc.classList.remove("show");
-					});
-				}
-			});
-
-		</script>
-		<script>
-			$(function() {
-				var $scheme = $('.object-scheme');
-
-				$scheme.rotate3d({
-					'source': 'images/object-2/Vzruv_02.Alpha_',
-					'count' : 70,
-					'auto'  : true
-				});
-			});
-		</script>
 		<script>
 			$(function(){
 				var $slider = $(".assort-slider");

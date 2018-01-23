@@ -217,11 +217,11 @@
             var timer = setInterval(change, 40); 
         }
 
-        if ($(".page").is(".page-main")){
-        	setTimeout(function(){
-	        	animateOpen();	
-	        }, 1500);
-        }
+        // if ($(".page").is(".page-main")){
+        // 	setTimeout(function(){
+	    //     	animateOpen();	
+	    //     }, 1500);
+        // }
         
 
         ////////// END MAIN OBJECT //////////
