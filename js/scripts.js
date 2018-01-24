@@ -172,56 +172,58 @@ document.documentElement.className = document.documentElement.className.replace(
            TABS
         ================= */
 
-        let tabs = document.querySelectorAll(".tabs > .tab");
+        function findAncestor (el, cls) {
+            while ((el = el.parentElement) && !el.classList.contains(cls));
+            return el;
+        }
 
-        function tabsClick(tabClickEvent) {
+        // another implementation
+        let tabs = [...document.querySelectorAll(".tabs")];
+        function tabClick(event) {
+            console.log(event.target);
+            console.log(event.currentTarget);
+            event.preventDefault();
+            
+            let tabElements = [...event.currentTarget.querySelectorAll(".tab")];
+            console.log(tabElements);
+            tabElements.map(function(tabElement){
+                tabElement.classList.remove("active");
+            });
 
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove("active");
+            let targetTab = findAncestor(event.target, "tab");
+            if (targetTab != null) {
+                targetTab.classList.add("active");
             }
 
-            let clickedTab = tabClickEvent.currentTarget; 
+            animateTabLine(event.currentTarget);
+            
+            // clear panes state
+            let contentPanes = [...document.querySelectorAll(".tab-pane")];
+            contentPanes.map(function(pane) {
+                pane.classList.remove("active");
+            });
 
-            clickedTab.classList.add("active");
-            tabClickEvent.preventDefault();
-
-            let contentPanes = document.querySelectorAll(".tab-pane");
-
-            for (let i = 0; i < contentPanes.length; i++) {
-                contentPanes[i].classList.remove("active");
-            }
-
-            let anchorReference = tabClickEvent.target;
-            let activePaneId = anchorReference.getAttribute("data-tab");
-            let activePane = document.querySelector("#" + activePaneId);
+            let activePaneId = event.target.getAttribute("data-tab");
+            let activePane = document.getElementById(activePaneId);
 
             activePane.classList.add("active");
+            
         }
+        tabs.map(function (tab) {
+            tab.addEventListener("click", tabClick);
+            animateTabLine(tab);
+        });
 
-        for (i = 0; i < tabs.length; i++) {
-            tabs[i].addEventListener("click", tabsClick);
-        }
-
-
-        /* ==============
-           TABS LINE
-        ================= */ 
-
-        if ($(".tabs-panel").length){
-
-            let $line = $(".tabs-panel .line");
-
-            tabsLineMove();
-
-            function tabsLineMove(){
-                let $tabsLiAct =  $(".tabs-panel li.active");
-                let offsetLeft = $tabsLiAct.position().left;
-
-                $line.css("left", offsetLeft + (($tabsLiAct.innerWidth() - 35)/2));
+        // TABS LINE ANIMATION
+        function animateTabLine(tabs){
+            let line = tabs.querySelector(".line");
+            let activeTab = tabs.querySelector(".tab.active");
+            if (line) {
+                let offset = activeTab.getBoundingClientRect().left - tabs.getBoundingClientRect().left;
+                line.style.left = `${offset + (activeTab.offsetWidth - 35)/2 }px`;
             }
-
-            $(".tabs-panel li").on("click", tabsLineMove);
         }
+
         
         /* ================
            FILTER FEEDBACK
@@ -441,6 +443,7 @@ document.documentElement.className = document.documentElement.className.replace(
             }
         }
 
+        // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
         document.onkeydown = customScrollKeysHandler;
         // handler for wheel event 
         addWheelListener( window, customScrollWheelHandler );
@@ -450,8 +453,7 @@ document.documentElement.className = document.documentElement.className.replace(
         // Handle direct click on havigation links  
         let navigationMenuElement = document.querySelector(".main");
         navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
-
-
+        
         window.onhashchange = hashUrlChangeHandler;
 
  
