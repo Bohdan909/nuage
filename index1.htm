@@ -11,6 +11,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"  />
 		
 		<link type="text/css" rel="stylesheet" href="css/perfect-scrollbar.min.css" />
+		<link type="text/css" rel="stylesheet" href="css/slick.css" />
 		<link type="text/css" rel="stylesheet" href="css/main.css" />
 	</head>
 	
@@ -1750,13 +1751,14 @@
 		<script src="./js/jquery.mousewheel.min.js"></script>
 		<script src="./js/perfect-scrollbar.jquery.min.js"></script>
 		<script src="./js/jquery.threesixty.js"></script> 
-		<script src="./js/rotate.js"></script> 
-		<script src="./js/scripts.js"></script>
+		<script src="./js/rotate.js" defer></script>
+		<script src="./js/slick.js" defer></script>
+		<script src="./js/scripts.js" defer></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 		<script src="./js/map.js"></script> 
 
 		<script>
-			$(function(){
+			window.addEventListener("load", function(){
 				var $slider = $(".assort-slider");
 				var $slide = $slider.find(".slide");
 				var $sliderLoader = $(".assort-slider-loader");

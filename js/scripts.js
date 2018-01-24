@@ -277,9 +277,12 @@ document.documentElement.className = document.documentElement.className.replace(
         // 1) handle other scroll events
         // 4) fix animation for some pages
 
-        //$(".main").addClass("stop-scrolling");
         let mainElem = document.querySelector(".main");
         mainElem.classList.add("stop-scrolling");
+        let allBlocks = [...document.querySelectorAll(".page")];
+        allBlocks.map(function(block){
+            block.classList.remove("loaded");
+        });
 
         // left: 37, up: 38, right: 39, down: 40,
         // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
@@ -297,31 +300,35 @@ document.documentElement.className = document.documentElement.className.replace(
         ];
         let baseHashUrl = "#";
 
-        // TODO: initialize variable by hashtag from url if it present
+        // initialize variable by hashtag from url if it present
         let currentHashtag = window.location.hash.substr(1);
         
         let currentBlockIndex = 0;
         let prevBlockIndex = 0;
 
-        
-        setCurrentBlockIndexByHashtag(currentHashtag);
+        currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
 
-        function setCurrentBlockIndexByHashtag(hashtag) {
-            let hashtagIndex = navLinks.indexOf(hashtag);
-            if ( hashtagIndex != -1 ) {
-                currentBlockIndex = hashtagIndex;
+        // setCurrentBlockIndexByHashtag(currentHashtag);
+        // function setCurrentBlockIndexByHashtag(hashtag) {
+        //         currentBlockIndex = hashtagIndex;
+        // }
+
+        function getBlockIndexByHashtag(hashtag) {
+            let result = currentBlockIndex;
+            let blockIndex = navLinks.indexOf(hashtag);
+            if (blockIndex != -1) {
+                result = blockIndex;
             }
+            return result;
         }
 
         let movingMenuUnderline = document.querySelector(".menu .moving-underline");
         let menuListElem = document.querySelector(".menu ul");
 
-        function navigateToBlock(blockIndex){
-            let currentBlockId = navLinks[currentBlockIndex];
-            let prevBlockId = navLinks[prevBlockIndex];
+        function playMenuUnderlineAnimation(currentBlockId) {
             let currentNavElement = document.querySelector("li." + currentBlockId);
-            let prevNavElement = document.querySelector("li." + prevBlockId);
-            
+            //let prevNavElement = document.querySelector("li." + prevBlockId);
+        
             if (currentNavElement) {
                 let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
                 movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
@@ -337,19 +344,37 @@ document.documentElement.className = document.documentElement.className.replace(
             if (currentNavElement) {
                 currentNavElement.classList.add("active");
             }*/
+        }
+
+        function navigateToBlockByHashtag(hashtag) {
+            currentBlockIndex = getBlockIndexByHashtag(hashtag);
+            navigateToBlock(currentBlockIndex);
+        }
+
+        function navigateToBlock(blockIndex){
+            console.log(`navigate to block called`);
             
-            let elem = document.getElementById(currentBlockId);
+            let currentBlockId = navLinks[currentBlockIndex];
 
             //mainElem.style.height = elem.scrollHeight + "px";
             
+            let elem = document.getElementById(currentBlockId);
             elem.classList.remove("loaded");
+
             window.location.href = baseHashUrl + currentBlockId;
+
+            // animation part
+            
+            playMenuUnderlineAnimation(currentBlockId);
             elem.classList.add("loaded");
             
+            // remove loaded from previous block
+            let prevBlockId = navLinks[prevBlockIndex];
+            // let oldUrlId = event.oldURL.split('#')[1].substr(1);
             let prevElement = document.getElementById(prevBlockId);
             prevElement.classList.remove("loaded");
 
-            playBlockAnimations(currentBlockId);
+            executePageSpecificScript(currentBlockId);
         }
         
         navigateToBlock(currentBlockIndex);
@@ -383,10 +408,8 @@ document.documentElement.className = document.documentElement.className.replace(
 
         let lastScrollTime = 0 
         function customScrollWheelHandler(e) {
-            
             // limit handling rate to prevent scrolling trough all pages
             if (Date.now() - lastScrollTime > 1000) {
-
                 if (e.deltaY > 0) {
                     scrollToNextBlock();
                 } else if (e.deltaY < 0) {
@@ -407,9 +430,16 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // extract hashtag from link
             let hashtag = event.target.hash.substr(1);
-            setCurrentBlockIndexByHashtag(hashtag)
-            navigateToBlock(currentBlockIndex);            
-        } 
+            navigateToBlockByHashtag(hashtag);
+        }
+
+        function hashUrlChangeHandler(event) {
+            if (event.newURL != event.oldURL) {
+                console.log(`hash changed`);
+                let newUrlId = window.location.hash.substr(1);
+                navigateToBlockByHashtag(newUrlId);
+            }
+        }
 
         document.onkeydown = customScrollKeysHandler;
         // handler for wheel event 
@@ -421,14 +451,15 @@ document.documentElement.className = document.documentElement.className.replace(
         let navigationMenuElement = document.querySelector(".main");
         navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
 
+
+        window.onhashchange = hashUrlChangeHandler;
+
  
         /* ==================
             3D ANIMATION
           =================== */
-        
-        
 
-        function playBlockAnimations(blockId) {
+        function executePageSpecificScript(blockId) {
             var $object = $('.object-main');
             var $scheme = $('.object-scheme');
 
@@ -439,6 +470,38 @@ document.documentElement.className = document.documentElement.className.replace(
                         'count' : 39,
                         'auto'  : true
                     });
+                    
+                    // Rotator
+                    var slides = document.querySelectorAll(".rotator > div");
+                    var cubes  = document.querySelector(".cubes");
+                    var currentSlide  = 0;
+                    var slideInterval = setInterval(nextSlide, 5000);
+                    var cubesClasses  = ["top", "mid", "btm"];
+
+                    function nextSlide(){
+                        slides[currentSlide].className = "slide";
+                        cubes.className = "cubes cubes-main";
+                            currentSlide = (currentSlide + 1) % slides.length;
+                            
+                            slides[currentSlide].className = "slide show";
+                            cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
+                    }
+
+                    // Lic
+                    var $licDesc = document.querySelector(".lic-desc");
+                    var $licItem = document.querySelectorAll(".lic-list li");
+                    
+                    for (let i = 0; i < $licItem.length; i++){
+                        
+                        $licItem[i].addEventListener("mouseover", function(){
+                            $licDesc.classList.add("show");
+                            $licDesc.innerHTML = this.getAttribute("data-desc");
+                        });
+
+                        $licItem[i].addEventListener("mouseleave", function(){
+                            $licDesc.classList.remove("show");
+                        });
+                    }
                     break;
                 case "advantages":
                     $scheme.rotate3d({
@@ -447,43 +510,15 @@ document.documentElement.className = document.documentElement.className.replace(
                         'auto'  : true
                     });
                     break;
+                case "assortment":
+                    break;
                 default:
                     break;
             }
 
             // 3D Model
 
-            // Rotator
-            var slides = document.querySelectorAll(".rotator > div");
-            var cubes  = document.querySelector(".cubes");
-            var currentSlide  = 0;
-            var slideInterval = setInterval(nextSlide, 5000);
-            var cubesClasses  = ["top", "mid", "btm"];
-
-            function nextSlide(){
-                slides[currentSlide].className = "slide";
-                cubes.className = "cubes cubes-main";
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    
-                    slides[currentSlide].className = "slide show";
-                    cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
-            }
-
-            // Lic
-            var $licDesc = document.querySelector(".lic-desc");
-            var $licItem = document.querySelectorAll(".lic-list li");
             
-            for (let i = 0; i < $licItem.length; i++){
-                
-                $licItem[i].addEventListener("mouseover", function(){
-                    $licDesc.classList.add("show");
-                    $licDesc.innerHTML = this.getAttribute("data-desc");
-                });
-
-                $licItem[i].addEventListener("mouseleave", function(){
-                    $licDesc.classList.remove("show");
-                });
-            }
         }
 
     });
