@@ -275,16 +275,46 @@ document.documentElement.className = document.documentElement.className.replace(
         /* =============================
             CUSTOM SCROLL AND NAVIGATION
         ================================ */
-        // TODO: 
-        // 1) handle other scroll events
-        // 4) fix animation for some pages
 
         let mainElem = document.querySelector(".main");
-        mainElem.classList.add("stop-scrolling");
-        let allBlocks = [...document.querySelectorAll(".page")];
-        allBlocks.map(function(block){
-            block.classList.remove("loaded");
-        });
+        // media query event handler
+        if (matchMedia) {
+            const mq = window.matchMedia("(min-width: 1025px)");
+            mq.addListener(WidthChange);
+            WidthChange(mq);
+        }
+        
+        
+        // media query change
+        function WidthChange(mq) {
+            if (mq.matches) {
+                // window width is at least 1025px
+                mainElem.classList.add("stop-scrolling");
+                let allBlocks = [...document.querySelectorAll(".page")];
+                allBlocks.map(function(block){
+                    block.classList.remove("loaded");
+                });
+
+                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                document.onkeydown = customScrollKeysHandler;
+                // handler for wheel event 
+                addWheelListener( window, customScrollWheelHandler );
+
+                window.ontouchmove = customScrollTouchHandler;
+                
+                // Handle direct click on havigation links  
+                let navigationMenuElement = document.querySelector(".main");
+                navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
+                
+                window.onhashchange = hashUrlChangeHandler;
+            } else {
+            // window width is less than 1025px
+            }
+        
+        }
+
+        
+        
 
         // left: 37, up: 38, right: 39, down: 40,
         // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
@@ -443,18 +473,7 @@ document.documentElement.className = document.documentElement.className.replace(
             }
         }
 
-        // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
-        document.onkeydown = customScrollKeysHandler;
-        // handler for wheel event 
-        addWheelListener( window, customScrollWheelHandler );
-
-        window.ontouchmove = customScrollTouchHandler;
         
-        // Handle direct click on havigation links  
-        let navigationMenuElement = document.querySelector(".main");
-        navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
-        
-        window.onhashchange = hashUrlChangeHandler;
 
  
         /* ==================
