@@ -476,9 +476,9 @@ document.documentElement.className = document.documentElement.className.replace(
         
 
  
-        /* ==================
-            3D ANIMATION
-          =================== */
+        /* =========================================
+            3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS
+          ========================================== */
 
         function executePageSpecificScript(blockId) {
             var $object = $('.object-main');
