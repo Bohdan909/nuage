@@ -180,12 +180,9 @@ document.documentElement.className = document.documentElement.className.replace(
         // another implementation
         let tabs = [...document.querySelectorAll(".tabs")];
         function tabClick(event) {
-            console.log(event.target);
-            console.log(event.currentTarget);
             event.preventDefault();
             
             let tabElements = [...event.currentTarget.querySelectorAll(".tab")];
-            console.log(tabElements);
             tabElements.map(function(tabElement){
                 tabElement.classList.remove("active");
             });
@@ -277,45 +274,7 @@ document.documentElement.className = document.documentElement.className.replace(
         ================================ */
 
         let mainElem = document.querySelector(".main");
-        // media query event handler
-        if (matchMedia) {
-            const mq = window.matchMedia("(min-width: 1025px)");
-            mq.addListener(WidthChange);
-            WidthChange(mq);
-        }
         
-        
-        // media query change
-        function WidthChange(mq) {
-            if (mq.matches) {
-                // window width is at least 1025px
-                mainElem.classList.add("stop-scrolling");
-                let allBlocks = [...document.querySelectorAll(".page")];
-                allBlocks.map(function(block){
-                    block.classList.remove("loaded");
-                });
-
-                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
-                document.onkeydown = customScrollKeysHandler;
-                // handler for wheel event 
-                addWheelListener( window, customScrollWheelHandler );
-
-                window.ontouchmove = customScrollTouchHandler;
-                
-                // Handle direct click on havigation links  
-                let navigationMenuElement = document.querySelector(".main");
-                navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
-                
-                window.onhashchange = hashUrlChangeHandler;
-            } else {
-            // window width is less than 1025px
-            }
-        
-        }
-
-        
-        
-
         // left: 37, up: 38, right: 39, down: 40,
         // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
         let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
@@ -332,18 +291,75 @@ document.documentElement.className = document.documentElement.className.replace(
         ];
         let baseHashUrl = "#";
 
+        let lastScrollTime = 0;
+
         // initialize variable by hashtag from url if it present
         let currentHashtag = window.location.hash.substr(1);
+        console.log(`current hashtag: ${currentHashtag}`);
+        
         
         let currentBlockIndex = 0;
-        let prevBlockIndex = 0;
+        let prevBlockIndex = -1;
+
+        let movingMenuUnderline = document.querySelector(".menu .moving-underline");
+        let menuListElem = document.querySelector(".menu ul");
+        let allBlocks = [...document.querySelectorAll(".page")];
+        
+        var $object = $('.object-main');
+        var $scheme = $('.object-scheme');
+
+        $object.rotate3d({
+            'source': 'images/object-1/1_',
+            'count' : 39,
+            'auto'  : true
+        });
+
+        $scheme.rotate3d({
+            'source': 'images/object-2/Vzruv_02.Alpha_',
+            'count' : 70,
+            'auto'  : true
+        });
+
+        // media query event handler
+        if (matchMedia) {
+            const mq = window.matchMedia("(min-width: 1025px)");
+            mq.addListener(WidthChange);
+            WidthChange(mq);
+        }
 
         currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
+        navigateToBlock(currentBlockIndex);
 
-        // setCurrentBlockIndexByHashtag(currentHashtag);
-        // function setCurrentBlockIndexByHashtag(hashtag) {
-        //         currentBlockIndex = hashtagIndex;
-        // }
+        function clearLoadedState(){
+            allBlocks.map(function(block){
+                block.classList.remove("loaded");
+            });
+        }
+
+        // media query change
+        function WidthChange(mq) {
+            if (mq.matches) {
+                // window width is at least 1025px
+                mainElem.classList.add("stop-scrolling");
+
+                clearLoadedState();
+
+                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                document.onkeydown = customScrollKeysHandler;
+                // handler for wheel event 
+                addWheelListener( window, customScrollWheelHandler );
+
+                window.ontouchmove = customScrollTouchHandler;
+                
+                // Handle direct click on havigation links  
+                let navigationMenuElement = document.querySelector(".main");
+                navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
+                
+                window.onhashchange = hashUrlChangeHandler;
+            } else {
+            // window width is less than 1025px
+            }
+        }
 
         function getBlockIndexByHashtag(hashtag) {
             let result = currentBlockIndex;
@@ -353,9 +369,6 @@ document.documentElement.className = document.documentElement.className.replace(
             }
             return result;
         }
-
-        let movingMenuUnderline = document.querySelector(".menu .moving-underline");
-        let menuListElem = document.querySelector(".menu ul");
 
         function playMenuUnderlineAnimation(currentBlockId) {
             let currentNavElement = document.querySelector("li." + currentBlockId);
@@ -384,33 +397,34 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         function navigateToBlock(blockIndex){
+            if (currentBlockIndex == prevBlockIndex) {
+                console.log(`trying to open already opened page index: ${currentBlockIndex} `);
+                return;
+            }
             console.log(`navigate to block called`);
-            
+            clearLoadedState();
             let currentBlockId = navLinks[currentBlockIndex];
 
             //mainElem.style.height = elem.scrollHeight + "px";
             
             let elem = document.getElementById(currentBlockId);
-            elem.classList.remove("loaded");
-
+            
             window.location.href = baseHashUrl + currentBlockId;
-
+            elem.classList.add("loaded");
             // animation part
             
             playMenuUnderlineAnimation(currentBlockId);
-            elem.classList.add("loaded");
-            
+
+            prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
             // remove loaded from previous block
             let prevBlockId = navLinks[prevBlockIndex];
-            // let oldUrlId = event.oldURL.split('#')[1].substr(1);
+
             let prevElement = document.getElementById(prevBlockId);
             prevElement.classList.remove("loaded");
 
             executePageSpecificScript(currentBlockId);
         }
         
-        navigateToBlock(currentBlockIndex);
-
         function scrollToNextBlock() {
             if (currentBlockIndex == navLinks.length - 1) {
                 return;
@@ -438,7 +452,6 @@ document.documentElement.className = document.documentElement.className.replace(
             }
         }
 
-        let lastScrollTime = 0 
         function customScrollWheelHandler(e) {
             // limit handling rate to prevent scrolling trough all pages
             if (Date.now() - lastScrollTime > 1000) {
@@ -462,6 +475,8 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // extract hashtag from link
             let hashtag = event.target.hash.substr(1);
+            currentBlockIndex = getBlockIndexByHashtag(hashtag);
+            prevBlockIndex = -1;
             navigateToBlockByHashtag(hashtag);
         }
 
@@ -469,77 +484,43 @@ document.documentElement.className = document.documentElement.className.replace(
             if (event.newURL != event.oldURL) {
                 console.log(`hash changed`);
                 let newUrlId = window.location.hash.substr(1);
+                let oldUrlId = event.oldURL.split('#')[1].substr(1);
+                prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
                 navigateToBlockByHashtag(newUrlId);
+                
+
             }
         }
 
-        
-
- 
         /* =========================================
             3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS
           ========================================== */
-
+        
         function executePageSpecificScript(blockId) {
-            var $object = $('.object-main');
-            var $scheme = $('.object-scheme');
-
+            
             switch (blockId) {
                 case "main":
-                    $object.rotate3d({
-                        'source': 'images/object-1/1_',
-                        'count' : 39,
-                        'auto'  : true
+                    // if ($object.length == 0) {
+                    //     $object = $('.object-main');
+                    // }
+                    //$object.rotate3d.animateOpen();
+                    $object.animateOpen(function () {
+                        setTimeout($object.animateClose, 300);
                     });
-                    
-                    // Rotator
-                    var slides = document.querySelectorAll(".rotator > div");
-                    var cubes  = document.querySelector(".cubes");
-                    var currentSlide  = 0;
-                    var slideInterval = setInterval(nextSlide, 5000);
-                    var cubesClasses  = ["top", "mid", "btm"];
-
-                    function nextSlide(){
-                        slides[currentSlide].className = "slide";
-                        cubes.className = "cubes cubes-main";
-                            currentSlide = (currentSlide + 1) % slides.length;
-                            
-                            slides[currentSlide].className = "slide show";
-                            cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
-                    }
-
-                    // Lic
-                    var $licDesc = document.querySelector(".lic-desc");
-                    var $licItem = document.querySelectorAll(".lic-list li");
-                    
-                    for (let i = 0; i < $licItem.length; i++){
-                        
-                        $licItem[i].addEventListener("mouseover", function(){
-                            $licDesc.classList.add("show");
-                            $licDesc.innerHTML = this.getAttribute("data-desc");
-                        });
-
-                        $licItem[i].addEventListener("mouseleave", function(){
-                            $licDesc.classList.remove("show");
-                        });
-                    }
                     break;
                 case "advantages":
-                    $scheme.rotate3d({
-                        'source': 'images/object-2/Vzruv_02.Alpha_',
-                        'count' : 70,
-                        'auto'  : true
+                    // if ($scheme.length == 0) {
+                    //     $scheme = $('.object-scheme');
+                    // }
+                    $scheme.animateOpen(function () {
+                        console.log("andvantages animation ended");
                     });
                     break;
                 case "assortment":
                     break;
                 default:
                     break;
-            }
-
-            // 3D Model
-
-            
+            }            
         }
 
     });

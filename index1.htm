@@ -1869,6 +1869,43 @@
 						$(".drop-block").removeClass("show");
 						$(".drop-inner").attr("style", "max-height: 0px;");	
 				});
+
+				
+
+				
+				
+				// Rotator
+				var slides = document.querySelectorAll(".rotator > div");
+				var cubes  = document.querySelector(".cubes");
+				var currentSlide  = 0;
+				var slideInterval = setInterval(nextSlide, 5000);
+				var cubesClasses  = ["top", "mid", "btm"];
+
+				function nextSlide(){
+					slides[currentSlide].className = "slide";
+					cubes.className = "cubes cubes-main";
+						currentSlide = (currentSlide + 1) % slides.length;
+						
+						slides[currentSlide].className = "slide show";
+						cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
+				}
+
+				// Lic
+				var $licDesc = document.querySelector(".lic-desc");
+				var $licItem = document.querySelectorAll(".lic-list li");
+				
+				for (let i = 0; i < $licItem.length; i++){
+					
+					$licItem[i].addEventListener("mouseover", function(){
+						$licDesc.classList.add("show");
+						$licDesc.innerHTML = this.getAttribute("data-desc");
+					});
+
+					$licItem[i].addEventListener("mouseleave", function(){
+						$licDesc.classList.remove("show");
+					});
+				}
+
 			});
 		</script>
 		
