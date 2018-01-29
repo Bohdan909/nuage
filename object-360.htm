@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+		<meta charset="utf-8" />
+		<title>Nuage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" /> 
+		
+        <link type="text/css" rel="stylesheet" href="css/perfect-scrollbar.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/styles.css" />
+        <link type="text/css" rel="stylesheet" href="css/template_styles.css" />
+
+
+        <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+        <style>
+
+        	html, body {
+        		height: auto;
+        	}
+
+        	.page {
+        		height: auto;
+        		padding-bottom: 100px;
+        	}
+
+        	#content {
+        		height: 100%;
+        	}
+
+        	.object-360 {
+        		overflow: hidden;
+        		padding-top: 50px;
+        		width: 350px;
+        		height: 450px;
+        		margin: auto;
+        		cursor: w-resize;
+        	}
+
+        	/*.product-viewer {
+        		width: 350px;
+        		height: 350px;
+        		margin: auto;
+        		text-align: center;
+        	}
+
+        	.product-viewer > img {
+        		width: 350px;
+        		margin: auto;
+        	}
+
+        	.handle {
+        		background-color: #000;
+        	}
+
+        	.cd-product-viewer-handle {
+        		width: 350px;
+        		margin: auto;
+        	}
+
+        	.cd-product-viewer-wrapper .product-sprite {
+        		background-size: auto 100%;
+        		background-position: 0 0;
+        	}
+*/
+        </style>
+	</head>
+	
+	<body>
+		<div id="main">
+			<div class="page page-main">
+				
+				<!-- Content -->
+				<div id="content">
+
+					<!-- <div class="cd-product-viewer-wrapper" data-frame="23" data-friction="0.1">
+						<div>
+							<figure class="product-viewer">
+								 <img src="images/object-360-1/1_00000.png"> 
+								<div class="product-sprite" data-image="img/img-sprite.png"></div>
+							</figure>
+
+							<div class="cd-product-viewer-handle">
+								<span class="fill"></span>
+								<span class="handle">Handle</span>
+							</div>
+						</div>
+					</div> -->
+
+
+					<div class="object-360"></div>
+
+					<div class="object-360"></div>
+
+					<div class="object-360"></div>
+
+					<div class="object-360"></div>
+
+					<div class="object-360"></div>
+
+					<div class="object-360"></div>
+
+
+				</div><!-- / Content -->
+			</div>
+
+		</div><!-- / Main -->
+
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+		<!-- <script src="./js/jquery.mobile.custom.min.js"></script>
+
+        <script src="./js/main.js"></script>  -->
+
+
+        <script src="./js/rotate.js"></script> 
+
+        <script>
+        	$(function(){
+        		var $object360  = $('.object-360');
+
+        		$object360.each(function(index){
+        			var idx = index + 1;
+
+        			$(this).rotate3d({
+					'source': 'images/object-360-' + idx + '/object_',
+					'count' : 89,
+					'speed' : 0.5,
+					'auto'  : false
+				});
+        		});
+		});
+        </script>
+
+	</body>
+</html>

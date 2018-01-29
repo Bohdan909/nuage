@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+		<meta charset="utf-8" />
+		<title>Nuage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" /> 
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="address=no">
+		<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"  />
+		
+        <link type="text/css" rel="stylesheet" href="css/perfect-scrollbar.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/main.css" />
+	</head>
+	
+	<body onload="initialize()">
+		<div class="main">
+			<div class="page page-map">
+
+				<!-- Map -->
+				<div class="map-block">
+					<div id="map-canvas"></div>
+				</div>
+
+				<!-- Header -->
+				<header id="header"> 
+					<nav class="menu">
+						<a href="index.htm" class="logo">
+							<img src="images/logo.png" alt="logo">
+						</a>
+							
+						<ul>
+							<li><a href="advantages.htm">преимущества</a></li>
+							<li><a href="assortment.htm">ассортимент</a></li>
+							<li><a href="mission.htm">миссия</a></li>
+							<li><a href="faq.htm">вопрос-ответ</a></li>
+							<li class="active"><a href="buy.htm">где купить?</a></li>
+							<li><a href="consultation.htm">консультация</a></li>
+						</ul>
+
+						<button class="btn-menu">
+							<i></i>
+							<i></i>
+							<i></i>
+						</button>
+					</nav>
+				</header><!-- / Header -->
+				
+				<!-- Content -->
+				<div id="content">
+					
+					<div class="socket">
+						<div class="map-column">
+							<div class="loc-search">
+								<div class="ico-loc"></div>
+								<input placeholder="где вы?" type="text">
+								<button type="submit"></button>
+							</div>
+
+							<div class="select">
+								<div class="ico-loc"></div>
+								<select>
+									<option selected hidden>список городов</option>
+									<option>Берлин</option>
+									<option>Лондон</option>
+									<option>Стамбул</option>
+								</select>
+							</div>
+
+							<ul class="partners">
+								<li>
+									<div class="title-3">Наши партнеры :</div>
+								</li>
+								<li>
+									<a href=""><img src="images/par-1.png" alt=""></a>
+								</li>
+								<li>
+									<a href=""><img src="images/par-2.png" alt=""></a>
+								</li>
+								<li>
+									<a href=""><img src="images/par-3.png" alt=""></a>
+								</li>
+								<li>
+									<a href=""><img src="images/par-4.png" alt=""></a>
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+					
+				</div><!-- / Content -->
+
+			</div>
+		</div><!-- / Main -->
+
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+		<script src="./js/modernizr-custom.js"></script> 
+		<script src="./js/jquery.mousewheel.min.js"></script>
+        <script src="./js/perfect-scrollbar.jquery.min.js"></script>
+		<script src="./js/scripts.js"></script> 
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<script src="./js/map.js"></script> 
+
+
+		
+		<!-- Live Reload -->
+		<script src="http://localhost:35729/livereload.js"></script>
+
+	</body>
+</html>
