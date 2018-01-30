@@ -6364,6 +6364,25 @@ div.mission-text-slider {
     .video-block .video-name.hide, .video-block .btn-play.hide {
       opacity: 0; }
 
+.video-block-shadow {
+  -webkit-transition: all 0.8s cubic-bezier(0.11, 0, 0.45, 1);
+  -ms-transition: all 0.8s cubic-bezier(0.11, 0, 0.45, 1);
+  transition: all 0.8s cubic-bezier(0.11, 0, 0.45, 1);
+  -webkit-transition-delay: 0.55s;
+  -ms-transition-delay: 0.55s;
+  transition-delay: 0.55s;
+  transform-origin: center center;
+  -ms-transform-origin: center center;
+  -webkit-transform-origin: center center;
+  position: absolute;
+  width: 310px;
+  height: 310px;
+  box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
+  -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
+  opacity: 0; }
+  .loaded .video-block-shadow {
+    opacity: 1; }
+
 .no-touchevents .loaded .video-block-wrap .video-block {
   animation: circleOpen 0.5s cubic-bezier(0.11, 0, 0.45, 1) forwards;
   -ms-animation: circleOpen 0.5s cubic-bezier(0.11, 0, 0.45, 1) forwards;
@@ -6375,6 +6394,9 @@ div.mission-text-slider {
   -webkit-animation: circleHover 0.7s cubic-bezier(0.11, 0, 0.45, 1) forwards; }
 
 .no-touchevents .loaded .video-block-wrap.hover .video-block-shadow {
+  -webkit-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  transition-delay: 0s;
   -webkit-transform: translateY(-50%) translateX(-50%) scale(1.2);
   -ms-transform: translateY(-50%) translateX(-50%) scale(1.2);
   transform: translateY(-50%) translateX(-50%) scale(1.2); }
@@ -6385,6 +6407,9 @@ div.mission-text-slider {
   -webkit-animation: circleLeave 0.7s cubic-bezier(0.11, 0, 0.45, 1) forwards; }
 
 .no-touchevents .loaded .video-block-wrap.leave .video-block-shadow {
+  -webkit-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  transition-delay: 0s;
   -webkit-transform: translateY(-50%) translateX(-50%) scale(1);
   -ms-transform: translateY(-50%) translateX(-50%) scale(1);
   transform: translateY(-50%) translateX(-50%) scale(1); }
@@ -6402,25 +6427,6 @@ div.mission-text-slider {
   -webkit-animation-play-state: paused !important;
   -ms-animation-play-state: paused !important;
   opacity: 1; }
-
-.video-block-shadow {
-  -webkit-transition-delay: 0.55s;
-  -ms-transition-delay: 0.55s;
-  transition-delay: 0.55s;
-  -webkit-transition: all 0.8s cubic-bezier(0.11, 0, 0.45, 1);
-  -ms-transition: all 0.8s cubic-bezier(0.11, 0, 0.45, 1);
-  transition: all 0.8s cubic-bezier(0.11, 0, 0.45, 1);
-  transform-origin: center center;
-  -ms-transform-origin: center center;
-  -webkit-transform-origin: center center;
-  position: absolute;
-  width: 310px;
-  height: 310px;
-  box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-  -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-  opacity: 0; }
-  .loaded .video-block-shadow {
-    opacity: 1; }
 
 @keyframes circleHover {
   0% {
