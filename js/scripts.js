@@ -178,12 +178,12 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         // another implementation
-        let tabs = [...document.querySelectorAll(".tabs")];
+        let tabs = document.querySelectorAll(".tabs");
         function tabClick(event) {
             event.preventDefault();
             
-            let tabElements = [...event.currentTarget.querySelectorAll(".tab")];
-            tabElements.map(function(tabElement){
+            let tabElements = event.currentTarget.querySelectorAll(".tab");
+            Array.prototype.forEach.call(tabElements, function(tabElement){
                 tabElement.classList.remove("active");
             });
 
@@ -195,8 +195,8 @@ document.documentElement.className = document.documentElement.className.replace(
             animateTabLine(event.currentTarget);
             
             // clear panes state
-            let contentPanes = [...document.querySelectorAll(".tab-pane")];
-            contentPanes.map(function(pane) {
+            let contentPanes = document.querySelectorAll(".tab-pane");
+            Array.prototype.forEach.call(contentPanes, function(pane) {
                 pane.classList.remove("active");
             });
 
@@ -206,7 +206,7 @@ document.documentElement.className = document.documentElement.className.replace(
             activePane.classList.add("active");
             
         }
-        tabs.map(function (tab) {
+        Array.prototype.forEach.call(tabs, function (tab) {
             tab.addEventListener("click", tabClick);
             animateTabLine(tab);
         });
@@ -303,7 +303,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
         let movingMenuUnderline = document.querySelector(".menu .moving-underline");
         let menuListElem = document.querySelector(".menu ul");
-        let allBlocks = [...document.querySelectorAll(".page")];
+        let allBlocks = document.querySelectorAll(".page");
         
         var $object = $('.object-main');
         var $scheme = $('.object-scheme');
@@ -331,7 +331,7 @@ document.documentElement.className = document.documentElement.className.replace(
         navigateToBlock(currentBlockIndex);
 
         function clearLoadedState(){
-            allBlocks.map(function(block){
+            Array.prototype.forEach.call(allBlocks, function(block){
                 block.classList.remove("loaded");
             });
         }
