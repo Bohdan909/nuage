@@ -9,3 +9,5 @@ materials/
 img/
 
 spritespin-master/
+.sass-cache/
+*.css.map
