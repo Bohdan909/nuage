@@ -412,6 +412,9 @@ ul.tabs.tabs-panel {
     }
 }
 
+.copyright-mobile {
+    display: none;
+}
 
 @include laptop {
 
@@ -468,6 +471,10 @@ ul.tabs.tabs-panel {
 
     @include port {
 
+        // .page-consult .figures {
+        //     display: none;
+        // }
+
         .contacts-column {
 
             &:first-child {
@@ -493,6 +500,10 @@ ul.tabs.tabs-panel {
 }
 
 @include mobile {
+
+    .popup-wrap {
+        display: none;
+    }
 
     .consult-top {
         padding-right: 0;
@@ -563,6 +574,29 @@ ul.tabs.tabs-panel {
                     }
                 }
             }
+        }
+    }
+
+    .copyright-mobile {
+        position: relative;
+        display: block;
+        padding-left: 30px;
+        font-size: 10px;
+        line-height: 14px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        text-transform: uppercase;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 19px;
+            height: 17px;
+            left: 0;
+            top: 7px;
+            background: url(../images/heart-w.svg) no-repeat;
+            background-size: cover;
         }
     }
 

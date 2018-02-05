@@ -8,7 +8,7 @@
 	.figures {
 		left: 0;
 		right: auto;
-		top: 35px;
+		top: 30px;
 		
 		li {
 			@include transform(translateX(-110px));
@@ -62,11 +62,17 @@
 
 .object-scheme-wrap {
 	 @include Center;
+	 @include trans(0.5s);
+	 opacity: 0;
+
+	 .loaded & {
+	 	opacity: 1;
+	 }
 }
 
 .object-scheme-block {
 	width: 60%;
-	z-index: 997;
+	z-index: 900;
 }
 
 .to-right, .to-left,
@@ -96,10 +102,11 @@
 
 .point {
 	position: absolute;
+
 }
 
 .point-btn {
-	@include transition(color, 0.3s, linear);
+	@include transition(color, 0.1s, linear);
 	position: absolute;
 	width: 66px;
 	height: 48px; 
@@ -108,6 +115,7 @@
 	font-family: $fontMed;
 	line-height: 48px;
 	font-size: 10px;
+	
 
 	&:after {
 		@extend .ps;
@@ -117,6 +125,8 @@
 		width: 100%;
 		z-index: -1;
 		background-color: #fff;
+		box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.45);
+    	-webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.45);
 	}
 	
 	.active:not(.plus) > & {
@@ -209,14 +219,22 @@
 	}
 }
 
-.no-touchevents .point-btn {
+.no-touchevents  {
 
-	&:after {
-		@extend .transDef;
+	.point-btn {
+		@extend .ps;
+
+		&:after {
+			@include transition(all, 0.4s, $easing);
+		}
+
+		&:not(.plus):hover:after {
+			@include transform(scaleX(1.25) scaleY(1.15));
+		}
 	}
-
-	&:not(.plus):hover:after {
-		@include transform(scaleX(1.1) scaleY(1.05));
+	
+	.active.point .point-btn:hover:after {
+		@include transform(scaleX(1) scaleY(1));
 	}
 }
 
@@ -446,7 +464,7 @@
 .scheme-desc-wrap {
 	width: 40%;
 	float: left;
-	z-index: 998;
+	z-index: 990;
 }
 
 .scheme-desc {
@@ -537,20 +555,40 @@
 
 .scheme-nav {
 	display: none;
+	height: 50px;
+	margin-bottom: 15px;
+
+	.btn-nav-left {
+		top: 0;
+		left: 250px;
+	}
+
+	.btn-nav-right {
+		top: 0;
+		left: 315px;
+	}
 }
 
-@media screen and (min-width: 2000px), screen and (max-height: 650px), screen and (max-width: 767px){
+
+
+@media screen and (min-width: 2000px), screen and (max-width: 767px){
+	
 	.page-adv .figures {
 		display: none;
 	}
 }
 
-@media (min-width: 1025px) and (max-height: 770px){
+@media (min-width: 1025px) and (max-height: 820px){
 
 	.object-scheme-wrap {
 		@include transform(translateY(0) translateX(-50%));
 		top: -40px;
 		left: 45%;	
+	}
+
+	.scheme-desc-inner {
+		@include transform(translateY(0));
+		top: 200px;
 	}
 
 	.object-scheme {
@@ -575,6 +613,21 @@
 	}
 }
 
+@media (min-width: 1025px) and (max-height: 700px){
+
+	.scheme-nav {
+		display: block;
+	}
+
+	.scheme-desc-inner {
+		top: 50px;
+	}
+
+	.points, .page-adv .figures {
+		display: none;		
+	}
+}
+
 @include mid {
 
 	.point:nth-child(2) {
@@ -591,22 +644,12 @@
 }
 
 
+
+
 @include tablet {
 
 	.scheme-nav {
 		display: block;
-		height: 50px;
-		margin-bottom: 15px;
-
-		.btn-nav-left {
-			top: 0;
-			left: 0;
-		}
-
-		.btn-nav-right {
-			top: 0;
-			left: 65px;
-		}
 	}
 
 	.object-scheme {
@@ -614,7 +657,19 @@
 	}
 
 	.points {
-		display: none;
+		
+
+		.point, .point .point-name {
+			left: 0 !important;
+			top: 0 !important; 
+		} 
+
+		.point {
+
+			.point-btn, .point-line {
+				display: none;
+			}
+		}
 	}
 
 	.scheme-desc-wrap {
@@ -654,6 +709,41 @@
 		}
 	}
 }
+
+// @media (max-width: 1024px) and (min-width: 768px){
+
+// 	.object-scheme-block, .object-scheme-wrap {
+// 		position: static !important;
+// 	}
+
+// 	.object-scheme-wrap {
+// 		@include transform(translateY(0));
+// 		height: 100%;
+// 		left: 0;
+// 		top: 0;
+
+// 		.points {
+// 			position: fixed;
+// 			left: 0;
+// 			top: 200px;
+// 		}
+// 	}
+
+// 	div.object-scheme {
+// 		@include transform(scale(0.7));
+// 		left: 50%;
+// 		top: 50%;
+// 		height: 100%;	
+
+		
+
+// 		img {
+// 			@include Center;
+// 		}
+// 	}
+
+
+// }
 
 @media (max-width: 1024px) and (min-width: 767px) and (max-height: 650px){
 

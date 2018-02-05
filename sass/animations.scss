@@ -102,8 +102,19 @@
         @include a-delay(0.55s);
     }
 
-    .lic-wrap {
-        @include a-delay(0.7s);
+    .lic-list {
+
+        li:nth-child(1) {
+            @include a-delay(0.7s);
+        }
+
+        li:nth-child(2) {
+            @include a-delay(0.8s);
+        }
+
+        li:nth-child(3) {
+            @include a-delay(0.9s);
+        }
     }
 
     .scroll-helper {

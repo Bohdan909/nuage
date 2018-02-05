@@ -29,6 +29,8 @@
     }
 }
 
+$arrowPos: -52%;
+
 .main {
 
     .btn {
@@ -44,14 +46,10 @@
         &.btn-inline {
             min-width: auto;
             line-height: 49px;
-
-            &:hover span {
-                color: $textCol;
-            }
         }
 
         span {
-            @extend .transDef;
+            @include transition(all, 0.4s, $easing);
             @extend .not-blurry;
             color: $textCol;
             font-size: 10px;
@@ -62,8 +60,8 @@
         }
 
         img {
-            @include transition(all, 0.4s, ease-out);
-            @include transform(translateY(-48%));
+            @include transition(all, 0.4s, $easing);
+            @include transform(translateY($arrowPos));
             @extend .sm;
             top: 50%;
             position: absolute;
@@ -80,7 +78,7 @@
             &:hover {
                 
                 img {
-                    @include transform(translateY(-48%) translateX(-5px));
+                    @include transform(translateY($arrowPos) translateX(-5px));
                 }
             }
         }
@@ -90,7 +88,7 @@
             text-align: right;
 
             img {
-                @include transform(rotate(180deg) translateY(-48%));
+                @include transform(rotate(180deg) translateY($arrowPos));
                 @include origin(top, center);
                 left: 16px;
             }
@@ -98,12 +96,27 @@
             &:hover {
                 
                 img {
-                    @include transform(rotate(180deg) translateY(-48%) translateX(5px));
+                    @include transform(rotate(180deg) translateY($arrowPos) translateX(5px));
                 }
             }
         }
     }
 
+    .btn-arrow-show {
+        padding: 0 11px 0 28px;
+        
+        img {
+            @include transform(translateX(-4px) translateY($arrowPos));
+            display: inline-block;
+            position: relative;
+            opacity: 0;
+        }
+
+        span {
+            //@include transform(translateX(12px));
+            display: inline-block;
+        }
+    }
 
     .btn-circle {
         @include border-rad(50%);
@@ -206,11 +219,23 @@
 
 .no-touchevents {
 
-    .main .btn {
+    .main {
 
-        &:hover {
+        .btn:hover {
             box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.25);
             -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.25);
+        }
+
+        .btn-arrow-show:hover {
+
+            span {
+                @include transform(translateX(-9px));
+            }
+            
+            img {
+                @include transform(translateX(-2px) translateY(-52%));
+                opacity: 1;
+            }
         }
     }
 }
@@ -218,7 +243,7 @@
 .like {
     width: 19px;
     height: 17px;
-    background: url(../images/heart.png) no-repeat 0 0;
+    background: url(../images/heart.svg) no-repeat 0 0;
 }
 
 .btn-wrap {

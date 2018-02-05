@@ -318,7 +318,18 @@ ul.feedback-filter {
 
             &.active {
                 color: $textCol;
-                background: none;
+                //background: none;
+            }
+        }
+    }
+
+    @include port {
+
+        ul.feedback-filter {
+            padding: 0 2%;
+            
+            li {
+                padding: 0 10px;
             }
         }
     }

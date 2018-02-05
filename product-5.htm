@@ -67,10 +67,11 @@
 
  								<div class="object-title-row animate-slide">
  									<div class="title-4">Nuage <span>Night Plus</span></div>
- 									<a class="btn btn-inline" href="buy.htm">
+ 									<a class="btn btn-arrow-show btn-inline" href="buy.htm">
  										<span>Купить</span>
+ 										<img width="12" height="10" src="images/arrow-right-b.svg" alt="">
  									</a>
- 									<div class="items">8 штук</div>
+ 									<div class="items">6 штук</div>
  								</div>
 
  								<a href="product-table.htm" class="btn-circle btn-comp animate-fade">
@@ -165,12 +166,14 @@
 							<div class="product-footer-right to-right">
 								<div class="product-list animate-fade">
 									<span></span>
-									<div><a href="product-1.htm">LIGHT</a></div>
-									<div><a href="product-2.htm">Normal</a></div>
-									<div><a href="product-3.htm">Super</a></div>
-									<div><a href="product-4.htm">Night</a></div>
-									<div  class="active"><a href="product-5.htm">Night Plus</a></div>
-									<div><a href="product-6.htm">Daily</a></div>
+									<section>
+										<div><a href="product-1.htm">LIGHT</a></div>
+										<div><a href="product-2.htm">Normal</a></div>
+										<div><a href="product-3.htm">Super</a></div>
+										<div><a href="product-4.htm">Night</a></div>
+										<div class="active"><a href="product-5.htm">Night Plus</a></div>
+										<div><a href="product-6.htm">Daily</a></div>
+									</section>
 								</div>
 							</div>
 						</div>
@@ -190,8 +193,62 @@
         <script src="./js/jquery.mobile.custom.min.js"></script>
 		<script src="./js/scripts.js"></script> 
         <script src="./js/plugins.js"></script> 
-
 		<script src="./js/main.js"></script> 
+
+		<script>
+			window.addEventListener("load", function(){
+
+				// Product List Hover
+				(function(){
+
+					let point = document.querySelectorAll(".product-list section > div");
+					let pointAct = findPonintAct(point);
+					let pointWidth = pointAct.offsetWidth;
+					let pointPos = pointAct.offsetLeft;
+					let pointBg = document.querySelector(".product-list > span");
+
+					setBg(pointWidth, pointPos);
+
+					for (let i = 0; i < point.length; i++){
+						
+						
+						point[i].addEventListener("mouseover", function(){
+							pointWidth = this.offsetWidth;
+							pointPos = this.offsetLeft;
+
+							setBg(pointWidth, pointPos);
+						});
+
+						point[i].addEventListener("mouseleave", function(){
+							pointWidth = pointAct.offsetWidth;
+							pointPos = pointAct.offsetLeft;
+
+							setBg(pointWidth, pointPos);
+						});
+					}
+
+					window.addEventListener("resize", function(){
+						pointWidth = pointAct.offsetWidth;
+						pointPos = pointAct.offsetLeft;
+						setBg(pointWidth, pointPos);
+					});
+
+					function setBg(width, pos){
+						pointBg.setAttribute("style", "width: " + width + "px; left: " + pos + "px");
+					}
+
+					function findPonintAct(point){
+
+						for (let i = 0; i < point.length; i++){
+							if (point[i].classList.contains("active")){
+								return point[i];
+							}
+						}
+					}
+					
+				}());
+			});
+		</script>
 	
 		<!-- Live Reload -->
 		<script src="http://localhost:35729/livereload.js"></script>

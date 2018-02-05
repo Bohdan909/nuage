@@ -1116,7 +1116,7 @@ body {
   border: none;
   outline: none;
   text-align: left;
-  line-height: 47px; }
+  line-height: 51px; }
   .main .btn.btn-inline {
     min-width: auto;
     line-height: 49px; }
@@ -3712,7 +3712,6 @@ ul.desc-list {
     width: 31850px;
     background-image: url(../images/sprites/img-sprite-3.png); }
   .product-sprite.product-sprite-4 {
-    width: 31064px;
     background-image: url(../images/sprites/img-sprite-4.png); }
   .product-sprite.product-sprite-5 {
     width: 31169px;

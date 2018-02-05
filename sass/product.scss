@@ -46,7 +46,6 @@ $prodFooterHeightMin: 85px;
     }
 
     &.product-sprite-4 {
-        width: 31064px;
         background-image: url(../images/sprites/img-sprite-4.png);
     }
 
@@ -205,6 +204,7 @@ $prodFooterHeightMin: 85px;
 }
 
 .object-title-row {
+    margin: 0 -30px;
     text-align: center;
 
     * {
@@ -418,36 +418,52 @@ div.product-view-block {
 // }
 
 .product-list {
-    font-size: 0;
-    text-align: right;
+    
 
-    > div {
-        display: inline-block;
-        margin-left: 28px;
+    section {
+        font-size: 0;
+        text-align: center;
 
-        a {
-            @include border-rad(35px);
-            @extend .transDef;
-            display: block;
-            padding: 0 20px;
-            height: 47px;
-            line-height: 47px;
-            text-transform: uppercase;
-            font-family: $fontMed;
-            font-size: 10px;
-            color: #6a7c96;
-            white-space: nowrap;
+        > div {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            margin-left: 28px;
 
-            &:hover {
+            a {
+                @extend .transDef;
+                display: block;
+                padding: 0 20px;
+                height: 47px;
+                line-height: 47px;
+                text-transform: uppercase;
+                font-family: $fontMed;
+                font-size: 10px;
+                color: #6a7c96;
+                white-space: nowrap;
+
+                &:hover {
+                    color: $textCol;
+                }
+            }
+
+            &.active a {
                 color: $textCol;
             }
         }
-
-        &.active a {
-            background-color: #fff;
-            color: $textCol;
-        }
     }
+
+    span {
+        @include border-rad(35px);
+        @include transition(all, 0.55s, $easing);
+        position: absolute;
+        top: 0;
+        display: block;
+        height: 47px;
+        background-color: #fff;
+    }
+
+    
 }
 
 @media (min-width: 768px) and (max-height: 760px){
@@ -512,13 +528,17 @@ div.product-view-block {
     }
 
     .product-list {
-        @include flex(space-between);
 
-        > div {
-            margin: 0;
+        section {
+            @include flex(space-between);
+            margin: 0 15px;
 
-            a {
-                padding: 0 17px;
+            > div {
+                margin: 0;
+
+                a {
+                    padding: 0 17px;
+                }
             }
         }
     }
@@ -609,8 +629,10 @@ div.product-view-block {
     .product-list {
         text-align: center;
 
-        > div a {
-            padding: 0 14px;
+        section  {
+            > div a {
+                padding: 0 14px;
+            }
         }
     }
 
@@ -657,6 +679,14 @@ div.product-view-block {
 
 @media (max-width: 850px){
 
+    .product-socket:after {
+        display: none;
+    }
+
+    .product-list > span {
+        display: none;
+    }
+
     .product-viewer-wrap {
         @include transform(scale(0.7));
     }
@@ -672,9 +702,15 @@ div.product-view-block {
             padding: 0 16px;
         }
 
-        .product-list > div a {
-            background: none !important;
-            padding: 0;
+        .product-list {
+
+            section {
+
+                > div a {
+                    background: none !important;
+                    padding: 0;
+                }
+            }
         }
     }
 }
@@ -724,11 +760,11 @@ div.product-view-block {
     .object-360-wrap {
 
         .btn-comp {
-            left: 15px;
+            left: 5px;
         }
 
         .btn-consist {
-            right: 15px;
+            right: 5px;
         }
     }
 
@@ -755,7 +791,7 @@ div.product-view-block {
 
     .object-360-wrap {
         width: auto;
-        margin: -75px 0 55px;
+        margin: -100px 0 55px;
 
         .btn-comp, .btn-consist {
             right: 0;
@@ -773,6 +809,7 @@ div.product-view-block {
 
     .object-title-row {
         text-align: left;
+        margin: 0;
 
         .btn {
             margin: 0 12px;
@@ -781,7 +818,7 @@ div.product-view-block {
 
     .product-viewer-wrap {
         @include origin(left, bottom);
-        margin-left: -30px;
+        //margin-left: -30px;
     }
 
     .product-viewer {
@@ -823,3 +860,11 @@ div.product-view-block {
         border: none;
     }
 }
+
+@include mobile-min {
+
+    .product-viewer-wrap {
+        margin-left: -20px;
+    }
+}
+

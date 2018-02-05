@@ -1,6 +1,7 @@
 document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '');
 
 (function($){
+
     $(document).ready(function() {
 
         let scrollPage = document.querySelector("body").classList.contains("scroll-one-page");
@@ -15,9 +16,11 @@ document.documentElement.className = document.documentElement.className.replace(
 
         let formWrap = $(".consult-form-wrap, .consult-top");
         let mesConsult = $(".message-consult");
+        let copyRight = $(".copyright-mobile");
 
         $(".btn-send").length && $(".btn-send").on("click", function(e){
             formWrap.fadeOut(200);
+            copyRight.hide();
             mesConsult.fadeIn(300);
 
             e.preventDefault();
@@ -26,9 +29,10 @@ document.documentElement.className = document.documentElement.className.replace(
         $(".btn-back-form") && $(".btn-back-form").on("click", function(e){
             formWrap.fadeIn(200);
             mesConsult.fadeOut(300);
+            copyRight.show();
 
             e.preventDefault();
-        });;
+        });
         
 
         /* ==============
@@ -79,7 +83,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 swipeToSlide:false,
                 infinite: true,
                 adaptiveHeight:true,
-                speed: 150,
+                speed: 10,
                 arrows: true,
                 slidesToScroll: 1,
                 slidesToShow: 1,
@@ -234,12 +238,13 @@ document.documentElement.className = document.documentElement.className.replace(
         ffItem.forEach(function(item){
             item.addEventListener("click", function(){
                 var filterPar = item.getAttribute("data-filter");
-                console.log(filterPar);
+                var scrollY = document.querySelector(".scroll-block");
                 
                 for (let i = 0; i < ffItem.length; i++){
                     ffItem[i].classList.remove("active");
                 }
-
+                
+                scrollBar(true);
                 item.classList.remove("active");
                 this.classList.add("active");
 
@@ -313,7 +318,7 @@ document.documentElement.className = document.documentElement.className.replace(
             var $scheme = $('.object-scheme');
 
             $object.length
-            &&
+                &&
             $object.rotate3d({
                 'source': 'images/object-1/1_',
                 'count' : 39,
@@ -542,14 +547,6 @@ document.documentElement.className = document.documentElement.className.replace(
             docWidth = $(document).width();
 
         scrollBar(true);
-
-        // Resize Mobile
-        if (winWidth !== cachedWidth){
-            
-
-            cachedWidth = winWidth;
-        }   
-            
     };
 
     // ScrollBar
