@@ -141,48 +141,6 @@ document.documentElement.className = document.documentElement.className.replace(
             });
         }
 
-        /* ==============
-           TABS
-        ================= */
-
-        var tabs = document.querySelectorAll(".tabs > .tab");
-        var indexActive = 0;
-        var lastPoint = 0;
-
-        function tabsClick(tabClickEvent) {
-
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove("active");
-            }
-
-            var clickedTab = tabClickEvent.currentTarget; 
-
-            clickedTab.classList.add("active");
-            tabClickEvent.preventDefault();
-
-            var contentPanes = document.querySelectorAll(".tab-pane");
-
-            for (let i = 0; i < contentPanes.length; i++) {
-                contentPanes[i].classList.remove("active");
-            }
-
-            var anchorReference = tabClickEvent.target;
-            var activePaneId = anchorReference.getAttribute("data-tab");
-            var activePane = document.querySelector("#" + activePaneId);
-
-            activePane.classList.add("active");
-
-            // Index Detect
-            if (tabClickEvent.target.classList.contains("point-btn")){
-                indexDetect(activePane);
-                changeClone(indexActive);
-            }
-        }
-
-        for (i = 0; i < tabs.length; i++) {
-            tabs[i].addEventListener("click", tabsClick);
-        }
-
         /* ==================
            NAVIGATION SCHEME
         ==================== */
@@ -230,26 +188,59 @@ document.documentElement.className = document.documentElement.className.replace(
             indexActive = Array.prototype.indexOf.call(list, activePane);
         }
         
-
         /* ==============
-           TABS LINE
-        ================= */ 
+           TABS
+        ================= */
 
-        if ($(".tabs-panel").length){
+        function findAncestor (el, cls) {
+            while ((el = el.parentElement) && !el.classList.contains(cls));
+            return el;
+        }
 
-            let $line = $(".tabs-panel .line");
+        // another implementation
+        let tabs = document.querySelectorAll(".tabs");
+        function tabClick(event) {
+            event.preventDefault();
+            
+            let tabElements = event.currentTarget.querySelectorAll(".tab");
+            Array.prototype.forEach.call(tabElements, function(tabElement){
+                tabElement.classList.remove("active");
+            });
 
-            tabsLineMove();
-
-            function tabsLineMove(){
-                let $tabsLiAct =  $(".tabs-panel li.active");
-                let offsetLeft = $tabsLiAct.position().left;
-
-                $line.css("left", offsetLeft + (($tabsLiAct.innerWidth() - 35)/2));
+            let targetTab = findAncestor(event.target, "tab");
+            if (targetTab != null) {
+                targetTab.classList.add("active");
             }
 
-            $(".tabs-panel li").on("click", tabsLineMove);
+            animateTabLine(event.currentTarget);
+            
+            // clear panes state
+            let contentPanes = document.querySelectorAll(".tab-pane");
+            Array.prototype.forEach.call(contentPanes, function(pane) {
+                pane.classList.remove("active");
+            });
+
+            let activePaneId = event.target.getAttribute("data-tab");
+            let activePane = document.getElementById(activePaneId);
+
+            activePane.classList.add("active");
+            
         }
+        Array.prototype.forEach.call(tabs, function (tab) {
+            tab.addEventListener("click", tabClick);
+            animateTabLine(tab);
+        });
+
+        // TABS LINE ANIMATION
+        function animateTabLine(tabs){
+            let line = tabs.querySelector(".line");
+            let activeTab = tabs.querySelector(".tab.active");
+            if (line) {
+                let offset = activeTab.getBoundingClientRect().left - tabs.getBoundingClientRect().left;
+                line.style.left = `${offset + (activeTab.offsetWidth - 35)/2 }px`;
+            }
+        }
+
         
         /* ================
            FILTER FEEDBACK
@@ -297,14 +288,269 @@ document.documentElement.className = document.documentElement.className.replace(
 
         windowSize();   
         $(window).resize(windowSize); 
+
+
+        /* =============================
+            CUSTOM SCROLL AND NAVIGATION
+        ================================ */
+
+        let mainElem = document.querySelector(".main");
         
+        // left: 37, up: 38, right: 39, down: 40,
+        // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+        let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
+        let keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
+
+        let navLinks = [
+            "main",
+            "advantages",
+            "assortment",
+            "mission",
+            "faq",
+            "buy",
+            "consultation"
+        ];
+        let baseHashUrl = "#";
+
+        let lastScrollTime = 0;
+
+        // initialize variable by hashtag from url if it present
+        let currentHashtag = window.location.hash.substr(1);
+        
+        
+        let currentBlockIndex = 0;
+        let prevBlockIndex = -1;
+
+        let movingMenuUnderline = document.querySelector(".menu .moving-underline");
+        let menuListElem = document.querySelector(".menu ul");
+        let allBlocks = document.querySelectorAll(".page");
+        
+        var $object = $('.object-main');
+        var $scheme = $('.object-scheme');
+
+        $object.rotate3d({
+            'source': 'images/object-1/1_',
+            'count' : 39,
+            'auto'  : true
+        });
+
+        $scheme.rotate3d({
+            'source': 'images/object-2/Vzruv_02.Alpha_',
+            'count' : 70,
+            'auto'  : true
+        });
+
+        // media query event handler
+        if (matchMedia) {
+            const mq = window.matchMedia("(min-width: 1025px)");
+            mq.addListener(WidthChange);
+            WidthChange(mq);
+        }
+
+        currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
+        navigateToBlock(currentBlockIndex);
+
+        function clearLoadedState(){
+            Array.prototype.forEach.call(allBlocks, function(block){
+                block.classList.remove("loaded");
+            });
+        }
+
+        // media query change
+        function WidthChange(mq) {
+            if (mq.matches) {
+                // window width is at least 1025px
+                mainElem.classList.add("stop-scrolling");
+
+                clearLoadedState();
+
+                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                document.onkeydown = customScrollKeysHandler;
+                // handler for wheel event 
+                addWheelListener( window, customScrollWheelHandler );
+
+                window.ontouchmove = customScrollTouchHandler;
+                
+                // Handle direct click on havigation links  
+                let navigationMenuElement = document.querySelector(".main");
+                navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
+                
+                window.onhashchange = hashUrlChangeHandler;
+            } else {
+            // window width is less than 1025px
+            }
+        }
+
+        function getBlockIndexByHashtag(hashtag) {
+            let result = currentBlockIndex;
+            let blockIndex = navLinks.indexOf(hashtag);
+            if (blockIndex != -1) {
+                result = blockIndex;
+            }
+            return result;
+        }
+
+        function playMenuUnderlineAnimation(currentBlockId) {
+            let currentNavElement = document.querySelector("li." + currentBlockId);
+            //let prevNavElement = document.querySelector("li." + prevBlockId);
+        
+            if (currentNavElement) {
+                let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
+                movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
+                movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
+            } else {
+                movingMenuUnderline.style.width = 0;
+            }
+            
+            /*if (prevNavElement) {
+                prevNavElement.classList.remove("active");
+            }
+            
+            if (currentNavElement) {
+                currentNavElement.classList.add("active");
+            }*/
+        }
+
+        function navigateToBlockByHashtag(hashtag) {
+            currentBlockIndex = getBlockIndexByHashtag(hashtag);
+            navigateToBlock(currentBlockIndex);
+        }
+
+        function navigateToBlock(blockIndex){
+            if (currentBlockIndex == prevBlockIndex) {
+                console.log(`trying to open already opened page index: ${currentBlockIndex} `);
+                return;
+            }
+
+            clearLoadedState();
+            let currentBlockId = navLinks[currentBlockIndex];
+
+            //mainElem.style.height = elem.scrollHeight + "px";
+            
+            let elem = document.getElementById(currentBlockId);
+    
+            window.location.href = baseHashUrl + currentBlockId;
+            
+            elem.classList.add("loaded");
+            // animation part
+            
+            playMenuUnderlineAnimation(currentBlockId);
+
+            prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
+            // remove loaded from previous block
+            let prevBlockId = navLinks[prevBlockIndex];
+
+            let prevElement = document.getElementById(prevBlockId);
+            prevElement.classList.remove("loaded");
+
+            executePageSpecificScript(currentBlockId);
+        }
+        
+        function scrollToNextBlock() {
+            if (currentBlockIndex == navLinks.length - 1) {
+                return;
+            }
+            prevBlockIndex = currentBlockIndex;
+            currentBlockIndex += 1;
+            navigateToBlock(currentBlockIndex);
+        }
+        function scrollToPrevBlock() {
+            if (currentBlockIndex == 0) {
+                return;
+            }
+            prevBlockIndex = currentBlockIndex;
+            currentBlockIndex -= 1;
+            navigateToBlock(currentBlockIndex);
+        }
+
+        function customScrollKeysHandler(e) {
+            if (keysPrev[e.keyCode]) {
+                e.preventDefault();
+                scrollToPrevBlock();
+            } else if (keysNext[e.keyCode]) {
+                e.preventDefault();
+                scrollToNextBlock();
+            }
+        }
+
+        function customScrollWheelHandler(e) {
+            // limit handling rate to prevent scrolling trough all pages
+            if (Date.now() - lastScrollTime > 1000) {
+                if (e.deltaY > 0) {
+                    scrollToNextBlock();
+                } else if (e.deltaY < 0) {
+                    scrollToPrevBlock();
+                }
+
+                lastScrollTime = Date.now();
+            }
+        }
+
+        function customScrollTouchHandler(e) {
+            // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
+        }
+
+        function handleDirectClickOnNavLinks (event) {
+            if (!event.target.matches('a[href^="#"]')) return;
+            event.preventDefault();
+
+            // extract hashtag from link
+            let hashtag = event.target.hash.substr(1);
+            currentBlockIndex = getBlockIndexByHashtag(hashtag);
+            prevBlockIndex = -1;
+            navigateToBlockByHashtag(hashtag);
+        }
+
+        function hashUrlChangeHandler(event) {
+            if (event.newURL != event.oldURL) {
+                console.log(`hash changed`);
+                let newUrlId = window.location.hash.substr(1);
+                let oldUrlId = event.oldURL.split('#')[1].substr(1);
+                prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
+                navigateToBlockByHashtag(newUrlId);
+                
+
+            }
+        }
+
+        /* =========================================
+            3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS
+          ========================================== */
+        
+        function executePageSpecificScript(blockId) {
+            
+            switch (blockId) {
+                case "main":
+                    // if ($object.length == 0) {
+                    //     $object = $('.object-main');
+                    // }
+                    //$object.rotate3d.animateOpen();
+                    $object.animateOpen(function () {
+                        setTimeout($object.animateClose, 300);
+                    });
+                    break;
+                case "advantages":
+                    // if ($scheme.length == 0) {
+                    //     $scheme = $('.object-scheme');
+                    // }
+                    $scheme.animateOpen(function () {
+                        console.log("andvantages animation ended");
+                    });
+                    break;
+                case "assortment":
+                    break;
+                default:
+                    break;
+            }            
+        }
+
     });
 
 
-    var cachedWidth = window.innerWidth;
+    let cachedWidth = window.innerWidth;
 
     function windowSize(){
-        var winWidth = window.innerWidth,
+        let winWidth = window.innerWidth,
             docWidth = $(document).width();
 
         scrollBar(true);
@@ -320,7 +566,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
     // ScrollBar
     function scrollBar(update){
-        var $scroll = $(".scroll-block");
+        let $scroll = $(".scroll-block");
 
         if ($scroll.length && window.innerWidth > 767){
             
@@ -354,5 +600,74 @@ document.documentElement.className = document.documentElement.className.replace(
         if ( typeof NodeList.prototype.forEach === "function" ) return false;
         NodeList.prototype.forEach = Array.prototype.forEach;
     }());
+
+
+    /*********************************
+     * UNIVERSAL MOUSE WHEEL HANDLER 
+     *********************************/
+
+    // creates a global "addWheelListener" method
+    // example: addWheelListener( elem, function( e ) { console.log( e.deltaY ); e.preventDefault(); } );
+    let prefix = "", _addEventListener, support;
+
+    // detect event model
+    if ( window.addEventListener ) {
+        _addEventListener = "addEventListener";
+    } else {
+        _addEventListener = "attachEvent";
+        prefix = "on";
+    }
+
+    // detect available wheel event
+    support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+              document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+              "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
+
+    window.addWheelListener = function( elem, callback, useCapture ) {
+        _addWheelListener( elem, support, callback, useCapture );
+
+        // handle MozMousePixelScroll in older Firefox
+        if( support == "DOMMouseScroll" ) {
+            _addWheelListener( elem, "MozMousePixelScroll", callback, useCapture );
+        }
+    };
+
+    function _addWheelListener( elem, eventName, callback, useCapture ) {
+        elem[ _addEventListener ]( prefix + eventName, support == "wheel" ? callback : function( originalEvent ) {
+            !originalEvent && ( originalEvent = window.event );
+
+            // create a normalized event object
+            let event = {
+                // keep a ref to the original event object
+                originalEvent: originalEvent,
+                target: originalEvent.target || originalEvent.srcElement,
+                type: "wheel",
+                deltaMode: originalEvent.type == "MozMousePixelScroll" ? 0 : 1,
+                deltaX: 0,
+                deltaY: 0,
+                deltaZ: 0,
+                preventDefault: function() {
+                    originalEvent.preventDefault ?
+                        originalEvent.preventDefault() :
+                        originalEvent.returnValue = false;
+                }
+            };
+            
+            // calculate deltaY (and deltaX) according to the event
+            if ( support == "mousewheel" ) {
+                event.deltaY = - 1/40 * originalEvent.wheelDelta;
+                // Webkit also support wheelDeltaX
+                originalEvent.wheelDeltaX && ( event.deltaX = - 1/40 * originalEvent.wheelDeltaX );
+            } else {
+                event.deltaY = originalEvent.deltaY || originalEvent.detail;
+            }
+
+            // it's time to fire the callback
+            return callback( event );
+
+        }, useCapture || false );
+    }
     
 }(jQuery))
+
+

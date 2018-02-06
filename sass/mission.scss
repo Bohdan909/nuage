@@ -426,7 +426,7 @@ div.mission-text-slider {
 }
 
 .mission-video-play {
-    @include trans(0.1s)
+    @include trans(0.1s);
     cursor: pointer;
 
     .btn-play {

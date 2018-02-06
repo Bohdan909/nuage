@@ -8,7 +8,7 @@
 	},
 
 	$.fn.rotate3d = function(options) {
-
+		var base = this;
 		// Set options
 		if (!options.source) options.source = defOptions.source;
 		if (!options.ext) options.ext = defOptions.ext;
@@ -31,7 +31,7 @@
 		}
 
 		// Move
-		var moveHandler = function(e) {
+		base.moveHandler = function(e) {
 			var offset = e.clientX - clickPosition;
 
 			if (Math.abs(offset) > options.speed) {
@@ -45,24 +45,24 @@
 			}
 		}
 
-		var upHandler = function(e){
-			$(document).off('mousemove', moveHandler);
+		base.upHandler = function(e){
+			$(document).off('mousemove', base.moveHandler);
 		}
 
-		function imageAttr(i){
+		base.imageAttr = function (i){
 			image.attr('src', images[i].src);
 		}
 
 		var animateReverseEnd = false, animateBackEnd = false, autoplayEnd = false, timer;
 
 		// Autoplay	
-		var autoPlay = function(){
+		base.autoPlay = function(){
 			let i = 0;
 
 			if (options.auto){
 
 				function change(){
-					imageAttr(i);
+					base.imageAttr(i);
 					i++;
 
 					console.log("Auto: go_____");
@@ -82,11 +82,11 @@
 		}
 
 		// Reverse
-		var changeImgReverse = function(){
+		base.changeImgReverse = function(){
 			let i = options.count;
 
 			function change(){
-				imageAttr(i);
+				base.imageAttr(i);
 			    i--;
 
 			    console.log("Reverse: go_____");
@@ -104,11 +104,11 @@
 		}
 
 		// Back
-		var changeImgBack = function(){
+		base.changeImgBack = function(){
 			let i = options.count - options.count*0.4;
 
 			function change(){
-				imageAttr(i);
+				base.imageAttr(i);
 				i++;
 
 				console.log("Back: go_____");
@@ -178,32 +178,37 @@
         ////////// MAIN OBJECT //////////
 
         // Open
-        var animateOpen = function(){
+        base.animateOpen = function(callback){
             let i = 0;
 
             function change(){
-                imageAttr(i);
+                base.imageAttr(i);
                 i++;
 
                 if (i >= images.length){
                     clearInterval(timer);       
                     animateOpenEnd = true;
                     //if (!animateCloseEnd) animateClose();
-                    setTimeout(animateClose, 700);
+					//setTimeout(animateClose, 700);
+					if (callback) {
+						callback();
+					} 
                 }
 
                 console.log("Open: " + animateOpenEnd);
             }       
 
-            var timer = setInterval(change, 40); 
+			var timer = setInterval(change, 40); 
+			
+			
         }
 
         // Close
-        var animateClose = function(){
+        base.animateClose = function(){
             let i = options.count;
 
             function change(){
-                imageAttr(i);
+                base.imageAttr(i);
                 i--;
 
                 if (i <= 0){
@@ -217,11 +222,11 @@
             var timer = setInterval(change, 40); 
         }
 
-        if ($(".page").is(".page-main")){
-        	setTimeout(function(){
-	        	animateOpen();	
-	        }, 1500);
-        }
+        // if ($(".page").is(".page-main")){
+        // 	setTimeout(function(){
+	    //     	animateOpen();	
+	    //     }, 1500);
+        // }
         
 
         ////////// END MAIN OBJECT //////////
@@ -232,12 +237,13 @@
 			.find('img')
 			.on('mousedown', function(e){
 				clickPosition = e.clientX;
-				$(document).on('mousemove', moveHandler);
+				$(document).on('mousemove', base.moveHandler);
 			});
 
 		image = $(this).find('img');
-		autoPlay();
+		//base.autoPlay();
 
-		$(document).on('mouseup', upHandler);
+		$(document).on('mouseup', base.upHandler);
+
 	}
 }(jQuery));
