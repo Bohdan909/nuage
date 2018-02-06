@@ -188,6 +188,17 @@
 	}
 }
 
+
+@supports (-ms-ime-align:auto) {
+	.point-name, .point-line {
+		display: none;
+		
+		.active & {
+			display: block;
+		}
+	}
+}
+
 .plus {
 	
 	&:before, &:after {
@@ -238,30 +249,10 @@
 	}
 }
 
-.point:nth-child(1) { // POINT 1
-	top: 222px;
-	left: 345px;
+.page-adv {
 
-	.point-name {
-		left: -151px;
-		top: -108px;
-	}
-
-	.point-line {
-
-		span {
-			@include transform(skewY(18deg));
-			width: 115px;
-			height: 28px;
-			left: -123px;
-			top: -25px;
-			border-right: none;
-			border-top: none;
-		}
-	}
-
-	.point-ico {
-
+	.point:nth-child(1) .point-ico {
+		
 		img {
 			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
 			@include delay(0.45s);
@@ -269,36 +260,15 @@
 			top: 50%;
 		}
 	}
-}
 
-.active.point:nth-child(1) .point-ico img {
-	@include transform(translateX(-50%) translateY(-50%) scaleX(1));
-}
-
-.point:nth-child(2) { // POINT 2
-	top: 147px;
-	left: 550px;
-
-	.point-name {
-		left: 145px;
-		top: -65px;
-	}
-
-	.point-line {
-
-		span {
-			@include transform(skewX(-25deg));
-			width: 100px;
-			height: 28px;
-			left: 87px;
-			top: -3px;
-			border-left: none;
-			border-top: none;
+	.active.point:nth-child(1), .active.point:nth-child(2) {
+		.point-ico img {
+			@include transform(translateX(-50%) translateY(-50%) scaleX(1));
 		}
 	}
 
-	.point-ico {
-
+	.point:nth-child(2) .point-ico {
+		
 		img {
 			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
 			@include delay(0.45s);
@@ -306,36 +276,9 @@
 			top: 50%;
 		}
 	}
-}
 
-.active.point:nth-child(2) .point-ico img {
-	@include transform(translateX(-50%) translateY(-50%) scaleX(1));
-}
-
-.point:nth-child(3) { // POINT 3
-	top: 346px;
-	left: 236px;
-
-	.point-name {
-		left: -240px;
-		top: 100px;
-	}
-
-	.point-line {
-
-		span {
-			@include transform(skewX(-25deg));
-			width: 35px;
-			height: 70px;
-			left: -20px;
-			top: 58px;
-			border-left: none;
-			border-top: none;
-		}
-	}
-
-	.point-ico {
-
+	.point:nth-child(3) .point-ico {
+		
 		img {
 			@include delay(0.45s);
 			left: 50%;
@@ -356,87 +299,40 @@
 			}
 		}
 	}
-}
 
-.active.point:nth-child(3) .point-ico img {
-	
-	&:nth-child(1) {
-		@include transform(translateX(-50%) translateY(13px));
-	}
+	.active.point:nth-child(3) .point-ico img {
+		
+		&:nth-child(1) {
+			@include transform(translateX(-50%) translateY(13px));
+		}
 
-	&:nth-child(2) {
-		@include transform(translateX(-50%) translateY(21px));
-	}
+		&:nth-child(2) {
+			@include transform(translateX(-50%) translateY(21px));
+		}
 
-	&:nth-child(3) {
-		@include transform(translateX(-50%) translateY(28px));
-	}
-}
-
-.point:nth-child(4) { // POINT 4
-	top: 442px;
-	left: 538px;
-
-	.point-name {
-		left: 112px;
-		top: -128px;
-	}
-
-	.point-line {
-
-		span {
-			@include transform(skewX(-25deg));
-			width: 45px;
-			height: 100px;
-			left: 100px;
-			top: -75px;
-			border-left: none;
-			border-top: none;
+		&:nth-child(3) {
+			@include transform(translateX(-50%) translateY(28px));
 		}
 	}
 
-	.point-ico {
-		@include transform(translateX(-10px));
-
+	.point:nth-child(4) .point-ico {
+		
 		img {
-			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
+			@include transform(translateY(-50%) scaleX(0.8));
 			@include origin(center,center);
 			@include delay(0.45s);
-			left: 50%;
 			top: 50%;
 		}
 	}
-}
 
-.active.point:nth-child(4) .point-ico img {
-	@include transform(translateX(-50%) translateY(-50%) scaleX(1));
-}
-
-.point:nth-child(5) { // POINT 5
-	top: 585px;
-	left: 420px;
-
-	.point-name {
-		left: 145px;
-		top: -54px;
-	}
-
-	.point-line {
-
-		span {
-			@include transform(skewX(-25deg));
-			width: 85px;
-			height: 25px;
-			left: 85px;
-			top: 0px;
-			border-left: none;
-			border-top: none;
+	.active.point:nth-child(4) {
+		.point-ico img {
+			@include transform(translateY(-50%) scaleX(1));
 		}
 	}
 
-	.point-ico {
-		@include transform(translateX(-10px));
-
+	.point:nth-child(5) .point-ico {
+		
 		img {
 			top: 0;
 
@@ -451,14 +347,178 @@
 			}
 		}
 	}
-}
 
-.active.point:nth-child(5) .point-ico img {
+	.active.point:nth-child(5) .point-ico img {
 
-	&:nth-child(2) {
-		@include transform(translateY(-4px));
+		&:nth-child(2) {
+			@include transform(translateY(-4px));
+		}
 	}
 }
+
+
+.object-scheme-wrap {
+
+	.point:nth-child(1) { // POINT 1
+		top: 222px;
+		left: 345px;
+
+		.point-name {
+			left: -151px;
+			top: -108px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewY(18deg));
+				width: 115px;
+				height: 28px;
+				left: -123px;
+				top: -25px;
+				border-right: none;
+				border-top: none;
+			}
+		}
+	}
+
+	.point:nth-child(2) { // POINT 2
+		top: 147px;
+		left: 550px;
+
+		.point-name {
+			left: 145px;
+			top: -65px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewX(-25deg));
+				width: 100px;
+				height: 28px;
+				left: 87px;
+				top: -3px;
+				border-left: none;
+				border-top: none;
+			}
+		}
+	}
+
+
+	.point:nth-child(3) { // POINT 3
+		top: 346px;
+		left: 236px;
+
+		.point-name {
+			left: -240px;
+			top: 100px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewX(-25deg));
+				width: 35px;
+				height: 70px;
+				left: -20px;
+				top: 58px;
+				border-left: none;
+				border-top: none;
+			}
+		}
+	}
+
+	
+	.point:nth-child(4) { // POINT 4
+		top: 442px;
+		left: 538px;
+
+		.point-name {
+			left: 112px;
+			top: -128px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewX(-25deg));
+				width: 45px;
+				height: 100px;
+				left: 100px;
+				top: -75px;
+				border-left: none;
+				border-top: none;
+			}
+		}
+
+		.point-ico {
+			@include transform(translateX(-10px));
+
+			img {
+				@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
+				@include origin(center,center);
+				@include delay(0.45s);
+				left: 50%;
+				top: 50%;
+			}
+		}
+	}
+
+	.active.point:nth-child(4) .point-ico img {
+		@include transform(translateX(-50%) translateY(-50%) scaleX(1));
+	}
+
+	.point:nth-child(5) { // POINT 5
+		top: 585px;
+		left: 420px;
+
+		.point-name {
+			left: 145px;
+			top: -54px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewX(-25deg));
+				width: 85px;
+				height: 25px;
+				left: 85px;
+				top: 0px;
+				border-left: none;
+				border-top: none;
+			}
+		}
+
+		.point-ico {
+			@include transform(translateX(-10px));
+
+			img {
+				top: 0;
+
+				&:nth-child(1) {
+					left: 12px;
+				}
+
+				&:nth-child(2) {
+					@include transform(translateY(-17px));
+					@include delay(0.2s);
+					left: 45px;
+				}
+			}
+		}
+	}
+
+	.active.point:nth-child(5) .point-ico img {
+
+		&:nth-child(2) {
+			@include transform(translateY(-4px));
+		}
+	}
+}
+
+
 
 // Scheme
 .scheme-desc-wrap {
@@ -502,7 +562,9 @@
 }
 
 .scheme-desc-inner {
-	@include vertCenter;
+	//@include vertCenter;
+	position: relative;
+	top: 240px;
 }
 
 @keyframes textAnimate {
@@ -567,6 +629,25 @@
 		top: 0;
 		left: 315px;
 	}
+
+	.points {
+
+		.point {
+			left: 0;
+			top: 0;
+
+			.point-name {
+
+				.point-ico {
+					width: 65px;
+				}
+
+				span {
+					left: 65px;
+				}
+			}
+		}
+	}
 }
 
 
@@ -584,6 +665,23 @@
 		@include transform(translateY(0) translateX(-50%));
 		top: -40px;
 		left: 45%;	
+
+		.point:nth-child(2) {
+			left: 525px;
+		}
+
+		.point:nth-child(3) {
+			left: 286px;
+		}
+
+		.point:nth-child(4) {
+			top: 342px;
+			left: 539px;
+		}
+
+		.point:nth-child(5) {
+			top: 525px;
+		}
 	}
 
 	.scheme-desc-inner {
@@ -595,22 +693,7 @@
 		@include transform(scale(0.8));
 	}	
 
-	.point:nth-child(2) {
-		left: 525px;
-	}
-
-	.point:nth-child(3) {
-		left: 286px;
-	}
-
-	.point:nth-child(4) {
-		top: 342px;
-		left: 539px;
-	}
-
-	.point:nth-child(5) {
-		top: 525px;
-	}
+	
 }
 
 @media (min-width: 1025px) and (max-height: 700px){
@@ -630,7 +713,7 @@
 
 @include mid {
 
-	.point:nth-child(2) {
+	.object-scheme-wrap .point:nth-child(2) {
 
 		.point-name {
 			left: 123px;
@@ -656,21 +739,21 @@
 		@include transform(scale(0.7));
 	}
 
-	.points {
+	// .points {
 		
 
-		.point, .point .point-name {
-			left: 0 !important;
-			top: 0 !important; 
-		} 
+	// 	.point, .point .point-name {
+	// 		left: 0 !important;
+	// 		top: 0 !important; 
+	// 	} 
 
-		.point {
+	// 	.point {
 
-			.point-btn, .point-line {
-				display: none;
-			}
-		}
-	}
+	// 		.point-btn, .point-line {
+	// 			display: none;
+	// 		}
+	// 	}
+	// }
 
 	.scheme-desc-wrap {
 		width: 45%;
@@ -678,6 +761,10 @@
 
 	.object-scheme-block {
 		width: 55%;
+
+		.points {
+			display: none;
+		}
 	}
 
 	.scheme-desc-inner {
@@ -700,11 +787,10 @@
 	@include port {
 
 		.scheme-desc-inner {
-			top: 205px;
+			top: 250px;
 
-			@media (min-width: 767px) and (min-height: 850px){
-				@include transform(translateY(-50%));
-				top: 50%;
+			@media (min-height: 1050px){
+				top: 350px;
 			}
 		}
 	}
@@ -803,10 +889,9 @@
 		}
 
 		.point-name {
-			left: 0 !important;
-			top: 51px !important;
 
 			span {
+				display: none;
 				letter-spacing: 0;
 			}
 		}

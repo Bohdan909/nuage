@@ -253,41 +253,19 @@
 							</div>
 						</div>
 
+						<div class="copyright-mobile">АО "ПФК ОБНОВЛЕНИЕ" "ВСЕ ПРАВА ЗАЩИЩЕНЫ" (c) 2017</div>
+
 
 
 						<!-- Footer -->
 						<div class="footer animate-fade">
-							<div class="footer-social">
-								<button class="like"></button>
-								
-								<div class="social-drop hide">
-									<span>Нравиться Nuage? Присойденяйтесь!</span>
-									<ul class="social">
-										<li>
-											<img width="22" src="images/soc-1.svg" alt="">
-										</li>
-										<li>
-											<img width="10" src="images/soc-2.svg" alt="">
-										</li>
-										<li>
-											<img width="28" src="images/soc-3.svg" alt="">
-										</li>
-										<li>
-											<img width="20" src="images/soc-4.svg" alt="">
-										</li>
-										<li>
-											<img width="20" src="images/soc-5.svg" alt="">
-										</li>
-									</ul>
-								</div>
-							</div>
+							<div class="policy-link">Политика Конфиденциальности</div>
 
 							<a href="" class="logo-f"></a>
 						</div>
 					</div>
 
-					<!-- 
-					<ul class="cubes cubes-a cubes-b">
+					<ul class="cubes figures cubes-b">
 						<li>
 							<div>
 								<span class="face-1"></span>
@@ -316,38 +294,23 @@
 								<span class="face-3"></span>
 							</div>
 						</li>
-						<li>
-							<div>
-								<span class="face-1"></span>
-								<span class="face-2"></span>
-								<span class="face-3"></span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="face-1"></span>
-								<span class="face-2"></span>
-								<span class="face-3"></span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="face-1"></span>
-								<span class="face-2"></span>
-								<span class="face-3"></span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="face-1"></span>
-								<span class="face-2"></span>
-								<span class="face-3"></span>
-							</div>
-						</li>
-					</ul> -->
+					</ul>
 
 				</div><!-- / Content -->
 
+			</div>
+
+			<div class="popup-wrap" id="popup-policy">
+				<div class="popup popup-policy">
+					<div class="popup-close"></div>
+					<div class="title-3">Политика Конфиденциальности</div>
+
+					<p>
+						Этот сайт принадлежит АО  «ПФК Обновление», которое полностью отвечает за его содержимое. 13+ . Сайт ориентирован на физических и юридических лиц Российской Федерации. Информация, размещенная на сайте, 
+						носит справочный характер и не может считаться консультацией медицинского работника или заменить ее. Для получения более подробной информации мы рекомендуем вам обратиться к специалисту.
+						Свидетельства о государственной регистрации: RU.54.HC.01.012.E.000072.07.16 от 19.07.2016г., RU.54.HC.01.012.E.000002.01.17 от 10.01.2017г."
+					</p>
+				</div>
 			</div>
 		</div><!-- / Main -->
 
@@ -359,6 +322,29 @@
         <script src="./js/perfect-scrollbar.jquery.min.js"></script>
 		<script src="./js/scripts.js"></script> 
 
+		<script>
+			// Popup
+			let btnClose = document.querySelectorAll(".popup-close");
+
+			document.querySelector(".policy-link").addEventListener("click", function(){
+
+				document.querySelector("#popup-policy").classList.add("open");
+			});
+
+
+			btnClose.forEach(function(btn){
+				let popupWrap = btn.parentNode.parentNode;
+				
+				btn.addEventListener("click", function(){
+					popupWrap.classList.remove("open");
+				});
+			});
+
+			(function(){
+	        	if ( typeof NodeList.prototype.forEach === "function" ) return false;
+		        NodeList.prototype.forEach = Array.prototype.forEach;
+		    }());
+		</script>
 
 		
 		<!-- Live Reload -->
