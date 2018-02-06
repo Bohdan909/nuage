@@ -627,11 +627,6 @@ div.assort-desc-item {
     @include animation(fadeOut, 2s, linear);
     display: none;
 
-    &.show {
-        @include animation(fadeIn, 1.3s, linear);
-        display: block;
-    }
-
     p {
         color: $textCol;
     }
@@ -639,7 +634,36 @@ div.assort-desc-item {
     .btn {
         display: none;
     }
+
+    &.show {
+        @include animation(fadeIn, 1.3s, linear);
+        display: block;
+
+        .title-rt {
+
+            section {
+                @include transform(translateY(0));
+                @include delay(0.2s);
+                opacity: 1;
+            }
+        }
+    }
 }
+
+.title-rt {
+    height: 33px;
+    overflow: hidden;
+
+    section {
+        @include transition(all, 0.4s, $easing);
+        @include transform(translateY(33px));
+        @include delay(0s);
+        opacity: 0;
+        white-space: nowrap;
+    }
+}
+
+
 
 ul.desc-list {
     padding-bottom: 15px;
