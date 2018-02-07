@@ -2,7 +2,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
 (function($){
     $(document).ready(function() {
-
+        
         setTimeout(function(){
             document.querySelector(".page").classList.add("loaded");
         }, 500);
@@ -32,8 +32,6 @@ document.documentElement.className = document.documentElement.className.replace(
             e.preventDefault();
         });
         
-        
-
         /* ==============
            MENU 
         ================= */   
@@ -294,224 +292,228 @@ document.documentElement.className = document.documentElement.className.replace(
             CUSTOM SCROLL AND NAVIGATION
         ================================ */
 
-        let mainElem = document.querySelector(".main");
-        
-        // left: 37, up: 38, right: 39, down: 40,
-        // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-        let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
-        let keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
+        if (document.querySelector(".main").classList.contains("page-scroll")){
 
-        let navLinks = [
-            "main",
-            "advantages",
-            "assortment",
-            "mission",
-            "faq",
-            "buy",
-            "consultation"
-        ];
-        let baseHashUrl = "#";
+            let mainElem = document.querySelector(".main");
+            
+            // left: 37, up: 38, right: 39, down: 40,
+            // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+            let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
+            let keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
 
-        let lastScrollTime = 0;
+            let navLinks = [
+                "main",
+                "advantages",
+                "assortment",
+                "mission",
+                "faq",
+                "buy",
+                "consultation"
+            ];
+            let baseHashUrl = "#";
 
-        // initialize variable by hashtag from url if it present
-        let currentHashtag = window.location.hash.substr(1);
-        
-        
-        let currentBlockIndex = 0;
-        let prevBlockIndex = -1;
+            let lastScrollTime = 0;
 
-        let movingMenuUnderline = document.querySelector(".menu .moving-underline");
-        let menuListElem = document.querySelector(".menu ul");
-        let allBlocks = document.querySelectorAll(".page");
-        
-        var $object = $('.object-main');
-        var $scheme = $('.object-scheme');
+            // initialize variable by hashtag from url if it present
+            let currentHashtag = window.location.hash.substr(1);
+            
+            
+            let currentBlockIndex = 0;
+            let prevBlockIndex = -1;
 
-        $object.rotate3d({
-            'source': 'images/object-1/1_',
-            'count' : 39,
-            'auto'  : true
-        });
+            let movingMenuUnderline = document.querySelector(".menu .moving-underline");
+            let menuListElem = document.querySelector(".menu ul");
+            let allBlocks = document.querySelectorAll(".page");
+            
+            var $object = $('.object-main');
+            var $scheme = $('.object-scheme');
 
-        $scheme.rotate3d({
-            'source': 'images/object-2/Vzruv_02.Alpha_',
-            'count' : 70,
-            'auto'  : true
-        });
-
-        // media query event handler
-        if (matchMedia) {
-            const mq = window.matchMedia("(min-width: 1025px)");
-            mq.addListener(WidthChange);
-            WidthChange(mq);
-        }
-
-        currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
-        navigateToBlock(currentBlockIndex);
-
-        function clearLoadedState(){
-            Array.prototype.forEach.call(allBlocks, function(block){
-                block.classList.remove("loaded");
+            $object.rotate3d({
+                'source': 'images/object-1/1_',
+                'count' : 39,
+                'auto'  : true
             });
-        }
 
-        // media query change
-        function WidthChange(mq) {
-            if (mq.matches) {
-                // window width is at least 1025px
-                mainElem.classList.add("stop-scrolling");
+            $scheme.rotate3d({
+                'source': 'images/object-2/Vzruv_02.Alpha_',
+                'count' : 70,
+                'auto'  : true
+            });
 
-                clearLoadedState();
+            // media query event handler
+            if (matchMedia) {
+                const mq = window.matchMedia("(min-width: 1025px)");
+                mq.addListener(WidthChange);
+                WidthChange(mq);
+            }
 
-                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
-                document.onkeydown = customScrollKeysHandler;
-                // handler for wheel event 
-                addWheelListener( window, customScrollWheelHandler );
+            currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
+            navigateToBlock(currentBlockIndex);
 
-                window.ontouchmove = customScrollTouchHandler;
+            function clearLoadedState(){
+                Array.prototype.forEach.call(allBlocks, function(block){
+                    block.classList.remove("loaded");
+                });
+            }
+
+            // media query change
+            function WidthChange(mq) {
+                if (mq.matches) {
+                    // window width is at least 1025px
+                    mainElem.classList.add("stop-scrolling");
+
+                    clearLoadedState();
+
+                    // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                    document.onkeydown = customScrollKeysHandler;
+                    // handler for wheel event 
+                    addWheelListener( window, customScrollWheelHandler );
+
+                    window.ontouchmove = customScrollTouchHandler;
+                    
+                    // Handle direct click on havigation links  
+                    let navigationMenuElement = document.querySelector(".main");
+                    navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
+                    
+                    window.onhashchange = hashUrlChangeHandler;
+                } else {
+                // window width is less than 1025px
+                }
+            }
+
+            function getBlockIndexByHashtag(hashtag) {
+                let result = currentBlockIndex;
+                let blockIndex = navLinks.indexOf(hashtag);
+                if (blockIndex != -1) {
+                    result = blockIndex;
+                }
+                return result;
+            }
+
+            function playMenuUnderlineAnimation(currentBlockId) {
+                let currentNavElement = document.querySelector("li." + currentBlockId);
+                //let prevNavElement = document.querySelector("li." + prevBlockId);
+            
+                if (currentNavElement) {
+                    let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
+                    movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
+                    movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
+                } else {
+                    movingMenuUnderline.style.width = 0;
+                }
                 
-                // Handle direct click on havigation links  
-                let navigationMenuElement = document.querySelector(".main");
-                navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
+                /*if (prevNavElement) {
+                    prevNavElement.classList.remove("active");
+                }
                 
-                window.onhashchange = hashUrlChangeHandler;
-            } else {
-            // window width is less than 1025px
-            }
-        }
-
-        function getBlockIndexByHashtag(hashtag) {
-            let result = currentBlockIndex;
-            let blockIndex = navLinks.indexOf(hashtag);
-            if (blockIndex != -1) {
-                result = blockIndex;
-            }
-            return result;
-        }
-
-        function playMenuUnderlineAnimation(currentBlockId) {
-            let currentNavElement = document.querySelector("li." + currentBlockId);
-            //let prevNavElement = document.querySelector("li." + prevBlockId);
-        
-            if (currentNavElement) {
-                let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
-                movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
-                movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
-            } else {
-                movingMenuUnderline.style.width = 0;
-            }
-            
-            /*if (prevNavElement) {
-                prevNavElement.classList.remove("active");
-            }
-            
-            if (currentNavElement) {
-                currentNavElement.classList.add("active");
-            }*/
-        }
-
-        function navigateToBlockByHashtag(hashtag) {
-            currentBlockIndex = getBlockIndexByHashtag(hashtag);
-            navigateToBlock(currentBlockIndex);
-        }
-
-        function navigateToBlock(blockIndex){
-            if (currentBlockIndex == prevBlockIndex) {
-                console.log(`trying to open already opened page index: ${currentBlockIndex} `);
-                return;
+                if (currentNavElement) {
+                    currentNavElement.classList.add("active");
+                }*/
             }
 
-            clearLoadedState();
-            let currentBlockId = navLinks[currentBlockIndex];
-
-            //mainElem.style.height = elem.scrollHeight + "px";
-            
-            let elem = document.getElementById(currentBlockId);
-    
-            window.location.href = baseHashUrl + currentBlockId;
-            
-            elem.classList.add("loaded");
-            // animation part
-            
-            playMenuUnderlineAnimation(currentBlockId);
-
-            prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
-            // remove loaded from previous block
-            let prevBlockId = navLinks[prevBlockIndex];
-
-            let prevElement = document.getElementById(prevBlockId);
-            prevElement.classList.remove("loaded");
-
-            executePageSpecificScript(currentBlockId);
-        }
-        
-        function scrollToNextBlock() {
-            if (currentBlockIndex == navLinks.length - 1) {
-                return;
+            function navigateToBlockByHashtag(hashtag) {
+                currentBlockIndex = getBlockIndexByHashtag(hashtag);
+                navigateToBlock(currentBlockIndex);
             }
-            prevBlockIndex = currentBlockIndex;
-            currentBlockIndex += 1;
-            navigateToBlock(currentBlockIndex);
-        }
-        function scrollToPrevBlock() {
-            if (currentBlockIndex == 0) {
-                return;
-            }
-            prevBlockIndex = currentBlockIndex;
-            currentBlockIndex -= 1;
-            navigateToBlock(currentBlockIndex);
-        }
 
-        function customScrollKeysHandler(e) {
-            if (keysPrev[e.keyCode]) {
-                e.preventDefault();
-                scrollToPrevBlock();
-            } else if (keysNext[e.keyCode]) {
-                e.preventDefault();
-                scrollToNextBlock();
-            }
-        }
-
-        function customScrollWheelHandler(e) {
-            // limit handling rate to prevent scrolling trough all pages
-            if (Date.now() - lastScrollTime > 1000) {
-                if (e.deltaY > 0) {
-                    scrollToNextBlock();
-                } else if (e.deltaY < 0) {
-                    scrollToPrevBlock();
+            function navigateToBlock(blockIndex){
+                if (currentBlockIndex == prevBlockIndex) {
+                    console.log(`trying to open already opened page index: ${currentBlockIndex} `);
+                    return;
                 }
 
-                lastScrollTime = Date.now();
-            }
-        }
+                clearLoadedState();
+                let currentBlockId = navLinks[currentBlockIndex];
 
-        function customScrollTouchHandler(e) {
-            // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
-        }
-
-        function handleDirectClickOnNavLinks (event) {
-            if (!event.target.matches('a[href^="#"]')) return;
-            event.preventDefault();
-
-            // extract hashtag from link
-            let hashtag = event.target.hash.substr(1);
-            currentBlockIndex = getBlockIndexByHashtag(hashtag);
-            prevBlockIndex = -1;
-            navigateToBlockByHashtag(hashtag);
-        }
-
-        function hashUrlChangeHandler(event) {
-            if (event.newURL != event.oldURL) {
-                console.log(`hash changed`);
-                let newUrlId = window.location.hash.substr(1);
-                let oldUrlId = event.oldURL.split('#')[1].substr(1);
-                prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
-                navigateToBlockByHashtag(newUrlId);
+                //mainElem.style.height = elem.scrollHeight + "px";
                 
+                let elem = document.getElementById(currentBlockId);
+        
+                window.location.href = baseHashUrl + currentBlockId;
+                
+                elem.classList.add("loaded");
+                // animation part
+                
+                playMenuUnderlineAnimation(currentBlockId);
 
+                prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
+                // remove loaded from previous block
+                let prevBlockId = navLinks[prevBlockIndex];
+
+                let prevElement = document.getElementById(prevBlockId);
+                prevElement.classList.remove("loaded");
+
+                executePageSpecificScript(currentBlockId);
             }
-        }
+            
+            function scrollToNextBlock() {
+                if (currentBlockIndex == navLinks.length - 1) {
+                    return;
+                }
+                prevBlockIndex = currentBlockIndex;
+                currentBlockIndex += 1;
+                navigateToBlock(currentBlockIndex);
+            }
+            function scrollToPrevBlock() {
+                if (currentBlockIndex == 0) {
+                    return;
+                }
+                prevBlockIndex = currentBlockIndex;
+                currentBlockIndex -= 1;
+                navigateToBlock(currentBlockIndex);
+            }
+
+            function customScrollKeysHandler(e) {
+                if (keysPrev[e.keyCode]) {
+                    e.preventDefault();
+                    scrollToPrevBlock();
+                } else if (keysNext[e.keyCode]) {
+                    e.preventDefault();
+                    scrollToNextBlock();
+                }
+            }
+
+            function customScrollWheelHandler(e) {
+                // limit handling rate to prevent scrolling trough all pages
+                if (Date.now() - lastScrollTime > 1000) {
+                    if (e.deltaY > 0) {
+                        scrollToNextBlock();
+                    } else if (e.deltaY < 0) {
+                        scrollToPrevBlock();
+                    }
+
+                    lastScrollTime = Date.now();
+                }
+            }
+
+            function customScrollTouchHandler(e) {
+                // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
+            }
+
+            function handleDirectClickOnNavLinks (event) {
+                if (!event.target.matches('a[href^="#"]')) return;
+                event.preventDefault();
+
+                // extract hashtag from link
+                let hashtag = event.target.hash.substr(1);
+                currentBlockIndex = getBlockIndexByHashtag(hashtag);
+                prevBlockIndex = -1;
+                navigateToBlockByHashtag(hashtag);
+            }
+
+            function hashUrlChangeHandler(event) {
+                if (event.newURL != event.oldURL) {
+                    console.log(`hash changed`);
+                    let newUrlId = window.location.hash.substr(1);
+                    let oldUrlId = event.oldURL.split('#')[1].substr(1);
+                    prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
+                    navigateToBlockByHashtag(newUrlId);
+                    
+
+                }
+            }
+
+        }    
 
         /* =========================================
             3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS

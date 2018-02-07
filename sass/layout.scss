@@ -50,9 +50,7 @@ body {
 
 #header {
     @include socket;
-    padding-top: 51px;
     position: fixed;
-    height: $header-height;
     text-align: center;
     z-index: 999;
 
@@ -192,9 +190,6 @@ body {
 @include tablet {
 
     #header {
-        height: $header-height-tbl;
-        padding-top: 40px;
-        width: calc(100% - 50px);
 
         .logo {
             left: 40px;
@@ -383,12 +378,6 @@ body {
 
 @include mobile {
 
-    #header {
-        height: $header-height-mob;
-        padding-top: 20px;
-        width: calc(100% - 34px);
-    } 
-
     .menu {
         top: 20px;
 
@@ -402,18 +391,6 @@ body {
     }
 }
 
-// Nexus, iPhone X  (Landscape)
-@media screen and (max-width: 960px) and (max-height: 600px){
-    
-    #header {
-        height: $header-height-mob;
-        padding-top: 20px;
-    } 
-
-    .menu {
-        top: 20px;
-    }
-}
 
 @media (min-width: 1025px) {
 
@@ -428,37 +405,94 @@ body {
    Content
    ========================= */   
 
+#header {
+    padding-top: 51px;
+    height: $header-height;
+}
+
 #content {
     position: relative;
     overflow: hidden;
     height: calc( 100vh - #{$header-height});
     height: -webkit-calc( 100vh - #{$header-height});
     margin-top: $header-height;
+}
 
-    @include tablet {
+@media screen and (min-width: 1025px) and (max-height: 700px){
+    
+    #header {
+        padding-top: 20px;
+        height: calc(#{$header-height} - 30px);
+        height: -webkit-calc(#{$header-height} - 30px);
+    }
+
+    .menu {
+        top: 20px;
+    }
+
+    #content {
+        height: calc( 100vh - (#{$header-height} - 30px));
+        height: -webkit-calc( 100vh - (#{$header-height} - 30px));
+        margin-top: calc(#{$header-height} - 30px);
+        margin-top: -webkit-calc(#{$header-height} - 30px);
+    }
+
+    .page-adv .footer {
+        display: none;
+    }
+}
+
+@include tablet {
+    
+    #header {
+        height: $header-height-tbl;
+        padding-top: 40px;
+        width: calc(100% - 50px);
+        width: -webkit-calc(100% - 50px);
+    }
+
+    #content {
         height: calc( 100vh - #{$header-height-tbl});
         height: -webkit-calc( 100vh - #{$header-height-tbl});
         margin-top: $header-height-tbl;
     }
+}
 
-    @include mobile {
+@include mobile {
+
+    #header {
+        height: $header-height-mob;
+        padding-top: 20px;
+        width: calc(100% - 34px);
+    } 
+
+    #content {
         height: auto !important;
         min-height: calc(100vh - #{$header-height-mob});
         min-height: -webkit-calc(100vh - #{$header-height-mob});
         margin-top: $header-height-mob;
     }
+}
+
+// Nexus, iPhone X  (Landscape)
+@media screen and (max-width: 960px) and (max-height: 600px){
     
-    // Nexus, iPhone X  (Landscape)
-    @media screen and (max-width: 960px) and (max-height: 600px){
+    #header {
+        height: $header-height-mob;
+        padding-top: 20px;
+    } 
+
+    .menu {
+        top: 20px;
+    }
+
+    #content {
         height: calc(100vh - #{$header-height-mob});
         height: -webkit-calc(100vh - #{$header-height-mob});
         margin-top: $header-height-mob;
     }
-
-    // @include mobile {
-    //     height: auto;
-    // }
 }
+
 
 .page {
     position: relative;
