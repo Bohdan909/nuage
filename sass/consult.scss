@@ -378,6 +378,10 @@ ul.tabs.tabs-panel {
         padding-top: 50px;
         width: auto;
         margin: 0;
+
+        @include land {
+            padding-top: 20px;
+        }
     }
 }
 

@@ -251,36 +251,37 @@
 
 .page-adv {
 
+	.point .point-ico img {
+		@include delay(0.45s);
+	}
+
 	.point:nth-child(1) .point-ico {
 		
 		img {
 			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
-			@include delay(0.45s);
 			left: 50%;
 			top: 50%;
 		}
 	}
 
-	.active.point:nth-child(1), .active.point:nth-child(2) {
+	.active.point:nth-child(1), .active.point:nth-child(3) {
 		.point-ico img {
 			@include transform(translateX(-50%) translateY(-50%) scaleX(1));
-		}
-	}
-
-	.point:nth-child(2) .point-ico {
-		
-		img {
-			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
-			@include delay(0.45s);
-			left: 50%;
-			top: 50%;
 		}
 	}
 
 	.point:nth-child(3) .point-ico {
 		
 		img {
-			@include delay(0.45s);
+			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
+			left: 50%;
+			top: 50%;
+		}
+	}
+
+	.point:nth-child(4) .point-ico {
+		
+		img {
 			left: 50%;
 			top: 0;
 
@@ -300,7 +301,7 @@
 		}
 	}
 
-	.active.point:nth-child(3) .point-ico img {
+	.active.point:nth-child(4) .point-ico img {
 		
 		&:nth-child(1) {
 			@include transform(translateX(-50%) translateY(13px));
@@ -315,23 +316,27 @@
 		}
 	}
 
-	.point:nth-child(4) .point-ico {
+	.point:nth-child(5) .point-ico {
 		
 		img {
 			@include transform(translateY(-50%) scaleX(0.8));
 			@include origin(center,center);
-			@include delay(0.45s);
 			top: 50%;
+			left: -10px;
+
+			@include tablet {
+				left: 0;
+			}
 		}
 	}
 
-	.active.point:nth-child(4) {
+	.active.point:nth-child(5) {
 		.point-ico img {
 			@include transform(translateY(-50%) scaleX(1));
 		}
 	}
 
-	.point:nth-child(5) .point-ico {
+	.point:nth-child(2) .point-ico {
 		
 		img {
 			top: 0;
@@ -348,7 +353,7 @@
 		}
 	}
 
-	.active.point:nth-child(5) .point-ico img {
+	.active.point:nth-child(2) .point-ico img {
 
 		&:nth-child(2) {
 			@include transform(translateY(-4px));
@@ -403,6 +408,24 @@
 				border-top: none;
 			}
 		}
+
+		.point-ico {
+			@include transform(translateX(-10px));
+
+			img {
+				top: 0;
+
+				&:nth-child(1) {
+					left: 12px;
+				}
+
+				&:nth-child(2) {
+					@include transform(translateY(-17px));
+					@include delay(0.2s);
+					left: 45px;
+				}
+			}
+		}
 	}
 
 
@@ -411,7 +434,7 @@
 		left: 236px;
 
 		.point-name {
-			left: -240px;
+			left: -164px;
 			top: 100px;
 		}
 
@@ -452,21 +475,7 @@
 			}
 		}
 
-		.point-ico {
-			@include transform(translateX(-10px));
-
-			img {
-				@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
-				@include origin(center,center);
-				@include delay(0.45s);
-				left: 50%;
-				top: 50%;
-			}
-		}
-	}
-
-	.active.point:nth-child(4) .point-ico img {
-		@include transform(translateX(-50%) translateY(-50%) scaleX(1));
+		
 	}
 
 	.point:nth-child(5) { // POINT 5
@@ -490,35 +499,8 @@
 				border-top: none;
 			}
 		}
-
-		.point-ico {
-			@include transform(translateX(-10px));
-
-			img {
-				top: 0;
-
-				&:nth-child(1) {
-					left: 12px;
-				}
-
-				&:nth-child(2) {
-					@include transform(translateY(-17px));
-					@include delay(0.2s);
-					left: 45px;
-				}
-			}
-		}
-	}
-
-	.active.point:nth-child(5) .point-ico img {
-
-		&:nth-child(2) {
-			@include transform(translateY(-4px));
-		}
 	}
 }
-
-
 
 // Scheme
 .scheme-desc-wrap {
@@ -896,7 +878,6 @@
 		.point-name {
 
 			span {
-				display: none;
 				letter-spacing: 0;
 			}
 		}
