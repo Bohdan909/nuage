@@ -190,7 +190,7 @@
 
     .figures {
         top: auto;
-        bottom: -20px;
+        bottom: -50px;
         left: 250px;
 
         li {
@@ -233,8 +233,8 @@
         }
     }
 
-    .figures-5, .figures-6 {
-        bottom: -35px;
+    .figures.cubes {
+        bottom: -20px;
     }
 
     &.loaded .figures li {
@@ -391,9 +391,16 @@
         @include notCenter;
     }
 
-    .product-image .product-text {
-        width: 430px;
-        padding: 0;
+    .product-image  {
+        
+        .image img {
+            @include transform(scale(1));
+        }
+
+        .product-text {
+            width: 430px;
+            padding: 0;
+        }
     }
 
     .product-table-block {

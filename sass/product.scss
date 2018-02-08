@@ -431,12 +431,13 @@ div.product-view-block {
 
 .product-list {
     
-
     section {
+        @include flex(space-between);
         font-size: 0;
         text-align: center;
 
         > div {
+            flex: 1;
             position: relative;
             z-index: 1;
             display: inline-block;
@@ -546,7 +547,6 @@ div.product-view-block {
     .product-list {
 
         section {
-            @include flex(space-between);
             margin: 0 15px;
 
             > div {
