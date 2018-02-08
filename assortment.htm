@@ -754,6 +754,12 @@
 			    setTimeout(function(){
 			    	$(".assort-bg-list").addClass("bg-1");
 			    }, 1000);
+
+			    $slide.find(".slick-slider-inner").on("click", function(e){
+					if (!$(this).parent().hasClass("slick-current")) { 
+						e.preventDefault();
+					}		
+				});
 			    
 
 				// Loader		

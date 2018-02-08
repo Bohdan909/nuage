@@ -116,7 +116,6 @@
 	line-height: 48px;
 	font-size: 10px;
 	
-
 	&:after {
 		@extend .ps;
 		@include border-rad(30px);
@@ -125,8 +124,8 @@
 		width: 100%;
 		z-index: -1;
 		background-color: #fff;
-		box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.45);
-    	-webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.45);
+		box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.06);
+    	-webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.06);
 	}
 	
 	.active:not(.plus) > & {
@@ -137,6 +136,46 @@
             background-image: -webkit-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
             background-image: -ms-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
 			
+		}
+	}
+}
+
+.point-btn.plus {
+	background-color: #fff;
+
+	&:after {
+		display: none;
+	}
+
+	i {
+		@include transition(all, 0.35s, linear);
+		@include origin(50%, 50%);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin: -5px 0 0 -5px;
+		width: 10px;
+		height: 10px;
+
+		&:before, &:after {
+			@extend .ps;
+			@extend .transDef;
+			background-color: $textCol;
+		}
+
+		&:before {
+			top: 4px;
+			width: 10px;
+			height: 2px;
+		}
+
+		&:after {
+			left: 4px;
+			width: 2px;
+			height: 10px;
 		}
 	}
 }
@@ -209,36 +248,7 @@
 	}
 }
 
-.plus {
-	
-	&:before, &:after {
-		@include Center;
-		@extend .ps;
-		@extend .transDef;
-		background-color: #7caadb;
-	}
 
-	&:before {
-		width: 10px;
-		height: 2px;
-	}
-
-	&:after {
-		width: 2px;
-		height: 10px;
-	}
-
-	.active > & {
-
-		&:before, &:after {
-			background-color: #fff;
-		}
-
-		&:after {
-			height: 2px;
-		}
-	}
-}
 
 .no-touchevents  {
 
@@ -398,12 +408,12 @@
 	}
 
 	.point:nth-child(2) { // POINT 2
-		top: 165px;
-		left: 570px;
+		top: 307px;
+		left: 525px;
 
 		.point-name {
 			left: 145px;
-			top: -65px;
+			top: -52px;
 		}
 
 		.point-line {
@@ -440,7 +450,7 @@
 
 
 	.point:nth-child(3) { // POINT 3
-		top: 346px;
+		top: 418px;
 		left: 236px;
 
 		.point-name {
@@ -464,22 +474,22 @@
 
 	
 	.point:nth-child(4) { // POINT 4
-		top: 442px;
-		left: 538px;
+		top: 458px;
+		left: 465px;
 
 		.point-name {
-			left: 112px;
-			top: -128px;
+			left: 181px;
+			top: -77px;
 		}
 
 		.point-line {
 
 			span {
 				@include transform(skewX(-25deg));
-				width: 45px;
-				height: 100px;
-				left: 100px;
-				top: -75px;
+				width: 100px;
+				height: 50px;
+				left: 89px;
+				top: -24px;
 				border-left: none;
 				border-top: none;
 			}
@@ -489,11 +499,11 @@
 	}
 
 	.point:nth-child(5) { // POINT 5
-		top: 585px;
-		left: 420px;
+		top: 578px;
+		left: 404px;
 
 		.point-name {
-			left: 145px;
+			left: 174px;
 			top: -54px;
 		}
 
@@ -501,7 +511,7 @@
 
 			span {
 				@include transform(skewX(-25deg));
-				width: 85px;
+				width: 115px;
 				height: 25px;
 				left: 85px;
 				top: 0px;
@@ -659,16 +669,17 @@
 		left: 45%;	
 
 		.point:nth-child(2) {
-			left: 525px;
+			left: 554px;
+			top: 270px;
 		}
 
 		.point:nth-child(3) {
-			left: 286px;
+			left: 250px;
 		}
 
 		.point:nth-child(4) {
-			top: 342px;
-			left: 539px;
+			top: 385px;
+			left: 513px;
 		}
 
 		.point:nth-child(5) {
@@ -693,6 +704,10 @@
 }
 
 @media (min-width: 1025px) and (max-height: 650px){
+
+	.object-scheme-wrap {
+		top: -55px;
+	}
 
 	.scheme-nav {
 		display: block;
@@ -907,10 +922,6 @@
 
 @include mobile-min {
 
-	.point-name span {
-		display: none;
-	}
-	
 	.page-adv {
 		background: none;
 	}

@@ -1272,7 +1272,9 @@
 									<section>
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Как правильно менять прокладки? Инструкция к использованию.
 												</span>
@@ -1288,7 +1290,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Почему использование средств гигиены с ароматизаторами может быть небезопасными?
 												</span>
@@ -1304,7 +1308,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Нужно ли менять прокладку в течение дня, если выделения совсем скудные?
 												</span>
@@ -1320,7 +1326,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Почему не рекомендуется хранить прокладки в ванной комнате?
 												</span>
@@ -1336,7 +1344,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Может ли стресс стать причиной задержки месячных?
 												</span>
@@ -1352,7 +1362,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Как правильно менять прокладки? Инструкция к использованию.
 												</span>
@@ -1368,7 +1380,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Почему не рекомендуется хранить прокладки в ванной комнате?
 												</span>
@@ -1384,7 +1398,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Нужно ли менять прокладку в течение дня, если выделения совсем скудные?
 												</span>
@@ -1400,7 +1416,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Как правильно менять прокладки? Инструкция к использованию.
 												</span>
@@ -1416,7 +1434,9 @@
 
 										<div class="answer-item">
 											<div class="answer-head">
-												<div class="point-btn plus"></div>
+												<div class="point-btn plus">
+													<i></i>
+												</div>
 												<span>
 													Почему использование средств гигиены с ароматизаторами может быть небезопасными?
 												</span>
@@ -1519,13 +1539,13 @@
 					
 					<div class="socket">
 						<div class="map-column">
-							<div class="loc-search">
+							<div class="loc-search animate-slide">
 								<div class="ico-loc"></div>
 								<input placeholder="где вы?" type="text">
 								<button type="submit"></button>
 							</div>
 
-							<div class="select">
+							<div class="select animate-slide">
 								<div class="ico-loc"></div>
 								<select>
 									<option selected hidden>список городов</option>
@@ -1535,7 +1555,7 @@
 								</select>
 							</div>
 
-							<ul class="partners">
+							<ul class="partners animate-slide">
 								<li>
 									<div class="title-3">Наши партнеры :</div>
 								</li>
@@ -1856,9 +1876,7 @@
 				var $slideItems = $(".assort-slider-ind i");
 				var items = $(".assort-slider > div").length;
 				var $cubes = $(".cubes-b");
-
 				
-
 				$slider.slick({
 					centerMode: false,
 					infinite: true,
@@ -1885,6 +1903,10 @@
 				setTimeout(function(){
 					$(".assort-bg-list").addClass("bg-1");
 				}, 1000);
+
+				$slide.find(".slick-slider-inner").on("click", function(e){
+					if (!$(this).parent().hasClass("slick-current")) e.preventDefault();
+				});
 				
 
 				// Loader		
@@ -2113,7 +2135,7 @@
 					setTimeout(videoOpen, 200);
 				});
 
-				$(".title-3").text(scrollTop);
+				//$(".title-3").text(scrollTop);
 
 				videoWrap.addEventListener("mouseleave", function(){
 					clearTimeout(timer);

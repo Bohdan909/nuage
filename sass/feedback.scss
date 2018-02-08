@@ -81,10 +81,6 @@ $heightPanel: 90px;
         &:before, &:after {
             @extend .ps;
         }
-
-        &:after {
-
-        }
     }
 
     .scroll-block {
@@ -109,12 +105,14 @@ $heightPanel: 90px;
         border-bottom: none;
     }
 
-    &.show .answer-head .point-btn:after {
-        height: 2px;
+    &.show .answer-head .point-btn.plus {
+
+        i {
+            @include transform(rotate(45deg));
+        }
     }
 
     .answer-head {
-        //padding-left: 88px;
         padding-left: 108px;
         padding-right: 15px;
         height: 87px;

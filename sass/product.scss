@@ -433,6 +433,7 @@ div.product-view-block {
     
     section {
         @include flex(space-between);
+        margin: 0 40px;
         font-size: 0;
         text-align: center;
 
@@ -441,7 +442,6 @@ div.product-view-block {
             position: relative;
             z-index: 1;
             display: inline-block;
-            margin-left: 28px;
 
             a {
                 @extend .transDef;

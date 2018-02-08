@@ -164,6 +164,10 @@
     -webkit-filter: blur(2px);
     filter: blur(2px);
 
+    .slick-slider-inner {
+        cursor: default;
+    }
+
     img {
         max-width: 100%;
         display: inline;
@@ -186,7 +190,10 @@
         opacity: 1;
         -webkit-filter: blur(0px);
         filter: blur(0px);
-        
+
+        .slick-slider-inner {
+            cursor: pointer;
+        }
     }
 }
 
@@ -624,7 +631,7 @@ div.assort-desc-item {
     left: 0;
     right: 0;
 
-    @include animation(fadeOut, 2s, linear);
+    @include animation(fadeOut, 0.8s, linear);
     display: none;
 
     p {
@@ -636,17 +643,8 @@ div.assort-desc-item {
     }
 
     &.show {
-        @include animation(fadeIn, 1.3s, linear);
+        @include animation(fadeIn, 1s, linear);
         display: block;
-
-        .title-rt {
-
-            section {
-                @include transform(translateY(0));
-                @include delay(0.2s);
-                opacity: 1;
-            }
-        }
     }
 }
 
@@ -655,14 +653,46 @@ div.assort-desc-item {
     overflow: hidden;
 
     section {
-        @include transition(all, 0.4s, $easing);
-        @include transform(translateY(33px));
-        @include delay(0s);
-        opacity: 0;
+        @include animation(ttl-rotate-out, 0.5s, $easing);
+        @include a-delay(0s);
         white-space: nowrap;
+    }
+
+    .show & {
+
+        section {
+            @include animation(ttl-rotate-in, 0.5s, $easing);
+        }
     }
 }
 
+@keyframes ttl-rotate-in {
+    0% {
+        opacity: 0;
+        @include transform(translateY(33px));
+    }
+    50% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+}
+
+@keyframes ttl-rotate-out {
+    0% {
+        opacity: 1;
+        @include transform(translateY(0px));
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 0;
+        @include transform(translateY(-33px));
+    }
+}
 
 
 ul.desc-list {

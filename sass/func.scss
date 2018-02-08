@@ -392,8 +392,9 @@ $mid-width      : 1550px;
     }
 }
 
-// Visibility Hidden
-@mixin vis-hidden {
+// Transform Bugs
+.vis-hidden {
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
