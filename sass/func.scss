@@ -48,6 +48,12 @@ $mid-width      : 1550px;
     }
 }
 
+@mixin tablet-only {
+    @media screen and (max-width: 1024px) and (min-width: 768px){
+        @content;
+    }
+}
+
 @mixin mid {
 	@media (max-width: #{$mid-width}) {
    		@content;
@@ -77,6 +83,8 @@ $mid-width      : 1550px;
         @content;
     }
 }
+
+
 
 // Socket
 @mixin socket {
@@ -451,6 +459,12 @@ $mid-width      : 1550px;
     @include transform(translateX(-50%) translateY(-50%));
     position: absolute;
     left: 50%;
+    top: 50%;
+}
+
+.ctrVert {
+    @include transform(translateY(-50%));
+    position: relative;
     top: 50%;
 }
 

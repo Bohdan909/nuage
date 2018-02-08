@@ -517,8 +517,8 @@ body {
     }
 
     #content {
-        height: calc( 600px - #{$header-height});
-        height: -webkit-calc( 600px - #{$header-height});
+        height: calc( 600px - (#{$header-height} - 30px));
+        height: -webkit-calc( 600px - (#{$header-height} - 30px));
     }
 
     @media (max-width: 1024px){

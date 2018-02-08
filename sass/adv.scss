@@ -189,6 +189,16 @@
 }
 
 
+@include ie10 {
+	.point-name, .point-line {
+		display: none;
+		
+		.active & {
+			display: block;
+		}
+	}
+}
+
 @supports (-ms-ime-align:auto) {
 	.point-name, .point-line {
 		display: none;
