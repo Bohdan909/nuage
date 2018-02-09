@@ -39,19 +39,24 @@ $heightPanel: 90px;
     &.to-right {
         width: 43%;
 
-        // .feedback-scroll, .feedback-bottom { 
-        //     border-right: 1px solid $borColor;
-        // }
+        .btn-wrap {
+            padding-left: 40px;
+        }
 
         .feedback-bottom, .feedback-title {
             padding-left: 40px;
         }
     }
 
+    .btn-wrap {
+        padding-left: 20px;
+        padding-bottom: 25px;
+    }
+
     .feedback-scroll {
         height: 290px;
-        height: calc(100vh - #{$header-height} - #{$heightPanel}*2);
-        height: -webkit-calc(100vh - #{$header-height} - #{$heightPanel}*2);
+        height: calc(100vh - #{$header-height} - #{$heightPanel});
+        height: -webkit-calc(100vh - #{$header-height} - #{$heightPanel});
     }
 
     @media (min-width: 1025px) and (max-height: 601px){
@@ -69,6 +74,7 @@ $heightPanel: 90px;
     .title-1 {
         font-size: 35px;
         line-height: 43px;
+        margin-bottom: 0;
     }
 }
 
@@ -272,6 +278,33 @@ ul.feedback-filter {
     }
 }
 
+@media screen and (max-height: 700px) and (min-width: 1025px){
+
+    .feedback-title {
+        height: 70px;
+        padding-top: 15px;
+
+        .title-1 {
+            font-size: 29px;
+        }
+    }
+
+    .feedback-column .feedback-scroll {
+        height: 290px;
+        height: calc(100vh - (#{$header-height} - 30px) - 70px);
+        height: -webkit-calc(100vh - (#{$header-height} - 30px) - 70px);
+    }
+}
+
+@media screen and (max-height: 600px) and (min-width: 1025px){
+
+    .feedback-column .feedback-scroll {
+        height: 290px;
+        height: calc(600px - (#{$header-height} - 30px) - 70px);
+        height: -webkit-calc(600px - (#{$header-height} - 30px) - 70px);
+    }
+}
+
 @include laptop {
 
     ul.feedback-filter {
@@ -289,8 +322,8 @@ ul.feedback-filter {
 
         .feedback-scroll {
             height: 290px;
-            height: calc(100vh - #{$header-height-tbl} - #{$heightPanel}*2);
-            height: -webkit-calc(100vh - #{$header-height-tbl} - #{$heightPanel}*2);
+            height: calc(100vh - #{$header-height-tbl} - #{$heightPanel});
+            height: -webkit-calc(100vh - #{$header-height-tbl} - #{$heightPanel});
         }
     }
 
@@ -394,6 +427,10 @@ ul.feedback-filter {
             .scroll-block {
                 overflow: visible;
             }
+        }
+
+        .btn-wrap {
+            padding-left: 0 !important;
         }
 
         .feedback-scroll, .feedback-bottom {

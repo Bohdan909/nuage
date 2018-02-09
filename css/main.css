@@ -5,7 +5,7 @@
 .assort-slider-wrap .slick-arrow.slick-prev:after,
 .assort-slider-wrap .slick-arrow.slick-prev:before,
 .btn-nav-left:after,
-.btn-nav-left:before, .btn-nav-right:after, .btn-nav-right:before, .assort-slider-ind span:after, .product-socket:after, .product-viewer:after, .cd-product-viewer-handle .handle:before, .cd-product-viewer-handle .handle:after, .ttl-line:after, .ico-sizes:before, .ico-sizes:after, .page-consist:after, .consist-table-head table th > div:before, .main .checkbox .custom-checkbox:before, .point-btn:after, .point-btn.plus i:before, .point-btn.plus i:after, .no-touchevents .point-btn, .feedback-scroll section:before, .feedback-scroll section:after, .feedback-item .feedback-status:after, .mission-video-close:before, .mission-video-close:after {
+.btn-nav-left:before, .btn-nav-right:after, .btn-nav-right:before, .assort-slider-ind span:after, .product-socket:after, .product-viewer:after, .cd-product-viewer-handle .handle:before, .cd-product-viewer-handle .handle:after, .ttl-line:after, .ico-sizes:before, .ico-sizes:after, .page-consist:after, .consist-table-head table th > div:before, .main .checkbox .custom-checkbox:before, .point-btn:after, .point-btn.plus i:before, .point-btn.plus i:after, .no-touchevents .point-btn, .feedback-scroll section:before, .feedback-scroll section:after, .feedback-item .feedback-status:after, .mission-tabs li:after, .mission-video-close:before, .mission-video-close:after {
   content: "";
   display: block;
   position: absolute;
@@ -485,7 +485,7 @@ div.main p {
 .assort-slider-wrap .slick-arrow.slick-prev:after,
 .assort-slider-wrap .slick-arrow.slick-prev:before,
 .btn-nav-left:after,
-.btn-nav-left:before, .btn-nav-right:after, .btn-nav-right:before, .assort-slider-ind span:after, .product-socket:after, .product-viewer:after, .cd-product-viewer-handle .handle:before, .cd-product-viewer-handle .handle:after, .ttl-line:after, .ico-sizes:before, .ico-sizes:after, .page-consist:after, .consist-table-head table th > div:before, .main .checkbox .custom-checkbox:before, .point-btn:after, .point-btn.plus i:before, .point-btn.plus i:after, .no-touchevents .point-btn, .feedback-scroll section:before, .feedback-scroll section:after, .feedback-item .feedback-status:after, .mission-video-close:before, .mission-video-close:after {
+.btn-nav-left:before, .btn-nav-right:after, .btn-nav-right:before, .assort-slider-ind span:after, .product-socket:after, .product-viewer:after, .cd-product-viewer-handle .handle:before, .cd-product-viewer-handle .handle:after, .ttl-line:after, .ico-sizes:before, .ico-sizes:after, .page-consist:after, .consist-table-head table th > div:before, .main .checkbox .custom-checkbox:before, .point-btn:after, .point-btn.plus i:before, .point-btn.plus i:after, .no-touchevents .point-btn, .feedback-scroll section:before, .feedback-scroll section:after, .feedback-item .feedback-status:after, .mission-tabs li:after, .mission-video-close:before, .mission-video-close:after {
   content: "";
   display: block;
   position: absolute;
@@ -6341,13 +6341,19 @@ ul.tabs.tabs-panel {
 
 .feedback-column.to-right {
   width: 43%; }
+  .feedback-column.to-right .btn-wrap {
+    padding-left: 40px; }
   .feedback-column.to-right .feedback-bottom, .feedback-column.to-right .feedback-title {
     padding-left: 40px; }
 
+.feedback-column .btn-wrap {
+  padding-left: 20px;
+  padding-bottom: 25px; }
+
 .feedback-column .feedback-scroll {
   height: 290px;
-  height: calc(100vh - 128px - 90px*2);
-  height: -webkit-calc(100vh - 128px - 90px*2); }
+  height: calc(100vh - 128px - 90px);
+  height: -webkit-calc(100vh - 128px - 90px); }
 
 @media (min-width: 1025px) and (max-height: 601px) {
   .feedback-column .feedback-scroll {
@@ -6358,7 +6364,8 @@ ul.tabs.tabs-panel {
   padding-top: 28px; }
   .feedback-title .title-1 {
     font-size: 35px;
-    line-height: 43px; }
+    line-height: 43px;
+    margin-bottom: 0; }
 
 .feedback-scroll {
   border-top: 1px solid #e2e7ed; }
@@ -6511,6 +6518,23 @@ ul.feedback-filter {
       top: auto;
       background-color: #ced4de; }
 
+@media screen and (max-height: 700px) and (min-width: 1025px) {
+  .feedback-title {
+    height: 70px;
+    padding-top: 15px; }
+    .feedback-title .title-1 {
+      font-size: 29px; }
+  .feedback-column .feedback-scroll {
+    height: 290px;
+    height: calc(100vh - (128px - 30px) - 70px);
+    height: -webkit-calc(100vh - (128px - 30px) - 70px); } }
+
+@media screen and (max-height: 600px) and (min-width: 1025px) {
+  .feedback-column .feedback-scroll {
+    height: 290px;
+    height: calc(600px - (128px - 30px) - 70px);
+    height: -webkit-calc(600px - (128px - 30px) - 70px); } }
+
 @media (max-width: 1280px) {
   ul.feedback-filter {
     padding: 0 2%; }
@@ -6520,8 +6544,8 @@ ul.feedback-filter {
 @media (max-width: 1024px) {
   .feedback-column .feedback-scroll {
     height: 290px;
-    height: calc(100vh - 118px - 90px*2);
-    height: -webkit-calc(100vh - 118px - 90px*2); }
+    height: calc(100vh - 118px - 90px);
+    height: -webkit-calc(100vh - 118px - 90px); }
   .feedback-title .title-1 {
     font-size: 30px;
     line-height: 38px; }
@@ -6577,6 +6601,8 @@ ul.feedback-filter {
     padding-bottom: 0 !important; }
     .feedback-column .feedback-scroll .scroll-block {
       overflow: visible; }
+  .feedback-column .btn-wrap {
+    padding-left: 0 !important; }
   .feedback-column .feedback-scroll, .feedback-column .feedback-bottom {
     border: none !important; }
   .feedback-bottom {
@@ -6715,13 +6741,10 @@ div.mission-text-slider {
 .mission-tabs {
   font-size: 0; }
   .mission-tabs li {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
     transition: all 0.4s ease-out;
     -webkit-transition: all 0.4s ease-out;
     -ms-transition: all 0.4s ease-out;
+    position: relative;
     vertical-align: top;
     display: inline-block;
     margin-right: 18px;
@@ -6729,20 +6752,40 @@ div.mission-text-slider {
     width: 55px;
     height: 55px;
     text-align: center;
-    cursor: pointer;
-    background-image: -moz-linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 19%, white 100%);
-    background-image: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 19%, white 100%);
-    background-image: -ms-linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 19%, white 100%); }
-    .mission-tabs li:hover {
-      color: #8db9e4; }
+    cursor: pointer; }
+    .mission-tabs li:after {
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%;
+      -webkit-transition: all 0.25s linear;
+      -ms-transition: all 0.25s linear;
+      transition: all 0.25s linear;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-image: -moz-linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 19%, white 100%);
+      background-image: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 19%, white 100%);
+      background-image: -ms-linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 19%, white 100%); }
     .mission-tabs li span {
+      position: relative;
+      z-index: 1;
       display: block;
       line-height: 55px; }
     .mission-tabs li.active {
       color: #fff;
-      background-image: -moz-linear-gradient(50deg, rgba(153, 194, 234, 0) 0%, rgba(160, 199, 237, 0.5) 19%, #99c2ea 100%);
-      background-image: -webkit-linear-gradient(50deg, rgba(153, 194, 234, 0) 0%, rgba(160, 199, 237, 0.5) 19%, #99c2ea 100%);
-      background-image: -ms-linear-gradient(50deg, rgba(153, 194, 234, 0) 0%, rgba(160, 199, 237, 0.5) 19%, #99c2ea 100%); }
+      cursor: default; }
+      .mission-tabs li.active:after {
+        background-image: -moz-linear-gradient(50deg, rgba(153, 194, 234, 0) 0%, rgba(160, 199, 237, 0.5) 19%, #99c2ea 100%);
+        background-image: -webkit-linear-gradient(50deg, rgba(153, 194, 234, 0) 0%, rgba(160, 199, 237, 0.5) 19%, #99c2ea 100%);
+        background-image: -ms-linear-gradient(50deg, rgba(153, 194, 234, 0) 0%, rgba(160, 199, 237, 0.5) 19%, #99c2ea 100%); }
+  .no-touchevents .mission-tabs li:not(.active):hover {
+    color: #8db9e4; }
+    .no-touchevents .mission-tabs li:not(.active):hover:after {
+      -webkit-transform: scale(1.15);
+      -ms-transform: scale(1.15);
+      transform: scale(1.15); }
 
 .video-block-wrap {
   -webkit-border-radius: 50%;
