@@ -42,10 +42,11 @@
 					</button>
 				</nav>
 			</header><!-- / Header -->
+			
 			<div id="main" class="page page-main loaded">
 
 				<!-- Content -->
-				<div id="content">
+				<div class="content">
 					<div class="socket">
 
 						<!-- Object Main -->
@@ -191,7 +192,7 @@
 			<div id="advantages" class="page page-adv loaded">
 				
 				<!-- Content -->
-				<div id="content">
+				<div class="content">
 					<div class="socket">
 
 						<!-- Scheme -->
@@ -453,7 +454,7 @@
 			<div id="assortment" class="page page-assort loaded">
 				
 				<!-- Content -->
-				<div id="content">
+				<div class="content">
 					<div class="assort-container">
 
 						<!-- Assort Slider -->
@@ -665,7 +666,7 @@
 												Ультратонкие, менее 3 мм
 											</li>
 										</ul>
-										<a class="btn btn-next animate-slide" href="product-table-1.htm">
+										<a class="btn btn-next animate-slide" href="product-1.htm">
 											<span>подробнее</span>
 											<img width="15" height="12" src="images/arrow-right-b.svg" alt="">
 										</a>
@@ -704,7 +705,7 @@
 												Ультратонкие, менее 3 мм
 											</li>
 										</ul>
-										<a class="btn btn-next animate-slide" href="product-table-2.htm">
+										<a class="btn btn-next animate-slide" href="product-2.htm">
 											<span>подробнее</span>
 											<img width="15" height="12" src="images/arrow-right-f.svg" alt="">
 										</a>
@@ -742,7 +743,7 @@
 												Ультратонкие, менее 3 мм.
 											</li>
 										</ul>
-										<a class="btn btn-next animate-slide" href="product-table-3.htm">
+										<a class="btn btn-next animate-slide" href="product-3.htm">
 											<span>подробнее</span>
 											<img width="15" height="12" src="images/arrow-right-p3.svg" alt="">
 										</a>
@@ -778,7 +779,7 @@
 												Ультратонкие, менее 3 мм
 											</li>
 										</ul>
-										<a class="btn btn-next animate-slide" href="product-table-4.htm">
+										<a class="btn btn-next animate-slide" href="product-4.htm">
 											<span>подробнее</span>
 											<img width="15" height="12" src="images/arrow-right-p4.svg" alt="">
 										</a>
@@ -818,7 +819,7 @@
 												Ультратонкие, менее 3 мм
 											</li>
 										</ul>
-										<a class="btn btn-next animate-slide" href="product-table-5.htm">
+										<a class="btn btn-next animate-slide" href="product-5.htm">
 											<span>подробнее</span>
 											<img width="15" height="12" src="images/arrow-right-p5.svg" alt="">
 										</a>
@@ -855,7 +856,7 @@
 												Ультратонкие, менее 1 мм
 											</li>
 										</ul>
-										<a class="btn btn-next animate-slide" href="product-table-6.htm">
+										<a class="btn btn-next animate-slide" href="product-6.htm">
 											<span>подробнее</span>
 											<img width="15" height="12" src="images/arrow-right-p6.svg" alt="">
 										</a>
@@ -1125,7 +1126,7 @@
 				</div>
 
 				<!-- Content -->
-				<div id="content">
+				<div class="content">
 					
 					<div class="socket">
 						<div class="mission-column to-right">
@@ -1251,7 +1252,7 @@
 			<div id="faq" class="page page-feedback loaded">
 				
 				<!-- Content -->
-				<div id="content">
+				<div class="content">
 					<div class="socket clearfix">
 						<ul class="tabs-panel tabs animate-fade">
 							<span class="line"></span>
@@ -1708,7 +1709,7 @@
 				</div>
 				
 				<!-- Content -->
-				<div id="content">
+				<div class="content">
 					
 					<div class="socket">
 						<div class="map-column">
@@ -1755,7 +1756,7 @@
 			<div id="consultation" class="page page-consult loaded">
 				
 				<!-- Content -->
-				<div id="content">
+				<div class="content">
 					<div class="socket">
 						
 						<div class="consult-top">
@@ -1972,7 +1973,7 @@
 		</div><!-- / Main -->
 
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		
 		<script src="./js/modernizr-custom.js"></script> 
 		<script src="./js/jquery.mousewheel.min.js"></script>
@@ -1981,9 +1982,9 @@
 		<script src="./js/rotate.js" defer></script>
 		<script src="./js/slick.js" defer></script>
 		<script src="./js/scripts.js" defer></script>
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-		<script src="./js/map.js"></script>
 		<script src="./js/jquery.vide.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp" defer></script>
+		<script src="./js/map.js" defer></script>
 
 		<script>
 			window.addEventListener("load", function(){
@@ -2024,7 +2025,9 @@
 				}, 1000);
 
 				$slide.find(".slick-slider-inner").on("click", function(e){
-					if (!$(this).parent().hasClass("slick-current")) e.preventDefault();
+					if (!$(this).parent().hasClass("slick-current")) { 
+						e.preventDefault();
+					}		
 				});
 				
 
@@ -2193,6 +2196,45 @@
 				let btnPlay = document.querySelector(".btn-play");
 				let btnName = document.querySelector(".video-name");
 				
+				// video.setAttribute("controls", "false");
+				setAttributes(video, {"autoplay": "true", "loop": "true", "controls": "false"});
+
+				function setAttributes(el, options) {
+				    Object.keys(options).forEach(function(attr) {
+				    	el.setAttribute(attr, options[attr]);
+				    });
+				}
+				
+				// videoBlock.addEventListener("mouseover", function(){
+				// 	checkPlay("hover", "leave");
+				// });
+
+				// videoBlock.addEventListener("mouseleave", function(){
+				// 	checkPlay("leave", "hover");
+				// });
+
+				// videoBlock.addEventListener("click", function(){
+				// 	video.play();
+				// 	video.controls = false;
+
+				// 	setTimeout(function(){
+				// 		videoBlock.classList.add("play");
+				// 		videoBlock.classList.remove("leave");
+				// 		videoBlock.classList.remove("hover");
+				// 	}, 200);
+					
+				// 	btnPlay.classList.add("hide");
+				// 	btnName.classList.add("hide");
+				// });
+
+				// function checkPlay(classNameA, classNameU){
+				// 	if (!videoBlock.classList.contains("play")){
+				// 		videoBlock.classList.add(classNameA);
+				// 		videoBlock.classList.remove(classNameU);
+				// 	}
+				// };
+
+
 				const timeAnim = 5000;
 				const timeAnimBack = 600;
 				let touch = document.querySelector("html").classList.contains("touchevents");
@@ -2203,15 +2245,14 @@
 				let videoCal   = document.querySelector(".video-calibrate");
 				let videoCloseBtn = document.querySelector(".mission-video-close");
 				let topPosPlay, leftPosPlay, topPos, leftPos, timer;
-
-				setAttributes(video, {"autoplay": "true", "loop": "true", "controls": "false"});
-
+				
 				videoWrap.addEventListener("mouseover", function(){
 					window.scrollTo(0, 0);
-					
+
 					if (!videoWrap.classList.contains("open") && !touch){
 						timer = setTimeout(videoOpen, 600);
 					}
+
 				});
 
 				// videoWrap.addEventListener("touchstart", function(){
@@ -2243,14 +2284,6 @@
 				// 	}
 				// }
 
-				window.addEventListener("resize", function(){
-		
-					if (!videoWrap.classList.contains("open")){
-						setCirclePos(radius);
-						videoPlay.classList.remove("hide");
-					} 
-				});
-
 				function setCirclePos(rad){
 					topPosPlay  = videoCal.getBoundingClientRect().top + scrollTop;
 					leftPosPlay = videoCal.getBoundingClientRect().left;
@@ -2278,11 +2311,13 @@
 					setTimeout(function(){ video.pause() }, 500);
 				}
 
-				function setAttributes(el, options) {
-				    Object.keys(options).forEach(function(attr) {
-				    	el.setAttribute(attr, options[attr]);
-				    });
-				}
+				window.addEventListener("resize", function(){
+		
+					if (!videoWrap.classList.contains("open")){
+						setCirclePos(radius);
+						videoPlay.classList.remove("hide");
+					} 
+				});
 				
 				// Popup
 				let btnClose = document.querySelectorAll(".popup-close");
@@ -2310,7 +2345,7 @@
 		</script>
 		
 		<!-- Live Reload -->
-		<script src="http://localhost:35729/livereload.js"></script>
+		<!-- <script src="http://localhost:35729/livereload.js"></script> -->
 
 	</body>
 </html>

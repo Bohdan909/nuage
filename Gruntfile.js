@@ -114,5 +114,6 @@ module.exports  = function(grunt){
 	grunt.registerTask("jshint", ["jshint"]);
     grunt.registerTask("min", ["uglify", "cssmin"]);
     grunt.registerTask("pre", ["autoprefixer"]);
-    grunt.registerTask("replace", "string-replace");
+	grunt.registerTask("replace", "string-replace");
+	grunt.registerTask("build", ["sass"]);
 };

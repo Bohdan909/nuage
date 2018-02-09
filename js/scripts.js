@@ -7,15 +7,15 @@ document.documentElement.className = document.documentElement.className.replace(
             document.querySelector(".page").classList.add("loaded");
         }, 500);
 
-         /* ==============
-           Consultation 
-        ================= */   
+        /* ==============
+          Consultation 
+       ================= */
 
         let formWrap = $(".consult-form-wrap, .consult-top");
         let mesConsult = $(".message-consult");
         let copyRight = $(".copyright-mobile");
 
-        $(".btn-send").length && $(".btn-send").on("click", function(e){
+        $(".btn-send").length && $(".btn-send").on("click", function (e) {
             formWrap.fadeOut(200);
             copyRight.hide();
             mesConsult.fadeIn(300);
@@ -23,31 +23,35 @@ document.documentElement.className = document.documentElement.className.replace(
             e.preventDefault();
         });
 
-        $(".btn-back-form") && $(".btn-back-form").on("click", function(e){
+        $(".btn-back-form") && $(".btn-back-form").on("click", function (e) {
             formWrap.fadeIn(200);
             mesConsult.fadeOut(300);
 
             if (window.innerWidth < 768) copyRight.show();
-            
+
             e.preventDefault();
         });
         
         /* ==============
            MENU 
-        ================= */   
+        ================= */
 
-        let $body    = document.querySelector("body");
-        let $btnMenu = document.querySelector(".btn-menu");
+        let $body = document.querySelector("body");
+        let navMenu = document.querySelector(".menu");
 
-        $btnMenu.addEventListener("click", function(){
+        navMenu.addEventListener("click", function (event) {
+            if (event.target.tagName == "IMG" && $body.classList.contains("menu-close")) {
+                event.stopPropagation();
+                return;
+            }
 
-            if ($body.classList.contains("menu-open")){
+            if ($body.classList.contains("menu-open")) {
                 $body.classList.add("menu-close");
 
-                setTimeout(function(){
+                setTimeout(function () {
                     $body.classList.remove("menu-open");
                 }, 0);
-                
+
             } else {
                 $body.classList.add("menu-open");
                 $body.classList.remove("menu-close");
@@ -56,17 +60,17 @@ document.documentElement.className = document.documentElement.className.replace(
 
         let $socDrop = document.querySelector(".social-drop");
         let $like = document.querySelector(".like");
-        
-        if(document.body.contains($like)){
-            $like.addEventListener("click", function(){
-                if ($socDrop.classList.contains("show")){
+
+        if (document.body.contains($like)) {
+            $like.addEventListener("click", function () {
+                if ($socDrop.classList.contains("show")) {
                     $socDrop.classList.add("hide");
                     $socDrop.classList.remove("show");
                 } else {
                     $socDrop.classList.add("show");
                     $socDrop.classList.remove("hide");
                 }
-                
+
             });
         }
 
@@ -100,40 +104,40 @@ document.documentElement.className = document.documentElement.className.replace(
            Drops
         ================= */
 
-        let $dropBtn = document.querySelector(".drop-wrap .btn"); 
+        let $dropBtn = document.querySelector(".drop-wrap .btn");
 
-        if (document.body.contains($dropBtn)){
-            $dropBtn.addEventListener("click", function(){
+        if (document.body.contains($dropBtn)) {
+            $dropBtn.addEventListener("click", function () {
                 let $dropBlock = this.parentNode.querySelector(".drop-block");
                 let $dropInner = $dropBlock.querySelector(".drop-inner");
-                let height     = $dropBlock.querySelector(".drop-h").offsetHeight;
+                let height = $dropBlock.querySelector(".drop-h").offsetHeight;
 
                 $dropBlock.classList.toggle("show");
-                if ($dropBlock.classList.contains("show")){
+                if ($dropBlock.classList.contains("show")) {
                     $dropInner.setAttribute("style", "max-height: " + height + "px");
                 } else {
                     $dropInner.setAttribute("style", "max-height: 0px");
                 }
-            });  
-        }  
+            });
+        }
 
         let $fbHead = document.querySelectorAll(".answer-head");
         let $fbPage = document.querySelector(".page-feedback");
 
-        if (document.body.contains($fbPage)){
-            $fbHead.forEach(function(head){
+        if (document.body.contains($fbPage)) {
+            $fbHead.forEach(function (head) {
 
-                head.addEventListener("click", function(){
+                head.addEventListener("click", function () {
                     let $point = this.parentNode;
                     let $text = $point.querySelector(".answer-body");
                     let textHeight = $text.querySelector(".answer-body-inner").offsetHeight;
 
-                    $point.classList.toggle("show");   
-                    if ($point.classList.contains("show")){
+                    $point.classList.toggle("show");
+                    if ($point.classList.contains("show")) {
                         $text.setAttribute("style", "max-height: " + textHeight + "px");
                     } else {
                         $text.setAttribute("style", "max-height: 0px");
-                    } 
+                    }
 
                 });
             });
@@ -144,14 +148,14 @@ document.documentElement.className = document.documentElement.className.replace(
         ==================== */
 
         let btnScheme = document.querySelectorAll(".scheme-nav button");
-        let pointClone  = document.querySelectorAll(".scheme-nav .point");
+        let pointClone = document.querySelectorAll(".scheme-nav .point");
 
-        btnScheme.forEach(function(btn){
+        btnScheme.forEach(function (btn) {
 
-            btn.addEventListener("click", function(e){
-                let pane  = document.querySelectorAll(".scheme-desc");
+            btn.addEventListener("click", function (e) {
+                let pane = document.querySelectorAll(".scheme-desc");
                 let point = document.querySelectorAll(".object-scheme-wrap .point");
-                let activePane  = document.querySelector(".scheme-desc.active");
+                let activePane = document.querySelector(".scheme-desc.active");
                 let pointActive = document.querySelector(".point.active");
 
                 indexDetect(activePane);
@@ -159,7 +163,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 pointActive.classList.remove("active");
                 activePane.classList.remove("active");
 
-                if (e.target.classList.contains("btn-nav-right")){
+                if (e.target.classList.contains("btn-nav-right")) {
                     (indexActive == lastPoint) ? indexActive = 0 : indexActive++;
                 } else {
                     (indexActive == 0) ? indexActive = lastPoint : indexActive--;
@@ -171,26 +175,26 @@ document.documentElement.className = document.documentElement.className.replace(
             });
         });
 
-        function changeClone(index){
-            pointClone.forEach(function(clone){
+        function changeClone(index) {
+            pointClone.forEach(function (clone) {
                 clone.classList.remove("active");
             });
             pointClone[index].classList.add("active");
         }
 
-        function indexDetect(activePane){
+        function indexDetect(activePane) {
             let wrap = activePane.parentNode;
             let list = wrap.children;
-    
+
             lastPoint = list.length - 1;
             indexActive = Array.prototype.indexOf.call(list, activePane);
         }
-        
+
         /* ==============
            TABS
         ================= */
 
-        function findAncestor (el, cls) {
+        function findAncestor(el, cls) {
             while ((el = el.parentElement) && !el.classList.contains(cls));
             return el;
         }
@@ -199,9 +203,9 @@ document.documentElement.className = document.documentElement.className.replace(
         let tabs = document.querySelectorAll(".tabs");
         function tabClick(event) {
             event.preventDefault();
-            
+
             let tabElements = event.currentTarget.querySelectorAll(".tab");
-            Array.prototype.forEach.call(tabElements, function(tabElement){
+            Array.prototype.forEach.call(tabElements, function (tabElement) {
                 tabElement.classList.remove("active");
             });
 
@@ -211,10 +215,10 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             animateTabLine(event.currentTarget);
-            
+
             // clear panes state
             let contentPanes = document.querySelectorAll(".tab-pane");
-            Array.prototype.forEach.call(contentPanes, function(pane) {
+            Array.prototype.forEach.call(contentPanes, function (pane) {
                 pane.classList.remove("active");
             });
 
@@ -222,7 +226,7 @@ document.documentElement.className = document.documentElement.className.replace(
             let activePane = document.getElementById(activePaneId);
 
             activePane.classList.add("active");
-            
+
         }
         Array.prototype.forEach.call(tabs, function (tab) {
             tab.addEventListener("click", tabClick);
@@ -230,40 +234,40 @@ document.documentElement.className = document.documentElement.className.replace(
         });
 
         // TABS LINE ANIMATION
-        function animateTabLine(tabs){
+        function animateTabLine(tabs) {
             let line = tabs.querySelector(".line");
             let activeTab = tabs.querySelector(".tab.active");
             if (line) {
                 let offset = activeTab.getBoundingClientRect().left - tabs.getBoundingClientRect().left;
-                line.style.left = `${offset + (activeTab.offsetWidth - 35)/2 }px`;
+                line.style.left = `${offset + (activeTab.offsetWidth - 35) / 2}px`;
             }
         }
 
-        
+
         /* ================
            FILTER FEEDBACK
-        =================== */ 
+        =================== */
 
         var ffItem = document.querySelectorAll(".feedback-filter li");
         var feedback = document.querySelectorAll(".feedback-item");
 
-        ffItem.forEach(function(item){
-            item.addEventListener("click", function(){
+        ffItem.forEach(function (item) {
+            item.addEventListener("click", function () {
                 var filterPar = item.getAttribute("data-filter");
                 var scrollY = document.querySelector(".scroll-block");
-                
-                for (let i = 0; i < ffItem.length; i++){
+
+                for (let i = 0; i < ffItem.length; i++) {
                     ffItem[i].classList.remove("active");
                 }
-                
+
                 scrollBar(true);
                 item.classList.remove("active");
                 this.classList.add("active");
 
-                for (let i = 0; i < feedback.length; i++){
+                for (let i = 0; i < feedback.length; i++) {
                     feedback[i].classList.remove("show");
 
-                    if (filterPar == "all"){
+                    if (filterPar == "all") {
                         feedback[i].classList.add("show");
                     } else if (feedback[i].getAttribute("data-feedback") === filterPar) {
                         feedback[i].classList.add("show");
@@ -274,18 +278,18 @@ document.documentElement.className = document.documentElement.className.replace(
 
         /* ==============
            FORMS
-        ================= */   
+        ================= */
 
-        $("input, textarea").focus(function(){
-           $(this).data("placeholder",$(this).attr("placeholder")).attr("placeholder","");
-        }).blur(function(){
-           $(this).attr("placeholder",$(this).data("placeholder"));
+        $("input, textarea").focus(function () {
+            $(this).data("placeholder", $(this).attr("placeholder")).attr("placeholder", "");
+        }).blur(function () {
+            $(this).attr("placeholder", $(this).data("placeholder"));
         });
 
         scrollBar();
 
-        windowSize();   
-        $(window).resize(windowSize); 
+        windowSize();
+        $(window).resize(windowSize);
 
 
         /* =============================
@@ -358,7 +362,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // media query change
             function WidthChange(mq) {
-                if (mq.matches) {
+                
                     // window width is at least 1025px
                     mainElem.classList.add("stop-scrolling");
 
@@ -366,16 +370,14 @@ document.documentElement.className = document.documentElement.className.replace(
 
                     // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
                     document.onkeydown = customScrollKeysHandler;
-                    // handler for wheel event 
-                    addWheelListener( window, customScrollWheelHandler );
 
                     window.ontouchmove = customScrollTouchHandler;
                     
-                    // Handle direct click on havigation links  
-                    let navigationMenuElement = document.querySelector(".main");
-                    navigationMenuElement.addEventListener("click", handleDirectClickOnNavLinks);
-                    
                     window.onhashchange = hashUrlChangeHandler;
+
+                if (mq.matches) {
+                    // handler for wheel event 
+                    addWheelListener( window, customScrollWheelHandler );
                 } else {
                 // window width is less than 1025px
                 }
@@ -416,36 +418,42 @@ document.documentElement.className = document.documentElement.className.replace(
                 navigateToBlock(currentBlockIndex);
             }
 
-            function navigateToBlock(blockIndex){
-                if (currentBlockIndex == prevBlockIndex) {
-                    console.log(`trying to open already opened page index: ${currentBlockIndex} `);
-                    return;
-                }
-
+            function displayBlock(currentBlockId) {
                 clearLoadedState();
-                let currentBlockId = navLinks[currentBlockIndex];
 
-                //mainElem.style.height = elem.scrollHeight + "px";
-                
                 let elem = document.getElementById(currentBlockId);
-        
-                window.location.href = baseHashUrl + currentBlockId;
-                
+
+                mainElem.style.height = elem.scrollHeight + "px";
+
                 elem.classList.add("loaded");
                 // animation part
-                
+
                 playMenuUnderlineAnimation(currentBlockId);
 
                 prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
                 // remove loaded from previous block
                 let prevBlockId = navLinks[prevBlockIndex];
 
-                let prevElement = document.getElementById(prevBlockId);
-                prevElement.classList.remove("loaded");
-
                 executePageSpecificScript(currentBlockId);
             }
-            
+
+            function getBlockId(blockIndex) {
+                return navLinks[blockIndex];
+            }
+
+            function navigateToBlock(blockIndex) {
+                if (currentBlockIndex == prevBlockIndex) {
+                    console.log(`trying to open already opened page index: ${currentBlockIndex} `);
+                    return;
+                }
+
+                let currentBlockId = getBlockId(currentBlockIndex);
+
+                window.location.href = baseHashUrl + currentBlockId;
+
+            }
+
+                
             function scrollToNextBlock() {
                 if (currentBlockIndex == navLinks.length - 1) {
                     return;
@@ -474,122 +482,122 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function customScrollWheelHandler(e) {
-                // limit handling rate to prevent scrolling trough all pages
-                if (Date.now() - lastScrollTime > 1000) {
-                    if (e.deltaY > 0) {
-                        scrollToNextBlock();
-                    } else if (e.deltaY < 0) {
-                        scrollToPrevBlock();
-                    }
+                let targetElement = document.getElementById(currentHashtag);
+                let contentElem = targetElement.querySelector(".content");
 
-                    lastScrollTime = Date.now();
-                }
+                //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
+                    console.log(`== scrolled to bottom ==`);
+                    //limit handling rate to prevent scrolling trough all pages
+                    if (Date.now() - lastScrollTime > 1000) {
+                        if (e.deltaY > 0) {
+                            scrollToNextBlock();
+                        } else if (e.deltaY < 0) {
+                            scrollToPrevBlock();
+                        }
+
+                        lastScrollTime = Date.now();
+                    }
+                //} else {
+                //    console.log(`== just scroll ==`);
+
+                //}
             }
 
             function customScrollTouchHandler(e) {
                 // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
             }
 
-            function handleDirectClickOnNavLinks (event) {
-                if (!event.target.matches('a[href^="#"]')) return;
-                event.preventDefault();
-
-                // extract hashtag from link
-                let hashtag = event.target.hash.substr(1);
-                currentBlockIndex = getBlockIndexByHashtag(hashtag);
-                prevBlockIndex = -1;
-                navigateToBlockByHashtag(hashtag);
-            }
-
+            // called when user navigates back or clicks on link
             function hashUrlChangeHandler(event) {
                 if (event.newURL != event.oldURL) {
                     console.log(`hash changed`);
                     let newUrlId = window.location.hash.substr(1);
-                    let oldUrlId = event.oldURL.split('#')[1].substr(1);
+                    let oldUrlId = event.oldURL.split('#')[1];
+                    //let newBlockIndex = getBlockIndexByHashtag(newUrlId);
                     prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
-                    navigateToBlockByHashtag(newUrlId);
-                    
+                    console.log(`prev block: ${oldUrlId}, new block: ${newUrlId}`);
+                    //navigateToBlockByHashtag(newUrlId);
 
+                    displayBlock(newUrlId);
                 }
-            }
 
-        }    
+            }    
 
         /* =========================================
             3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS
           ========================================== */
-        
-        function executePageSpecificScript(blockId) {
-            
-            switch (blockId) {
-                case "main":
-                    // if ($object.length == 0) {
-                    //     $object = $('.object-main');
-                    // }
-                    //$object.rotate3d.animateOpen();
-                    $object.animateOpen(function () {
-                        setTimeout($object.animateClose, 300);
-                    });
-                    break;
-                case "advantages":
-                    // if ($scheme.length == 0) {
-                    //     $scheme = $('.object-scheme');
-                    // }
-                    $scheme.animateOpen(function () {
-                        console.log("andvantages animation ended");
-                    });
-                    break;
-                case "assortment":
-                    break;
-                default:
-                    break;
-            }            
-        }
 
+            function executePageSpecificScript(blockId) {
+
+                switch (blockId) {
+                    case "main":
+                        // if ($object.length == 0) {
+                        //     $object = $('.object-main');
+                        // }
+                        //$object.rotate3d.animateOpen();
+                        $object.animateOpen(function () {
+                            setTimeout($object.animateClose, 300);
+                        });
+                        break;
+                    case "advantages":
+                        // if ($scheme.length == 0) {
+                        //     $scheme = $('.object-scheme');
+                        // }
+                        $scheme.animateOpen(function () {
+                            console.log("andvantages animation ended");
+                        });
+                        break;
+                    case "assortment":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     });
 
 
     let cachedWidth = window.innerWidth;
 
-    function windowSize(){
+    function windowSize() {
         let winWidth = window.innerWidth,
             docWidth = $(document).width();
 
         scrollBar(true);
 
         // Resize Mobile
-        if (winWidth !== cachedWidth){
-            
+        if (winWidth !== cachedWidth) {
+
 
             cachedWidth = winWidth;
-        }   
-            
+        }
+
     };
 
     // ScrollBar
-    function scrollBar(update){
+    function scrollBar(update) {
         let $scroll = $(".scroll-block");
 
-        if ($scroll.length && window.innerWidth > 767){
-            
-            if (update){
+        if ($scroll.length && window.innerWidth > 767) {
+
+            if (update) {
                 $scroll.perfectScrollbar("update");
             } else {
                 $scroll.perfectScrollbar({
                     wheelSpeed: 0.5,
                     wheelPropagation: false,
                     minScrollbarLength: 20
-                }); 
+                });
             }
         }
     }
 
     // Click Out
-    function ClickOut(element){
+    function ClickOut(element) {
         this.element = element;
-        
-        this.removeClass = function(class_){
-            $(document).on("click", function(event) {
+
+        this.removeClass = function (class_) {
+            $(document).on("click", function (event) {
                 if ($(event.target).closest(element).length) return;
                 $(element).removeClass(class_);
                 event.stopPropagation();
@@ -598,8 +606,8 @@ document.documentElement.className = document.documentElement.className.replace(
     };
 
     // forEach for IE
-    (function(){
-        if ( typeof NodeList.prototype.forEach === "function" ) return false;
+    (function () {
+        if (typeof NodeList.prototype.forEach === "function") return false;
         NodeList.prototype.forEach = Array.prototype.forEach;
     }());
 
@@ -613,7 +621,7 @@ document.documentElement.className = document.documentElement.className.replace(
     let prefix = "", _addEventListener, support;
 
     // detect event model
-    if ( window.addEventListener ) {
+    if (window.addEventListener) {
         _addEventListener = "addEventListener";
     } else {
         _addEventListener = "attachEvent";
@@ -622,21 +630,21 @@ document.documentElement.className = document.documentElement.className.replace(
 
     // detect available wheel event
     support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
-              document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
-              "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
+        document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+            "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
 
-    window.addWheelListener = function( elem, callback, useCapture ) {
-        _addWheelListener( elem, support, callback, useCapture );
+    window.addWheelListener = function (elem, callback, useCapture) {
+        _addWheelListener(elem, support, callback, useCapture);
 
         // handle MozMousePixelScroll in older Firefox
-        if( support == "DOMMouseScroll" ) {
-            _addWheelListener( elem, "MozMousePixelScroll", callback, useCapture );
+        if (support == "DOMMouseScroll") {
+            _addWheelListener(elem, "MozMousePixelScroll", callback, useCapture);
         }
     };
 
-    function _addWheelListener( elem, eventName, callback, useCapture ) {
-        elem[ _addEventListener ]( prefix + eventName, support == "wheel" ? callback : function( originalEvent ) {
-            !originalEvent && ( originalEvent = window.event );
+    function _addWheelListener(elem, eventName, callback, useCapture) {
+        elem[_addEventListener](prefix + eventName, support == "wheel" ? callback : function (originalEvent) {
+            !originalEvent && (originalEvent = window.event);
 
             // create a normalized event object
             let event = {
@@ -648,28 +656,28 @@ document.documentElement.className = document.documentElement.className.replace(
                 deltaX: 0,
                 deltaY: 0,
                 deltaZ: 0,
-                preventDefault: function() {
+                preventDefault: function () {
                     originalEvent.preventDefault ?
                         originalEvent.preventDefault() :
                         originalEvent.returnValue = false;
                 }
             };
-            
+
             // calculate deltaY (and deltaX) according to the event
-            if ( support == "mousewheel" ) {
-                event.deltaY = - 1/40 * originalEvent.wheelDelta;
+            if (support == "mousewheel") {
+                event.deltaY = - 1 / 40 * originalEvent.wheelDelta;
                 // Webkit also support wheelDeltaX
-                originalEvent.wheelDeltaX && ( event.deltaX = - 1/40 * originalEvent.wheelDeltaX );
+                originalEvent.wheelDeltaX && (event.deltaX = - 1 / 40 * originalEvent.wheelDeltaX);
             } else {
                 event.deltaY = originalEvent.deltaY || originalEvent.detail;
             }
 
             // it's time to fire the callback
-            return callback( event );
+            return callback(event);
 
-        }, useCapture || false );
+        }, useCapture || false);
     }
-    
+
 }(jQuery))
 
 
