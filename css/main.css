@@ -555,7 +555,9 @@ html, body {
   text-align: center; }
 
 body {
-  min-height: 100%; }
+  min-height: 100%;
+  height: 100vh;
+  overflow-y: scroll; }
 
 .main {
   margin: 0 auto;
@@ -927,25 +929,25 @@ body {
 /* =========================
    Content
    ========================= */
-#content {
+.content {
   position: relative;
   overflow: hidden;
   height: calc( 100vh - 128px);
   height: -webkit-calc( 100vh - 128px);
   margin-top: 128px; }
   @media (max-width: 1024px) {
-    #content {
+    .content {
       height: calc( 100vh - 118px);
       height: -webkit-calc( 100vh - 118px);
       margin-top: 118px; } }
   @media (max-width: 767px) {
-    #content {
+    .content {
       height: auto !important;
       min-height: calc(100vh - 98px);
       min-height: -webkit-calc(100vh - 98px);
       margin-top: 98px; } }
   @media screen and (max-width: 960px) and (max-height: 600px) {
-    #content {
+    .content {
       height: calc(100vh - 98px);
       height: -webkit-calc(100vh - 98px);
       margin-top: 98px; } }
@@ -956,24 +958,39 @@ body {
   height: 100vh;
   overflow: hidden; }
 
+.stop-scrolling {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative; }
+  .stop-scrolling .page {
+    position: absolute;
+    z-index: 1;
+    height: auto;
+    /* overflow: hidden; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    visibility: hidden; }
+  .stop-scrolling .page.loaded {
+    visibility: visible; }
+
 @media (max-height: 601px) and (min-width: 768px) {
   html, body {
     height: 600px !important; }
-  .page {
-    height: 600px; }
   #header {
     position: absolute; }
-  #content {
+  .content {
     height: calc( 600px - 128px);
     height: -webkit-calc( 600px - 128px); } }
 
 @media (max-height: 601px) and (min-width: 768px) and (max-width: 1024px) {
-  #content {
+  .content {
     height: calc( 600px - 118px);
     height: -webkit-calc( 600px - 118px); } }
 
 @media (max-height: 601px) and (min-width: 768px) and (max-width: 960px) {
-  #content {
+  .content {
     height: calc( 600px - 98px);
     height: -webkit-calc( 600px - 98px); } }
 
@@ -1045,10 +1062,6 @@ body {
     display: inline-block;
     vertical-align: middle;
     margin: 0 8px; }
-
-.stop-scrolling {
-  height: 100%;
-  overflow: hidden; }
 
 .popup-wrap {
   animation: fadeOut 0.4s linear forwards;
@@ -6367,10 +6380,10 @@ ul.feedback-filter {
 /* --------------------
     Mission
     ------------------- */
-.page-mission #content > .socket {
+.page-mission .content > .socket {
   padding: 50px 0 30px; }
   @media (max-height: 750px) and (min-width: 768px) {
-    .page-mission #content > .socket {
+    .page-mission .content > .socket {
       padding: 20px 0; } }
 
 .page-mission .cubes {
@@ -6732,11 +6745,11 @@ div.mission-text-slider {
 @media (max-width: 320px) {
   .video-calibrate {
     left: -12px; }
-  .page-mission #content > .socket {
+  .page-mission .content > .socket {
     padding-top: 43px; } }
 
 @media (min-width: 1025px) and (max-height: 770px) {
-  .page-mission #content > .socket {
+  .page-mission .content > .socket {
     padding: 20px 0; }
   .mission-column .title-3 {
     line-height: 30px;
