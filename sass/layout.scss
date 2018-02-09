@@ -18,6 +18,8 @@ html, body {
 
 body {
     min-height: 100%;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .main {
@@ -428,7 +430,7 @@ body {
    Content
    ========================= */   
 
-#content {
+.content {
     position: relative;
     overflow: hidden;
     height: calc( 100vh - #{$header-height});
@@ -465,7 +467,31 @@ body {
     z-index: 1;
     height: 100vh;  
     overflow: hidden;
-}    
+}
+
+.stop-scrolling {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+
+    .page {
+        position: absolute;
+        z-index: 1;
+        height: auto;
+        /* overflow: hidden; */
+        left: 0;
+        top: 0;
+        width: 100%;
+        visibility: hidden;
+    }
+    .page.loaded {
+        visibility: visible;
+    }
+
+}
+
+
 
 @media (max-height: 601px) and (min-width: 768px){
 
@@ -474,7 +500,7 @@ body {
     }
 
     .page {
-        height: 600px;
+        //height: 600px;
         //overflow-y: auto;
     }
 
@@ -482,20 +508,20 @@ body {
         position: absolute;
     }
 
-    #content {
+    .content {
         height: calc( 600px - #{$header-height});
         height: -webkit-calc( 600px - #{$header-height});
     }
 
     @media (max-width: 1024px){
-        #content {
+        .content {
             height: calc( 600px - #{$header-height-tbl});
             height: -webkit-calc( 600px - #{$header-height-tbl});
         }
     }
 
     @media (max-width: 960px){
-        #content {
+        .content {
             height: calc( 600px - #{$header-height-mob});
             height: -webkit-calc( 600px - #{$header-height-mob});
         }
@@ -592,11 +618,6 @@ body {
         vertical-align: middle;    
         margin: 0 8px;
     }
-}
-
-.stop-scrolling {
-    height: 100%;
-    overflow: hidden;
 }
 
 .popup-wrap {
