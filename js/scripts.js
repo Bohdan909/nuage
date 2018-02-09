@@ -362,7 +362,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // media query change
             function WidthChange(mq) {
-                if (mq.matches) {
+                
                     // window width is at least 1025px
                     mainElem.classList.add("stop-scrolling");
 
@@ -370,12 +370,14 @@ document.documentElement.className = document.documentElement.className.replace(
 
                     // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
                     document.onkeydown = customScrollKeysHandler;
-                    // handler for wheel event 
-                    addWheelListener( window, customScrollWheelHandler );
 
                     window.ontouchmove = customScrollTouchHandler;
                     
                     window.onhashchange = hashUrlChangeHandler;
+
+                if (mq.matches) {
+                    // handler for wheel event 
+                    addWheelListener( window, customScrollWheelHandler );
                 } else {
                 // window width is less than 1025px
                 }
@@ -483,7 +485,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 let targetElement = document.getElementById(currentHashtag);
                 let contentElem = targetElement.querySelector(".content");
 
-                if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
+                //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
                     console.log(`== scrolled to bottom ==`);
                     //limit handling rate to prevent scrolling trough all pages
                     if (Date.now() - lastScrollTime > 1000) {
@@ -495,10 +497,10 @@ document.documentElement.className = document.documentElement.className.replace(
 
                         lastScrollTime = Date.now();
                     }
-                } else {
-                    console.log(`== just scroll ==`);
+                //} else {
+                //    console.log(`== just scroll ==`);
 
-                }
+                //}
             }
 
             function customScrollTouchHandler(e) {
