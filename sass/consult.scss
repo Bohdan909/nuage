@@ -45,6 +45,13 @@
     }
 }
 
+@media screen and (max-height: 860px), screen and (max-width: 1025px) {
+
+    .page-consult .cubes {
+        display: none;
+    }
+}
+
 .consult-top {
     position: relative;
     padding-right: 20%;
@@ -474,10 +481,6 @@ ul.tabs.tabs-panel {
     }
 
     @include port {
-
-        // .page-consult .figures {
-        //     display: none;
-        // }
 
         .contacts-column {
 
