@@ -694,6 +694,33 @@ div.assort-desc-item {
     }
 }
 
+@-webkit-keyframes ttl-rotate-in {
+    0% {
+        opacity: 0;
+        @include transform(translateY(33px));
+    }
+    50% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+}
+
+@-webkit-keyframes ttl-rotate-out {
+    0% {
+        opacity: 1;
+        @include transform(translateY(0px));
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 0;
+        @include transform(translateY(-33px));
+    }
+}
 
 ul.desc-list {
     padding-bottom: 15px;
@@ -860,18 +887,29 @@ ul.desc-list {
         height: auto;
     }
 
-    .assort-column div.filter-wrap, div.assort-desc-item {
-        position: static;
-    }
-
     div.assort-desc-item {
         @include transform(translateY(0));
+        position: static;
         top: auto;
     }
 
     ul.desc-list li {
         margin-bottom: 12px;
         padding-top: 13px;
+    }
+
+    .assort-column div.filter-wrap {
+        position: relative;
+        bottom: 0;
+    }
+
+    .filter-item {
+        padding: 15px 10px 15px 20px;
+
+        .title-3 {
+            font-size: 17px;    
+            line-height: 22px;
+        }
     }
 
     .assort-slider .slick-current .slick-slider-inner {

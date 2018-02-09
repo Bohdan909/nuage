@@ -484,6 +484,74 @@ $mid-width      : 1550px;
     color: rgba(0,0,0, $opacity);
 }
 
+@keyframes fadeIn-l {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    5% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes fadeOut-l {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    95% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@-webkit-keyframes fadeIn-l {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    1% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@-webkit-keyframes fadeOut-l {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    99% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;

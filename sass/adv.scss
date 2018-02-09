@@ -554,12 +554,25 @@
 }
 
 .tab-pane:not(.feedback-column) {
-	@include animation(fadeOut, 0.1s, linear);
+	@include animation(fadeOut, 0.3s, linear);
 	display: none;
 
 	&.active {
-		@include animation(fadeIn, 0.1s, linear);
+		@include animation(fadeIn, 0.3s, linear);
 		display: block;
+	}
+
+	&.laying-on {
+		@include animation(fadeOut-l, 0.4s, linear);
+		//@include a-delay(0.1s);
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+
+		&.active {
+			@include animation(fadeIn-l, 0.3s, linear);
+		}
 	}
 }
 

@@ -53,6 +53,50 @@
   position: relative;
   top: 50%; }
 
+@keyframes fadeIn-l {
+  0% {
+    opacity: 0;
+    visibility: hidden; }
+  5% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 1;
+    visibility: visible; } }
+
+@keyframes fadeOut-l {
+  0% {
+    opacity: 1;
+    visibility: visible; }
+  95% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
+@-webkit-keyframes fadeIn-l {
+  0% {
+    opacity: 0;
+    visibility: hidden; }
+  1% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 1;
+    visibility: visible; } }
+
+@-webkit-keyframes fadeOut-l {
+  0% {
+    opacity: 1;
+    visibility: visible; }
+  99% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -488,6 +532,50 @@ div.main p {
   transform: translateY(-50%);
   position: relative;
   top: 50%; }
+
+@keyframes fadeIn-l {
+  0% {
+    opacity: 0;
+    visibility: hidden; }
+  5% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 1;
+    visibility: visible; } }
+
+@keyframes fadeOut-l {
+  0% {
+    opacity: 1;
+    visibility: visible; }
+  95% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
+@-webkit-keyframes fadeIn-l {
+  0% {
+    opacity: 0;
+    visibility: hidden; }
+  1% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 1;
+    visibility: visible; } }
+
+@-webkit-keyframes fadeOut-l {
+  0% {
+    opacity: 1;
+    visibility: visible; }
+  99% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
 
 @keyframes fadeIn {
   0% {
@@ -3593,6 +3681,34 @@ div.assort-desc-item {
     -ms-transform: translateY(-33px);
     transform: translateY(-33px); } }
 
+@-webkit-keyframes ttl-rotate-in {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(33px);
+    -ms-transform: translateY(33px);
+    transform: translateY(33px); }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); } }
+
+@-webkit-keyframes ttl-rotate-out {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px); }
+  50% {
+    opacity: 0.5; }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-33px);
+    -ms-transform: translateY(-33px);
+    transform: translateY(-33px); } }
+
 ul.desc-list {
   padding-bottom: 15px; }
   ul.desc-list li {
@@ -3731,16 +3847,23 @@ ul.desc-list {
   .assort-desc-wrap {
     padding-top: 20px;
     height: auto; }
-  .assort-column div.filter-wrap, div.assort-desc-item {
-    position: static; }
   div.assort-desc-item {
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0);
+    position: static;
     top: auto; }
   ul.desc-list li {
     margin-bottom: 12px;
     padding-top: 13px; }
+  .assort-column div.filter-wrap {
+    position: relative;
+    bottom: 0; }
+  .filter-item {
+    padding: 15px 10px 15px 20px; }
+    .filter-item .title-3 {
+      font-size: 17px;
+      line-height: 22px; }
   .assort-slider .slick-current .slick-slider-inner {
     -webkit-transform: translateY(40%);
     -ms-transform: translateY(40%);
@@ -5834,15 +5957,27 @@ ul.tabs.tabs-panel {
   -webkit-animation: textAnimate 0.4s ease-out forwards; }
 
 .tab-pane:not(.feedback-column) {
-  animation: fadeOut 0.1s linear forwards;
-  -ms-animation: fadeOut 0.1s linear forwards;
-  -webkit-animation: fadeOut 0.1s linear forwards;
+  animation: fadeOut 0.3s linear forwards;
+  -ms-animation: fadeOut 0.3s linear forwards;
+  -webkit-animation: fadeOut 0.3s linear forwards;
   display: none; }
   .tab-pane:not(.feedback-column).active {
-    animation: fadeIn 0.1s linear forwards;
-    -ms-animation: fadeIn 0.1s linear forwards;
-    -webkit-animation: fadeIn 0.1s linear forwards;
+    animation: fadeIn 0.3s linear forwards;
+    -ms-animation: fadeIn 0.3s linear forwards;
+    -webkit-animation: fadeIn 0.3s linear forwards;
     display: block; }
+  .tab-pane:not(.feedback-column).laying-on {
+    animation: fadeOut-l 0.4s linear forwards;
+    -ms-animation: fadeOut-l 0.4s linear forwards;
+    -webkit-animation: fadeOut-l 0.4s linear forwards;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block; }
+    .tab-pane:not(.feedback-column).laying-on.active {
+      animation: fadeIn-l 0.3s linear forwards;
+      -ms-animation: fadeIn-l 0.3s linear forwards;
+      -webkit-animation: fadeIn-l 0.3s linear forwards; }
 
 .scheme-desc-inner {
   position: relative;
@@ -6529,18 +6664,13 @@ div.mission-text {
     margin-bottom: 30px; }
 
 div.mission-text-slider {
+  position: relative;
+  height: 90px;
   overflow: hidden; }
-  div.mission-text-slider .title-3, div.mission-text-slider p {
-    -webkit-transform: translateY(8px) translateZ(0) scale(1, 1);
-    -ms-transform: translateY(8px) translateZ(0) scale(1, 1);
-    transform: translateY(8px) translateZ(0) scale(1, 1);
-    -webkit-transition: all 0.4s ease-out;
-    -ms-transition: all 0.4s ease-out;
-    transition: all 0.4s ease-out; }
   div.mission-text-slider .active.tab-pane .title-3, div.mission-text-slider .active.tab-pane p {
-    animation: activeSlide 0.4s ease-in-out forwards;
-    -ms-animation: activeSlide 0.4s ease-in-out forwards;
-    -webkit-animation: activeSlide 0.4s ease-in-out forwards;
+    animation: activeSlide 0.4s cubic-bezier(0.11, 0, 0.45, 1) forwards;
+    -ms-animation: activeSlide 0.4s cubic-bezier(0.11, 0, 0.45, 1) forwards;
+    -webkit-animation: activeSlide 0.4s cubic-bezier(0.11, 0, 0.45, 1) forwards;
     opacity: 0; }
   div.mission-text-slider .title-3 {
     margin-bottom: 0px;
@@ -6554,6 +6684,16 @@ div.mission-text-slider {
     margin-bottom: 0;
     overflow: hidden; }
 
+@keyframes noActiveSlide {
+  0% {
+    transform: translateY(0px) translateZ(0) scale(1, 1);
+    -ms-transform: translateY(0px) translateZ(0) scale(1, 1);
+    opacity: 1; }
+  100% {
+    transform: translateY(5px) translateZ(0) scale(1, 1);
+    -ms-transform: translateY(5px) translateZ(0) scale(1, 1);
+    opacity: 0; } }
+
 @keyframes activeSlide {
   0% {
     transform: translateY(5px) translateZ(0) scale(1, 1);
@@ -6566,10 +6706,10 @@ div.mission-text-slider {
 
 @-webkit-keyframes activeSlide {
   0% {
-    -webkit-transform: translateY(5px);
+    -webkit-transform: translateY(5px) translateZ(0) scale(1, 1);
     opacity: 0; }
   100% {
-    -webkit-transform: translateY(0px);
+    -webkit-transform: translateY(0px) translateZ(0) scale(1, 1);
     opacity: 1; } }
 
 .mission-tabs {
@@ -6840,11 +6980,17 @@ div.mission-text-slider {
     line-height: 25px !important; }
   .page-mission p {
     font-size: 12px !important;
-    line-height: 20px !important; }
+    line-height: 18px !important; }
   div.mission-text {
     padding-top: 0; }
-  div.mission-text-slider p {
-    height: 42px; } }
+    div.mission-text p {
+      margin-bottom: 10px; }
+  .mission-text-slider-wrap section > span {
+    margin-bottom: 15px; }
+  div.mission-text-slider {
+    height: 65px; }
+    div.mission-text-slider p {
+      height: 40px; } }
 
 @media (max-width: 1550px) {
   .mission-column .strip {
@@ -6855,12 +7001,19 @@ div.mission-text-slider {
     right: -40px; } }
 
 @media (max-width: 1024px) {
-  .mission-text {
-    height: 55%; }
-  .mission-text-slider-wrap {
-    height: 45%; }
+  .mission-text-slider-wrap section > span {
+    margin-bottom: 2px; }
+  div.mission-text {
+    border-bottom: none; }
   .mission-column.to-left {
     border: none; } }
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  div.mission-text .title-3 {
+    line-height: 30px; }
+  div.mission-text p {
+    line-height: 22px;
+    margin-bottom: 10px; } }
 
 @media screen and (max-width: 1024px) and (orientation: portrait) {
   .mission-column.to-left {
@@ -6887,6 +7040,8 @@ div.mission-text-slider {
     border: none; }
   .mission-text-slider-wrap {
     padding-top: 35px; }
+    .mission-text-slider-wrap .title-3 {
+      font-size: 19px; }
     .mission-text-slider-wrap section > span {
       margin-bottom: 20px; }
   div.mission-text-slider p {

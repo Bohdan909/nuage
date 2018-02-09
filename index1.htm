@@ -1165,7 +1165,7 @@
 									</span>
 
 									<div class="mission-text-slider animate-slide">
-										<div id="tab-21" class="tab-pane active">
+										<div id="tab-21" class="tab-pane laying-on active">
 											<div class="title-3">
 												«Аптечное» качество
 											</div>
@@ -1174,7 +1174,7 @@
 											</p>
 										</div>
 
-										<div id="tab-22" class="tab-pane">
+										<div id="tab-22" class="tab-pane laying-on">
 											<div class="title-3">
 												Медицинские компетенции
 											</div>
@@ -1183,7 +1183,7 @@
 											</p>
 										</div>
 
-										<div id="tab-23" class="tab-pane">
+										<div id="tab-23" class="tab-pane laying-on">
 											<div class="title-3">
 												Максимальное соответствие
 											</div>
@@ -1192,7 +1192,7 @@
 											</p>
 										</div>
 
-										<div id="tab-24" class="tab-pane">
+										<div id="tab-24" class="tab-pane laying-on">
 											<div class="title-3">
 												Максимальный комфорт
 											</div>
@@ -2074,45 +2074,6 @@
 				let btnPlay = document.querySelector(".btn-play");
 				let btnName = document.querySelector(".video-name");
 				
-				// video.setAttribute("controls", "false");
-				setAttributes(video, {"autoplay": "true", "loop": "true", "controls": "false"});
-
-				function setAttributes(el, options) {
-				    Object.keys(options).forEach(function(attr) {
-				    	el.setAttribute(attr, options[attr]);
-				    });
-				}
-				
-				// videoBlock.addEventListener("mouseover", function(){
-				// 	checkPlay("hover", "leave");
-				// });
-
-				// videoBlock.addEventListener("mouseleave", function(){
-				// 	checkPlay("leave", "hover");
-				// });
-
-				// videoBlock.addEventListener("click", function(){
-				// 	video.play();
-				// 	video.controls = false;
-
-				// 	setTimeout(function(){
-				// 		videoBlock.classList.add("play");
-				// 		videoBlock.classList.remove("leave");
-				// 		videoBlock.classList.remove("hover");
-				// 	}, 200);
-					
-				// 	btnPlay.classList.add("hide");
-				// 	btnName.classList.add("hide");
-				// });
-
-				// function checkPlay(classNameA, classNameU){
-				// 	if (!videoBlock.classList.contains("play")){
-				// 		videoBlock.classList.add(classNameA);
-				// 		videoBlock.classList.remove(classNameU);
-				// 	}
-				// };
-
-
 				const timeAnim = 5000;
 				const timeAnimBack = 600;
 				let touch = document.querySelector("html").classList.contains("touchevents");
@@ -2123,19 +2084,22 @@
 				let videoCal   = document.querySelector(".video-calibrate");
 				let videoCloseBtn = document.querySelector(".mission-video-close");
 				let topPosPlay, leftPosPlay, topPos, leftPos, timer;
-				
+
+				setAttributes(video, {"autoplay": "true", "loop": "true", "controls": "false"});
+
 				videoWrap.addEventListener("mouseover", function(){
 					window.scrollTo(0, 0);
-					if (!touch) timer = setTimeout(videoOpen, 600);
+					
+					if (!videoWrap.classList.contains("open") && !touch){
+						timer = setTimeout(videoOpen, 600);
+					}
 				});
 
 				videoWrap.addEventListener("touchstart", function(){
 					window.scrollTo(0, 0);
-					scrollDisable();
+					//scrollDisable();
 					setTimeout(videoOpen, 200);
 				});
-
-				//$(".title-3").text(scrollTop);
 
 				videoWrap.addEventListener("mouseleave", function(){
 					clearTimeout(timer);
@@ -2147,18 +2111,26 @@
 
 				setCirclePos(radius);
 
-				function scrollDisable(){
-					document.addEventListener('touchstart', this.touchstart);
-					document.addEventListener('touchmove', this.touchmove);
+				// function scrollDisable(){
+				// 	document.addEventListener('touchstart', this.touchstart);
+				// 	document.addEventListener('touchmove', this.touchmove);
 
-					function touchstart(e){
-					    e.preventDefault()
-					}
+				// 	function touchstart(e){
+				// 	    e.preventDefault()
+				// 	}
 
-					function touchmove(e){
-					    e.preventDefault()
-					}
-				}
+				// 	function touchmove(e){
+				// 	    e.preventDefault()
+				// 	}
+				// }
+
+				window.addEventListener("resize", function(){
+		
+					if (!videoWrap.classList.contains("open")){
+						setCirclePos(radius);
+						videoPlay.classList.remove("hide");
+					} 
+				});
 
 				function setCirclePos(rad){
 					topPosPlay  = videoCal.getBoundingClientRect().top + scrollTop;
@@ -2184,15 +2156,16 @@
 					console.log("video Close");
 					setCirclePos(radius);
 					videoWrap.classList.remove("open");
+					setTimeout(function(){ video.pause() }, 500);
 				}
 
-				window.addEventListener("resize", function(){
-		
-					if (!videoWrap.classList.contains("open")){
-						setCirclePos(radius);
-						videoPlay.classList.remove("hide");
-					} 
-				});
+				function setAttributes(el, options) {
+				    Object.keys(options).forEach(function(attr) {
+				    	el.setAttribute(attr, options[attr]);
+				    });
+				}
+
+				
 
 				// Popup
 				let btnClose = document.querySelectorAll(".popup-close");
