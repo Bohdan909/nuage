@@ -48,6 +48,12 @@ $mid-width      : 1550px;
     }
 }
 
+@mixin tablet-only {
+    @media screen and (max-width: 1024px) and (min-width: 768px){
+        @content;
+    }
+}
+
 @mixin mid {
 	@media (max-width: #{$mid-width}) {
    		@content;
@@ -77,6 +83,8 @@ $mid-width      : 1550px;
         @content;
     }
 }
+
+
 
 // Socket
 @mixin socket {
@@ -384,8 +392,9 @@ $mid-width      : 1550px;
     }
 }
 
-// Visibility Hidden
-@mixin vis-hidden {
+// Transform Bugs
+.vis-hidden {
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
@@ -454,6 +463,12 @@ $mid-width      : 1550px;
     top: 50%;
 }
 
+.ctrVert {
+    @include transform(translateY(-50%));
+    position: relative;
+    top: 50%;
+}
+
 @mixin notCenter {
     transform: translate(0);
     -webkit-transform: translate(0);
@@ -467,6 +482,74 @@ $mid-width      : 1550px;
 
 @mixin color-b($opacity){
     color: rgba(0,0,0, $opacity);
+}
+
+@keyframes fadeIn-l {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    5% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes fadeOut-l {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    95% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@-webkit-keyframes fadeIn-l {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    1% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@-webkit-keyframes fadeOut-l {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    99% {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 @keyframes fadeIn {

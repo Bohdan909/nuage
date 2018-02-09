@@ -95,7 +95,7 @@
 									</span>
 
 									<div class="mission-text-slider animate-slide">
-										<div id="tab-1" class="tab-pane active">
+										<div id="tab-1" class="tab-pane laying-on active">
 											<div class="title-3">
 												«Аптечное» качество
 											</div>
@@ -104,7 +104,7 @@
 											</p>
 										</div>
 
-										<div id="tab-2" class="tab-pane">
+										<div id="tab-2" class="tab-pane laying-on">
 											<div class="title-3">
 												Медицинские компетенции
 											</div>
@@ -113,7 +113,7 @@
 											</p>
 										</div>
 
-										<div id="tab-3" class="tab-pane">
+										<div id="tab-3" class="tab-pane laying-on">
 											<div class="title-3">
 												Максимальное соответствие
 											</div>
@@ -122,7 +122,7 @@
 											</p>
 										</div>
 
-										<div id="tab-4" class="tab-pane">
+										<div id="tab-4" class="tab-pane laying-on">
 											<div class="title-3">
 												Максимальный комфорт
 											</div>
@@ -252,16 +252,18 @@
 				
 				videoWrap.addEventListener("mouseover", function(){
 					window.scrollTo(0, 0);
-					if (!touch) timer = setTimeout(videoOpen, 600);
+
+					if (!videoWrap.classList.contains("open") && !touch){
+						timer = setTimeout(videoOpen, 600);
+					}
+
 				});
 
-				videoWrap.addEventListener("touchstart", function(){
-					window.scrollTo(0, 0);
-					scrollDisable();
-					setTimeout(videoOpen, 200);
-				});
-
-				$(".title-3").text(scrollTop);
+				// videoWrap.addEventListener("touchstart", function(){
+				// 	window.scrollTo(0, 0);
+				// 	//scrollDisable();
+				// 	setTimeout(videoOpen, 200);
+				// });
 
 				videoWrap.addEventListener("mouseleave", function(){
 					clearTimeout(timer);
@@ -273,18 +275,18 @@
 
 				setCirclePos(radius);
 
-				function scrollDisable(){
-					document.addEventListener('touchstart', this.touchstart);
-					document.addEventListener('touchmove', this.touchmove);
+				// function scrollDisable(){
+				// 	document.addEventListener('touchstart', this.touchstart);
+				// 	document.addEventListener('touchmove', this.touchmove);
 
-					function touchstart(e){
-					    e.preventDefault()
-					}
+				// 	function touchstart(e){
+				// 	    e.preventDefault()
+				// 	}
 
-					function touchmove(e){
-					    e.preventDefault()
-					}
-				}
+				// 	function touchmove(e){
+				// 	    e.preventDefault()
+				// 	}
+				// }
 
 				function setCirclePos(rad){
 					topPosPlay  = videoCal.getBoundingClientRect().top + scrollTop;
@@ -310,6 +312,7 @@
 					console.log("video Close");
 					setCirclePos(radius);
 					videoWrap.classList.remove("open");
+					setTimeout(function(){ video.pause() }, 500);
 				}
 
 				window.addEventListener("resize", function(){
@@ -319,7 +322,7 @@
 						videoPlay.classList.remove("hide");
 					} 
 				});
-			})
+			});
 				
 		</script>
 

@@ -116,7 +116,6 @@
 	line-height: 48px;
 	font-size: 10px;
 	
-
 	&:after {
 		@extend .ps;
 		@include border-rad(30px);
@@ -125,8 +124,8 @@
 		width: 100%;
 		z-index: -1;
 		background-color: #fff;
-		box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.45);
-    	-webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.45);
+		box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.06);
+    	-webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.06);
 	}
 	
 	.active:not(.plus) > & {
@@ -137,6 +136,46 @@
             background-image: -webkit-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
             background-image: -ms-linear-gradient( -90deg, rgba(135,181,225,0.5) 0%, rgba(135,181,225,0.5) 19%, rgb(135,181,225) 100%);
 			
+		}
+	}
+}
+
+.point-btn.plus {
+	background-color: #fff;
+
+	&:after {
+		display: none;
+	}
+
+	i {
+		@include transition(all, 0.35s, linear);
+		@include origin(50%, 50%);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin: -5px 0 0 -5px;
+		width: 10px;
+		height: 10px;
+
+		&:before, &:after {
+			@extend .ps;
+			@extend .transDef;
+			background-color: $textCol;
+		}
+
+		&:before {
+			top: 4px;
+			width: 10px;
+			height: 2px;
+		}
+
+		&:after {
+			left: 4px;
+			width: 2px;
+			height: 10px;
 		}
 	}
 }
@@ -189,6 +228,16 @@
 }
 
 
+@include ie10 {
+	.point-name, .point-line {
+		display: none;
+		
+		.active & {
+			display: block;
+		}
+	}
+}
+
 @supports (-ms-ime-align:auto) {
 	.point-name, .point-line {
 		display: none;
@@ -199,36 +248,7 @@
 	}
 }
 
-.plus {
-	
-	&:before, &:after {
-		@include Center;
-		@extend .ps;
-		@extend .transDef;
-		background-color: #7caadb;
-	}
 
-	&:before {
-		width: 10px;
-		height: 2px;
-	}
-
-	&:after {
-		width: 2px;
-		height: 10px;
-	}
-
-	.active > & {
-
-		&:before, &:after {
-			background-color: #fff;
-		}
-
-		&:after {
-			height: 2px;
-		}
-	}
-}
 
 .no-touchevents  {
 
@@ -251,36 +271,37 @@
 
 .page-adv {
 
+	.point .point-ico img {
+		@include delay(0.45s);
+	}
+
 	.point:nth-child(1) .point-ico {
 		
 		img {
 			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
-			@include delay(0.45s);
 			left: 50%;
 			top: 50%;
 		}
 	}
 
-	.active.point:nth-child(1), .active.point:nth-child(2) {
+	.active.point:nth-child(1), .active.point:nth-child(3) {
 		.point-ico img {
 			@include transform(translateX(-50%) translateY(-50%) scaleX(1));
-		}
-	}
-
-	.point:nth-child(2) .point-ico {
-		
-		img {
-			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
-			@include delay(0.45s);
-			left: 50%;
-			top: 50%;
 		}
 	}
 
 	.point:nth-child(3) .point-ico {
 		
 		img {
-			@include delay(0.45s);
+			@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
+			left: 50%;
+			top: 50%;
+		}
+	}
+
+	.point:nth-child(4) .point-ico {
+		
+		img {
 			left: 50%;
 			top: 0;
 
@@ -300,7 +321,7 @@
 		}
 	}
 
-	.active.point:nth-child(3) .point-ico img {
+	.active.point:nth-child(4) .point-ico img {
 		
 		&:nth-child(1) {
 			@include transform(translateX(-50%) translateY(13px));
@@ -315,23 +336,27 @@
 		}
 	}
 
-	.point:nth-child(4) .point-ico {
+	.point:nth-child(5) .point-ico {
 		
 		img {
 			@include transform(translateY(-50%) scaleX(0.8));
 			@include origin(center,center);
-			@include delay(0.45s);
 			top: 50%;
+			left: -10px;
+
+			@include tablet {
+				left: 0;
+			}
 		}
 	}
 
-	.active.point:nth-child(4) {
+	.active.point:nth-child(5) {
 		.point-ico img {
 			@include transform(translateY(-50%) scaleX(1));
 		}
 	}
 
-	.point:nth-child(5) .point-ico {
+	.point:nth-child(2) .point-ico {
 		
 		img {
 			top: 0;
@@ -348,7 +373,7 @@
 		}
 	}
 
-	.active.point:nth-child(5) .point-ico img {
+	.active.point:nth-child(2) .point-ico img {
 
 		&:nth-child(2) {
 			@include transform(translateY(-4px));
@@ -383,12 +408,12 @@
 	}
 
 	.point:nth-child(2) { // POINT 2
-		top: 147px;
-		left: 550px;
+		top: 307px;
+		left: 525px;
 
 		.point-name {
 			left: 145px;
-			top: -65px;
+			top: -52px;
 		}
 
 		.point-line {
@@ -399,93 +424,6 @@
 				height: 28px;
 				left: 87px;
 				top: -3px;
-				border-left: none;
-				border-top: none;
-			}
-		}
-	}
-
-
-	.point:nth-child(3) { // POINT 3
-		top: 346px;
-		left: 236px;
-
-		.point-name {
-			left: -240px;
-			top: 100px;
-		}
-
-		.point-line {
-
-			span {
-				@include transform(skewX(-25deg));
-				width: 35px;
-				height: 70px;
-				left: -20px;
-				top: 58px;
-				border-left: none;
-				border-top: none;
-			}
-		}
-	}
-
-	
-	.point:nth-child(4) { // POINT 4
-		top: 442px;
-		left: 538px;
-
-		.point-name {
-			left: 112px;
-			top: -128px;
-		}
-
-		.point-line {
-
-			span {
-				@include transform(skewX(-25deg));
-				width: 45px;
-				height: 100px;
-				left: 100px;
-				top: -75px;
-				border-left: none;
-				border-top: none;
-			}
-		}
-
-		.point-ico {
-			@include transform(translateX(-10px));
-
-			img {
-				@include transform(translateX(-50%) translateY(-50%) scaleX(0.8));
-				@include origin(center,center);
-				@include delay(0.45s);
-				left: 50%;
-				top: 50%;
-			}
-		}
-	}
-
-	.active.point:nth-child(4) .point-ico img {
-		@include transform(translateX(-50%) translateY(-50%) scaleX(1));
-	}
-
-	.point:nth-child(5) { // POINT 5
-		top: 585px;
-		left: 420px;
-
-		.point-name {
-			left: 145px;
-			top: -54px;
-		}
-
-		.point-line {
-
-			span {
-				@include transform(skewX(-25deg));
-				width: 85px;
-				height: 25px;
-				left: 85px;
-				top: 0px;
 				border-left: none;
 				border-top: none;
 			}
@@ -510,15 +448,79 @@
 		}
 	}
 
-	.active.point:nth-child(5) .point-ico img {
 
-		&:nth-child(2) {
-			@include transform(translateY(-4px));
+	.point:nth-child(3) { // POINT 3
+		top: 418px;
+		left: 236px;
+
+		.point-name {
+			left: -164px;
+			top: 100px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewX(-25deg));
+				width: 35px;
+				height: 70px;
+				left: -20px;
+				top: 58px;
+				border-left: none;
+				border-top: none;
+			}
+		}
+	}
+
+	
+	.point:nth-child(4) { // POINT 4
+		top: 458px;
+		left: 465px;
+
+		.point-name {
+			left: 181px;
+			top: -77px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewX(-25deg));
+				width: 100px;
+				height: 50px;
+				left: 89px;
+				top: -24px;
+				border-left: none;
+				border-top: none;
+			}
+		}
+
+		
+	}
+
+	.point:nth-child(5) { // POINT 5
+		top: 578px;
+		left: 404px;
+
+		.point-name {
+			left: 174px;
+			top: -54px;
+		}
+
+		.point-line {
+
+			span {
+				@include transform(skewX(-25deg));
+				width: 115px;
+				height: 25px;
+				left: 85px;
+				top: 0px;
+				border-left: none;
+				border-top: none;
+			}
 		}
 	}
 }
-
-
 
 // Scheme
 .scheme-desc-wrap {
@@ -552,12 +554,25 @@
 }
 
 .tab-pane:not(.feedback-column) {
-	@include animation(fadeOut, 0.1s, linear);
+	@include animation(fadeOut, 0.3s, linear);
 	display: none;
 
 	&.active {
-		@include animation(fadeIn, 0.1s, linear);
+		@include animation(fadeIn, 0.3s, linear);
 		display: block;
+	}
+
+	&.laying-on {
+		@include animation(fadeOut-l, 0.4s, linear);
+		//@include a-delay(0.1s);
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+
+		&.active {
+			@include animation(fadeIn-l, 0.3s, linear);
+		}
 	}
 }
 
@@ -618,7 +633,7 @@
 .scheme-nav {
 	display: none;
 	height: 50px;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 
 	.btn-nav-left {
 		top: 0;
@@ -667,16 +682,17 @@
 		left: 45%;	
 
 		.point:nth-child(2) {
-			left: 525px;
+			left: 554px;
+			top: 270px;
 		}
 
 		.point:nth-child(3) {
-			left: 286px;
+			left: 250px;
 		}
 
 		.point:nth-child(4) {
-			top: 342px;
-			left: 539px;
+			top: 385px;
+			left: 513px;
 		}
 
 		.point:nth-child(5) {
@@ -689,6 +705,10 @@
 		top: 200px;
 	}
 
+	.scheme-desc .title-1 {
+		font-size: 40px;
+	}
+
 	.object-scheme {
 		@include transform(scale(0.8));
 	}	
@@ -696,7 +716,11 @@
 	
 }
 
-@media (min-width: 1025px) and (max-height: 700px){
+@media (min-width: 1025px) and (max-height: 650px){
+
+	.object-scheme-wrap {
+		top: -55px;
+	}
 
 	.scheme-nav {
 		display: block;
@@ -706,7 +730,8 @@
 		top: 50px;
 	}
 
-	.points, .page-adv .figures {
+	.object-scheme-wrap .points, 
+	.page-adv .figures {
 		display: none;		
 	}
 }
@@ -891,7 +916,6 @@
 		.point-name {
 
 			span {
-				display: none;
 				letter-spacing: 0;
 			}
 		}
@@ -911,10 +935,6 @@
 
 @include mobile-min {
 
-	.point-name span {
-		display: none;
-	}
-	
 	.page-adv {
 		background: none;
 	}

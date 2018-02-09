@@ -1,9 +1,9 @@
 document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '');
 
-(function ($) {
-    $(document).ready(function () {
-
-        setTimeout(function () {
+(function($){
+    $(document).ready(function() {
+        
+        setTimeout(function(){
             document.querySelector(".page").classList.add("loaded");
         }, 500);
 
@@ -31,9 +31,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
             e.preventDefault();
         });
-
-
-
+        
         /* ==============
            MENU 
         ================= */
@@ -42,7 +40,6 @@ document.documentElement.className = document.documentElement.className.replace(
         let navMenu = document.querySelector(".menu");
 
         navMenu.addEventListener("click", function (event) {
-            console.log(event.target);
             if (event.target.tagName == "IMG" && $body.classList.contains("menu-close")) {
                 event.stopPropagation();
                 return;
@@ -299,265 +296,262 @@ document.documentElement.className = document.documentElement.className.replace(
             CUSTOM SCROLL AND NAVIGATION
         ================================ */
 
-        let mainElem = document.querySelector(".main");
+        if (document.querySelector(".main").classList.contains("page-scroll")){
 
-        // left: 37, up: 38, right: 39, down: 40,
-        // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-        let keysPrev = { 37: 1, 38: 1, 33: 1, 36: 1 };
-        let keysNext = { 39: 1, 40: 1, 32: 1, 34: 1, 35: 1 };
+            let mainElem = document.querySelector(".main");
+            
+            // left: 37, up: 38, right: 39, down: 40,
+            // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+            let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
+            let keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
 
-        let navLinks = [
-            "main",
-            "advantages",
-            "assortment",
-            "mission",
-            "faq",
-            "buy",
-            "consultation"
-        ];
-        let baseHashUrl = "#";
+            let navLinks = [
+                "main",
+                "advantages",
+                "assortment",
+                "mission",
+                "faq",
+                "buy",
+                "consultation"
+            ];
+            let baseHashUrl = "#";
 
-        let lastScrollTime = 0;
+            let lastScrollTime = 0;
 
-        // initialize variable by hashtag from url if it present
-        let currentHashtag = window.location.hash.substr(1);
+            // initialize variable by hashtag from url if it present
+            let currentHashtag = window.location.hash.substr(1);
+            
+            
+            let currentBlockIndex = 0;
+            let prevBlockIndex = -1;
 
+            let movingMenuUnderline = document.querySelector(".menu .moving-underline");
+            let menuListElem = document.querySelector(".menu ul");
+            let allBlocks = document.querySelectorAll(".page");
+            
+            var $object = $('.object-main');
+            var $scheme = $('.object-scheme');
 
-        let currentBlockIndex = 0;
-        let prevBlockIndex = -1;
-
-        let movingMenuUnderline = document.querySelector(".menu .moving-underline");
-        let menuListElem = document.querySelector(".menu ul");
-        let allBlocks = document.querySelectorAll(".page");
-
-        var $object = $('.object-main');
-        var $scheme = $('.object-scheme');
-
-        $object.rotate3d({
-            'source': 'images/object-1/1_',
-            'count': 39,
-            'auto': true
-        });
-
-        $scheme.rotate3d({
-            'source': 'images/object-2/Vzruv_02.Alpha_',
-            'count': 70,
-            'auto': true
-        });
-
-        // media query event handler
-        if (window.matchMedia) {
-            const mq = window.matchMedia("(min-width: 0px)");
-            mq.addListener(mediaWidthChange);
-            mediaWidthChange(mq);
-        }
-
-        currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
-        navigateToBlock(currentBlockIndex);
-
-        function clearLoadedState() {
-            Array.prototype.forEach.call(allBlocks, function (block) {
-                block.classList.remove("loaded");
+            $object.rotate3d({
+                'source': 'images/object-1/1_',
+                'count' : 39,
+                'auto'  : true
             });
-        }
 
-        // media query change
-        function mediaWidthChange(mq) {
-            if (mq.matches) {
-                // window width is at least 1025px
-                mainElem.classList.add("stop-scrolling");
+            $scheme.rotate3d({
+                'source': 'images/object-2/Vzruv_02.Alpha_',
+                'count' : 70,
+                'auto'  : true
+            });
 
+            // media query event handler
+            if (matchMedia) {
+                const mq = window.matchMedia("(min-width: 1025px)");
+                mq.addListener(WidthChange);
+                WidthChange(mq);
+            }
+
+            currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
+            navigateToBlock(currentBlockIndex);
+
+            function clearLoadedState(){
+                Array.prototype.forEach.call(allBlocks, function(block){
+                    block.classList.remove("loaded");
+                });
+            }
+
+            // media query change
+            function WidthChange(mq) {
+                if (mq.matches) {
+                    // window width is at least 1025px
+                    mainElem.classList.add("stop-scrolling");
+
+                    clearLoadedState();
+
+                    // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                    document.onkeydown = customScrollKeysHandler;
+                    // handler for wheel event 
+                    addWheelListener( window, customScrollWheelHandler );
+
+                    window.ontouchmove = customScrollTouchHandler;
+                    
+                    window.onhashchange = hashUrlChangeHandler;
+                } else {
+                // window width is less than 1025px
+                }
+            }
+
+            function getBlockIndexByHashtag(hashtag) {
+                let result = currentBlockIndex;
+                let blockIndex = navLinks.indexOf(hashtag);
+                if (blockIndex != -1) {
+                    result = blockIndex;
+                }
+                return result;
+            }
+
+            function playMenuUnderlineAnimation(currentBlockId) {
+                let currentNavElement = document.querySelector("li." + currentBlockId);
+                //let prevNavElement = document.querySelector("li." + prevBlockId);
+            
+                if (currentNavElement) {
+                    let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
+                    movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
+                    movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
+                } else {
+                    movingMenuUnderline.style.width = 0;
+                }
+                
+                /*if (prevNavElement) {
+                    prevNavElement.classList.remove("active");
+                }
+                
+                if (currentNavElement) {
+                    currentNavElement.classList.add("active");
+                }*/
+            }
+
+            function navigateToBlockByHashtag(hashtag) {
+                currentBlockIndex = getBlockIndexByHashtag(hashtag);
+                navigateToBlock(currentBlockIndex);
+            }
+
+            function displayBlock(currentBlockId) {
                 clearLoadedState();
 
-                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
-                document.onkeydown = customScrollKeysHandler;
-                // handler for wheel event 
-                addWheelListener(window, customScrollWheelHandler);
+                let elem = document.getElementById(currentBlockId);
 
-                window.ontouchmove = customScrollTouchHandler;
+                mainElem.style.height = elem.scrollHeight + "px";
 
-                window.onhashchange = hashUrlChangeHandler;
-            } else {
-                // window width is less than 1025px
-            }
-        }
+                elem.classList.add("loaded");
+                // animation part
 
-        function getBlockIndexByHashtag(hashtag) {
-            let result = currentBlockIndex;
-            let blockIndex = navLinks.indexOf(hashtag);
-            if (blockIndex != -1) {
-                result = blockIndex;
-            }
-            return result;
-        }
+                playMenuUnderlineAnimation(currentBlockId);
 
-        function playMenuUnderlineAnimation(currentBlockId) {
-            let currentNavElement = document.querySelector("li." + currentBlockId);
-            //let prevNavElement = document.querySelector("li." + prevBlockId);
+                prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
+                // remove loaded from previous block
+                let prevBlockId = navLinks[prevBlockIndex];
 
-            if (currentNavElement) {
-                let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
-                movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
-                movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
-            } else {
-                movingMenuUnderline.style.width = 0;
+                executePageSpecificScript(currentBlockId);
             }
 
-            /*if (prevNavElement) {
-                prevNavElement.classList.remove("active");
-            }
-            
-            if (currentNavElement) {
-                currentNavElement.classList.add("active");
-            }*/
-        }
-
-        function navigateToBlockByHashtag(hashtag) {
-            currentBlockIndex = getBlockIndexByHashtag(hashtag);
-            navigateToBlock(currentBlockIndex);
-        }
-
-        function displayBlock(currentBlockId) {
-            clearLoadedState();
-
-            let elem = document.getElementById(currentBlockId);
-
-            mainElem.style.height = elem.scrollHeight + "px";
-
-            elem.classList.add("loaded");
-            // animation part
-
-            playMenuUnderlineAnimation(currentBlockId);
-
-            prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
-            // remove loaded from previous block
-            let prevBlockId = navLinks[prevBlockIndex];
-
-            let prevElement = document.getElementById(prevBlockId);
-            prevElement.classList.remove("loaded");
-
-            executePageSpecificScript(currentBlockId);
-        }
-
-        function getBlockId(blockIndex) {
-             return navLinks[blockIndex];
-        }
-
-        function navigateToBlock(blockIndex) {
-            if (currentBlockIndex == prevBlockIndex) {
-                console.log(`trying to open already opened page index: ${currentBlockIndex} `);
-                return;
+            function getBlockId(blockIndex) {
+                return navLinks[blockIndex];
             }
 
-            let currentBlockId = getBlockId(currentBlockIndex);
-
-            window.location.href = baseHashUrl + currentBlockId;
-
-        }
-
-        function scrollToNextBlock() {
-            if (currentBlockIndex == navLinks.length - 1) {
-                return;
-            }
-            prevBlockIndex = currentBlockIndex;
-            currentBlockIndex += 1;
-            navigateToBlock(currentBlockIndex);
-        }
-        function scrollToPrevBlock() {
-            if (currentBlockIndex == 0) {
-                return;
-            }
-            prevBlockIndex = currentBlockIndex;
-            currentBlockIndex -= 1;
-            navigateToBlock(currentBlockIndex);
-        }
-
-        function customScrollKeysHandler(e) {
-            if (keysPrev[e.keyCode]) {
-                e.preventDefault();
-                scrollToPrevBlock();
-            } else if (keysNext[e.keyCode]) {
-                e.preventDefault();
-                scrollToNextBlock();
-            }
-        }
-
-        function customScrollWheelHandler(e) {
-
-            let targetElement = document.getElementById(currentHashtag);
-            let contentElem = targetElement.querySelector(".content");
-
-            if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
-                console.log(`== scrolled to bottom ==`);
-                //limit handling rate to prevent scrolling trough all pages
-                if (Date.now() - lastScrollTime > 1000) {
-                    if (e.deltaY > 0) {
-                        scrollToNextBlock();
-                    } else if (e.deltaY < 0) {
-                        scrollToPrevBlock();
-                    }
-
-                    lastScrollTime = Date.now();
+            function navigateToBlock(blockIndex) {
+                if (currentBlockIndex == prevBlockIndex) {
+                    console.log(`trying to open already opened page index: ${currentBlockIndex} `);
+                    return;
                 }
-            } else {
-                console.log(`== just scroll ==`);
+
+                let currentBlockId = getBlockId(currentBlockIndex);
+
+                window.location.href = baseHashUrl + currentBlockId;
 
             }
 
-        }
-
-        function customScrollTouchHandler(e) {
-            // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
-        }
-
-        // called when user navigates back or clicks on link
-        function hashUrlChangeHandler(event) {
-            console.log(`hash change called`);
-
-            if (event.newURL != event.oldURL) {
-                console.log(`hash changed`);
-                let newUrlId = window.location.hash.substr(1);
-                let oldUrlId = event.oldURL.split('#')[1];
-                //let newBlockIndex = getBlockIndexByHashtag(newUrlId);
-                prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
-                console.log(`prev block: ${oldUrlId}, new block: ${newUrlId}`);
-                //navigateToBlockByHashtag(newUrlId);
-
-                displayBlock(newUrlId);
+                
+            function scrollToNextBlock() {
+                if (currentBlockIndex == navLinks.length - 1) {
+                    return;
+                }
+                prevBlockIndex = currentBlockIndex;
+                currentBlockIndex += 1;
+                navigateToBlock(currentBlockIndex);
             }
-        }
+            function scrollToPrevBlock() {
+                if (currentBlockIndex == 0) {
+                    return;
+                }
+                prevBlockIndex = currentBlockIndex;
+                currentBlockIndex -= 1;
+                navigateToBlock(currentBlockIndex);
+            }
+
+            function customScrollKeysHandler(e) {
+                if (keysPrev[e.keyCode]) {
+                    e.preventDefault();
+                    scrollToPrevBlock();
+                } else if (keysNext[e.keyCode]) {
+                    e.preventDefault();
+                    scrollToNextBlock();
+                }
+            }
+
+            function customScrollWheelHandler(e) {
+                let targetElement = document.getElementById(currentHashtag);
+                let contentElem = targetElement.querySelector(".content");
+
+                if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
+                    console.log(`== scrolled to bottom ==`);
+                    //limit handling rate to prevent scrolling trough all pages
+                    if (Date.now() - lastScrollTime > 1000) {
+                        if (e.deltaY > 0) {
+                            scrollToNextBlock();
+                        } else if (e.deltaY < 0) {
+                            scrollToPrevBlock();
+                        }
+
+                        lastScrollTime = Date.now();
+                    }
+                } else {
+                    console.log(`== just scroll ==`);
+
+                }
+            }
+
+            function customScrollTouchHandler(e) {
+                // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
+            }
+
+            // called when user navigates back or clicks on link
+            function hashUrlChangeHandler(event) {
+                if (event.newURL != event.oldURL) {
+                    console.log(`hash changed`);
+                    let newUrlId = window.location.hash.substr(1);
+                    let oldUrlId = event.oldURL.split('#')[1];
+                    //let newBlockIndex = getBlockIndexByHashtag(newUrlId);
+                    prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
+                    console.log(`prev block: ${oldUrlId}, new block: ${newUrlId}`);
+                    //navigateToBlockByHashtag(newUrlId);
+
+                    displayBlock(newUrlId);
+                }
+
+            }    
 
         /* =========================================
             3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS
           ========================================== */
 
-        function executePageSpecificScript(blockId) {
+            function executePageSpecificScript(blockId) {
 
-            switch (blockId) {
-                case "main":
-                    // if ($object.length == 0) {
-                    //     $object = $('.object-main');
-                    // }
-                    //$object.rotate3d.animateOpen();
-                    $object.animateOpen(function () {
-                        setTimeout($object.animateClose, 300);
-                    });
-                    break;
-                case "advantages":
-                    // if ($scheme.length == 0) {
-                    //     $scheme = $('.object-scheme');
-                    // }
-                    $scheme.animateOpen(function () {
-                        console.log("andvantages animation ended");
-                    });
-                    break;
-                case "assortment":
-                    break;
-                default:
-                    break;
+                switch (blockId) {
+                    case "main":
+                        // if ($object.length == 0) {
+                        //     $object = $('.object-main');
+                        // }
+                        //$object.rotate3d.animateOpen();
+                        $object.animateOpen(function () {
+                            setTimeout($object.animateClose, 300);
+                        });
+                        break;
+                    case "advantages":
+                        // if ($scheme.length == 0) {
+                        //     $scheme = $('.object-scheme');
+                        // }
+                        $scheme.animateOpen(function () {
+                            console.log("andvantages animation ended");
+                        });
+                        break;
+                    case "assortment":
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-
     });
 
 

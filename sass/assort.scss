@@ -164,6 +164,10 @@
     -webkit-filter: blur(2px);
     filter: blur(2px);
 
+    .slick-slider-inner {
+        cursor: default;
+    }
+
     img {
         max-width: 100%;
         display: inline;
@@ -186,7 +190,10 @@
         opacity: 1;
         -webkit-filter: blur(0px);
         filter: blur(0px);
-        
+
+        .slick-slider-inner {
+            cursor: pointer;
+        }
     }
 }
 
@@ -356,7 +363,7 @@ $sliderAnimTime: 0.30s;
         width: 130px;
         height: 130px;
         left: 50%;
-        top: -85px;
+        top: -70px;
 
         i {
             @include vertCenter;
@@ -624,7 +631,7 @@ div.assort-desc-item {
     left: 0;
     right: 0;
 
-    @include animation(fadeOut, 2s, linear);
+    @include animation(fadeOut, 0.8s, linear);
     display: none;
 
     p {
@@ -636,17 +643,8 @@ div.assort-desc-item {
     }
 
     &.show {
-        @include animation(fadeIn, 1.3s, linear);
+        @include animation(fadeIn, 1s, linear);
         display: block;
-
-        .title-rt {
-
-            section {
-                @include transform(translateY(0));
-                @include delay(0.2s);
-                opacity: 1;
-            }
-        }
     }
 }
 
@@ -655,15 +653,74 @@ div.assort-desc-item {
     overflow: hidden;
 
     section {
-        @include transition(all, 0.4s, $easing);
-        @include transform(translateY(33px));
-        @include delay(0s);
-        opacity: 0;
+        @include animation(ttl-rotate-out, 0.5s, $easing);
+        @include a-delay(0s);
         white-space: nowrap;
+    }
+
+    .show & {
+
+        section {
+            @include animation(ttl-rotate-in, 0.5s, $easing);
+        }
     }
 }
 
+@keyframes ttl-rotate-in {
+    0% {
+        opacity: 0;
+        @include transform(translateY(33px));
+    }
+    50% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+}
 
+@keyframes ttl-rotate-out {
+    0% {
+        opacity: 1;
+        @include transform(translateY(0px));
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 0;
+        @include transform(translateY(-33px));
+    }
+}
+
+@-webkit-keyframes ttl-rotate-in {
+    0% {
+        opacity: 0;
+        @include transform(translateY(33px));
+    }
+    50% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+}
+
+@-webkit-keyframes ttl-rotate-out {
+    0% {
+        opacity: 1;
+        @include transform(translateY(0px));
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 0;
+        @include transform(translateY(-33px));
+    }
+}
 
 ul.desc-list {
     padding-bottom: 15px;
@@ -830,18 +887,29 @@ ul.desc-list {
         height: auto;
     }
 
-    .assort-column div.filter-wrap, div.assort-desc-item {
-        position: static;
-    }
-
     div.assort-desc-item {
         @include transform(translateY(0));
+        position: static;
         top: auto;
     }
 
     ul.desc-list li {
         margin-bottom: 12px;
         padding-top: 13px;
+    }
+
+    .assort-column div.filter-wrap {
+        position: relative;
+        bottom: 0;
+    }
+
+    .filter-item {
+        padding: 15px 10px 15px 20px;
+
+        .title-3 {
+            font-size: 17px;    
+            line-height: 22px;
+        }
     }
 
     .assort-slider .slick-current .slick-slider-inner {
@@ -857,7 +925,7 @@ ul.desc-list {
     }
 }
 
-@media (min-width: 768px) and (max-height: 660px) {
+@media (min-width: 768px) and (max-height: 620px) {
 
     .page-assort .figures {
         display: none;
@@ -916,19 +984,30 @@ ul.desc-list {
         right: 93px;
     }
 
-    .assort-slider-wrap .slick-arrow.slick-prev {
-        right: 163px;
-        bottom: 40px; 
-    }
+    .assort-slider-wrap {
+        padding-left: 0;
+        
+        .slick-arrow.slick-prev {
+            right: 163px;
+            bottom: 40px; 
+        }
 
-    .assort-slider-wrap .slick-arrow.slick-next {
-        right: 25px;
-        bottom: 40px; 
+        .slick-arrow.slick-next {
+            right: 25px;
+            bottom: 40px;
+        }
     }
 
     ul.desc-list li {
         margin-bottom: 12px;
         padding-top: 13px;
+    }
+
+    @include land {
+        
+        .assort-slider-wrap{
+            width: 65%;
+        }
     }
 
     @include port { // Portrait
