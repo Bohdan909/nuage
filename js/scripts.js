@@ -3,9 +3,9 @@ document.documentElement.className = document.documentElement.className.replace(
 (function($){
     $(document).ready(function() {
         
-        setTimeout(function(){
-            document.querySelector(".page").classList.add("loaded");
-        }, 500);
+        // setTimeout(function(){
+        //     document.querySelector(".page").classList.add("loaded");
+        // }, 500);
 
         /* ==============
           Consultation 
@@ -297,7 +297,7 @@ document.documentElement.className = document.documentElement.className.replace(
         ================================ */
 
         if (document.querySelector(".main").classList.contains("page-scroll")){
-
+            console.log(`=== page loaded ===`);
             let mainElem = document.querySelector(".main");
             
             // left: 37, up: 38, right: 39, down: 40,
@@ -320,8 +320,10 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // initialize variable by hashtag from url if it present
             let currentHashtag = window.location.hash.substr(1);
-            
-            
+            if (currentHashtag.length == 0) {
+                currentHashtag = navLinks[0];
+            }
+
             let currentBlockIndex = 0;
             let prevBlockIndex = -1;
 
@@ -344,15 +346,10 @@ document.documentElement.className = document.documentElement.className.replace(
                 'auto'  : true
             });
 
-            // media query event handler
-            if (matchMedia) {
-                const mq = window.matchMedia("(min-width: 1025px)");
-                mq.addListener(WidthChange);
-                WidthChange(mq);
-            }
-
+            clearLoadedState();
+            
             currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
-            navigateToBlock(currentBlockIndex);
+            displayBlock(getBlockId(currentBlockIndex));
 
             function clearLoadedState(){
                 Array.prototype.forEach.call(allBlocks, function(block){
@@ -360,26 +357,29 @@ document.documentElement.className = document.documentElement.className.replace(
                 });
             }
 
+            // media query event handler
+            if (window.matchMedia) {
+                const mq = window.matchMedia("(min-width: 1025px)");
+                mq.addListener(WidthChange);
+                WidthChange(mq);
+            }
+            
+
             // media query change
             function WidthChange(mq) {
-                
-                    // window width is at least 1025px
-                    mainElem.classList.add("stop-scrolling");
+                // window width is at least 1025px
+                mainElem.classList.add("stop-scrolling");
 
-                    clearLoadedState();
+                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                document.onkeydown = customScrollKeysHandler;
+                window.ontouchmove = customScrollTouchHandler;
+                window.onhashchange = hashUrlChangeHandler;
 
-                    // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
-                    document.onkeydown = customScrollKeysHandler;
-
-                    window.ontouchmove = customScrollTouchHandler;
-                    
-                    window.onhashchange = hashUrlChangeHandler;
-
+                // add custom scroll only for devices with screen more than 1025px
                 if (mq.matches) {
-                    // handler for wheel event 
                     addWheelListener( window, customScrollWheelHandler );
                 } else {
-                // window width is less than 1025px
+                    // window width is less than 1025px
                 }
             }
 
@@ -419,19 +419,17 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function displayBlock(currentBlockId) {
-                clearLoadedState();
-
+                
                 let elem = document.getElementById(currentBlockId);
 
                 mainElem.style.height = elem.scrollHeight + "px";
 
                 elem.classList.add("loaded");
-                // animation part
 
+                // animation part
                 playMenuUnderlineAnimation(currentBlockId);
 
                 prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
-                // remove loaded from previous block
                 let prevBlockId = navLinks[prevBlockIndex];
 
                 executePageSpecificScript(currentBlockId);
@@ -442,15 +440,8 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function navigateToBlock(blockIndex) {
-                if (currentBlockIndex == prevBlockIndex) {
-                    console.log(`trying to open already opened page index: ${currentBlockIndex} `);
-                    return;
-                }
-
-                let currentBlockId = getBlockId(currentBlockIndex);
-
+                let currentBlockId = getBlockId(blockIndex);
                 window.location.href = baseHashUrl + currentBlockId;
-
             }
 
                 
@@ -510,13 +501,13 @@ document.documentElement.className = document.documentElement.className.replace(
             // called when user navigates back or clicks on link
             function hashUrlChangeHandler(event) {
                 if (event.newURL != event.oldURL) {
+                    clearLoadedState();
                     console.log(`hash changed`);
                     let newUrlId = window.location.hash.substr(1);
                     let oldUrlId = event.oldURL.split('#')[1];
                     //let newBlockIndex = getBlockIndexByHashtag(newUrlId);
                     prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
                     console.log(`prev block: ${oldUrlId}, new block: ${newUrlId}`);
-                    //navigateToBlockByHashtag(newUrlId);
 
                     displayBlock(newUrlId);
                 }
