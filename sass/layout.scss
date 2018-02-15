@@ -511,7 +511,7 @@ body {
 
     .page {
         position: absolute;
-        z-index: 1;
+        z-index: -1;
         height: auto;
         /* overflow: hidden; */
         left: 0;
@@ -521,6 +521,7 @@ body {
     }
     .page.loaded {
         visibility: visible;
+        z-index: 1;
     }
 
 }
