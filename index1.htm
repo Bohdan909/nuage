@@ -1117,7 +1117,13 @@
 					<div class="video-calibrate">
 						<!-- Video -->
 						<div class="mission-video-content">
-							<div class="mission-video" data-vide-options="autoplay: false" data-vide-bg="mp4: video/video.mp4"></div>
+							<div class="mission-video" data-vide-options="autoplay: false" data-vide-bg="mp4: video/video.mp4">
+								<div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%;">
+									<video loop="true" muted="" autoplay="true" controls="false">
+										<source src="video/video.mp4" type="video/mp4">
+									</video>
+								</div>
+							</div>
 							<div class="mission-video-close"></div>
 						</div>
 						<div class="mission-video-play">						
@@ -1988,7 +1994,7 @@
 		<script src="./js/rotate.js" defer></script>
 		<script src="./js/slick.js" defer></script>
 		<script src="./js/scripts.js" defer></script>
-		<script src="./js/jquery.vide.js"></script>
+		<!-- <script src="./js/jquery.vide.js"></script> -->
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp" defer></script>
 		<script src="./js/map.js" defer></script>
 
@@ -2256,24 +2262,27 @@
 				
 				videoWrap.addEventListener("mouseover", function(){
 					//window.scrollTo(0, 0);
-
-					if (!videoWrap.classList.contains("open") && !touch){
-						let isPlaying = video.currentTime > 0 && !video.paused && !video.ended 
-							&& video.readyState > 2;
-							
-						if (!isPlaying) {
-							timer = setTimeout(videoOpen, 600);
-						}
+					console.log(`mouse over video`);
+					if (!videoWrap.classList.contains("open")){
+						timer = setTimeout(videoOpen, 600);
 					}
 
 				});
 
-				videoContent.addEventListener("mousemove", function (event) {
+				videoWrap.addEventListener("mousemove", function (event) {
 					showSiteControls(function(){
 						setTimeout(hideSiteControls, 1500);
 					});
 
 				});
+
+				videoWrap.addEventListener("touchstart", function (event) {
+					console.log(`video touched`);
+					showSiteControls(function(){
+						setTimeout(hideSiteControls, 1500);
+					});
+
+				}, false);
 
 				function hideSiteHeader() {
 					siteHeader.style.opacity = "0";
@@ -2311,11 +2320,12 @@
 				});
 
 				videoCloseBtn.addEventListener("click", function(){
+					console.log(`close button clicked`);
 					setTimeout(videoClose, 200);
 				});
 				
 
-				setCirclePos(radius);
+				//setCirclePos(radius);
 
 				// function scrollDisable(){
 				// 	document.addEventListener('touchstart', this.touchstart);
@@ -2346,7 +2356,7 @@
 				function videoOpen(){
 					console.log("video Open");
 					hideSiteHeader();
-					setCirclePos("2000px");
+					//setCirclePos("2000px");
 					video.play();
 					
 					videoWrap.classList.add("open");
@@ -2355,7 +2365,7 @@
 				function videoClose(){
 					console.log("video Close");
 					showSiteHeader();
-					setCirclePos(radius);
+					//setCirclePos(radius);
 					videoWrap.classList.remove("open");
 					setTimeout(function(){ video.pause() }, 500);
 				}

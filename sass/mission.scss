@@ -65,13 +65,7 @@
         line-height: 36px;
     }
 
-    .strip {
-        @include rot(-57deg);
-        right: -75px;
-        width: 120%;
-        height: 122px;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%);
-    }
+    
 }
 
 div.mission-text {
@@ -441,13 +435,13 @@ div.mission-text-slider {
     -webkit-transition: width 0.6s $easing, height 0.6s $easing;
     -ms-transition: width 0.6s $easing, height 0.6s $easing;
     transition: width 0.6s $easing, height 0.6s $easing;
-    position: relative;
-    top: 50%;
-    margin: auto;
-    box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-    -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-    //border: 1px solid red;
-    overflow: hidden;
+    // position: relative;
+    // top: 50%;
+    // margin: auto;
+    // box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
+    // -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
+    // //border: 1px solid red;
+    // overflow: hidden;
     position: absolute;
     top: -100%;
     bottom: -100%;
@@ -463,6 +457,8 @@ div.mission-text-slider {
 
     &.open {
         @include transition(all, 4.0s, $easing);
+        width: 2000px;
+        height: 2000px;
 
         .mission-video-close:hover {
             opacity: 1;
@@ -513,6 +509,18 @@ div.mission-text-slider {
     video {
         visibility: visible !important;
         opacity: 1 !important;
+        margin: auto;
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+        opacity: 0;
+        width: auto;
+        height: auto;
+        min-height: 100%;
+		min-width: 100%;
     }
 }
 
@@ -540,15 +548,12 @@ div.mission-text-slider {
     background:  none;
 
     .strip {
+        @include rot(-57deg);
         top: 52%;
-        right: 0px;
+        right: 0;
         width: 60%;
         height: 122px;
         background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%);
-        -webkit-transform: rotate(-57deg);
-        -moz-transform: rotate(-57deg);
-        -o-transform: rotate(-57deg);
-        transform: rotate(-57deg);
     }
 }
 
@@ -564,6 +569,11 @@ div.mission-text-slider {
 
     .video-calibrate {
         @include transform(translateY(0));
+        &.open {
+            @include transition(all, 4.0s, $easing);
+            width: 960px;
+            height: 960px;
+        }
     }   
 
     @include land {
@@ -571,12 +581,26 @@ div.mission-text-slider {
             height: 480px;
         }
     }
+    
+    .mission-column.to-right {
+        min-height: 330px;
+    }
+    .video-calibrate {
+        left: -100%;
+    }
+    .mission-video-content {
+        margin-left: 0;
+    }
 }
 
 @include mobile-min {
 
     .video-calibrate {
-        left: -12px;
+        left: -100%;
+    }
+
+    .mission-video-content {
+        margin-left: 0;
     }
 
     // .mission-video-wrap {
@@ -835,6 +859,10 @@ div.mission-text-slider {
 
     div.mission-text-slider p {
         height: 80px;
+    }
+
+    .strip {
+
     }
 }
 
