@@ -216,14 +216,17 @@ document.documentElement.className = document.documentElement.className.replace(
 
             animateTabLine(event.currentTarget);
 
-            // clear panes state
-            let contentPanes = document.querySelectorAll(".tab-pane");
-            Array.prototype.forEach.call(contentPanes, function (pane) {
-                pane.classList.remove("active");
-            });
+            
 
             let activePaneId = event.target.getAttribute("data-tab");
             let activePane = document.getElementById(activePaneId);
+
+            // clear panes state
+            let panesParent = activePane.parentElement;
+            let contentPanes = panesParent.querySelectorAll(".tab-pane");
+            Array.prototype.forEach.call(contentPanes, function (pane) {
+                pane.classList.remove("active");
+            });
 
             activePane.classList.add("active");
 
