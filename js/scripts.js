@@ -346,6 +346,14 @@ document.documentElement.className = document.documentElement.className.replace(
                 'auto'  : true
             });
 
+            let mq = null;
+            // media query event handler
+            if (window.matchMedia) {
+                mq = window.matchMedia("(min-width: 1025px)");
+                mq.addListener(WidthChange);
+                WidthChange(mq);
+            }
+
             clearLoadedState();
             
             currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
@@ -356,14 +364,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     block.classList.remove("loaded");
                 });
             }
-
-            // media query event handler
-            if (window.matchMedia) {
-                const mq = window.matchMedia("(min-width: 1025px)");
-                mq.addListener(WidthChange);
-                WidthChange(mq);
-            }
-            
 
             // media query change
             function WidthChange(mq) {
@@ -422,8 +422,10 @@ document.documentElement.className = document.documentElement.className.replace(
                 
                 let elem = document.getElementById(currentBlockId);
 
-                mainElem.style.height = elem.scrollHeight + "px";
-
+                if (!mq.matches) {
+                    mainElem.style.height = elem.scrollHeight + "px";
+                }
+                
                 elem.classList.add("loaded");
 
                 // animation part
@@ -477,7 +479,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 let contentElem = targetElement.querySelector(".content");
 
                 //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
-                    console.log(`== scrolled to bottom ==`);
+                    //console.log(`== scrolled to bottom ==`);
                     //limit handling rate to prevent scrolling trough all pages
                     if (Date.now() - lastScrollTime > 1000) {
                         if (e.deltaY > 0) {
