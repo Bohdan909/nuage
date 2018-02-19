@@ -216,8 +216,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
             animateTabLine(event.currentTarget);
 
-            
-
             let activePaneId = event.target.getAttribute("data-tab");
             let activePane = document.getElementById(activePaneId);
 
@@ -425,9 +423,9 @@ document.documentElement.className = document.documentElement.className.replace(
                 
                 let elem = document.getElementById(currentBlockId);
 
-                if (!mq.matches) {
-                    mainElem.style.height = elem.scrollHeight + "px";
-                }
+                // if (!mq.matches) {
+                //     mainElem.style.height = elem.scrollHeight + "px";
+                // }
                 
                 elem.classList.add("loaded");
 

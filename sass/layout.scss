@@ -505,13 +505,14 @@ body {
 }
 
 .stop-scrolling {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     width: 100vw;
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
 
     .page {
-        position: absolute;
+        position: relative;
         z-index: -1;
         height: auto;
         /* overflow: hidden; */
@@ -519,8 +520,10 @@ body {
         top: 0;
         width: 100%;
         visibility: hidden;
+        display: none;
     }
     .page.loaded {
+        display: block;
         visibility: visible;
         z-index: 1;
     }
