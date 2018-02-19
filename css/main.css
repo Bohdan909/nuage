@@ -1091,20 +1091,22 @@ body {
   overflow: hidden; }
 
 .stop-scrolling {
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   width: 100vw;
-  overflow: hidden;
   position: relative; }
   .stop-scrolling .page {
-    position: absolute;
+    position: relative;
     z-index: -1;
     height: auto;
     /* overflow: hidden; */
     left: 0;
     top: 0;
     width: 100%;
-    visibility: hidden; }
+    visibility: hidden;
+    display: none; }
   .stop-scrolling .page.loaded {
+    display: block;
     visibility: visible;
     z-index: 1; }
 
@@ -6968,8 +6970,8 @@ div.mission-text-slider {
     -webkit-transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
     -ms-transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
     transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
-    width: 2000px;
-    height: 2000px; }
+    width: 2880px;
+    height: 2880px; }
     .video-calibrate.open .mission-video-close:hover {
       opacity: 1; }
     .video-calibrate.open .mission-video-play {
