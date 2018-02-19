@@ -457,8 +457,8 @@ div.mission-text-slider {
 
     &.open {
         @include transition(all, 4.0s, $easing);
-        width: 2000px;
-        height: 2000px;
+        width: 2880px;
+        height: 2880px;
 
         .mission-video-close:hover {
             opacity: 1;
