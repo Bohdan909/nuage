@@ -172,7 +172,6 @@
         // Open
         base.animateOpen = function(callback){
 			if (!base.animateOpenEnd || !base.animateCloseEnd) {
-				console.log(`play open anim later`);
 				setTimeout( base.animateOpen, 2000);
 				return;
 			}

@@ -9,13 +9,13 @@ function initialize() {
 
     var point = new google.maps.LatLng(55.819515, 37.490370);
 
-    var image = new google.maps.MarkerImage(
-        'images/marker.png',
-        new google.maps.Size(34,53)
-    );
+    // var image = new google.maps.MarkerImage(
+    //     'images/marker.png',
+    //     new google.maps.Size(34,53)
+    // );
 
     var marker = new google.maps.Marker({
-        icon: image,
+        //icon: image,
         draggable: false,
         raiseOnDrag: false,
         map: map,

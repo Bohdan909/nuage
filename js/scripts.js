@@ -572,7 +572,6 @@ document.documentElement.className = document.documentElement.className.replace(
                         });
                         break;
                     case "assortment":
-                        console.log($slider);
                         $slider.slick('setPosition');
                         
                         // Setup Classes
@@ -581,14 +580,19 @@ document.documentElement.className = document.documentElement.className.replace(
                         setTimeout(function(){
                             $(".assort-bg-list").addClass("bg-1");
                         }, 1000);
-        
-                        $slide.find(".slick-slider-inner").on("click", function(e){
-                            if (!$(this).parent().hasClass("slick-current")) { 
-                                e.preventDefault();
-                            }		
-                        });
                         
-        
+                        $slider.on( "click", ".slick-slider-inner", function( e ) {
+                            if (!$(this).parent().hasClass("slick-current") || $(this).parent().hasClass("slick-cloned")) { 
+                                e.preventDefault();
+                                var currentSlideIndex = $slider.slick("slickCurrentSlide");
+                                if (currentSlideIndex == 5) {
+                                    $slider.slick("slickGoTo", 0, true);
+                                } else {
+                                    $slider.slick("slickNext");
+                                }                        
+                            }	
+                        });
+                                
                         // Loader		
                         $(".slick-arrow").on("click", function(event){
                             let target = $(event.target);
