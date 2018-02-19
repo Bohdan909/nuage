@@ -569,6 +569,7 @@ div.mission-text-slider {
 
     .video-calibrate {
         @include transform(translateY(0));
+
         &.open {
             @include transition(all, 4.0s, $easing);
             width: 960px;
@@ -875,5 +876,25 @@ div.mission-text-slider {
 
     .mission-tabs li {
         margin-right: 10px;
+    }
+}
+
+@include desktop-wide {
+    .video-calibrate {
+        &.open {
+            @include transition(all, 4.0s, $easing);
+            width: 3500px;
+            height: 3500px;
+        }
+    }
+}
+
+@include ultra-hd {
+    .video-calibrate {
+        &.open {
+            @include transition(all, 4.0s, $easing);
+            width: 4900px;
+            height: 4900px;
+        }
     }
 }

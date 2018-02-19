@@ -28,6 +28,8 @@ $mobile-width   : 767px;
 $tablet-width   : 1024px;
 $laptop-width   : 1280px;
 $mid-width      : 1550px;
+$desk-wide-width: 2560px;
+$ultra-hd-width : 3840px;
 
 // Mixins
 @mixin mobile {
@@ -84,6 +86,17 @@ $mid-width      : 1550px;
     }
 }
 
+@mixin desktop-wide {
+    @media screen and (min-width: 1920px) and (max-width: #{$desk-wide-width}) {
+        @content;
+    }
+}
+
+@mixin ultra-hd {
+    @media screen and (min-width: #{$desk-wide-width}) and (max-width: #{$ultra-hd-width}) {
+        @content;
+    }
+}
 
 
 // Socket
