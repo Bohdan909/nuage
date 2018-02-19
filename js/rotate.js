@@ -160,18 +160,10 @@
 
 
 		// HOVER
-		var animateOpenEnd  = true;
-		var animateCloseEnd = true;
+		base.animateOpenEnd  = true;
+		base.animateCloseEnd = true;
 
-        $(".object-hover").on("mouseover", function(){
-            if (animateOpenEnd && animateCloseEnd) animateOpen();
-            animateOpenEnd = false;
-        }); 
-
-        $(".object-hover").on("mouseleave", function(){
-            if (animateOpenEnd && animateCloseEnd) animateClose();
-            animateCloseEnd = false;
-        }); 
+        
 
 
         
@@ -179,6 +171,12 @@
 
         // Open
         base.animateOpen = function(callback){
+			if (!base.animateOpenEnd || !base.animateCloseEnd) {
+				console.log(`play open anim later`);
+				setTimeout( base.animateOpen, 2000);
+				return;
+			}
+			base.animateOpenEnd = false;
             let i = 0;
 
             function change(){
@@ -187,7 +185,7 @@
 
                 if (i >= images.length){
                     clearInterval(timer);       
-                    animateOpenEnd = true;
+                    base.animateOpenEnd = true;
                     //if (!animateCloseEnd) animateClose();
 					//setTimeout(animateClose, 700);
 					if (callback) {
@@ -195,7 +193,7 @@
 					} 
                 }
 
-                console.log("Open: " + animateOpenEnd);
+                console.log("Open: " + base.animateOpenEnd);
             }       
 
 			var timer = setInterval(change, 40); 
@@ -205,6 +203,13 @@
 
         // Close
         base.animateClose = function(){
+			console.log(`close anim called`);
+			if (!base.animateOpenEnd || !base.animateCloseEnd){
+				console.log(`play close anim later`);
+				setTimeout( base.animateClose, 2000);
+				return;
+			} 
+			base.animateCloseEnd = false;
             let i = options.count;
 
             function change(){
@@ -213,10 +218,10 @@
 
                 if (i <= 0){
                     clearInterval(timer);       
-                    animateCloseEnd = true;
+                    base.animateCloseEnd = true;
                 }
 
-                console.log("Close: " + animateCloseEnd);
+                console.log("Close: " + base.animateCloseEnd);
             }       
 
             var timer = setInterval(change, 40); 
@@ -229,10 +234,27 @@
         // }
         
 
-        ////////// END MAIN OBJECT //////////
+		////////// END MAIN OBJECT //////////
+
+		if (base.hasClass("object-hover")) {
+			base.on("mouseover", function(){
+
+					base.animateOpen();
+
+				//base.animateOpenEnd = false;
+			}); 
+	
+			base.on("mouseleave", function(){
+				
+					base.animateClose();
+				
+				//base.animateCloseEnd = false;
+			}); 
+		}
+		
 		
 
-		$(this)
+		base
 			.append($('<img>').attr({'src': options.source + currentIndex + options.ext}))
 			.find('img')
 			.on('mousedown', function(e){

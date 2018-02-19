@@ -562,18 +562,11 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 switch (blockId) {
                     case "main":
-                        // if ($object.length == 0) {
-                        //     $object = $('.object-main');
-                        // }
-                        //$object.rotate3d.animateOpen();
                         $object.animateOpen(function () {
                             setTimeout($object.animateClose, 300);
                         });
                         break;
                     case "advantages":
-                        // if ($scheme.length == 0) {
-                        //     $scheme = $('.object-scheme');
-                        // }
                         $scheme.animateOpen(function () {
                             console.log("andvantages animation ended");
                         });
