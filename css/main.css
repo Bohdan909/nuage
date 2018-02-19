@@ -7190,4 +7190,20 @@ div.mission-text-slider {
   .mission-tabs li {
     margin-right: 10px; } }
 
+@media screen and (min-width: 1920px) and (max-width: 2560px) {
+  .video-calibrate.open {
+    -webkit-transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
+    -ms-transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
+    transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
+    width: 3500px;
+    height: 3500px; } }
+
+@media screen and (min-width: 2560px) and (max-width: 3840px) {
+  .video-calibrate.open {
+    -webkit-transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
+    -ms-transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
+    transition: all 4s cubic-bezier(0.11, 0, 0.45, 1);
+    width: 4900px;
+    height: 4900px; } }
+
 /*# sourceMappingURL=main.css.map */
