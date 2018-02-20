@@ -1126,7 +1126,10 @@
 							</div>
 							<div class="mission-video-close"></div>
 						</div>
-						<div class="mission-video-play">						
+						<div class="mission-video-play">
+							<div class="preview-image">
+								<img src="images/pre-loader.jpg" alt="">
+							</div>						
 							<div class="video-name">открыть видеоролик</div>
 							<div class="btn-play"></div>
 						</div>
@@ -2394,18 +2397,18 @@
 				// 	}
 				// }
 
-				function setCirclePos(rad){
-					topPosPlay  = videoCal.getBoundingClientRect().top + scrollTop;
-					leftPosPlay = videoCal.getBoundingClientRect().left;
-					topPos  = topPosPlay + 155;
-					leftPos = leftPosPlay + 155;
+				// function setCirclePos(rad){
+				// 	topPosPlay  = videoCal.getBoundingClientRect().top + scrollTop;
+				// 	leftPosPlay = videoCal.getBoundingClientRect().left;
+				// 	topPos  = topPosPlay + 155;
+				// 	leftPos = leftPosPlay + 155;
 	
-					// if (window.innerWidth < 359) rad = "140px";
-					videoWrap.style.width = rad;
-					videoWrap.style.height = rad;
-					//videoWrap.setAttribute("style","clip-path:circle("+rad+" at "+leftPos+"px"+" "+topPos+"px);");
-					//videoPlay.setAttribute("style","top:"+topPosPlay+"px; left:"+leftPosPlay+"px;");
-				}
+				// 	// if (window.innerWidth < 359) rad = "140px";
+				// 	videoWrap.style.width = rad;
+				// 	videoWrap.style.height = rad;
+				// 	//videoWrap.setAttribute("style","clip-path:circle("+rad+" at "+leftPos+"px"+" "+topPos+"px);");
+				// 	//videoPlay.setAttribute("style","top:"+topPosPlay+"px; left:"+leftPosPlay+"px;");
+				// }
 
 				function videoOpen(){
 					console.log("video Open");
@@ -2424,13 +2427,13 @@
 					setTimeout(function(){ video.pause() }, 500);
 				}
 
-				window.addEventListener("resize", function(){
+				// window.addEventListener("resize", function(){
 		
-					if (!videoWrap.classList.contains("open")){
-						setCirclePos(radius);
-						videoPlay.classList.remove("hide");
-					} 
-				});
+				// 	if (!videoWrap.classList.contains("open")){
+				// 		setCirclePos(radius);
+				// 		videoPlay.classList.remove("hide");
+				// 	} 
+				// });
 				
 				// Popup
 				let btnClose = document.querySelectorAll(".popup-close");

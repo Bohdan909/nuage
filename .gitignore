@@ -12,5 +12,7 @@ spritespin-master/
 
 .sass-cache/
 
-css/*.css.map
+.vscode/
 
+css/main.css.map
+css/main.css

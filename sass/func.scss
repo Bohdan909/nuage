@@ -300,15 +300,15 @@ $ultra-hd-width : 3840px;
 }   
 
 @mixin trans($time) {
-    transition: all $time ease-out; 
     -webkit-transition: all $time ease-out; 
     -ms-transition: all $time ease-out;
+    transition: all $time ease-out; 
 }
 
 .transDef {
-    transition: all 0.2s ease-out; 
     -webkit-transition: all 0.2s ease-out; 
     -ms-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out; 
 }   
 
 @mixin transform($exp){
@@ -318,9 +318,9 @@ $ultra-hd-width : 3840px;
 }  
 
 @mixin origin($h, $v) {
-    transform-origin: $h $v;
     -ms-transform-origin: $h $v;
     -webkit-transform-origin: $h $v;
+    transform-origin: $h $v;
 }
 
 // Delay
@@ -331,9 +331,9 @@ $ultra-hd-width : 3840px;
 }
 
 @mixin a-delay($time){
-    animation-delay: $time !important;
     -webkit-animation-delay: $time !important; 
     -ms-animation-delay: $time !important; 
+    animation-delay: $time !important;
 }
 
 // Border Boxing
@@ -360,14 +360,14 @@ $ultra-hd-width : 3840px;
 
 @mixin st($size, $color, $deg) {
     position: absolute; display: block; width: $size; height: $size;  border-left-color: $color; pointer-events: none; border-right: 1px solid $color; border-top: 1px solid $color; 
-    transform: rotate($deg); -webkit-transform: rotate($deg); -moz-transform:rotate($deg); -o-transform:rotate($deg);
+    -webkit-transform: rotate($deg); -moz-transform:rotate($deg); -o-transform:rotate($deg); transform: rotate($deg); 
 }
 
 // Scale
 @mixin scale($scale){
-    transform: scale($scale);
     -ms-transform: scale($scale);
     -webkit-transform: scale($scale);
+    transform: scale($scale);
 }
 
 // Flexbox
@@ -379,8 +379,8 @@ $ultra-hd-width : 3840px;
 
 @mixin flex($val) {
     @include display-flex;
-    justify-content: $val;
     -webkit-justify-content: $val;
+    justify-content: $val;
 }
 
 @mixin flex-vert($val) {
@@ -390,8 +390,8 @@ $ultra-hd-width : 3840px;
     -ms-flex-direction: column;
     flex-direction: column;
 
-    justify-content: $val;
     -webkit-justify-content: $val;
+    justify-content: $val;
 }
 
 @mixin flex-tbl {
@@ -407,8 +407,8 @@ $ultra-hd-width : 3840px;
 
 // Transform Bugs
 .vis-hidden {
-    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .not-blurry {
@@ -427,15 +427,15 @@ $ultra-hd-width : 3840px;
 
 // Animation
 @mixin animation($name, $duration, $func){
-    animation: $name $duration $func forwards;
     -ms-animation: $name $duration $func forwards;
     -webkit-animation: $name $duration $func forwards;
+    animation: $name $duration $func forwards;
 }
 
 @mixin animation-d($name, $duration, $func, $delay){
-    animation: $name $duration $func $delay;
     -ms-animation: $name $duration $func $delay;
     -webkit-animation: $name $duration $func $delay;
+    animation: $name $duration $func $delay;
 }
 
 // Center

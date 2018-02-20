@@ -423,40 +423,32 @@ div.mission-text-slider {
     }
 }
 
-.mission-video-play, .video-calibrate {
-    width: 310px;
-    height: 310px;
+.mission-video-play, 
+.video-calibrate {
+    width: 450px;
+    height: 450px;
 }
 
 .video-calibrate {
     @include transform(translateY(-50%));
     @include border-rad(50%);
-    //@include transition(all, 0.6s, $easing);
-    -webkit-transition: width 0.6s $easing, height 0.6s $easing;
-    -ms-transition: width 0.6s $easing, height 0.6s $easing;
-    transition: width 0.6s $easing, height 0.6s $easing;
-    // position: relative;
-    // top: 50%;
-    // margin: auto;
-    // box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-    // -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-    // //border: 1px solid red;
-    // overflow: hidden;
     position: absolute;
     top: -100%;
     bottom: -100%;
-    left: calc(-100% - 178px);
+    left: calc(-100% - 54px);
     right: -100%;
     margin: auto;
-    width: 310px;
-    height: 310px;
     overflow: hidden;
     z-index: 30;
     box-sizing: border-box;
     transform: translateX(356px) translateZ(0) scale(1);
+    -webkit-transition: width 0.6s $easing, height 0.6s $easing;
+    -ms-transition: width 0.6s $easing, height 0.6s $easing;
+    transition: width 0.6s $easing, height 0.6s $easing;
 
     &.open {
         @include transition(all, 4.0s, $easing);
+
         width: 2880px;
         height: 2880px;
 
@@ -465,13 +457,16 @@ div.mission-text-slider {
         }
 
         .mission-video-play {
+            @include transition(opacity, 0.2s, $easing);
+            
             opacity: 0;
         }
     }
 }
 
 .mission-video-play {
-    @include trans(0.1s);
+    @include trans(0.3s);
+    @include delay(0.6s);
     cursor: pointer;
     position: absolute;
     top: -50%;
@@ -491,7 +486,7 @@ div.mission-text-slider {
         left: 0;
         right: 0;
         text-align: center;
-        top: 204px;
+        top: calc(50% + 40px);
     }
 
     &.hide {
@@ -531,7 +526,7 @@ div.mission-text-slider {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    margin-left: -267px;
+    margin-left: -330px;
     margin-top: 0px;
     background-color: #585858;
     background-repeat: no-repeat;
@@ -554,6 +549,20 @@ div.mission-text-slider {
         width: 60%;
         height: 122px;
         background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%);
+    }
+}
+
+.preview-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        position: relative;
     }
 }
 
@@ -783,6 +792,8 @@ div.mission-text-slider {
 
 @include tablet {
 
+    
+
     .mission-text-slider-wrap section > span {
         margin-bottom: 2px;
     }
@@ -811,6 +822,22 @@ div.mission-text-slider {
                 margin-bottom: 10px;
             }
         }
+
+        .video-calibrate {
+            width: 450px;
+            height: 450px;
+            left: calc(-100% - 220px);
+    
+            &.open {
+                @include transition(all, 4.0s, $easing);
+                width: 2000px;
+                height: 2000px;
+            }
+        }
+    
+        .mission-video-content {
+            margin-left: -246px;
+        }
     }
 
     @include port {
@@ -826,6 +853,12 @@ div.mission-text-slider {
 }
 
 @include mobile {
+
+    .mission-video-play,
+    .video-calibrate {
+        width: 300px;
+        height: 300px;
+    }
 
     .video-block-wrap {
         @include transform(translate(0));
@@ -868,6 +901,11 @@ div.mission-text-slider {
 }
 
 @include mobile-min {
+    .mission-video-play,
+    .video-calibrate {
+        width: 300px;
+        height: 300px;
+    }
 
     .video-block-wrap {
         @include transform(scale(0.92));
@@ -880,21 +918,48 @@ div.mission-text-slider {
 }
 
 @include desktop-wide {
+    .mission-video-play,
     .video-calibrate {
+        width: 600px;
+        height: 600px;
+    }
+
+    .video-calibrate {
+        
+        left: calc(-100% + 200px);
+
         &.open {
             @include transition(all, 4.0s, $easing);
             width: 3500px;
             height: 3500px;
         }
     }
+
+    .mission-video-content {
+        margin-left: -456px;
+    }
 }
 
 @include ultra-hd {
+    .mission-video-play,
     .video-calibrate {
+        width: 600px;
+        height: 600px;
+    }
+
+    .video-calibrate {
+        width: 600px;
+        height: 600px;
+        left: calc(-100% + 200px);
+
         &.open {
             @include transition(all, 4.0s, $easing);
-            width: 4900px;
-            height: 4900px;
+            width: 5300px;
+            height: 5300px;
         }
+    }
+
+    .mission-video-content {
+        margin-left: -266px;
     }
 }
