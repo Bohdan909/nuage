@@ -3,9 +3,9 @@ document.documentElement.className = document.documentElement.className.replace(
 (function($){
     $(document).ready(function() {
         
-        setTimeout(function(){
-            document.querySelector(".page").classList.add("loaded");
-        }, 500);
+        // setTimeout(function(){
+        //     document.querySelector(".page").classList.add("loaded");
+        // }, 500);
 
         /* ==============
           Consultation 
@@ -216,14 +216,15 @@ document.documentElement.className = document.documentElement.className.replace(
 
             animateTabLine(event.currentTarget);
 
+            let activePaneId = event.target.getAttribute("data-tab");
+            let activePane = document.getElementById(activePaneId);
+
             // clear panes state
-            let contentPanes = document.querySelectorAll(".tab-pane");
+            let panesParent = activePane.parentElement;
+            let contentPanes = panesParent.querySelectorAll(".tab-pane");
             Array.prototype.forEach.call(contentPanes, function (pane) {
                 pane.classList.remove("active");
             });
-
-            let activePaneId = event.target.getAttribute("data-tab");
-            let activePane = document.getElementById(activePaneId);
 
             activePane.classList.add("active");
 
@@ -297,7 +298,7 @@ document.documentElement.className = document.documentElement.className.replace(
         ================================ */
 
         if (document.querySelector(".main").classList.contains("page-scroll")){
-
+            console.log(`=== page loaded ===`);
             let mainElem = document.querySelector(".main");
             
             // left: 37, up: 38, right: 39, down: 40,
@@ -320,8 +321,10 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // initialize variable by hashtag from url if it present
             let currentHashtag = window.location.hash.substr(1);
-            
-            
+            if (currentHashtag.length == 0) {
+                currentHashtag = navLinks[0];
+            }
+
             let currentBlockIndex = 0;
             let prevBlockIndex = -1;
 
@@ -329,6 +332,11 @@ document.documentElement.className = document.documentElement.className.replace(
             let menuListElem = document.querySelector(".menu ul");
             let allBlocks = document.querySelectorAll(".page");
             
+            //////////////////////////////
+            // ONE-TIME INITIALIZATIONS 
+            /// for single-page app   ////
+            
+
             var $object = $('.object-main');
             var $scheme = $('.object-scheme');
 
@@ -344,15 +352,50 @@ document.documentElement.className = document.documentElement.className.replace(
                 'auto'  : true
             });
 
+            var $slider = $(".assort-slider");
+            var $slide = $slider.find(".slide");
+            var $sliderLoader = $(".assort-slider-loader");
+            var $bgItem = $(".assort-bg-list li");
+            var $curSlideInd = $(".assort-slider-ind span");
+            var $slideItems = $(".assort-slider-ind i");
+            var items = $(".assort-slider > div").length;
+            var $cubes = $(".cubes-b");
+            
+            $slider.slick({
+                centerMode: false,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                speed: 500,
+                focusOnSelect: false,
+                swipe: false,
+                useTransform: true,
+                cssEase: 'cubic-bezier(0.11,0,0.45,1)',
+
+                responsive: [{
+                    breakpoint: 1025,
+                    settings: {
+                        slidesToShow: 1,
+                        fade: true
+                    }
+                }]
+            });
+
+            // ONE-TIME INITIALIZATIONS END //
+            //////////////////////////////////
+
+            let mq = null;
             // media query event handler
-            if (matchMedia) {
-                const mq = window.matchMedia("(min-width: 1025px)");
+            if (window.matchMedia) {
+                mq = window.matchMedia("(min-width: 1025px)");
                 mq.addListener(WidthChange);
                 WidthChange(mq);
             }
 
+            clearLoadedState();
+            
             currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
-            navigateToBlock(currentBlockIndex);
+            displayBlock(getBlockId(currentBlockIndex));
 
             function clearLoadedState(){
                 Array.prototype.forEach.call(allBlocks, function(block){
@@ -362,24 +405,19 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // media query change
             function WidthChange(mq) {
-                
-                    // window width is at least 1025px
-                    mainElem.classList.add("stop-scrolling");
+                // window width is at least 1025px
+                mainElem.classList.add("stop-scrolling");
 
-                    clearLoadedState();
+                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                document.onkeydown = customScrollKeysHandler;
+                window.ontouchmove = customScrollTouchHandler;
+                window.onhashchange = hashUrlChangeHandler;
 
-                    // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
-                    document.onkeydown = customScrollKeysHandler;
-
-                    window.ontouchmove = customScrollTouchHandler;
-                    
-                    window.onhashchange = hashUrlChangeHandler;
-
+                // add custom scroll only for devices with screen more than 1025px
                 if (mq.matches) {
-                    // handler for wheel event 
                     addWheelListener( window, customScrollWheelHandler );
                 } else {
-                // window width is less than 1025px
+                    // window width is less than 1025px
                 }
             }
 
@@ -419,19 +457,19 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function displayBlock(currentBlockId) {
-                clearLoadedState();
-
+                
                 let elem = document.getElementById(currentBlockId);
 
-                mainElem.style.height = elem.scrollHeight + "px";
-
+                // if (!mq.matches) {
+                //     mainElem.style.height = elem.scrollHeight + "px";
+                // }
+                
                 elem.classList.add("loaded");
-                // animation part
 
+                // animation part
                 playMenuUnderlineAnimation(currentBlockId);
 
                 prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
-                // remove loaded from previous block
                 let prevBlockId = navLinks[prevBlockIndex];
 
                 executePageSpecificScript(currentBlockId);
@@ -442,15 +480,8 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function navigateToBlock(blockIndex) {
-                if (currentBlockIndex == prevBlockIndex) {
-                    console.log(`trying to open already opened page index: ${currentBlockIndex} `);
-                    return;
-                }
-
-                let currentBlockId = getBlockId(currentBlockIndex);
-
+                let currentBlockId = getBlockId(blockIndex);
                 window.location.href = baseHashUrl + currentBlockId;
-
             }
 
                 
@@ -486,7 +517,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 let contentElem = targetElement.querySelector(".content");
 
                 //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
-                    console.log(`== scrolled to bottom ==`);
+                    //console.log(`== scrolled to bottom ==`);
                     //limit handling rate to prevent scrolling trough all pages
                     if (Date.now() - lastScrollTime > 1000) {
                         if (e.deltaY > 0) {
@@ -510,13 +541,13 @@ document.documentElement.className = document.documentElement.className.replace(
             // called when user navigates back or clicks on link
             function hashUrlChangeHandler(event) {
                 if (event.newURL != event.oldURL) {
+                    clearLoadedState();
                     console.log(`hash changed`);
                     let newUrlId = window.location.hash.substr(1);
                     let oldUrlId = event.oldURL.split('#')[1];
                     //let newBlockIndex = getBlockIndexByHashtag(newUrlId);
                     prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
                     console.log(`prev block: ${oldUrlId}, new block: ${newUrlId}`);
-                    //navigateToBlockByHashtag(newUrlId);
 
                     displayBlock(newUrlId);
                 }
@@ -548,6 +579,94 @@ document.documentElement.className = document.documentElement.className.replace(
                         });
                         break;
                     case "assortment":
+                        console.log($slider);
+                        $slider.slick('setPosition');
+                        
+                        // Setup Classes
+                        $slideItems.text(items);
+                        $(".figures-1").addClass("show");
+                        setTimeout(function(){
+                            $(".assort-bg-list").addClass("bg-1");
+                        }, 1000);
+        
+                        $slide.find(".slick-slider-inner").on("click", function(e){
+                            if (!$(this).parent().hasClass("slick-current")) { 
+                                e.preventDefault();
+                            }		
+                        });
+                        
+        
+                        // Loader		
+                        $(".slick-arrow").on("click", function(event){
+                            let target = $(event.target);
+                            let curIndex = parseInt($curSlideInd.text());
+        
+                            if (target.is(".slick-next")){
+                                if (curIndex == 1) loader()
+                            } else {
+                                if (curIndex == items) loader()
+                            }
+                    
+                            $(".figures").removeClass("show");	
+                            $(".figures-" + curIndex).addClass("show");	
+                        });
+        
+                        function loader(){
+                            $(".slick-list").addClass("hide");
+                            $sliderLoader.addClass("show");
+        
+                            setTimeout(function(){
+                                $(".slick-list").removeClass("hide");
+                                $sliderLoader.removeClass("show");
+                            }, 700);
+                        }
+                        
+                        // Change
+                        $slider.on("beforeChange", function(event, slick, currentSlide, nextSlide){
+        
+                            currentSlide = nextSlide;
+        
+                            var $curSlide = $bgItem.eq(currentSlide);
+        
+                            $bgItem.removeClass("show");
+                            $curSlide.addClass("show");
+        
+                            setTimeout(function(){
+                                $(".assort-bg-list").attr("class", "assort-bg-list");
+                                $(".assort-bg-list").addClass("bg-" + (currentSlide + 1));
+                                //$bgItem.not(":eq(" + currentSlide + ")").removeClass("show");
+                            }, 900);
+        
+                            $curSlideInd.text(currentSlide + 1);
+        
+                            // Slider Description
+                            function changeSliderDesc(){
+                                var $sliderDesc = document.querySelectorAll(".assort-desc-wrap .assort-desc-item");	
+        
+                                for (let i = 0; i < $sliderDesc.length; i++){
+                                    $sliderDesc[i].classList.remove("show");
+                                }
+        
+                                $sliderDesc[currentSlide].classList.add("show");
+                            }
+                            
+                            setTimeout(changeSliderDesc, 0);
+        
+                            // Cubes
+                            $("body")
+                                .attr("class", "")
+                                .addClass("page-style-" + (currentSlide + 1));
+                            
+                        });
+        
+                        // Filter Click
+                        var filterItem = $(".filter-item .drops li, .filter-item .ico-list li, .filter-item .items-list li");
+        
+                        filterItem.on("click", function(){
+                            console.log("click");
+                            $(".drop-block").removeClass("show");
+                            $(".drop-inner").attr("style", "max-height: 0px;");	
+                        });
                         break;
                     default:
                         break;

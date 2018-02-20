@@ -51,6 +51,7 @@ body {
    ========================= */
 
 #header {
+    @include transition(all, 0.7s, $easing);
     @include socket;
     position: fixed;
     text-align: center;
@@ -504,23 +505,27 @@ body {
 }
 
 .stop-scrolling {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     width: 100vw;
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
 
     .page {
-        position: absolute;
-        z-index: 1;
+        position: relative;
+        z-index: -1;
         height: auto;
         /* overflow: hidden; */
         left: 0;
         top: 0;
         width: 100%;
         visibility: hidden;
+        display: none;
     }
     .page.loaded {
+        display: block;
         visibility: visible;
+        z-index: 1;
     }
 
 }

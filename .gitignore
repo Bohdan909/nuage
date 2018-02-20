@@ -12,6 +12,5 @@ spritespin-master/
 
 .sass-cache/
 
-*.css.map
-
+css/*.css.map
 
