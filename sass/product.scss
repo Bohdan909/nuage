@@ -482,8 +482,6 @@ div.product-view-block {
         height: 47px;
         background-color: #fff;
     }
-
-    
 }
 
 @media (min-width: 768px) and (max-height: 760px){
@@ -498,9 +496,9 @@ div.product-view-block {
 
     @media (max-width: 1280px){
 
-        .ttl-line {
-            @include ttl-line-no;
-        }
+        // .ttl-line {
+        //     @include ttl-line-no;
+        // }
 
         .sizes-img {
             top: 15px;
