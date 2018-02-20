@@ -423,7 +423,8 @@ div.mission-text-slider {
     }
 }
 
-.mission-video-play, .video-calibrate {
+.mission-video-play, 
+.video-calibrate {
     width: 310px;
     height: 310px;
 }
@@ -431,29 +432,21 @@ div.mission-text-slider {
 .video-calibrate {
     @include transform(translateY(-50%));
     @include border-rad(50%);
-    //@include transition(all, 0.6s, $easing);
-    -webkit-transition: width 0.6s $easing, height 0.6s $easing;
-    -ms-transition: width 0.6s $easing, height 0.6s $easing;
-    transition: width 0.6s $easing, height 0.6s $easing;
-    // position: relative;
-    // top: 50%;
-    // margin: auto;
-    // box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-    // -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-    // //border: 1px solid red;
-    // overflow: hidden;
     position: absolute;
     top: -100%;
     bottom: -100%;
     left: calc(-100% - 178px);
     right: -100%;
     margin: auto;
-    width: 310px;
-    height: 310px;
+    width: 450px;
+    height: 450px;
     overflow: hidden;
     z-index: 30;
     box-sizing: border-box;
     transform: translateX(356px) translateZ(0) scale(1);
+    -webkit-transition: width 0.6s $easing, height 0.6s $easing;
+    -ms-transition: width 0.6s $easing, height 0.6s $easing;
+    transition: width 0.6s $easing, height 0.6s $easing;
 
     &.open {
         @include transition(all, 4.0s, $easing);
@@ -531,7 +524,7 @@ div.mission-text-slider {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    margin-left: -267px;
+    margin-left: -330px;
     margin-top: 0px;
     background-color: #585858;
     background-repeat: no-repeat;
@@ -881,6 +874,14 @@ div.mission-text-slider {
 
 @include desktop-wide {
     .video-calibrate {
+        width: 600px;
+        height: 600px;
+        left: calc(-100% + 200px);
+
+        .mission-video-content {
+            margin-left: -456px;
+        }
+
         &.open {
             @include transition(all, 4.0s, $easing);
             width: 3500px;
@@ -891,10 +892,18 @@ div.mission-text-slider {
 
 @include ultra-hd {
     .video-calibrate {
+        width: 600px;
+        height: 600px;
+        left: calc(-100% + 200px);
+
+        .mission-video-content {
+            margin-left: -456px;
+        }
+
         &.open {
             @include transition(all, 4.0s, $easing);
-            width: 4900px;
-            height: 4900px;
+            width: 5300px;
+            height: 5300px;
         }
     }
 }
