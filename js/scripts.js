@@ -242,7 +242,8 @@ document.documentElement.className = document.documentElement.className.replace(
             let activeTab = tabs.querySelector(".tab.active");
             if (line) {
                 let offset = activeTab.getBoundingClientRect().left - tabs.getBoundingClientRect().left;
-                line.style.left = `${offset + (activeTab.offsetWidth - 35) / 2}px`;
+                let leftValue = offset + (activeTab.offsetWidth - 35) / 2;
+                line.style.left = leftValue + "px";
             }
         }
 
@@ -304,8 +305,8 @@ document.documentElement.className = document.documentElement.className.replace(
             
             // left: 37, up: 38, right: 39, down: 40,
             // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-            let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
-            let keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
+            let keysPrev = { 38: 1, 33: 1};
+            let keysNext = { 40: 1, 34: 1};
 
             let navLinks = [
                 "main",
@@ -416,10 +417,11 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 // add custom scroll only for devices with screen more than 1025px
                 if (mq.matches) {
-                    addWheelListener( window, customScrollWheelHandler, true);
+                    addWheelListener( window, customScrollWheelHandler, false);
                     
                     let scrollBlocks = document.querySelectorAll(".page .scroll-block");
                     Array.prototype.forEach.call(scrollBlocks, function(scrollBlock){
+                        addWheelListener( scrollBlock, customScrollForScrollable, true);
                         scrollBlock.classList.add("dragscroll");
                         scrollBlock.style.cursor = "grab";
                     });
@@ -443,8 +445,8 @@ document.documentElement.className = document.documentElement.className.replace(
             
                 if (currentNavElement) {
                     let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
-                    movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
-                    movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
+                    movingMenuUnderline.style.width = currentNavElement.offsetWidth + "px";
+                    movingMenuUnderline.style.transform = "translateX(" + navElemOffset + "px)";
                 } else {
                     movingMenuUnderline.style.width = 0;
                 }
@@ -524,9 +526,8 @@ document.documentElement.className = document.documentElement.className.replace(
                 let contentElem = targetElement.querySelector(".content");
 
                 //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
-                    //console.log(`== scrolled to bottom ==`);
                     //limit handling rate to prevent scrolling trough all pages
-                    if (Date.now() - lastScrollTime > 1000) {
+                    if (Date.now() - lastScrollTime > 1400) {
                         if (e.deltaY > 0) {
                             scrollToNextBlock();
                         } else if (e.deltaY < 0) {
@@ -536,18 +537,14 @@ document.documentElement.className = document.documentElement.className.replace(
                         lastScrollTime = Date.now();
                     }
                 //} else {
-                //    console.log(`== just scroll ==`);
+                //    console.log("== just scroll ==");
 
                 //}
             }
 
             function customScrollForScrollable(e) {
-                console.log(e);
-                
-                //e.cancelBu;
                 e.cancelBubble = true;
-                console.log("scrolled over scrollable");
-                
+                customScrollWheelHandler(e);  
             }
 
             function customScrollTouchHandler(e) {
