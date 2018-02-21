@@ -242,7 +242,8 @@ document.documentElement.className = document.documentElement.className.replace(
             let activeTab = tabs.querySelector(".tab.active");
             if (line) {
                 let offset = activeTab.getBoundingClientRect().left - tabs.getBoundingClientRect().left;
-                line.style.left = `${offset + (activeTab.offsetWidth - 35) / 2}px`;
+                let leftValue = offset + (activeTab.offsetWidth - 35) / 2;
+                line.style.left = leftValue + "px";
             }
         }
 
@@ -443,8 +444,8 @@ document.documentElement.className = document.documentElement.className.replace(
             
                 if (currentNavElement) {
                     let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
-                    movingMenuUnderline.style.width = `${currentNavElement.offsetWidth}px`;
-                    movingMenuUnderline.style.transform = `translateX(${navElemOffset}px)`;
+                    movingMenuUnderline.style.width = currentNavElement.offsetWidth + "px";
+                    movingMenuUnderline.style.transform = "translateX(" + navElemOffset + "px)";
                 } else {
                     movingMenuUnderline.style.width = 0;
                 }
@@ -524,7 +525,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 let contentElem = targetElement.querySelector(".content");
 
                 //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
-                    //console.log(`== scrolled to bottom ==`);
                     //limit handling rate to prevent scrolling trough all pages
                     if (Date.now() - lastScrollTime > 1000) {
                         if (e.deltaY > 0) {
@@ -536,7 +536,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         lastScrollTime = Date.now();
                     }
                 //} else {
-                //    console.log(`== just scroll ==`);
+                //    console.log("== just scroll ==");
 
                 //}
             }
