@@ -305,8 +305,8 @@ document.documentElement.className = document.documentElement.className.replace(
             
             // left: 37, up: 38, right: 39, down: 40,
             // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-            let keysPrev = {37: 1, 38: 1, 33: 1, 36: 1};
-            let keysNext = {39: 1, 40: 1, 32: 1, 34: 1, 35: 1};
+            let keysPrev = { 38: 1, 33: 1};
+            let keysNext = { 40: 1, 34: 1};
 
             let navLinks = [
                 "main",
@@ -527,7 +527,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
                     //limit handling rate to prevent scrolling trough all pages
-                    if (Date.now() - lastScrollTime > 1000) {
+                    if (Date.now() - lastScrollTime > 1400) {
                         if (e.deltaY > 0) {
                             scrollToNextBlock();
                         } else if (e.deltaY < 0) {
