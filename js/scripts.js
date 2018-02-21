@@ -417,10 +417,11 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 // add custom scroll only for devices with screen more than 1025px
                 if (mq.matches) {
-                    addWheelListener( window, customScrollWheelHandler, true);
+                    addWheelListener( window, customScrollWheelHandler, false);
                     
                     let scrollBlocks = document.querySelectorAll(".page .scroll-block");
                     Array.prototype.forEach.call(scrollBlocks, function(scrollBlock){
+                        addWheelListener( scrollBlock, customScrollForScrollable, true);
                         scrollBlock.classList.add("dragscroll");
                         scrollBlock.style.cursor = "grab";
                     });
@@ -542,12 +543,8 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function customScrollForScrollable(e) {
-                console.log(e);
-                
-                //e.cancelBu;
                 e.cancelBubble = true;
-                console.log("scrolled over scrollable");
-                
+                customScrollWheelHandler(e);  
             }
 
             function customScrollTouchHandler(e) {
