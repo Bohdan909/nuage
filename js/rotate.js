@@ -202,9 +202,7 @@
 
         // Close
         base.animateClose = function(){
-			console.log(`close anim called`);
 			if (!base.animateOpenEnd || !base.animateCloseEnd){
-				console.log(`play close anim later`);
 				setTimeout( base.animateClose, 2000);
 				return;
 			} 
