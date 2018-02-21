@@ -25,7 +25,8 @@ function initialize() {
   var btnLoc = document.querySelectorAll('.ico-loc');
   
   submit.addEventListener('click', function(){
-    geocodeAddress(geocoder, map);
+    var address = document.getElementById('address').value;
+    geocodeAddress(geocoder, map, address);
   });
 
   Array.prototype.forEach.call(btnLoc, function(item){
@@ -45,6 +46,16 @@ function initialize() {
     });
   });
 
+  var selectize = $("#select-city").selectize({
+    allowEmptyOption: true,
+    create: true,
+
+    onChange: function(val){
+      var address = val;
+      geocodeAddress(geocoder, map, address);
+    }
+  });
+
   function setMarker(){
     new google.maps.Marker({
       //icon: image,
@@ -58,8 +69,9 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-function geocodeAddress(geocoder, resultsMap) {
-  var address = document.getElementById('address').value;
+function geocodeAddress(geocoder, resultsMap, address){
+  
+
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
