@@ -2,6 +2,8 @@ document.documentElement.className = document.documentElement.className.replace(
 
 (function($){
     $(document).ready(function() {
+
+         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
         
         // setTimeout(function(){
         //     document.querySelector(".page").classList.add("loaded");
@@ -58,19 +60,22 @@ document.documentElement.className = document.documentElement.className.replace(
             }
         });
 
-        let $socDrop = document.querySelector(".social-drop");
-        let $like = document.querySelector(".like");
+        
+        let $like = document.querySelectorAll(".like");
 
-        if (document.body.contains($like)) {
-            $like.addEventListener("click", function () {
-                if ($socDrop.classList.contains("show")) {
-                    $socDrop.classList.add("hide");
-                    $socDrop.classList.remove("show");
-                } else {
-                    $socDrop.classList.add("show");
-                    $socDrop.classList.remove("hide");
-                }
+        if (pageScroll){
+            Array.prototype.forEach.call($like, function(likeItem){
+                likeItem.addEventListener("click", function(){
+                    let $socDrop = this.parentNode.querySelector(".social-drop");
 
+                    if ($socDrop.classList.contains("show")){
+                        $socDrop.classList.add("hide");
+                        $socDrop.classList.remove("show");
+                    } else {
+                        $socDrop.classList.add("show");
+                        $socDrop.classList.remove("hide");
+                    }
+                });
             });
         }
 
@@ -300,7 +305,7 @@ document.documentElement.className = document.documentElement.className.replace(
             CUSTOM SCROLL AND NAVIGATION
         ================================ */
 
-        if (document.querySelector(".main").classList.contains("page-scroll")){
+        if (pageScroll){
             let mainElem = document.querySelector(".main");
             
             // left: 37, up: 38, right: 39, down: 40,
