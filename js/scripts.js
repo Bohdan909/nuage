@@ -121,14 +121,16 @@ document.documentElement.className = document.documentElement.className.replace(
             });
         }
 
-        let $fbHead = document.querySelectorAll(".answer-head");
+        
         let $fbPage = document.querySelector(".page-feedback");
+        let $fbHead = $fbPage.querySelectorAll(".answer-head");
+        let $fbButtonPlus = $fbPage.querySelectorAll(".point-btn.plus");
 
         if (document.body.contains($fbPage)) {
-            $fbHead.forEach(function (head) {
+            $fbButtonPlus.forEach(function (buttonPlus) {
 
-                head.addEventListener("click", function () {
-                    let $point = this.parentNode;
+                buttonPlus.addEventListener("click", function () {
+                    let $point = this.parentNode.parentNode;
                     let $text = $point.querySelector(".answer-body");
                     let textHeight = $text.querySelector(".answer-body-inner").offsetHeight;
 
@@ -298,7 +300,6 @@ document.documentElement.className = document.documentElement.className.replace(
         ================================ */
 
         if (document.querySelector(".main").classList.contains("page-scroll")){
-            console.log(`=== page loaded ===`);
             let mainElem = document.querySelector(".main");
             
             // left: 37, up: 38, right: 39, down: 40,
@@ -415,7 +416,13 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 // add custom scroll only for devices with screen more than 1025px
                 if (mq.matches) {
-                    addWheelListener( window, customScrollWheelHandler );
+                    addWheelListener( window, customScrollWheelHandler, true);
+                    
+                    let scrollBlocks = document.querySelectorAll(".page .scroll-block");
+                    Array.prototype.forEach.call(scrollBlocks, function(scrollBlock){
+                        scrollBlock.classList.add("dragscroll");
+                        scrollBlock.style.cursor = "grab";
+                    });
                 } else {
                     // window width is less than 1025px
                 }
@@ -534,6 +541,15 @@ document.documentElement.className = document.documentElement.className.replace(
                 //}
             }
 
+            function customScrollForScrollable(e) {
+                console.log(e);
+                
+                //e.cancelBu;
+                e.cancelBubble = true;
+                console.log("scrolled over scrollable");
+                
+            }
+
             function customScrollTouchHandler(e) {
                 // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
             }
@@ -542,12 +558,11 @@ document.documentElement.className = document.documentElement.className.replace(
             function hashUrlChangeHandler(event) {
                 if (event.newURL != event.oldURL) {
                     clearLoadedState();
-                    console.log(`hash changed`);
+
                     let newUrlId = window.location.hash.substr(1);
                     let oldUrlId = event.oldURL.split('#')[1];
                     //let newBlockIndex = getBlockIndexByHashtag(newUrlId);
                     prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
-                    console.log(`prev block: ${oldUrlId}, new block: ${newUrlId}`);
 
                     displayBlock(newUrlId);
                 }

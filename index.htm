@@ -2166,6 +2166,7 @@
 		<script src="./js/scripts.js" defer></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCffH-0iEsLpkHn31rDlWyWdLsZBC11XCY&v=3.exp" defer></script>
 		<script src="./js/map.js" defer></script>
+		<script src="./js//dragscroll.js" defer></script>
 
 		<script>
 			window.addEventListener("load", function(){
@@ -2332,7 +2333,6 @@
 				});
 
 				videoWrap.addEventListener("touchstart", function (event) {
-					console.log(`video touched`);
 					showSiteControls(function(){
 						setTimeout(hideSiteControls, 1500);
 					});
@@ -2375,7 +2375,6 @@
 				});
 
 				videoCloseBtn.addEventListener("click", function(){
-					console.log(`close button clicked`);
 					setTimeout(videoClose, 200);
 				});
 				
