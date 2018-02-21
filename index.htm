@@ -1729,187 +1729,185 @@
 					<div class="socket">
 						<div class="map-column">
 							<div class="loc-search animate-slide">
-								<div class="ico-loc"></div>
-								<input placeholder="где вы?" type="text">
-								<button type="submit"></button>
+								<div id="btn-loc" class="ico-loc"></div>
+								<input id="address" placeholder="где вы?" type="text" value="">
+								<button id="submit" type="submit" value="Geocode"></button>
 							</div>
 
 							<div class="select animate-slide">
-								<div class="select-inner">
-									<div class="ico-loc"></div>
-									<select id="select-city">
-										<option selected hidden>список городов</option>
-										<option>Москва</option>
-										<option>Санкт-Петербург</option>
-										<option>Новосибирск</option>
-										<option>Екатеринбург</option>
-										<option>Нижний Новгород</option>
-										<option>Казань</option>
-										<option>Челябинск</option>
-										<option>Омск</option>
-										<option>Самара</option>
-										<option>Ростов-на-Дону</option>
-										<option>Уфа</option>
-										<option>Красноярск</option>
-										<option>Воронеж</option>
-										<option>Пермь</option>
-										<option>Волгоград</option>
-										<option>Краснодар</option>
-										<option>Саратов</option>
-										<option>Тюмень</option>
-										<option>Тольятти</option>
-										<option>Ижевск</option>
-										<option>Барнаул</option>
-										<option>Ульяновск</option>
-										<option>Иркутск</option>
-										<option>Хабаровск</option>
-										<option>Ярославль</option>
-										<option>Владивосток</option>
-										<option>Махачкала</option>
-										<option>Томск</option>
-										<option>Оренбург</option>
-										<option>Кемерово</option>
-										<option>Новокузнецк</option>
-										<option>Рязань</option>
-										<option>Астрахань</option>
-										<option>Набережные Челны</option>
-										<option>Пенза</option>
-										<option>Липецк</option>
-										<option>Киров</option>
-										<option>Чебоксары</option>
-										<option>Тула</option>
-										<option>Калининград</option>
-										<option>Балашиха</option>
-										<option>Курск</option>
-										<option>Ставрополь</option>
-										<option>Улан-Удэ</option>
-										<option>Тверь</option>
-										<option>Магнитогорск</option>
-										<option>Сочи</option>
-										<option>Иваново</option>
-										<option>Брянск</option>
-										<option>Белгород</option>
-										<option>Сургут</option>
-										<option>Владимир</option>
-										<option>Нижний Тагил</option>
-										<option>Архангельск</option>
-										<option>Чита</option>
-										<option>Калуга</option>
-										<option>Смоленск</option>
-										<option>Волжский</option>
-										<option>Курган</option>
-										<option>Череповец</option>
-										<option>Орёл</option>
-										<option>Саранск</option>
-										<option>Вологда</option>
-										<option>Якутск</option>
-										<option>Владикавказ</option>
-										<option>Подольск</option>
-										<option>Мурманск</option>
-										<option>Грозный</option>
-										<option>Тамбов</option>
-										<option>Стерлитамак</option>
-										<option>Петрозаводск</option>
-										<option>Кострома</option>
-										<option>Нижневартовск</option>
-										<option>Новороссийск</option>
-										<option>Йошкар-Ола</option>
-										<option>Химки</option>
-										<option>Таганрог</option>
-										<option>Комсомольск- на-Амуре</option>
-										<option>Сыктывкар</option>
-										<option>Нальчик</option>
-										<option>Нижнекамск</option>
-										<option>Шахты</option>
-										<option>Дзержинск</option>
-										<option>Братск</option>
-										<option>Орск</option>
-										<option>Ангарск</option>
-										<option>Энгельс</option>
-										<option>Благовещенск</option>
-										<option>Старый Оскол</option>
-										<option>Королёв</option>
-										<option>Великий Новгород</option>
-										<option>Псков</option>
-										<option>Мытищи</option>
-										<option>Бийск</option>
-										<option>Люберцы</option>
-										<option>Прокопьевск</option>
-										<option>Южно-Сахалинск</option>
-										<option>Балаково</option>
-										<option>Армавир</option>
-										<option>Рыбинск</option>
-										<option>Северодвинск</option>
-										<option>Петропавловск- Камчатский</option>
-										<option>Абакан</option>
-										<option>Норильск</option>
-										<option>Сызрань</option>
-										<option>Волгодонск</option>
-										<option>Уссурийск</option>
-										<option>Каменск-Уральский</option>
-										<option>Новочеркасск</option>
-										<option>Златоуст</option>
-										<option>Электросталь</option>
-										<option>Альметьевск</option>
-										<option>Красногорск</option>
-										<option>Салават</option>
-										<option>Миасс</option>
-										<option>Находка</option>
-										<option>Керчь</option>
-										<option>Копейск</option>
-										<option>Пятигорск</option>
-										<option>Березники</option>
-										<option>Рубцовск</option>
-										<option>Коломна</option>
-										<option>Майкоп</option>
-										<option>Одинцово</option>
-										<option>Хасавюрт</option>
-										<option>Ковров</option>
-										<option>Кисловодск</option>
-										<option>Нефтекамск</option>
-										<option>Нефтеюганск</option>
-										<option>Новочебоксарск</option>
-										<option>Серпухов</option>
-										<option>Щёлково</option>
-										<option>Новомосковск</option>
-										<option>Батайск</option>
-										<option>Первоуральск</option>
-										<option>Домодедово</option>
-										<option>Дербент</option>
-										<option>Черкесск</option>
-										<option>Орехово-Зуево</option>
-										<option>Невинномысск</option>
-										<option>Димитровград</option>
-										<option>Назрань</option>
-										<option>Кызыл</option>
-										<option>Октябрьский</option>
-										<option>Обнинск</option>
-										<option>Каспийск</option>
-										<option>Новый Уренгой</option>
-										<option>Раменское</option>
-										<option>Камышин</option>
-										<option>Муром</option>
-										<option>Долгопрудный</option>
-										<option>Новошахтинск</option>
-										<option>Жуковский</option>
-										<option>Северск</option>
-										<option>Ессентуки</option>
-										<option>Ноябрьск</option>
-										<option>Артём</option>
-										<option>Пушкино</option>
-										<option>Евпатория</option>
-										<option>Ачинск</option>
-										<option>Сергиев Посад</option>
-										<option>Арзамас</option>
-										<option>Элиста</option>
-										<option>Елец</option>
-										<option>Реутов</option>
-										<option>Бердск</option>
-										<option>Новокуйбышевск</option>
-										<option>Ногинск</option>
-										<option>Железногорск</option>
-									</select>
-								</div>
+								<div class="ico-loc"></div>
+								<select id="select-city">
+									<option selected hidden>список городов</option>
+									<option>Москва</option>
+									<option>Санкт-Петербург</option>
+									<option>Новосибирск</option>
+									<option>Екатеринбург</option>
+									<option>Нижний Новгород</option>
+									<option>Казань</option>
+									<option>Челябинск</option>
+									<option>Омск</option>
+									<option>Самара</option>
+									<option>Ростов-на-Дону</option>
+									<option>Уфа</option>
+									<option>Красноярск</option>
+									<option>Воронеж</option>
+									<option>Пермь</option>
+									<option>Волгоград</option>
+									<option>Краснодар</option>
+									<option>Саратов</option>
+									<option>Тюмень</option>
+									<option>Тольятти</option>
+									<option>Ижевск</option>
+									<option>Барнаул</option>
+									<option>Ульяновск</option>
+									<option>Иркутск</option>
+									<option>Хабаровск</option>
+									<option>Ярославль</option>
+									<option>Владивосток</option>
+									<option>Махачкала</option>
+									<option>Томск</option>
+									<option>Оренбург</option>
+									<option>Кемерово</option>
+									<option>Новокузнецк</option>
+									<option>Рязань</option>
+									<option>Астрахань</option>
+									<option>Набережные Челны</option>
+									<option>Пенза</option>
+									<option>Липецк</option>
+									<option>Киров</option>
+									<option>Чебоксары</option>
+									<option>Тула</option>
+									<option>Калининград</option>
+									<option>Балашиха</option>
+									<option>Курск</option>
+									<option>Ставрополь</option>
+									<option>Улан-Удэ</option>
+									<option>Тверь</option>
+									<option>Магнитогорск</option>
+									<option>Сочи</option>
+									<option>Иваново</option>
+									<option>Брянск</option>
+									<option>Белгород</option>
+									<option>Сургут</option>
+									<option>Владимир</option>
+									<option>Нижний Тагил</option>
+									<option>Архангельск</option>
+									<option>Чита</option>
+									<option>Калуга</option>
+									<option>Смоленск</option>
+									<option>Волжский</option>
+									<option>Курган</option>
+									<option>Череповец</option>
+									<option>Орёл</option>
+									<option>Саранск</option>
+									<option>Вологда</option>
+									<option>Якутск</option>
+									<option>Владикавказ</option>
+									<option>Подольск</option>
+									<option>Мурманск</option>
+									<option>Грозный</option>
+									<option>Тамбов</option>
+									<option>Стерлитамак</option>
+									<option>Петрозаводск</option>
+									<option>Кострома</option>
+									<option>Нижневартовск</option>
+									<option>Новороссийск</option>
+									<option>Йошкар-Ола</option>
+									<option>Химки</option>
+									<option>Таганрог</option>
+									<option>Комсомольск- на-Амуре</option>
+									<option>Сыктывкар</option>
+									<option>Нальчик</option>
+									<option>Нижнекамск</option>
+									<option>Шахты</option>
+									<option>Дзержинск</option>
+									<option>Братск</option>
+									<option>Орск</option>
+									<option>Ангарск</option>
+									<option>Энгельс</option>
+									<option>Благовещенск</option>
+									<option>Старый Оскол</option>
+									<option>Королёв</option>
+									<option>Великий Новгород</option>
+									<option>Псков</option>
+									<option>Мытищи</option>
+									<option>Бийск</option>
+									<option>Люберцы</option>
+									<option>Прокопьевск</option>
+									<option>Южно-Сахалинск</option>
+									<option>Балаково</option>
+									<option>Армавир</option>
+									<option>Рыбинск</option>
+									<option>Северодвинск</option>
+									<option>Петропавловск- Камчатский</option>
+									<option>Абакан</option>
+									<option>Норильск</option>
+									<option>Сызрань</option>
+									<option>Волгодонск</option>
+									<option>Уссурийск</option>
+									<option>Каменск-Уральский</option>
+									<option>Новочеркасск</option>
+									<option>Златоуст</option>
+									<option>Электросталь</option>
+									<option>Альметьевск</option>
+									<option>Красногорск</option>
+									<option>Салават</option>
+									<option>Миасс</option>
+									<option>Находка</option>
+									<option>Керчь</option>
+									<option>Копейск</option>
+									<option>Пятигорск</option>
+									<option>Березники</option>
+									<option>Рубцовск</option>
+									<option>Коломна</option>
+									<option>Майкоп</option>
+									<option>Одинцово</option>
+									<option>Хасавюрт</option>
+									<option>Ковров</option>
+									<option>Кисловодск</option>
+									<option>Нефтекамск</option>
+									<option>Нефтеюганск</option>
+									<option>Новочебоксарск</option>
+									<option>Серпухов</option>
+									<option>Щёлково</option>
+									<option>Новомосковск</option>
+									<option>Батайск</option>
+									<option>Первоуральск</option>
+									<option>Домодедово</option>
+									<option>Дербент</option>
+									<option>Черкесск</option>
+									<option>Орехово-Зуево</option>
+									<option>Невинномысск</option>
+									<option>Димитровград</option>
+									<option>Назрань</option>
+									<option>Кызыл</option>
+									<option>Октябрьский</option>
+									<option>Обнинск</option>
+									<option>Каспийск</option>
+									<option>Новый Уренгой</option>
+									<option>Раменское</option>
+									<option>Камышин</option>
+									<option>Муром</option>
+									<option>Долгопрудный</option>
+									<option>Новошахтинск</option>
+									<option>Жуковский</option>
+									<option>Северск</option>
+									<option>Ессентуки</option>
+									<option>Ноябрьск</option>
+									<option>Артём</option>
+									<option>Пушкино</option>
+									<option>Евпатория</option>
+									<option>Ачинск</option>
+									<option>Сергиев Посад</option>
+									<option>Арзамас</option>
+									<option>Элиста</option>
+									<option>Елец</option>
+									<option>Реутов</option>
+									<option>Бердск</option>
+									<option>Новокуйбышевск</option>
+									<option>Ногинск</option>
+									<option>Железногорск</option>
+								</select>
 							</div>
 
 							<ul class="partners animate-slide">
@@ -2162,12 +2160,12 @@
 		<script src="./js/jquery.mousewheel.min.js"></script>
 		<script src="./js/perfect-scrollbar.jquery.min.js"></script>
 		<script src="./js/jquery.threesixty.js"></script> 
+		<script src="./js/selectize.min.js"></script>
 		<script src="./js/rotate.js" defer></script>
 		<script src="./js/slick.js" defer></script>
 		<script src="./js/scripts.js" defer></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCffH-0iEsLpkHn31rDlWyWdLsZBC11XCY&v=3.exp" defer></script>
 		<script src="./js/map.js" defer></script>
-		<script src="./js/selectize.min.js"></script>
 
 		<script>
 			window.addEventListener("load", function(){
@@ -2453,13 +2451,26 @@
 				});
 
 				// Custom Select
-				$("#select-city").selectize({
+				var selectize = $("#select-city").selectize({
 					allowEmptyOption: true,
-    				create: true
+    				create: true,
+
+    				onDropdownOpen: function(){
+    					scrollSelectInit();
+    				}
 				});
 
+				function scrollSelectInit(){
+					$(".selectize-dropdown").perfectScrollbar({
+	                    wheelSpeed: 0.5,
+	                    wheelPropagation: false,
+	                    minScrollbarLength: 20
+	                });
+				}
+
+				// IE forEach
 				(function(){
-					if ( typeof NodeList.prototype.forEach === "function" ) return false;
+					if (typeof NodeList.prototype.forEach === "function") return false;
 					NodeList.prototype.forEach = Array.prototype.forEach;
 				}());
 
