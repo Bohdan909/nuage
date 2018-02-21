@@ -103,7 +103,7 @@ div.mission-text {
 div.mission-text-slider {
     position: relative;
     height: 90px;
-    overflow: hidden;
+    //overflow: hidden;
 
     .title-3, p {
         @extend .not-blurry;

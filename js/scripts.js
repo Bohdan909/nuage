@@ -59,7 +59,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 $body.classList.remove("menu-close");
             }
         });
-
         
         let $like = document.querySelectorAll(".like");
 
@@ -126,12 +125,11 @@ document.documentElement.className = document.documentElement.className.replace(
             });
         }
 
-        
-        let $fbPage = document.querySelector(".page-feedback");
-        let $fbHead = $fbPage.querySelectorAll(".answer-head");
-        let $fbButtonPlus = $fbPage.querySelectorAll(".point-btn.plus");
+        if (pageScroll) {
+            let $fbPage = document.querySelector(".page-feedback");
+            let $fbHead = $fbPage.querySelectorAll(".answer-head");
+            let $fbButtonPlus = $fbPage.querySelectorAll(".point-btn.plus");
 
-        if (document.body.contains($fbPage)) {
             $fbButtonPlus.forEach(function (buttonPlus) {
 
                 buttonPlus.addEventListener("click", function () {
@@ -145,7 +143,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     } else {
                         $text.setAttribute("style", "max-height: 0px");
                     }
-
                 });
             });
         }

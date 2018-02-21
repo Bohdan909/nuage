@@ -78,7 +78,6 @@ body {
     }
 }
 
-
 .menu-btn {
     display: none;
     position: absolute;
@@ -188,7 +187,6 @@ body {
         border-bottom: 2px solid #364e6e;
     }
 }
-
 
 @include tablet {
 
@@ -530,8 +528,6 @@ body {
 
 }
 
-
-
 @media (max-height: 601px) and (min-width: 768px){
 
     html, body {
@@ -645,8 +641,6 @@ body {
         }
     }
 }
-
-
 
 .social {
     text-align: center;
