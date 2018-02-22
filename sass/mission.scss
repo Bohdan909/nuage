@@ -542,7 +542,6 @@ div.mission-text-slider {
     height: 100vh;
     position: absolute;
     background: none;
-    z-index: 998;
 
     .strip {
         @include rot(-57deg);
