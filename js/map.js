@@ -53,8 +53,20 @@ function initialize() {
     onChange: function(val){
       var address = val;
       geocodeAddress(geocoder, map, address);
+    },
+
+    onDropdownOpen: function(){
+      scrollSelectInit();
     }
   });
+
+  function scrollSelectInit(){
+    $(".selectize-dropdown").perfectScrollbar({
+        wheelSpeed: 0.5,
+        wheelPropagation: false,
+        minScrollbarLength: 20
+    });
+  }
 
   function setMarker(){
     new google.maps.Marker({

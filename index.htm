@@ -2449,24 +2449,6 @@
 					});
 				});
 
-				// Custom Select
-				var selectize = $("#select-city").selectize({
-					allowEmptyOption: true,
-    				create: true,
-
-    				onDropdownOpen: function(){
-    					scrollSelectInit();
-    				}
-				});
-
-				function scrollSelectInit(){
-					$(".selectize-dropdown").perfectScrollbar({
-	                    wheelSpeed: 0.5,
-	                    wheelPropagation: false,
-	                    minScrollbarLength: 20
-	                });
-				}
-
 				// IE forEach
 				(function(){
 					if (typeof NodeList.prototype.forEach === "function") return false;
