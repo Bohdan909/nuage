@@ -405,11 +405,6 @@ $ultra-hd-width : 3840px;
 }
 
 // Transform Bugs
-.vis-hidden {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
 .not-blurry {
     -webkit-transform: translateZ(0) scale(1.0, 1.0);
     -webkit-font-smoothing: subpixel-antialiased;

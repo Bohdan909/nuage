@@ -6,6 +6,7 @@
    ========================= */
 
 .drops {
+    @extend .sm;
     font-size: 0;
     text-align: center;
 
