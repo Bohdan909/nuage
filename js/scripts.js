@@ -301,6 +301,174 @@ document.documentElement.className = document.documentElement.className.replace(
         ================================ */
 
         if (document.querySelector(".main").classList.contains("page-scroll")){
+
+            // SCROLL MANAGER DEFINITION
+            function Page(pageId){
+                this.id = pageId;
+                this.pageElement = document.getElementById(pageId);
+                
+                this.loaded = function(){
+                    this.pageElement.classList.remove('loading');
+                    this.clearNext();
+                    this.clearPrev();
+                    
+                };
+                this.loaded = this.loaded.bind(this);
+                
+                this.load = function(){
+                    if (this.pageElement.classList.contains('next') || this.pageElement.classList.contains('prev')) {
+                        this.pageElement.classList.add('loading');
+                        this.pageElement.classList.add('loaded');
+                        //this.pageElement.addEventListener("transitionend", this.loaded, true);
+                        setTimeout(this.loaded, 700);
+                    } else {
+                        this.pageElement.classList.add('loaded');
+                    }
+                };
+
+                this.unload = function() {
+                    this.pageElement.classList.remove('loaded');
+                    this.pageElement.removeEventListener("transitionend", this.unload, true);
+                };
+                this.unload = this.unload.bind(this);
+
+                this.setNext = function() {
+                    this.pageElement.classList.add('next');
+                    //this.pageElement.addEventListener("transitionend", this.unload, true);
+                    setTimeout(this.unload, 700);
+                    
+                };
+
+                this.setPrev = function() {
+                    this.pageElement.classList.add('prev');
+                    //this.pageElement.addEventListener("transitionend", this.unload, true);
+                    setTimeout(this.unload, 700);
+                };
+
+                this.clearPrev = function() {
+                    this.pageElement.classList.remove('prev');
+                }
+
+                this.clearNext = function() {
+                    this.pageElement.classList.remove('next');
+                }
+
+                this.currentToPrev = function() {
+                    this.setPrev();
+                };
+
+                this.nextToCurrent = function() {
+                    this.load();
+                };
+
+                this.currentToNext = function() {
+                    this.setNext();
+                };
+
+                this.prevToCurrent = function() {
+                    this.load();
+                };
+
+            }
+
+            function ScrollManager(parentSelector, pagesArray){
+                this.scrollParent = document.querySelector(parentSelector);
+                //this.pages = this.scrollParent.querySelectorAll(pagesSelector);
+                this.currentPage = null;
+                this.previousPage = null;
+                this.nextPage = null;
+                this.pagesArray = pagesArray;
+                this.currentPageIndex = 0;
+
+                this.setCurrentPageByIndex = function (index) {
+                    
+                    this.currentPageIndex = index;
+                    console.log('set page index: ' + index);
+                    
+                    this.currentPage = this.pagesArray[index];
+                    console.log('set current page ' + this.currentPage.id);
+                    this.currentPage.load();
+
+
+                    if (index > 0) {
+                        this.previousPage = this.pagesArray[index - 1];
+                        this.previousPage.setPrev();
+                    } else {
+                        this.previousPage = null;
+                    }
+
+                    if (index < (this.pagesArray.length - 1)) {
+                        this.nextPage = this.pagesArray[index + 1];
+                        this.nextPage.setNext();
+                    } else {
+                        this.nextPage = null;
+                    }
+                }
+
+                this.init = function() {
+                    if (null != this.pagesArray && this.pagesArray.length > 1) {
+                        this.setCurrentPageByIndex(0);
+                    }
+                };
+                this.init();
+
+                this.setCurrentPage = function(pageId){
+                    for (let i = 0; i < this.pagesArray.length; i++) {
+                        const page = this.pagesArray[i];
+                        if (page.id == pageId) {
+                            
+                            
+                            this.setCurrentPageByIndex(i);
+
+                            break;
+                        }
+                    }
+                };
+                
+                this.scrollToNextPage = function() {
+                    if (this.currentPageIndex == this.pagesArray.length - 1) {
+                        return;
+                    }
+                    
+                    console.log('increase current page index');
+                    this.currentPageIndex += 1;
+                    this.setCurrentPageByIndex(this.currentPageIndex);
+                    // if (this.nextPage != null) {
+                    //     this.currentPage.currentToPrev();
+                    //     this.previousPage = this.currentPage;
+                    //     this.nextPage.nextToCurrent();
+                    //     this.currentPage = this.nextPage;
+                    // }
+                };
+
+                this.scrollToPrevPage = function() {
+                    if (this.currentPageIndex == 0) {
+                        return;
+                    }
+                    console.log('decrease current page index');
+                    
+                    this.currentPageIndex -= 1;
+                    this.setCurrentPageByIndex(this.currentPageIndex);
+                    // if (this.previousPage != null) {
+                    //     this.currentPage.currentToNext();
+                    //     this.nextPage = this.currentPage;
+                    //     this.previousPage.prevToCurrent();
+                    //     this.currentPage = this.previousPage;
+                    // }    
+                };
+            }
+            // SCROLL MANAGER DEFINITION END
+
+            let scrollManager = new ScrollManager('.main', [
+                new Page('main'),
+                new Page('advantages'),
+                new Page('assortment'),
+                new Page('mission'),
+                new Page('faq'),
+                new Page('buy'),
+                new Page('consultation')
+            ]);
+
             let mainElem = document.querySelector(".main");
             
             // left: 37, up: 38, right: 39, down: 40,
@@ -397,7 +565,8 @@ document.documentElement.className = document.documentElement.className.replace(
             clearLoadedState();
             
             currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
-            displayBlock(getBlockId(currentBlockIndex));
+            //displayBlock(getBlockId(currentBlockIndex));
+            scrollManager.setCurrentPage(currentHashtag);
 
             function clearLoadedState(){
                 Array.prototype.forEach.call(allBlocks, function(block){
@@ -472,6 +641,15 @@ document.documentElement.className = document.documentElement.className.replace(
                 // if (!mq.matches) {
                 //     mainElem.style.height = elem.scrollHeight + "px";
                 // }
+                //elem.style.MozTransform = "transform: translate3d(0, -100vh, 0)";
+                // elem.animate(
+                //     [
+                //         { transform: 'translate3d(0, 0vh, 0)'},
+                //         { transform: 'translate3d(0, -100vh, 0)'}
+                //       ], {
+                //         duration: 700,
+                //       }
+                // );
                 
                 elem.classList.add("loaded");
 
@@ -529,9 +707,11 @@ document.documentElement.className = document.documentElement.className.replace(
                     //limit handling rate to prevent scrolling trough all pages
                     if (Date.now() - lastScrollTime > 1400) {
                         if (e.deltaY > 0) {
-                            scrollToNextBlock();
+                            //scrollToNextBlock();
+                            scrollManager.scrollToNextPage();
                         } else if (e.deltaY < 0) {
-                            scrollToPrevBlock();
+                            //scrollToPrevBlock();
+                            scrollManager.scrollToPrevPage();
                         }
 
                         lastScrollTime = Date.now();
