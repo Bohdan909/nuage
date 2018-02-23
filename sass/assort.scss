@@ -1074,16 +1074,30 @@ ul.desc-list {
     }
 }
 
-@media screen and (max-width: 880px) and (min-height: 750px){
-    
-    .assort-slider .slick-slide {
+@media (max-width: 880px) and (min-width: 768px){
 
-        .slick-slider-inner {
-            @include notCenter;
+    @media (max-height: 750px){
+
+        .assort-slider .slick-slide {
+
+            .slick-slider-inner {
+                @include notCenter;
+                top: 17px;
+            }
+
+            .title-2 {
+                padding-top: 0;
+            }
         }
+    }
 
-        .title-2 {
-            padding-top: 0;
+    @media (max-height: 700px){
+
+        .assort-slider .slick-slide {
+
+            p, .drops {
+                display: none;
+            }
         }
     }
 }
