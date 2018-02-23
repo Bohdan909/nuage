@@ -306,6 +306,11 @@ document.documentElement.className = document.documentElement.className.replace(
             function Page(pageId){
                 this.id = pageId;
                 this.pageElement = document.getElementById(pageId);
+
+                this.setLoaded = function(){
+                    this.pageElement.classList.add('loaded');
+                }
+                this.setLoaded = this.setLoaded.bind(this);
                 
                 this.loaded = function(){
                     this.pageElement.classList.remove('loading');
@@ -318,7 +323,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 this.load = function(){
                     if (this.pageElement.classList.contains('next') || this.pageElement.classList.contains('prev')) {
                         this.pageElement.classList.add('loading');
-                        this.pageElement.classList.add('loaded');
+                        setTimeout(this.setLoaded, 300);
                         //this.pageElement.addEventListener("transitionend", this.loaded, true);
                         setTimeout(this.loaded, 700);
                     } else {
