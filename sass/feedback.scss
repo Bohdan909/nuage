@@ -152,10 +152,6 @@ $heightPanel: 90px;
             line-height: 18px;
             color: #364e6e;
         }
-
-        &:hover span {
-            color: #828ea0;
-        }
     }
 
     .answer-body {
@@ -178,9 +174,16 @@ $heightPanel: 90px;
     }
 }
 
-.no-touchevents .answer-head .point-btn:hover {
-    box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
-    -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
+.no-touchevents .answer-head {
+
+    .point-btn:hover {
+        box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
+        -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
+    }
+
+    &:hover span {
+        color: #828ea0;
+    }
 }
 
 .feedback-column.to-right {

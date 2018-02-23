@@ -2,6 +2,8 @@ document.documentElement.className = document.documentElement.className.replace(
 
 (function($){
     $(document).ready(function() {
+
+         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
         
         // setTimeout(function(){
         //     document.querySelector(".page").classList.add("loaded");
@@ -57,20 +59,22 @@ document.documentElement.className = document.documentElement.className.replace(
                 $body.classList.remove("menu-close");
             }
         });
+        
+        let $like = document.querySelectorAll(".like");
 
-        let $socDrop = document.querySelector(".social-drop");
-        let $like = document.querySelector(".like");
+        if (pageScroll){
+            Array.prototype.forEach.call($like, function(likeItem){
+                likeItem.addEventListener("click", function(){
+                    let $socDrop = this.parentNode.querySelector(".social-drop");
 
-        if (document.body.contains($like)) {
-            $like.addEventListener("click", function () {
-                if ($socDrop.classList.contains("show")) {
-                    $socDrop.classList.add("hide");
-                    $socDrop.classList.remove("show");
-                } else {
-                    $socDrop.classList.add("show");
-                    $socDrop.classList.remove("hide");
-                }
-
+                    if ($socDrop.classList.contains("show")){
+                        $socDrop.classList.add("hide");
+                        $socDrop.classList.remove("show");
+                    } else {
+                        $socDrop.classList.add("show");
+                        $socDrop.classList.remove("hide");
+                    }
+                });
             });
         }
 
@@ -121,12 +125,11 @@ document.documentElement.className = document.documentElement.className.replace(
             });
         }
 
-        
-        let $fbPage = document.querySelector(".page-feedback");
-        let $fbHead = $fbPage.querySelectorAll(".answer-head");
-        let $fbButtonPlus = $fbPage.querySelectorAll(".point-btn.plus");
+        if (pageScroll) {
+            let $fbPage = document.querySelector(".page-feedback");
+            let $fbHead = $fbPage.querySelectorAll(".answer-head");
+            let $fbButtonPlus = $fbPage.querySelectorAll(".point-btn.plus");
 
-        if (document.body.contains($fbPage)) {
             $fbButtonPlus.forEach(function (buttonPlus) {
 
                 buttonPlus.addEventListener("click", function () {
@@ -140,7 +143,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     } else {
                         $text.setAttribute("style", "max-height: 0px");
                     }
-
                 });
             });
         }
@@ -229,8 +231,8 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             activePane.classList.add("active");
-
         }
+
         Array.prototype.forEach.call(tabs, function (tab) {
             tab.addEventListener("click", tabClick);
             animateTabLine(tab);
@@ -300,7 +302,7 @@ document.documentElement.className = document.documentElement.className.replace(
             CUSTOM SCROLL AND NAVIGATION
         ================================ */
 
-        if (document.querySelector(".main").classList.contains("page-scroll")){
+        if (pageScroll){
 
             //////////////////////////////
             // ONE-TIME INITIALIZATIONS 
@@ -316,8 +318,14 @@ document.documentElement.className = document.documentElement.className.replace(
                 'auto'  : true
             });
 
+            // $scheme.rotate3d({
+            //     'source': 'images/object-2/Vzruv_02.Alpha_',
+            //     'count' : 70,
+            //     'auto'  : true
+            // });
+
             $scheme.rotate3d({
-                'source': 'images/object-2/Vzruv_02.Alpha_',
+                'source': 'images/scheme/1_000',
                 'count' : 70,
                 'auto'  : true
             });

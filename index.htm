@@ -150,7 +150,7 @@
 								</button>
 								
 								<div class="social-drop hide">
-									<span>Нравиться Nuage? Присойденяйтесь!</span>
+									<span>Нравится Nuage? Присоединяйтесь!</span>
 									<ul class="social">
 										<li>
 											<img width="22" height="12" src="images/soc-1.svg" alt="">
@@ -397,7 +397,7 @@
 								<button class="like"></button>
 								
 								<div class="social-drop hide">
-									<span>Нравиться Nuage? Присойденяйтесь!</span>
+									<span>Нравится Nuage? Присоединяйтесь!</span>
 									<ul class="social">
 										<li>
 											<img width="22" src="images/soc-1.svg" alt="">
@@ -2448,24 +2448,6 @@
 						popupWrap.classList.remove("open");
 					});
 				});
-
-				// Custom Select
-				var selectize = $("#select-city").selectize({
-					allowEmptyOption: true,
-    				create: true,
-
-    				onDropdownOpen: function(){
-    					scrollSelectInit();
-    				}
-				});
-
-				function scrollSelectInit(){
-					$(".selectize-dropdown").perfectScrollbar({
-	                    wheelSpeed: 0.5,
-	                    wheelPropagation: false,
-	                    minScrollbarLength: 20
-	                });
-				}
 
 				// IE forEach
 				(function(){

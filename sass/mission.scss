@@ -16,6 +16,7 @@
 
     .cubes {
         top: auto;
+        z-index: 0;
 
         li:nth-child(1) {
             bottom: 85px;
@@ -103,7 +104,7 @@ div.mission-text {
 div.mission-text-slider {
     position: relative;
     height: 90px;
-    overflow: hidden;
+    //overflow: hidden;
 
     .title-3, p {
         @extend .not-blurry;
@@ -538,9 +539,9 @@ div.mission-text-slider {
 
 .video-block-wrapper {
     width: 100vw;
-    height:  100vh;
-    position:  absolute;
-    background:  none;
+    height: 100vh;
+    position: absolute;
+    background: none;
 
     .strip {
         @include rot(-57deg);

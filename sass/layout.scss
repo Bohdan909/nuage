@@ -51,7 +51,7 @@ body {
    ========================= */
 
 #header {
-    @include transition(all, 0.7s, $easing);
+    //@include transition(all, 0.7s, $easing);
     @include socket;
     position: fixed;
     text-align: center;
@@ -77,7 +77,6 @@ body {
         }
     }
 }
-
 
 .menu-btn {
     display: none;
@@ -188,7 +187,6 @@ body {
         border-bottom: 2px solid #364e6e;
     }
 }
-
 
 @include tablet {
 
@@ -538,8 +536,6 @@ body {
     }
 }
 
-
-
 @media (max-height: 601px) and (min-width: 768px){
 
     html, body {
@@ -653,8 +649,6 @@ body {
         }
     }
 }
-
-
 
 .social {
     text-align: center;

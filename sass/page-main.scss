@@ -20,14 +20,14 @@
 }
 
 .object-main-wrap {
-    @include transform(translateY(-50%));
+    //@include transform(translateY(-50%));
+    //top: 50%;
+    bottom: 157px;
     position: absolute;
-    top: 50%;
     width: 765px;
     height: 413px;    
-    // top: 10vh;
-    left: 405px;
-    z-index: 3;
+    left: 412px;
+    z-index: 150;
 }
 
 .object-main {
@@ -40,7 +40,6 @@
         width: 100%;
     }
 }
-
 
 .page-main {
     
@@ -274,7 +273,7 @@ div.scroll-helper {
         }
 
         &:nth-child(3) {
-            top: 54vh;
+            top: 52vh;
         }
     }
 }
@@ -532,9 +531,6 @@ ul.cubes-main {
     right: -100px;
 }
 
-
-
-
 @media (max-height: 800px) and (min-width: 1025px){
 
     div.scroll-helper .ico-mouse {
@@ -561,9 +557,10 @@ ul.cubes-main {
     }
 
     .object-main-wrap {
-        @include transform(translateY(-50%));
-        top: 50%;
-        left: 500px;
+        // @include transform(translateY(-50%));
+        // top: 50%;
+        bottom: 128px;
+        left: 504px;
     }
 
     div.scroll-helper {
@@ -605,21 +602,41 @@ ul.cubes-main {
 
 @include mid {
 
-    .object-main, .object-main-wrap {
-        @include object-mid;
-    }
-
     .object-main-wrap {
-        @include transform(translateY(-50%));
-        top: 48%;
-        left: 370px;
+        left: 286px;
     }
 
-    div.scroll-helper {
-        @include scroll-helper-min;
+    .quote-wrap {
+        right: -60px;
 
-        .ico-mouse {
-            top: 70px;
+        .slide {
+            right: 0 !important;
+        }
+    }
+
+    ul.cubes-main {
+        right: -114px;
+    }
+}
+
+@media (min-width: 1281px) { // Min Middle
+
+    @media (max-height: 800px){
+        .object-main-wrap {
+            bottom: 130px;
+        }
+    }
+
+    @media (max-height: 600px){
+        .object-main-wrap {
+            @include transform(translateY(-50%));
+            top: 48%;
+        }
+    }
+
+    @media (max-width: 1550px) and (max-height: 700px){
+        .object-main-wrap {
+            left: 371px;
         }
     }
 }
@@ -668,19 +685,19 @@ ul.cubes-main {
         ul.cubes-main {
 
             li:nth-child(1) {
-                transform: translateY(23vh) !important;
+                transform: translateY(21vh) !important;
             }
 
             li:nth-child(2) {
-                transform: translateY(26vh) !important;
+                transform: translateY(23vh) !important;
             }
 
             li:nth-child(3) {
-               transform: translateY(27vh) !important;
+               transform: translateY(24vh) !important;
             }
 
             li:nth-child(4) {
-                transform: translateY(29vh) !important;
+                transform: translateY(22vh) !important;
             }
         }
     }
@@ -688,10 +705,14 @@ ul.cubes-main {
 
 @include laptop {
 
+    .object-main, .object-main-wrap {
+        @include object-mid;
+    }
+
     .object-main-wrap {
-        @include transform(scale(0.9) translateY(-50%));
+        @include transform(scale(0.9));
         @include origin(top, top);
-        //top: auto;
+        bottom: 98px;
         left: 270px;
     }
 
@@ -699,6 +720,10 @@ ul.cubes-main {
         width: 310px;
         height: 310px;
         bottom: -155px;
+
+        .ico-mouse {
+            top: 70px;
+        }
     }
 
     @media (max-height: 700px){
@@ -714,6 +739,11 @@ ul.cubes-main {
 
 @include tablet {
 
+    .title-main {
+        font-size: 85px;
+        margin-bottom: 20px;
+    }
+
     .lic-list li {
         margin-right: 15px;
     }
@@ -725,10 +755,8 @@ ul.cubes-main {
     }
 
     .object-main-wrap {
-        @include transform(scale(1) translateY(0) translateX(-50%));
-        top: auto;
-        left: 55%;
-        bottom: 80px;
+        @include transform(scale(1) translateX(-50%));
+        left: 54%;
     }
 
     ul.cubes-main {
@@ -818,7 +846,7 @@ ul.cubes-main {
 
         .text-block {
             @include transform(translateY(0));
-            top: 50px;
+            top: 40px;
         }
 
         .circle-main {
@@ -827,6 +855,17 @@ ul.cubes-main {
 
         .strip {
             top: 28vh;
+        }
+    }
+
+    @include port {
+        .object-main-wrap {
+            @include transform(scale(0.87) translateX(-50%));
+            @include origin(left, center);
+        }
+
+        .quote-wrap {
+            right: 0;
         }
     }
 
@@ -896,13 +935,14 @@ ul.cubes-main {
 @media screen and (max-width: 1024px) and (min-height: 1200px){
 
     .page-main .text-block {
-        top: 100px;
+        @include transform(translateY(-50%));
+        top: 40%;
     }
     
     .object-main-wrap {
         width: 765px;
         height: 413px;
-        bottom: 250px;
+        bottom: 122px;
     }
 
     .object-main {
@@ -1026,8 +1066,6 @@ ul.cubes-main {
         }
     }
 }
-
-
 
 // Nexus, iPhone X  (Landscape)
 @media screen and (max-width: 960px) and (max-height: 600px){
