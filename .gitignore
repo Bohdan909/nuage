@@ -14,5 +14,7 @@ spritespin-master/
 
 .vscode/
 
+dist/
+
 css/main.css.map
 css/main.css

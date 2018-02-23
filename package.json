@@ -2,6 +2,7 @@
   "name": "Forpost",
   "version": "0.0.1",
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "grunt": "latest",
     "grunt-autoprefixer": "latest",
     "grunt-contrib-cssmin": "^1.0.1",
@@ -12,6 +13,7 @@
     "grunt-sass": "^2.1.0",
     "grunt-string-replace": "latest",
     "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.9.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4"
