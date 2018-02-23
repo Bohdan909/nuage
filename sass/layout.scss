@@ -51,7 +51,7 @@ body {
    ========================= */
 
 #header {
-    @include transition(all, 0.7s, $easing);
+    //@include transition(all, 0.7s, $easing);
     @include socket;
     position: fixed;
     text-align: center;

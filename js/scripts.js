@@ -231,8 +231,8 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             activePane.classList.add("active");
-
         }
+
         Array.prototype.forEach.call(tabs, function (tab) {
             tab.addEventListener("click", tabClick);
             animateTabLine(tab);
@@ -350,8 +350,14 @@ document.documentElement.className = document.documentElement.className.replace(
                 'auto'  : true
             });
 
+            // $scheme.rotate3d({
+            //     'source': 'images/object-2/Vzruv_02.Alpha_',
+            //     'count' : 70,
+            //     'auto'  : true
+            // });
+
             $scheme.rotate3d({
-                'source': 'images/object-2/Vzruv_02.Alpha_',
+                'source': 'images/scheme/1_000',
                 'count' : 70,
                 'auto'  : true
             });
@@ -484,6 +490,8 @@ document.documentElement.className = document.documentElement.className.replace(
                 let prevBlockId = navLinks[prevBlockIndex];
 
                 executePageSpecificScript(currentBlockId);
+
+                $slider.slick("refresh");
             }
 
             function getBlockId(blockIndex) {

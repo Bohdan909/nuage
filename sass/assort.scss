@@ -329,6 +329,7 @@
     @media (min-width: 1551px){
         @include transform(scale(1.17));
         @include origin(bottom, center);
+        width: 279px;
     }
 }
 
@@ -374,6 +375,7 @@ $sliderAnimTime: 0.30s;
             @include vertCenter;
             @include delay(0s);
             @include transition(all, 0.4s, linear);
+            @extend .not-blurry;
             opacity: 0;
             display: block;
             text-transform: uppercase;
