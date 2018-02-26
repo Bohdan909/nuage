@@ -569,7 +569,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
             }
 
-            function ScrollManager(parentSelector, pagesArray){
+            function ScrollManager(parentSelector, pagesArray, currentId){
                 this.scrollParent = document.querySelector(parentSelector);
                 //this.pages = this.scrollParent.querySelectorAll(pagesSelector);
                 this.currentPage = null;
@@ -603,13 +603,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     }
                 }
 
-                this.init = function() {
-                    if (null != this.pagesArray && this.pagesArray.length > 1) {
-                        this.setCurrentPageByIndex(0);
-                    }
-                };
-                this.init();
-
                 this.setCurrentPage = function(pageId){
                     for (let i = 0; i < this.pagesArray.length; i++) {
                         const page = this.pagesArray[i];
@@ -619,7 +612,18 @@ document.documentElement.className = document.documentElement.className.replace(
                         }
                     }
                 };
-                
+
+                this.init = function() {
+                    if (null != this.pagesArray && this.pagesArray.length > 1) {
+                        if (currentId != null) {
+                            this.setCurrentPage(currentId);
+                        } else {
+                            this.setCurrentPageByIndex(0);
+                        }
+                    }
+                };
+                this.init();
+
                 this.scrollToNextPage = function() {
                     if (this.currentPageIndex == this.pagesArray.length - 1) {
                         return;
@@ -649,15 +653,7 @@ document.documentElement.className = document.documentElement.className.replace(
             }
             // SCROLL MANAGER DEFINITION END
 
-            let scrollManager = new ScrollManager('.main', [
-                new Page('main'),
-                new Page('advantages'),
-                new Page('assortment'),
-                new Page('mission'),
-                new Page('faq'),
-                new Page('buy'),
-                new Page('consultation')
-            ]);
+            
 
             let mainElem = document.querySelector(".main");
             
@@ -675,6 +671,16 @@ document.documentElement.className = document.documentElement.className.replace(
             if (currentHashtag.length == 0) {
                 currentHashtag = "main";
             }
+
+            let scrollManager = new ScrollManager('.main', [
+                new Page('main'),
+                new Page('advantages'),
+                new Page('assortment'),
+                new Page('mission'),
+                new Page('faq'),
+                new Page('buy'),
+                new Page('consultation')
+            ], currentHashtag);
           
             //let allBlocks = document.querySelectorAll(".page");
             
