@@ -613,8 +613,15 @@ document.documentElement.className = document.documentElement.className.replace(
                     }
                 };
 
+                this.clearLoadedState = function() {
+                    this.pagesArray.forEach(function(page){
+                        page.unload();
+                    });
+                };
+
                 this.init = function() {
                     if (null != this.pagesArray && this.pagesArray.length > 1) {
+                        this.clearLoadedState();
                         if (currentId != null) {
                             this.setCurrentPage(currentId);
                         } else {
@@ -645,11 +652,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     this.setCurrentPageByIndex(this.currentPageIndex); 
                 };
 
-                this.clearLoadedState = function() {
-                    this.pagesArray.forEach(function(page){
-                        page.unload();
-                    });
-                };
+                
             }
             // SCROLL MANAGER DEFINITION END
 
@@ -691,10 +694,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 mq.addListener(WidthChange);
                 WidthChange(mq);
             }
-
-            scrollManager.clearLoadedState();
-            
-            scrollManager.setCurrentPage(currentHashtag);
 
             // media query change
             function WidthChange(mq) {
@@ -760,8 +759,6 @@ document.documentElement.className = document.documentElement.className.replace(
             // called when user navigates back or clicks on link
             function hashUrlChangeHandler(event) {
                 if (event.newURL != event.oldURL) {
-                    scrollManager.clearLoadedState();
-
                     let newUrlId = window.location.hash.substr(1);
                     let oldUrlId = event.oldURL.split('#')[1];
 
