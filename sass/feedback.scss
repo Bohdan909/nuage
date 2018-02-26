@@ -343,9 +343,11 @@ ul.feedback-filter {
     }
 
     ul.feedback-filter {
-        padding: 0 5%;
+        padding: 0 2%;
 
         li {
+            flex-grow: 1;
+            padding: 0 5px;
             font-size: 9px;
             color: #828ea0;
 
@@ -359,7 +361,7 @@ ul.feedback-filter {
     @include port {
 
         ul.feedback-filter {
-            padding: 0 2%;
+            //padding: 0 2%;
             
             li {
                 padding: 0 10px;

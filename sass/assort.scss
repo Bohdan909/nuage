@@ -72,7 +72,7 @@
     }
 
     @include laptop {
-        width: 63%;
+        width: 62%;
     }
 
     .assort-slider, .slick-list {
@@ -152,7 +152,6 @@
     }
 }
 
-
 // Assortment Slider
 .assort-slider .slick-track {
     height: 100%;
@@ -178,8 +177,7 @@
     }
 
     .title-2 {
-        padding: 18px 0 5px;
-        margin: 0;
+        padding: 0 0 5px;
     }
 
     p {
@@ -212,15 +210,15 @@
 @media (min-width: 1025px){
 
     .assort-slider .slick-current .slick-slider-inner {
-        @include transform(translateY(95%));
+        @include transform(translateY(70%));
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(60%) translateX(11%) scale(0.6));
+        @include transform(translateY(37%) translateX(11%) scale(0.6));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(20%) scale(0.4));
+        @include transform(translateY(7%) scale(0.4));
     }
 
     .assort-slider .slick-active-last + .slick-slide .slick-slider-inner {
@@ -234,10 +232,6 @@
     .slick-all-prev .slick-slider-inner {
         @include transform(translateY(350%));
     }
-
-    // .assort-slider .slick-slide .slick-slider-inner {
-    //     transition-delay: 0.4s !important;
-    // }
 }
 
 .assort-slider .slick-list {
@@ -312,6 +306,7 @@
 
 
 .slick-slider-inner {
+    @include origin(center, center);
     text-align: center;
     display: block;
     text-decoration: none;
@@ -326,11 +321,8 @@
     overflow: hidden;
     background-repeat: no-repeat;
 
-    @media (min-width: 1551px){
-        @include transform(scale(1.17));
-        @include origin(bottom, center);
-        width: 279px;
-    }
+    width: 488px;
+    height: 350px;
 }
 
 .assort-slider-img {
@@ -354,6 +346,10 @@ $sliderAnimTime: 0.30s;
 
 .no-touchevents {
 
+    .assort-slider .slick-slide .title-2 {
+        margin-top: -35px;
+    }
+
     .assort-slider-img {
         display: none;
     }
@@ -369,7 +365,7 @@ $sliderAnimTime: 0.30s;
         width: 130px;
         height: 130px;
         left: 50%;
-        top: -70px;
+        top: -45px;
 
         i {
             @include vertCenter;
@@ -385,8 +381,7 @@ $sliderAnimTime: 0.30s;
     }
 
     .assort-slider-sprite {
-        position: relative;
-        left: 10px;
+        @extend .ctrHor;
         display: block;
         margin: auto;
         
@@ -400,7 +395,7 @@ $sliderAnimTime: 0.30s;
             left: 0;
             top: 0;
             display: block;
-            width: 8400px;
+            width: 14640px;
             height: 100%;
             background-size: 100%, 100%;
             background-position: left;
@@ -493,45 +488,67 @@ $sliderAnimTime: 0.30s;
         }
     }
 
-
-    @media (max-width: 1279px){
+    @include mid {
 
         .assort-slider-sprite {
-            @include transform(scale(0.85));
-            @include origin(center, bottom);
-            left: 0;
+            @include transform(scale(0.85) translateX(-50%));
+            @include origin(left, bottom);
+            margin-top: -25px;
+        }
+
+        .assort-det {
+            top: -8px;
         }
     }
 
-    @media (max-width: 1225px){
+    @media (max-width: 1280px){
 
         .assort-slider-sprite {
-            left: -1vw;
+            @include transform(scale(0.75) translateX(-50%));
+            margin-top: -75px;
+        }
+
+        .assort-det {
+            width: 100px;
+            height: 100px;
+            top: 38px;
+
+            i {
+                font-size: 10px;
+            }
+        }
+
+        .assort-slider .slick-slide {
+            
+            // &.slick-current .slick-slider-inner {
+            //     margin-left: 35px;
+            // }
+
+            .title-2 {
+                margin-top: -25px;
+            }
         }
     }
 
     @media (max-width: 1150px){
 
         .assort-slider-sprite {
-            left: -2vw;
+            @include transform(scale(0.6) translateX(-50%));
+            margin-top: -85px;
         }
     }
 
     @include tablet {
 
         .assort-slider-sprite {
+            @include transform(scale(0.85));
+            @include origin(center, bottom);
             left: 0;
-        }
-    }
-
-    @media (min-width: 1551px){
-
-        .assort-det {
-            top: -110px;
+            margin-top: 0;
         }
 
-        .slide-6 .assort-det {
-            top: -125px;
+        .assort-slider .slick-slide .title-2 {
+            margin-top: 0;
         }
     }
 }
@@ -880,15 +897,15 @@ ul.desc-list {
 @media (min-width: 1025px) and (max-height: 860px) {
 
     .assort-slider .slick-current .slick-slider-inner {
-        @include transform(translateY(70%));
+        @include transform(translateY(51%));
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(30%) translateX(11%) scale(0.6));
+        @include transform(translateY(24%) translateX(11%) scale(0.6));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(7%) scale(0.4));
+        @include transform(translateY(2%) scale(0.4));
     }
 
     .assort-bg-list {
@@ -954,15 +971,15 @@ ul.desc-list {
     }
 
     .assort-slider .slick-current .slick-slider-inner {
-        @include transform(translateY(40%));
+        @include transform(translateY(37%));
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(10%) translateX(11%) scale(0.6));
+        @include transform(translateY(8%) translateX(11%) scale(0.6));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(-10%) scale(0.4));
+        @include transform(translateY(-12%) scale(0.4));
     }
 }
 
@@ -988,15 +1005,15 @@ ul.desc-list {
 @media (min-width: 1025px) and (max-height: 660px) {
 
     .assort-slider .slick-current .slick-slider-inner {
-        @include transform(translateY(25%));
+        @include transform(translateY(15%));
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(3%) translateX(11%) scale(0.6));
+        @include transform(translateY(0%) translateX(11%) scale(0.6));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(-15%) scale(0.4));
+        @include transform(translateY(-16%) scale(0.4));
     }
 }
 

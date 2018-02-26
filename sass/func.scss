@@ -480,6 +480,12 @@ $ultra-hd-width : 3840px;
     top: 50%;
 }
 
+.ctrHor {
+    @include transform(translateX(-50%));
+    position: relative;
+    left: 50%;
+}
+
 @mixin notCenter {
     transform: translate(0);
     -webkit-transform: translate(0);
