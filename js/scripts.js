@@ -531,6 +531,9 @@ document.documentElement.className = document.documentElement.className.replace(
                 this.unload = this.unload.bind(this);
 
                 this.setNext = function() {
+                    if (this.pageElement.classList.contains('prev')) {
+                        this.pageElement.classList.remove('prev');
+                    }
                     this.pageElement.classList.add('next');
                     //this.pageElement.addEventListener("transitionend", this.unload, true);
                     setTimeout(this.unload, 700);
@@ -538,6 +541,9 @@ document.documentElement.className = document.documentElement.className.replace(
                 };
 
                 this.setPrev = function() {
+                    if (this.pageElement.classList.contains('next')) {
+                        this.pageElement.classList.remove('next');
+                    }
                     this.pageElement.classList.add('prev');
                     //this.pageElement.addEventListener("transitionend", this.unload, true);
                     setTimeout(this.unload, 700);
@@ -578,14 +584,12 @@ document.documentElement.className = document.documentElement.className.replace(
                 this.pagesArray = pagesArray;
                 this.currentPageIndex = 0;
 
-                this.setCurrentPageByIndex = function (index) {
-                    
+                this.displayPageByIndex = function (index) {
+                    if (this.currentPage) {
+                        this.currentPage.unload();
+                    }
                     this.currentPageIndex = index;
-                    console.log('set page index: ' + index);
-                    
                     this.currentPage = this.pagesArray[index];
-                    console.log('set current page ' + this.currentPage.id);
-                    window.location.href = '#' + this.currentPage.id;
                     this.currentPage.load();
 
                     if (index > 0) {
@@ -601,12 +605,35 @@ document.documentElement.className = document.documentElement.className.replace(
                     } else {
                         this.nextPage = null;
                     }
-                }
+                };
+
+                this.displayPage = function (pageId) {
+                    for (let i = 0; i < this.pagesArray.length; i++) {
+                        const page = this.pagesArray[i];
+                        if (page.id == pageId) {
+                            //this.clearLoadedState();
+                            this.displayPageByIndex(i);
+                            break;
+                        }
+                    }
+                };
+
+                this.setCurrentPageByIndex = function (index) {
+                    
+                    this.currentPageIndex = index;
+                    console.log('set page index: ' + index);
+                    
+                    this.currentPage = this.pagesArray[index];
+                    console.log('set current page ' + this.currentPage.id);
+                    window.location.href = '#' + this.currentPage.id;
+                    
+                };
 
                 this.setCurrentPage = function(pageId){
                     for (let i = 0; i < this.pagesArray.length; i++) {
                         const page = this.pagesArray[i];
                         if (page.id == pageId) {
+                            //this.clearLoadedState();
                             this.setCurrentPageByIndex(i);
                             break;
                         }
@@ -623,9 +650,9 @@ document.documentElement.className = document.documentElement.className.replace(
                     if (null != this.pagesArray && this.pagesArray.length > 1) {
                         this.clearLoadedState();
                         if (currentId != null) {
-                            this.setCurrentPage(currentId);
+                            this.displayPage(currentId);
                         } else {
-                            this.setCurrentPageByIndex(0);
+                            this.displayPageByIndex(0);
                         }
                     }
                 };
@@ -762,7 +789,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     let newUrlId = window.location.hash.substr(1);
                     let oldUrlId = event.oldURL.split('#')[1];
 
-                    scrollManager.setCurrentPage(newUrlId);
+                    scrollManager.displayPage(newUrlId);
                 }
             }    
         }
