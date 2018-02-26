@@ -52,6 +52,13 @@
     }
 }
 
+@media screen and (max-width: 1024px) and (max-height: 660px){
+
+    .page-consult .footer {
+        display: none;
+    }
+}
+
 .consult-top {
     position: relative;
     padding-right: 20%;
@@ -189,8 +196,6 @@ ul.tabs.tabs-panel {
             resize:none;
         }
     }
-
-    
 }
 
 .main .checkbox {

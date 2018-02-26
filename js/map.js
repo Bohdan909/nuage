@@ -82,7 +82,6 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function geocodeAddress(geocoder, resultsMap, address){
-  
 
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === 'OK') {

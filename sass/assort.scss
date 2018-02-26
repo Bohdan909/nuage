@@ -1028,6 +1028,9 @@ ul.desc-list {
     .assort-slider-wrap {
         width: 61%;
         padding-left: 0;
+
+        width: calc(100% - 360px);
+        width: -webkit-calc(100% - 360px);
         
         .slick-arrow.slick-prev {
             right: 163px;
@@ -1045,12 +1048,12 @@ ul.desc-list {
         padding-top: 13px;
     }
 
-    @include land {
+    // @include land { // Landscape
         
-        .assort-slider-wrap{
-            width: 65%;
-        }
-    }
+    //     .assort-slider-wrap {
+    //         width: 65%;
+    //     }
+    // }
 
     @include port { // Portrait
 
@@ -1067,6 +1070,34 @@ ul.desc-list {
             transform-origin: bottom center;
             -webkit-transform-origin: bottom center;
             -ms-transform-origin: bottom center;
+        }
+    }
+}
+
+@media (max-width: 880px) and (min-width: 768px){
+
+    @media (max-height: 750px){
+
+        .assort-slider .slick-slide {
+
+            .slick-slider-inner {
+                @include notCenter;
+                top: 17px;
+            }
+
+            .title-2 {
+                padding-top: 0;
+            }
+        }
+    }
+
+    @media (max-height: 700px){
+
+        .assort-slider .slick-slide {
+
+            p, .drops {
+                display: none;
+            }
         }
     }
 }
