@@ -303,39 +303,7 @@ document.documentElement.className = document.documentElement.className.replace(
         ================================ */
 
         if (pageScroll){
-            let mainElem = document.querySelector(".main");
-            
-            // left: 37, up: 38, right: 39, down: 40,
-            // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-            let keysPrev = { 38: 1, 33: 1};
-            let keysNext = { 40: 1, 34: 1};
 
-            let navLinks = [
-                "main",
-                "advantages",
-                "assortment",
-                "mission",
-                "faq",
-                "buy",
-                "consultation"
-            ];
-            let baseHashUrl = "#";
-
-            let lastScrollTime = 0;
-
-            // initialize variable by hashtag from url if it present
-            let currentHashtag = window.location.hash.substr(1);
-            if (currentHashtag.length == 0) {
-                currentHashtag = navLinks[0];
-            }
-
-            let currentBlockIndex = 0;
-            let prevBlockIndex = -1;
-
-            let movingMenuUnderline = document.querySelector(".menu .moving-underline");
-            let menuListElem = document.querySelector(".menu ul");
-            let allBlocks = document.querySelectorAll(".page");
-            
             //////////////////////////////
             // ONE-TIME INITIALIZATIONS 
             /// for single-page app   ////
@@ -394,202 +362,20 @@ document.documentElement.className = document.documentElement.className.replace(
             // ONE-TIME INITIALIZATIONS END //
             //////////////////////////////////
 
-            let mq = null;
-            // media query event handler
-            if (window.matchMedia) {
-                mq = window.matchMedia("(min-width: 1025px)");
-                mq.addListener(WidthChange);
-                WidthChange(mq);
-            }
-
-            clearLoadedState();
-            
-            currentBlockIndex = getBlockIndexByHashtag(currentHashtag);
-            displayBlock(getBlockId(currentBlockIndex));
-
-            function clearLoadedState(){
-                Array.prototype.forEach.call(allBlocks, function(block){
-                    block.classList.remove("loaded");
-                });
-            }
-
-            // media query change
-            function WidthChange(mq) {
-                // window width is at least 1025px
-                mainElem.classList.add("stop-scrolling");
-
-                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
-                document.onkeydown = customScrollKeysHandler;
-                window.ontouchmove = customScrollTouchHandler;
-                window.onhashchange = hashUrlChangeHandler;
-
-                // add custom scroll only for devices with screen more than 1025px
-                if (mq.matches) {
-                    addWheelListener( window, customScrollWheelHandler, false);
-                    
-                    let scrollBlocks = document.querySelectorAll(".page .scroll-block");
-                    Array.prototype.forEach.call(scrollBlocks, function(scrollBlock){
-                        addWheelListener( scrollBlock, customScrollForScrollable, true);
-                        scrollBlock.classList.add("dragscroll");
-                        scrollBlock.style.cursor = "grab";
-                    });
-                } else {
-                    // window width is less than 1025px
-                }
-            }
-
-            function getBlockIndexByHashtag(hashtag) {
-                let result = currentBlockIndex;
-                let blockIndex = navLinks.indexOf(hashtag);
-                if (blockIndex != -1) {
-                    result = blockIndex;
-                }
-                return result;
-            }
-
-            function playMenuUnderlineAnimation(currentBlockId) {
-                let currentNavElement = document.querySelector("li." + currentBlockId);
-                //let prevNavElement = document.querySelector("li." + prevBlockId);
-            
-                if (currentNavElement) {
-                    let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
-                    movingMenuUnderline.style.width = currentNavElement.offsetWidth + "px";
-                    movingMenuUnderline.style.transform = "translateX(" + navElemOffset + "px)";
-                } else {
-                    movingMenuUnderline.style.width = 0;
-                }
-                
-                /*if (prevNavElement) {
-                    prevNavElement.classList.remove("active");
-                }
-                
-                if (currentNavElement) {
-                    currentNavElement.classList.add("active");
-                }*/
-            }
-
-            function navigateToBlockByHashtag(hashtag) {
-                currentBlockIndex = getBlockIndexByHashtag(hashtag);
-                navigateToBlock(currentBlockIndex);
-            }
-
-            function displayBlock(currentBlockId) {
-                
-                let elem = document.getElementById(currentBlockId);
-
-                // if (!mq.matches) {
-                //     mainElem.style.height = elem.scrollHeight + "px";
-                // }
-                
-                elem.classList.add("loaded");
-
-                // animation part
-                playMenuUnderlineAnimation(currentBlockId);
-
-                prevBlockIndex = prevBlockIndex == -1 ? 0 : prevBlockIndex;
-                let prevBlockId = navLinks[prevBlockIndex];
-
-                executePageSpecificScript(currentBlockId);
-
-                $slider.slick("refresh");
-            }
-
-            function getBlockId(blockIndex) {
-                return navLinks[blockIndex];
-            }
-
-            function navigateToBlock(blockIndex) {
-                let currentBlockId = getBlockId(blockIndex);
-                window.location.href = baseHashUrl + currentBlockId;
-            }
-
-                
-            function scrollToNextBlock() {
-                if (currentBlockIndex == navLinks.length - 1) {
-                    return;
-                }
-                prevBlockIndex = currentBlockIndex;
-                currentBlockIndex += 1;
-                navigateToBlock(currentBlockIndex);
-            }
-            function scrollToPrevBlock() {
-                if (currentBlockIndex == 0) {
-                    return;
-                }
-                prevBlockIndex = currentBlockIndex;
-                currentBlockIndex -= 1;
-                navigateToBlock(currentBlockIndex);
-            }
-
-            function customScrollKeysHandler(e) {
-                if (keysPrev[e.keyCode]) {
-                    e.preventDefault();
-                    scrollToPrevBlock();
-                } else if (keysNext[e.keyCode]) {
-                    e.preventDefault();
-                    scrollToNextBlock();
-                }
-            }
-
-            function customScrollWheelHandler(e) {
-                let targetElement = document.getElementById(currentHashtag);
-                let contentElem = targetElement.querySelector(".content");
-
-                //if (targetElement.scrollHeight - document.documentElement.clientHeight == document.documentElement.scrollTop) {
-                    //limit handling rate to prevent scrolling trough all pages
-                    if (Date.now() - lastScrollTime > 1400) {
-                        if (e.deltaY > 0) {
-                            scrollToNextBlock();
-                        } else if (e.deltaY < 0) {
-                            scrollToPrevBlock();
-                        }
-
-                        lastScrollTime = Date.now();
-                    }
-                //} else {
-                //    console.log("== just scroll ==");
-
-                //}
-            }
-
-            function customScrollForScrollable(e) {
-                e.cancelBubble = true;
-                customScrollWheelHandler(e);  
-            }
-
-            function customScrollTouchHandler(e) {
-                // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
-            }
-
-            // called when user navigates back or clicks on link
-            function hashUrlChangeHandler(event) {
-                if (event.newURL != event.oldURL) {
-                    clearLoadedState();
-
-                    let newUrlId = window.location.hash.substr(1);
-                    let oldUrlId = event.oldURL.split('#')[1];
-                    //let newBlockIndex = getBlockIndexByHashtag(newUrlId);
-                    prevBlockIndex = getBlockIndexByHashtag(oldUrlId);
-
-                    displayBlock(newUrlId);
-                }
-
-            }    
-
-        /* =========================================
-            3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS
-          ========================================== */
+            /* =========================================
+                3D ANIMATION AND BLOCK-SPECIFIC SCRIPTS
+            ========================================== */
 
             function executePageSpecificScript(blockId) {
 
                 switch (blockId) {
                     case "main":
-                        $object.animateOpen(function () {
+                        $object.animateOpen(true, function () {
                             setTimeout($object.animateClose, 300);
                         });
                         break;
                     case "advantages":
-                        $scheme.animateOpen(function () {
+                        $scheme.animateOpen(true, function () {
                             console.log("andvantages animation ended");
                         });
                         break;
@@ -691,6 +477,321 @@ document.documentElement.className = document.documentElement.className.replace(
                         break;
                 }
             }
+
+            let movingMenuUnderline = document.querySelector(".menu .moving-underline");
+            let menuListElem = document.querySelector(".menu ul");
+
+            function playMenuUnderlineAnimation(currentBlockId) {
+                let currentNavElement = document.querySelector("li." + currentBlockId);
+            
+                if (currentNavElement) {
+                    let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
+                    movingMenuUnderline.style.width = currentNavElement.offsetWidth + "px";
+                    movingMenuUnderline.style.transform = "translateX(" + navElemOffset + "px)";
+                } else {
+                    movingMenuUnderline.style.width = 0;
+                }
+            }
+
+            // SCROLL MANAGER DEFINITION
+            function Page(pageId){
+                this.id = pageId;
+                this.pageElement = document.getElementById(pageId);
+
+                this.setLoaded = function(){
+                    this.pageElement.classList.add('loaded');
+                }
+                this.setLoaded = this.setLoaded.bind(this);
+                
+                this.loaded = function(){
+                    this.pageElement.classList.remove('loading');
+                    this.clearNext();
+                    this.clearPrev();
+                    
+                };
+                this.loaded = this.loaded.bind(this);
+                
+                this.load = function(){
+                    if (this.pageElement.classList.contains('next') || this.pageElement.classList.contains('prev')) {
+                        this.pageElement.classList.add('loading');
+                        setTimeout(this.setLoaded, 300);
+                        //this.pageElement.addEventListener("transitionend", this.loaded, true);
+                        setTimeout(this.loaded, 700);
+                    } else {
+                        this.setLoaded();
+                    }
+                    playMenuUnderlineAnimation(this.id);
+                    executePageSpecificScript(this.id);
+                };
+
+                this.unload = function() {
+                    this.pageElement.classList.remove('loaded');
+                    this.pageElement.removeEventListener("transitionend", this.unload, true);
+                };
+                this.unload = this.unload.bind(this);
+
+                this.setNext = function() {
+                    if (this.pageElement.classList.contains('prev')) {
+                        this.pageElement.classList.remove('prev');
+                    }
+                    this.pageElement.classList.add('next');
+                    //this.pageElement.addEventListener("transitionend", this.unload, true);
+                    setTimeout(this.unload, 700);
+                    
+                };
+
+                this.setPrev = function() {
+                    if (this.pageElement.classList.contains('next')) {
+                        this.pageElement.classList.remove('next');
+                    }
+                    this.pageElement.classList.add('prev');
+                    //this.pageElement.addEventListener("transitionend", this.unload, true);
+                    setTimeout(this.unload, 700);
+                };
+
+                this.clearPrev = function() {
+                    this.pageElement.classList.remove('prev');
+                }
+
+                this.clearNext = function() {
+                    this.pageElement.classList.remove('next');
+                }
+
+                this.currentToPrev = function() {
+                    this.setPrev();
+                };
+
+                this.nextToCurrent = function() {
+                    this.load();
+                };
+
+                this.currentToNext = function() {
+                    this.setNext();
+                };
+
+                this.prevToCurrent = function() {
+                    this.load();
+                };
+
+            }
+
+            function ScrollManager(parentSelector, pagesArray, currentId){
+                this.scrollParent = document.querySelector(parentSelector);
+                //this.pages = this.scrollParent.querySelectorAll(pagesSelector);
+                this.currentPage = null;
+                this.previousPage = null;
+                this.nextPage = null;
+                this.pagesArray = pagesArray;
+                this.currentPageIndex = 0;
+
+                this.displayPageByIndex = function (index) {
+                    if (this.currentPage) {
+                        this.currentPage.unload();
+                    }
+                    this.currentPageIndex = index;
+                    this.currentPage = this.pagesArray[index];
+                    this.currentPage.load();
+
+                    if (index > 0) {
+                        this.previousPage = this.pagesArray[index - 1];
+                        this.previousPage.setPrev();
+                    } else {
+                        this.previousPage = null;
+                    }
+
+                    if (index < (this.pagesArray.length - 1)) {
+                        this.nextPage = this.pagesArray[index + 1];
+                        this.nextPage.setNext();
+                    } else {
+                        this.nextPage = null;
+                    }
+                };
+
+                this.displayPage = function (pageId) {
+                    for (let i = 0; i < this.pagesArray.length; i++) {
+                        const page = this.pagesArray[i];
+                        if (page.id == pageId) {
+                            //this.clearLoadedState();
+                            this.displayPageByIndex(i);
+                            break;
+                        }
+                    }
+                };
+
+                this.setCurrentPageByIndex = function (index) {
+                    
+                    this.currentPageIndex = index;
+                    console.log('set page index: ' + index);
+                    
+                    this.currentPage = this.pagesArray[index];
+                    console.log('set current page ' + this.currentPage.id);
+                    window.location.href = '#' + this.currentPage.id;
+                    
+                };
+
+                this.setCurrentPage = function(pageId){
+                    for (let i = 0; i < this.pagesArray.length; i++) {
+                        const page = this.pagesArray[i];
+                        if (page.id == pageId) {
+                            //this.clearLoadedState();
+                            this.setCurrentPageByIndex(i);
+                            break;
+                        }
+                    }
+                };
+
+                this.clearLoadedState = function() {
+                    this.pagesArray.forEach(function(page){
+                        page.unload();
+                    });
+                };
+
+                this.init = function() {
+                    if (null != this.pagesArray && this.pagesArray.length > 1) {
+                        this.clearLoadedState();
+                        if (currentId != null) {
+                            this.displayPage(currentId);
+                        } else {
+                            this.displayPageByIndex(0);
+                        }
+                    }
+                };
+                this.init();
+
+                this.scrollToNextPage = function() {
+                    if (this.currentPageIndex == this.pagesArray.length - 1) {
+                        return;
+                    }
+                    
+                    console.log('increase current page index');
+                    this.currentPageIndex += 1;
+                    this.setCurrentPageByIndex(this.currentPageIndex);
+
+                };
+
+                this.scrollToPrevPage = function() {
+                    if (this.currentPageIndex == 0) {
+                        return;
+                    }
+                    console.log('decrease current page index');
+                    
+                    this.currentPageIndex -= 1;
+                    this.setCurrentPageByIndex(this.currentPageIndex); 
+                };
+
+                
+            }
+            // SCROLL MANAGER DEFINITION END
+
+            
+
+            let mainElem = document.querySelector(".main");
+            
+            // left: 37, up: 38, right: 39, down: 40,
+            // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+            let keysPrev = { 38: 1, 33: 1};
+            let keysNext = { 40: 1, 34: 1};
+
+            //let baseHashUrl = "#";
+
+            let lastScrollTime = 0;
+
+            // initialize variable by hashtag from url if it present
+            let currentHashtag = window.location.hash.substr(1);
+            if (currentHashtag.length == 0) {
+                currentHashtag = "main";
+            }
+
+            let scrollManager = new ScrollManager('.main', [
+                new Page('main'),
+                new Page('advantages'),
+                new Page('assortment'),
+                new Page('mission'),
+                new Page('faq'),
+                new Page('buy'),
+                new Page('consultation')
+            ], currentHashtag);
+          
+            //let allBlocks = document.querySelectorAll(".page");
+            
+            let mq = null;
+            // media query event handler
+            if (window.matchMedia) {
+                mq = window.matchMedia("(min-width: 1025px)");
+                mq.addListener(WidthChange);
+                WidthChange(mq);
+            }
+
+            // media query change
+            function WidthChange(mq) {
+                // window width is at least 1025px
+                mainElem.classList.add("stop-scrolling");
+
+                // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
+                document.onkeydown = customScrollKeysHandler;
+                window.ontouchmove = customScrollTouchHandler;
+                window.onhashchange = hashUrlChangeHandler;
+
+                // add custom scroll only for devices with screen more than 1025px
+                if (mq.matches) {
+                    addWheelListener( window, customScrollWheelHandler, false);
+                    
+                    let scrollBlocks = document.querySelectorAll(".page .scroll-block");
+                    Array.prototype.forEach.call(scrollBlocks, function(scrollBlock){
+                        addWheelListener( scrollBlock, customScrollForScrollable, true);
+                        scrollBlock.classList.add("dragscroll");
+                        scrollBlock.style.cursor = "grab";
+                    });
+                } else {
+                    // window width is less than 1025px
+                }
+            }
+
+            function customScrollKeysHandler(e) {
+                if (keysPrev[e.keyCode]) {
+                    e.preventDefault();
+                    //scrollToPrevBlock();
+                    scrollManager.scrollToPrevPage();
+                } else if (keysNext[e.keyCode]) {
+                    e.preventDefault();
+                    //scrollToNextBlock();
+                    scrollManager.scrollToNextPage();
+                }
+            }
+
+            function customScrollWheelHandler(e) {
+                //limit handling rate to prevent scrolling trough all pages
+                if (Date.now() - lastScrollTime > 1400) {
+                    if (e.deltaY > 0) {
+                        //scrollToNextBlock();
+                        scrollManager.scrollToNextPage();
+                    } else if (e.deltaY < 0) {
+                        //scrollToPrevBlock();
+                        scrollManager.scrollToPrevPage();
+                    }
+
+                    lastScrollTime = Date.now();
+                }
+            }
+
+            function customScrollForScrollable(e) {
+                e.cancelBubble = true;
+                customScrollWheelHandler(e);  
+            }
+
+            function customScrollTouchHandler(e) {
+                // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
+            }
+
+            // called when user navigates back or clicks on link
+            function hashUrlChangeHandler(event) {
+                if (event.newURL != event.oldURL) {
+                    let newUrlId = window.location.hash.substr(1);
+                    let oldUrlId = event.oldURL.split('#')[1];
+
+                    scrollManager.displayPage(newUrlId);
+                }
+            }    
         }
     });
 

@@ -53,7 +53,10 @@
 			image.attr('src', images[i].src);
 		}
 
-		var animateReverseEnd = false, animateBackEnd = false, autoplayEnd = false, timer;
+		var animateReverseEnd = false, 
+		animateBackEnd = false, 
+		autoplayEnd = false, 
+		timer;
 
 		// Autoplay	
 		base.autoPlay = function(){
@@ -162,17 +165,20 @@
 		// HOVER
 		base.animateOpenEnd  = true;
 		base.animateCloseEnd = true;
+		base.isOpened = false;
+		base.isHovered = false;
 
-        
-
-
-        
         ////////// MAIN OBJECT //////////
 
         // Open
-        base.animateOpen = function(callback){
-			if (!base.animateOpenEnd || !base.animateCloseEnd) {
-				setTimeout( base.animateOpen, 2000);
+        base.animateOpen = function(reset, callback){
+			if (reset) {
+				base.isOpened = false;
+			}
+			if (!base.animateOpenEnd || !base.animateCloseEnd || base.isOpened) {
+				//console.log(base.selector + " postpone Open animation");
+				
+				//setTimeout( base.animateOpen, 2000);
 				return;
 			}
 			base.animateOpenEnd = false;
@@ -184,7 +190,8 @@
 
                 if (i >= images.length){
                     clearInterval(timer);       
-                    base.animateOpenEnd = true;
+					base.animateOpenEnd = true;
+					base.isOpened = true;
                     //if (!animateCloseEnd) animateClose();
 					//setTimeout(animateClose, 700);
 					if (callback) {
@@ -192,7 +199,7 @@
 					} 
                 }
 
-                console.log("Open: " + base.animateOpenEnd);
+                console.log(base.selector + " Open ended: " + base.animateOpenEnd);
             }       
 
 			var timer = setInterval(change, 40); 
@@ -202,8 +209,10 @@
 
         // Close
         base.animateClose = function(){
-			if (!base.animateOpenEnd || !base.animateCloseEnd){
-				setTimeout( base.animateClose, 2000);
+			if (!base.animateOpenEnd || !base.animateCloseEnd || !base.isOpened || base.isHovered){
+				//console.log(base.selector + " postpone Close animation");
+
+				//setTimeout( base.animateClose, 2000);
 				return;
 			} 
 			base.animateCloseEnd = false;
@@ -215,10 +224,10 @@
 
                 if (i <= 0){
                     clearInterval(timer);       
-                    base.animateCloseEnd = true;
+					base.animateCloseEnd = true;
+					base.isOpened = false;
                 }
-
-                console.log("Close: " + base.animateCloseEnd);
+                console.log(base.selector + " Close ended: " + base.animateCloseEnd);
             }       
 
             var timer = setInterval(change, 40); 
@@ -234,16 +243,21 @@
 		////////// END MAIN OBJECT //////////
 
 		if (base.hasClass("object-hover")) {
-			base.on("mouseover", function(){
 
-					base.animateOpen();
+			base.on("mouseover", function(){
+				base.isHovered = true;
+				base.animateOpen(false);
 
 				//base.animateOpenEnd = false;
 			}); 
 	
 			base.on("mouseleave", function(){
-				
+				base.isHovered = false;
+				if (!base.isOpened && !base.animateOpenEnd) {
+					setTimeout(base.animateClose, 2000);
+				} else if (base.isOpened && base.animateOpenEnd) {
 					base.animateClose();
+				}
 				
 				//base.animateCloseEnd = false;
 			}); 

@@ -1,8 +1,8 @@
 Have nodejs installed, then do
 
 ```
+> sudo npm install -g gulp-cli
+> sudo npm install -g gulp
 > npm install
-> sudo npm install -g grunt
-> sudo npm install -g grunt-cli
-> grunt
+> gulp
 ```
