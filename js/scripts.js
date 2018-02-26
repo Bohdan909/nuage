@@ -370,12 +370,12 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 switch (blockId) {
                     case "main":
-                        $object.animateOpen(function () {
+                        $object.animateOpen(true, function () {
                             setTimeout($object.animateClose, 300);
                         });
                         break;
                     case "advantages":
-                        $scheme.animateOpen(function () {
+                        $scheme.animateOpen(true, function () {
                             console.log("andvantages animation ended");
                         });
                         break;
