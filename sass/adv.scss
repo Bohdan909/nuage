@@ -905,6 +905,11 @@
 		padding-bottom: 20px;
 	}
 
+	.scheme-desc .title-1 {
+		font-size: 32px;
+		line-height: 41px;
+	}
+
 	.point {
 		left: 0 !important;
 		top: 0 !important;
@@ -933,7 +938,12 @@
 	}
 }
 
-@include mobile-min {
+@media (max-width: 374px) {
+
+	.scheme-desc .title-1 {
+		font-size: 25px;
+		line-height: 35px;
+	}
 
 	.page-adv {
 		background: none;

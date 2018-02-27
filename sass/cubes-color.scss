@@ -44,6 +44,8 @@
         position: absolute;
         
         div {
+            width: 22px;
+            height: 22px;
             transform-style: preserve-3d;
             -webkit-transform-style: preserve-3d;
             -ms-transform-style: preserve-3d;
@@ -78,8 +80,6 @@
         }
     }
 }
-
-
 
 // Cubes Assortment
 .page-assort {

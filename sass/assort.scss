@@ -540,11 +540,16 @@ $sliderAnimTime: 0.30s;
 
     @include tablet {
 
-        .assort-slider-sprite {
-            @include transform(scale(0.85));
-            @include origin(center, bottom);
-            left: 0;
-            margin-top: 0;
+        .assort-slider-sprite, .assort-det {
+            display: none;
+            // @include transform(scale(0.85));
+            // @include origin(center, bottom);
+            // left: 0;
+            // margin-top: 0;
+        }
+
+        .assort-slider-img {
+            display: block;
         }
 
         .assort-slider .slick-slide .title-2 {
