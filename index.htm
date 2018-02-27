@@ -1117,9 +1117,9 @@
 					<div class="video-calibrate">
 						<!-- Video -->
 						<div class="mission-video-content">
-							<div class="mission-video" data-vide-options="autoplay: false" data-vide-bg="mp4: video/video.mp4">
-								<div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%;">
-									<video loop="true" muted="" autoplay="true" controls="false">
+							<div class="mission-video">
+								<div class="video-container">
+									<video loop="loop" controls preload="auto" autoplay="true" muted playsinline webkit-playsinline>
 										<source src="video/video.mp4" type="video/mp4">
 									</video>
 								</div>
@@ -2258,21 +2258,54 @@
 						$licDesc.classList.remove("show");
 					});
 				}
-
+				
 				// Video
 				let videoBlock = document.querySelector(".video-block-wrap");
 				let video   = document.querySelector(".mission-video video");
 				let btnPlay = document.querySelector(".btn-play");
 				let btnName = document.querySelector(".video-name");
-				
-				// video.setAttribute("controls", "false");
-				setAttributes(video, {"autoplay": "true", "loop": "true", "controls": "false"});
 
-				function setAttributes(el, options) {
-				    Object.keys(options).forEach(function(attr) {
-				    	el.setAttribute(attr, options[attr]);
-				    });
+				const timeAnim = 5000;
+				const timeAnimBack = 600;
+				let touch = document.querySelector("html").classList.contains("touchevents");
+				let radius = "310px";
+				let scrollTop = $(window).scrollTop();
+				let videoWrap  = document.querySelector(".video-calibrate");
+				let videoPlay  = document.querySelector(".mission-video-play");
+				let videoCal   = document.querySelector(".video-calibrate");
+				let videoCloseBtn = document.querySelector(".mission-video-close");
+				let videoContent = videoWrap.querySelector(".mission-video-content");
+				let siteHeader = document.getElementById("header");
+				let topPosPlay, leftPosPlay, topPos, leftPos, timer;
+
+				var supportsVideo = !!document.createElement('video').canPlayType;
+				if (supportsVideo) {
+					video.controls = false;
+					
 				}
+
+				video.addEventListener('canplay', function() {
+					console.log(video.readyState);
+					
+					if(video.readyState >= 3) {
+						videoPlay.querySelector(".preview-image").style.opacity = "0";
+					}
+				}, false);
+				
+				function playVideoFromStart(videoElem, soundMuted) {
+					videoElem.currentTime = 0;
+					videoElem.muted = soundMuted;
+					videoElem.play();
+				}
+
+				// video.setAttribute("controls", "false");
+				//setAttributes(video, {"autoplay": "true", "loop": "true"});
+
+				// function setAttributes(el, options) {
+				//     Object.keys(options).forEach(function(attr) {
+				//     	el.setAttribute(attr, options[attr]);
+				//     });
+				// }
 				
 				// videoBlock.addEventListener("mouseover", function(){
 				// 	checkPlay("hover", "leave");
@@ -2304,25 +2337,20 @@
 				// };
 
 
-				const timeAnim = 5000;
-				const timeAnimBack = 600;
-				let touch = document.querySelector("html").classList.contains("touchevents");
-				let radius = "310px";
-				let scrollTop = $(window).scrollTop();
-				let videoWrap  = document.querySelector(".video-calibrate");
-				let videoPlay  = document.querySelector(".mission-video-play");
-				let videoCal   = document.querySelector(".video-calibrate");
-				let videoCloseBtn = document.querySelector(".mission-video-close");
-				let videoContent = videoWrap.querySelector(".mission-video-content");
-				let siteHeader = document.getElementById("header");
-				let topPosPlay, leftPosPlay, topPos, leftPos, timer;
 				
-				videoWrap.addEventListener("mouseover", function(){
-					//window.scrollTo(0, 0);
+				
+				// videoWrap.addEventListener("mouseover", function(){
+				// 	//window.scrollTo(0, 0);
+				// 	if (!videoWrap.classList.contains("open")){
+				// 		timer = setTimeout(videoOpen, 600);
+				// 	}
+
+				// });
+
+				videoWrap.addEventListener("click", function() {
 					if (!videoWrap.classList.contains("open")){
 						timer = setTimeout(videoOpen, 600);
 					}
-
 				});
 
 				videoWrap.addEventListener("mousemove", function (event) {
@@ -2411,7 +2439,8 @@
 					console.log("video Open");
 					hideSiteHeader();
 					//setCirclePos("2000px");
-					video.play();
+					//video.play();
+					playVideoFromStart(video, false);
 					
 					videoWrap.classList.add("open");
 				}
