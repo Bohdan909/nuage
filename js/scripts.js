@@ -2,8 +2,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
 (function($){
     $(document).ready(function() {
-
-         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
+        let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
         
         // setTimeout(function(){
         //     document.querySelector(".page").classList.add("loaded");
