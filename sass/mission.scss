@@ -470,10 +470,14 @@ div.mission-text-slider {
     @include delay(0.6s);
     cursor: pointer;
     position: absolute;
-    top: -50%;
-    bottom: -50%;
-    left: -50%;
-    right: -50%;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    // top: -50%;
+    // bottom: -50%;
+    // left: -50%;
+    // right: -50%;
     margin: auto;
     z-index: 1;
 
@@ -565,6 +569,20 @@ div.mission-text-slider {
         height: 100%;
         position: relative;
     }
+}
+
+.video-container {
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    overflow: hidden;
+    background-size: cover;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 
 @include mobile {
@@ -850,6 +868,8 @@ div.mission-text-slider {
         .mission-text, .mission-text-slider-wrap {
             height: 50%;
         }
+
+        
     }
 }
 
@@ -962,5 +982,58 @@ div.mission-text-slider {
 
     .mission-video-content {
         margin-left: -266px;
+    }
+}
+
+@media (min-width: 426px) and (max-width: 1024px) {
+    @include port {
+        .mission-video-play {
+            width: 400px;
+            height: 400px;
+        }
+        .video-calibrate {
+            width: 400px;
+            height: 400px;
+            left: calc(-100% - 400px);
+    
+            &.open {
+                @include transition(all, 4.0s, $easing);
+                width: 2000px;
+                height: 2000px;
+            }
+        }
+
+        .mission-video-content {
+            margin-left: -156px;
+        }
+    }
+}
+
+
+@media (min-width: 426px) and (max-width: 1024px) and (max-height: 960px) {
+    @include port {
+        .mission-video-play {
+            //margin-left: 100%;
+            width: 400px;
+            height: 400px;
+            // top: auto;
+            // bottom: auto;
+        }
+
+        .video-calibrate {
+            width: 400px;
+            height: 400px;
+            left: -100%;
+    
+            &.open {
+                @include transition(all, 4.0s, $easing);
+                width: 2000px;
+                height: 2000px;
+            }
+        }
+
+        .mission-video-content {
+            margin-left: 0;
+        }
     }
 }
