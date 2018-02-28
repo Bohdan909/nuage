@@ -6,14 +6,16 @@ const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const babel = require("gulp-babel");
 const autoprefixer = require('gulp-autoprefixer');
+const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
 const del = require('del');
 
 gulp.task('sass', function () {
  return gulp.src('./sass/main.scss')
   .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
-  .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
   .pipe(cleanCSS({compatibility: 'ie10'}))
+  .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
   .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest('./css'));
 });
@@ -29,6 +31,8 @@ function js(){
   return gulp.src(['js/**/*'])
       //.pipe(sourcemaps.init())
       //.pipe(babel({"presets": ["env"]}))
+      //.pipe(uglify())
+      //.pipe(concat('main.min.js'))
       //.pipe(sourcemaps.write("."))
       .pipe(gulp.dest('dist/js'));
 };
@@ -78,6 +82,10 @@ gulp.task('favicon', function() {
 gulp.task('clean:cache', function(){
   return del('.sass-cache/**', {force:true});
 });
+
+exports.html = html;
+exports.js = js;
+exports.watch = watch;
 
 const media = gulp.parallel('images', 'img', 'video', 'pdf');
 gulp.task('media', media);
