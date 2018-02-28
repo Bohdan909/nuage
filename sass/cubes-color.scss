@@ -100,7 +100,7 @@
     li:nth-child(8) { @include delay(0.35s); }
 
     &.show {
-        li              { @include transform(translateX(0));  }
+        li              { @include transform(translateX(0)); }
         li:nth-child(1) { @include delay(0.5s);  }
         li:nth-child(2) { @include delay(0.6s);  }
         li:nth-child(3) { @include delay(0.7s);  }
@@ -536,49 +536,47 @@ $btn-col-delay: 0.35s;
 }
 
 .assort-bg-list {
-    // @include transition(background, 0.01s, linear);
-    // @include delay(1.9s);
 
     &.bg-1 {
         background: rgb(135,181,225);
-        background-image: -moz-linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
+        background-image: linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
     }
 
     &.bg-2 {
         background: rgb(180,175,223);
-        background-image: -moz-linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
+        background-image: linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
     }
 
     &.bg-3 {
         background: rgb(175,136,147);
-        background-image: -moz-linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
+        background-image: linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
     }
 
     &.bg-4 {
         background: rgb(155,100,166);
-        background-image: -moz-linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
+        background-image: linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
     }
 
     &.bg-5 {
         background: rgb(75,75,129);
-        background-image: -moz-linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
+        background-image: linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
     }
 
     &.bg-6 {
         background-color: rgb(237,158,111);
-        background-image: -moz-linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
+        background-image: linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
     }
 }
 
@@ -651,43 +649,43 @@ $btn-col-delay: 0.35s;
 
     li:nth-child(1) {
         background:rgb(135,181,225);
-        background-image: -moz-linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
+        background-image: linear-gradient( 66deg, rgb(135,181,225) 0%, rgb(162,201,238) 81%, rgb(189,221,251) 100%);
     }
 
     li:nth-child(2) {
         background: rgb(180,175,223);
-        background-image: -moz-linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
+        background-image: linear-gradient( 66deg, rgb(180,175,223) 0%, rgb(203,158,211) 100%);
     }
 
     li:nth-child(3) {
         background: rgb(175,136,147);
-        background-image: -moz-linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
+        background-image: linear-gradient( 66deg, rgb(175,136,147) 0%, rgb(239,206,191) 100%);
     }
 
     li:nth-child(4) {
         background: rgb(155,100,166);
-        background-image: -moz-linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
+        background-image: linear-gradient( 66deg, rgb(155,100,166) 0%, rgb(129,75,139) 49%, rgb(103,50,111) 100%);
     }
 
     li:nth-child(5) {
         background: rgb(75,75,129);
-        background-image: -moz-linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
+        background-image: linear-gradient( 66deg, rgb(75,75,129) 0%, rgb(88,88,143) 49%, rgb(101,100,157) 100%);
     }
 
     li:nth-child(6) {
         background-color: rgb(237,158,111);
-        background-image: -moz-linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
         background-image: -webkit-linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
         background-image: -ms-linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
+        background-image: linear-gradient( 66deg, rgb(237,158,111) 0%, rgb(240,173,134) 49%, rgb(243,188,156) 100%);
     }
 }

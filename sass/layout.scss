@@ -28,9 +28,7 @@ body {
     text-align: left;
 
     background: #f2f5f9;
-    background-image: -moz-linear-gradient( 90deg, rgb(221,229,240) 0%, rgb(238,242,248) 33%, rgb(255,255,255) 100%);
-    background-image: -webkit-linear-gradient( 90deg, rgb(221,229,240) 0%, rgb(238,242,248) 33%, rgb(255,255,255) 100%);
-    background-image: -ms-linear-gradient( 90deg, rgb(221,229,240) 0%, rgb(238,242,248) 33%, rgb(255,255,255) 100%);
+    background-image: linear-gradient(0deg, rgb(221,229,240) 0%, rgb(238,242,248) 33%, rgb(255,255,255) 100%);
 }
 
 .socket {
