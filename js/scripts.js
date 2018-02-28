@@ -391,12 +391,17 @@ document.documentElement.className = document.documentElement.className.replace(
                         $slider.on( "click", ".slick-slider-inner", function( e ) {
                             if (!$(this).parent().hasClass("slick-current") || $(this).parent().hasClass("slick-cloned")) { 
                                 e.preventDefault();
-                                var currentSlideIndex = $slider.slick("slickCurrentSlide");
+                                let currentSlideIndex = $slider.slick("slickCurrentSlide");
+                                let figureIndex = currentSlideIndex + 2;
                                 if (currentSlideIndex == 5) {
+                                    figureIndex = 1;
                                     $slider.slick("slickGoTo", 0, true);
                                 } else {
                                     $slider.slick("slickNext");
-                                }                        
+                                }
+                                
+                                $(".figures").removeClass("show");	
+                                $(".figures-" + figureIndex).addClass("show");
                             }	
                         });
                                 
@@ -410,7 +415,7 @@ document.documentElement.className = document.documentElement.className.replace(
                             } else {
                                 if (curIndex == items) loader()
                             }
-                    
+
                             $(".figures").removeClass("show");	
                             $(".figures-" + curIndex).addClass("show");	
                         });
