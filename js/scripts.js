@@ -383,7 +383,15 @@ document.documentElement.className = document.documentElement.className.replace(
                         
                         // Setup Classes
                         $slideItems.text(items);
-                        $(".figures-1").addClass("show");
+
+                        function displaySliderFugure(figIndex) {
+                            $(".figures").removeClass("show");	
+                            $(".figures-" + figIndex).addClass("show");
+                        }
+                        let curSlideIndex = parseInt($curSlideInd.text());
+
+                        displaySliderFugure(curSlideIndex);
+
                         setTimeout(function(){
                             $(".assort-bg-list").addClass("bg-1");
                         }, 1000);
@@ -400,8 +408,7 @@ document.documentElement.className = document.documentElement.className.replace(
                                     $slider.slick("slickNext");
                                 }
                                 
-                                $(".figures").removeClass("show");	
-                                $(".figures-" + figureIndex).addClass("show");
+                                displaySliderFugure(figureIndex);
                             }	
                         });
                                 
@@ -416,8 +423,7 @@ document.documentElement.className = document.documentElement.className.replace(
                                 if (curIndex == items) loader()
                             }
 
-                            $(".figures").removeClass("show");	
-                            $(".figures-" + curIndex).addClass("show");	
+                            displaySliderFugure(curIndex);
                         });
         
                         function loader(){
