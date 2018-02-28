@@ -237,7 +237,10 @@ $ultra-hd-width : 3840px;
 	-webkit-border-radius: $radius;
 	-moz-border-radius: $radius;
 	-ms-border-radius: $radius;
-	border-radius: $radius;
+    border-radius: $radius;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
 }
 
 @mixin border-rad-top ($radius) {
