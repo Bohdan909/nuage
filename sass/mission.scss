@@ -834,7 +834,25 @@ div.mission-text-slider {
             height: 50%;
         }
 
-        
+        .mission-video-play {
+            width: 400px;
+            height: 400px;
+        }
+        .video-calibrate {
+            width: 400px;
+            height: 400px;
+            left: calc(-100% - 400px);
+    
+            &.open {
+                @include transition(all, 4.0s, $easing);
+                width: 2000px;
+                height: 2000px;
+            }
+        }
+
+        .mission-video-content {
+            margin-left: -156px;
+        }
     }
 }
 
@@ -975,34 +993,9 @@ div.mission-text-slider {
     }
 }
 
-@media (min-width: 426px) and (max-width: 1024px) {
-    @include port {
-        .mission-video-play {
-            width: 400px;
-            height: 400px;
-        }
-        .video-calibrate {
-            width: 400px;
-            height: 400px;
-            left: calc(-100% - 400px);
-    
-            &.open {
-                @include transition(all, 4.0s, $easing);
-                width: 2000px;
-                height: 2000px;
-            }
-        }
-
-        .mission-video-content {
-            margin-left: -156px;
-        }
-    }
-}
-
-// Nexus 7 rules
+// Tablets porttrait
 @media (min-width: 426px) 
-  and (max-width: 1024px) 
-  and (max-height: 960px) {
+  and (max-width: 767px) {
     @include port {
         .mission-video-play {
             //margin-left: 100%;
