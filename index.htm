@@ -2353,19 +2353,7 @@
 					}
 				});
 
-				videoWrap.addEventListener("mousemove", function (event) {
-					showSiteControls(function(){
-						setTimeout(hideSiteControls, 1500);
-					});
-
-				});
-
-				videoWrap.addEventListener("touchstart", function (event) {
-					showSiteControls(function(){
-						setTimeout(hideSiteControls, 1500);
-					});
-
-				}, false);
+				
 
 				function hideSiteHeader() {
 					siteHeader.style.opacity = "0";
@@ -2391,11 +2379,11 @@
 
 				}
 
-				// videoWrap.addEventListener("touchstart", function(){
-				// 	window.scrollTo(0, 0);
-				// 	//scrollDisable();
-				// 	setTimeout(videoOpen, 200);
-				// });
+				function handleVideoTouch(event){
+					showSiteControls(function(){
+						setTimeout(hideSiteControls, 1500);
+					});
+				}
 
 				videoWrap.addEventListener("mouseleave", function(){
 					clearTimeout(timer);
@@ -2434,7 +2422,7 @@
 				// 	//videoWrap.setAttribute("style","clip-path:circle("+rad+" at "+leftPos+"px"+" "+topPos+"px);");
 				// 	//videoPlay.setAttribute("style","top:"+topPosPlay+"px; left:"+leftPosPlay+"px;");
 				// }
-
+				
 				function videoOpen(){
 					console.log("video Open");
 					hideSiteHeader();
@@ -2443,6 +2431,9 @@
 					playVideoFromStart(video, false);
 					
 					videoWrap.classList.add("open");
+					
+					videoWrap.addEventListener("mousemove", handleVideoTouch, false);
+					videoWrap.addEventListener("touchstart", handleVideoTouch, false);
 				}
 
 				function videoClose(){
@@ -2451,6 +2442,9 @@
 					//setCirclePos(radius);
 					videoWrap.classList.remove("open");
 					setTimeout(function(){ video.pause() }, 500);
+					
+					videoWrap.removeEventListener("mousemove", handleVideoTouch, false);
+					videoWrap.removeEventListener("touchstart", handleVideoTouch, false);
 				}
 
 				// window.addEventListener("resize", function(){

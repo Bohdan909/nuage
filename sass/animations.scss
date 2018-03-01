@@ -127,6 +127,8 @@
 
     .object-main {
         @include a-delay(0.3s);
+        transform: translateZ(0);
+        backface-visibility: hidden;
     }
 }
 
