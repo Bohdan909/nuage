@@ -724,7 +724,7 @@
 	}
 
 	.object-scheme {
-		@include transform(scale(0.8), taranslateZ(0));
+		transform: scale(0.8) translateY(0);
 		backface-visibility: hidden;
 	}	
 
