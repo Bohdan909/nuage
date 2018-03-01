@@ -348,7 +348,10 @@ document.documentElement.className = document.documentElement.className.replace(
                 swipe: false,
                 useTransform: true,
                 cssEase: 'cubic-bezier(0.11,0,0.45,1)',
-
+                touchMove: false,
+                draggable: false,
+                lazyLoad: 'progressive',
+                
                 responsive: [{
                     breakpoint: 1025,
                     settings: {
@@ -739,7 +742,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
                 document.onkeydown = customScrollKeysHandler;
-                window.ontouchmove = customScrollTouchHandler;
+                //window.ontouchmove = customScrollTouchHandler;
                 window.onhashchange = hashUrlChangeHandler;
 
                 // add custom scroll only for devices with screen more than 1025px
@@ -924,7 +927,7 @@ document.documentElement.className = document.documentElement.className.replace(
             // it's time to fire the callback
             return callback(event);
 
-        }, useCapture || false);
+        }, {passive: true}, useCapture || false);
     }
 
 }(jQuery))
