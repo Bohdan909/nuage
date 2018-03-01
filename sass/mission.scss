@@ -248,36 +248,36 @@ div.mission-text-slider {
     }
 }
 
-.video-block {
-    @include transition(all, 0.6s, $easing);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    -webkit-clip-path: circle(5% at 50% 50%);
-    clip-path: circle(5% at 50% 50%);
-    opacity: 0;
+// .video-block {
+//     @include transition(all, 0.6s, $easing);
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     overflow: hidden;
+//     -webkit-clip-path: circle(5% at 50% 50%);
+//     clip-path: circle(5% at 50% 50%);
+//     opacity: 0;
 
 
-    .video {
-        position: absolute;
-        width: 400px;
-        height: 400px;
-        left: 0;
-        top: 0;
-        z-index: 100;
-    }
+//     .video {
+//         position: absolute;
+//         width: 400px;
+//         height: 400px;
+//         left: 0;
+//         top: 0;
+//         z-index: 100;
+//     }
 
-    .video-name, .btn-play {
-        z-index: 101;
+//     .video-name, .btn-play {
+//         z-index: 101;
 
-        &.hide {
-            opacity: 0;
-        }
-    }
-}
+//         &.hide {
+//             opacity: 0;
+//         }
+//     }
+// }
 
 .btn-play {
     @include trans(0.5s);
@@ -427,7 +427,6 @@ div.mission-text-slider {
 }
 
 .video-calibrate {
-    @include transform(translateY(-50%));
     @include border-rad(50%);
     position: absolute;
     top: -100%;
@@ -438,7 +437,7 @@ div.mission-text-slider {
     overflow: hidden;
     z-index: 30;
     box-sizing: border-box;
-    transform: translateX(356px) translateZ(0) scale(1);
+    transform: translate3d(356px, 0, 0);
     -webkit-transition: width 0.6s $easing, height 0.6s $easing;
     -ms-transition: width 0.6s $easing, height 0.6s $easing;
     transition: width 0.6s $easing, height 0.6s $easing;
@@ -489,6 +488,8 @@ div.mission-text-slider {
         right: 0;
         text-align: center;
         top: calc(50% + 40px);
+        color: #dddddd;
+        font-weight: 600;
     }
 
     &.hide {
@@ -511,13 +512,14 @@ div.mission-text-slider {
         z-index: -1;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate3d(-50%, -50%, 0);
         visibility: hidden;
         opacity: 0;
         width: auto;
         height: auto;
         min-height: 100%;
-		min-width: 100%;
+        min-width: 100%;
+        backface-visibility: hidden;
     }
 }
 
@@ -534,7 +536,7 @@ div.mission-text-slider {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
-    transform: translateX(-50%) translateY(-50%) translateZ(0);
+    transform: translate3d(-50%, -50%, 0);
     backface-visibility: hidden;
     z-index: 1;
 }
@@ -595,7 +597,7 @@ div.mission-text-slider {
     }
 
     .video-calibrate {
-        @include transform(translateY(0));
+        @include transform(translateY(-5%));
 
         &.open {
             @include transition(all, 4.0s, $easing);
@@ -618,6 +620,7 @@ div.mission-text-slider {
     }
     .mission-video-content {
         margin-left: 0;
+        margin-top: 5%;
     }
 }
 
@@ -808,10 +811,13 @@ div.mission-text-slider {
                 margin-bottom: 10px;
             }
         }
+        .video-calibrate,
+        .mission-video-play {
+            width: 400px;
+            height: 400px;
+        }
 
         .video-calibrate {
-            width: 450px;
-            height: 450px;
             left: calc(-100% - 220px);
     
             &.open {
@@ -836,14 +842,14 @@ div.mission-text-slider {
             height: 50%;
         }
 
+        .video-calibrate,
         .mission-video-play {
             width: 400px;
             height: 400px;
         }
         .video-calibrate {
-            width: 400px;
-            height: 400px;
             left: calc(-100% - 400px);
+            transform: translate3d(356px, 0, 0);
     
             &.open {
                 @include transition(all, 4.0s, $easing);
@@ -925,10 +931,12 @@ div.mission-text-slider {
 
     .video-calibrate {
         left: -100%;
+        transform: translate3d(0, 30px, 0);
     }
 
     .mission-video-content {
         margin-left: 0;
+        margin-top: -30px;
     }
 
     .video-block-wrap {
@@ -991,7 +999,7 @@ div.mission-text-slider {
     }
 
     .mission-video-content {
-        margin-left: -266px;
+        margin-left: -456px;
     }
 }
 
@@ -999,17 +1007,13 @@ div.mission-text-slider {
 @media (min-width: 426px) 
   and (max-width: 767px) {
     @include port {
+        .video-calibrate,
         .mission-video-play {
-            //margin-left: 100%;
-            width: 400px;
-            height: 400px;
-            // top: auto;
-            // bottom: auto;
+            width: 380px;
+            height: 380px;
         }
 
         .video-calibrate {
-            width: 400px;
-            height: 400px;
             left: -100%;
             transform: translateY(-50%);
     
@@ -1031,13 +1035,27 @@ div.mission-text-slider {
 
 // IPhone X landscape
 @media only screen 
-  and (min-width: 375px) 
-  and (max-width: 812px) 
+  and (max-height: 375px) 
+  and (min-width: 812px) 
   and (-webkit-min-device-pixel-ratio: 3)
   and (orientation: landscape) { 
     .mission-video-play,
     .video-calibrate {
         width: 300px;
         height: 300px;
+    }
+}
+// IPhone X portrait
+@media only screen 
+  and (max-width: 375px) 
+  and (min-height: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+    .video-calibrate {
+        @include transform(translateY(-25%));
+    }
+
+    .mission-video-content {
+        margin-top: 25%;
     }
 }
