@@ -753,13 +753,23 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
                 document.onkeydown = customScrollKeysHandler;
-                //window.ontouchmove = customScrollTouchHandler;
+                
+                // IE fix for onhashchange
+                if(!window.HashChangeEvent)(function(){
+                    var lastURL=document.URL;
+                    window.addEventListener("hashchange",function(event){
+                        Object.defineProperty(event,"oldURL",{enumerable:true,configurable:true,value:lastURL});
+                        Object.defineProperty(event,"newURL",{enumerable:true,configurable:true,value:document.URL});
+                        lastURL=document.URL;
+                    });
+                }());
                 window.onhashchange = hashUrlChangeHandler;
 
                 // add custom scroll only for devices with screen more than 1025px
                 if (mq.matches) {
                     addWheelListener( window, customScrollWheelHandler, false);
                     
+                    // add drag handlers for scrollable blocks
                     let scrollBlocks = document.querySelectorAll(".page .scroll-block");
                     Array.prototype.forEach.call(scrollBlocks, function(scrollBlock){
                         addWheelListener( scrollBlock, customScrollForScrollable, true);
@@ -768,6 +778,8 @@ document.documentElement.className = document.documentElement.className.replace(
                     });
                 } else {
                     // window width is less than 1025px
+                    //window.ontouchmove = customScrollTouchHandler;
+                    ontouch(window, customScrollTouchHandler);
                 }
             }
 
@@ -803,8 +815,16 @@ document.documentElement.className = document.documentElement.className.replace(
                 customScrollWheelHandler(e);  
             }
 
-            function customScrollTouchHandler(e) {
+            function customScrollTouchHandler(evt, dir, phase, swipetype, distance) {
                 // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
+                console.log("Swipe direction: " + swipetype);
+                if (phase == "end") {
+                    if (swipetype == "left") {
+                        scrollManager.scrollToNextPage();
+                    } else if (swipetype == "right") {
+                        scrollManager.scrollToPrevPage();
+                    }
+                }
             }
 
             // called when user navigates back or clicks on link
@@ -972,6 +992,85 @@ document.documentElement.className = document.documentElement.className.replace(
 
         }, {passive: true}, useCapture || false);
     }
+
+    /************************************
+     * SWIPE HANDLER (Returns direction) 
+     ************************************/
+    // http://www.javascriptkit.com/javatutors/touchevents3.shtml
+    function ontouch(el, callback){
+ 
+        var touchsurface = el,
+        dir,
+        swipeType,
+        startX,
+        startY,
+        distX,
+        distY,
+        threshold = 150, //required min distance traveled to be considered swipe
+        restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+        allowedTime = 500, // maximum time allowed to travel that distance
+        elapsedTime,
+        startTime,
+        handletouch = callback || function(evt, dir, phase, swipetype, distance){}
+     
+        touchsurface.addEventListener('touchstart', function(e){
+            var touchobj = e.changedTouches[0]
+            dir = 'none'
+            swipeType = 'none'
+            dist = 0
+            startX = touchobj.pageX
+            startY = touchobj.pageY
+            startTime = new Date().getTime() // record time when finger first makes contact with surface
+            handletouch(e, 'none', 'start', swipeType, 0) // fire callback function with params dir="none", phase="start", swipetype="none" etc
+            //e.preventDefault()
+     
+        }, false)
+     
+        touchsurface.addEventListener('touchmove', function(e){
+            var touchobj = e.changedTouches[0]
+            distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+            distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+            if (Math.abs(distX) > Math.abs(distY)){ // if distance traveled horizontally is greater than vertically, consider this a horizontal movement
+                dir = (distX < 0)? 'left' : 'right'
+                handletouch(e, dir, 'move', swipeType, distX) // fire callback function with params dir="left|right", phase="move", swipetype="none" etc
+            }
+            else{ // else consider this a vertical movement
+                dir = (distY < 0)? 'up' : 'down'
+                handletouch(e, dir, 'move', swipeType, distY) // fire callback function with params dir="up|down", phase="move", swipetype="none" etc
+            }
+            //e.preventDefault() // prevent scrolling when inside DIV
+        }, false)
+     
+        touchsurface.addEventListener('touchend', function(e){
+            var touchobj = e.changedTouches[0]
+            elapsedTime = new Date().getTime() - startTime // get time elapsed
+            if (elapsedTime <= allowedTime){ // first condition for awipe met
+                if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+                    swipeType = dir // set swipeType to either "left" or "right"
+                }
+                else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+                    swipeType = dir // set swipeType to either "top" or "down"
+                }
+            }
+            // Fire callback function with params dir="left|right|up|down", phase="end", swipetype=dir etc:
+            handletouch(e, dir, 'end', swipeType, (dir =='left' || dir =='right')? distX : distY)
+            //e.preventDefault()
+        }, false)
+    }
+     
+    // USAGE:
+    /*
+    ontouch(el, function(evt, dir, phase, swipetype, distance){
+     // evt: contains original Event object
+     // dir: contains "none", "left", "right", "top", or "down"
+     // phase: contains "start", "move", or "end"
+     // swipetype: contains "none", "left", "right", "top", or "down"
+     // distance: distance traveled either horizontally or vertically, depending on dir value
+     
+     if ( phase == 'move' && (dir =='left' || dir == 'right') )
+      console.log('You are moving the finger horizontally by ' + distance)
+    })
+    */
 
 }(jQuery))
 
