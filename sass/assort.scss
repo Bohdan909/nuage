@@ -159,9 +159,11 @@
 
 .assort-slider .slick-slide {
     @include transition(opacity, 0.3s, linear);
+    @extend .sm;
     opacity: 0.48;
 
     .slick-slider-inner {
+        @extend .sm;
         cursor: pointer;
         -webkit-filter: blur(2px);
         filter: blur(2px);
@@ -193,7 +195,6 @@
     &.slick-current {
         opacity: 1;
         
-
         .slick-slider-inner {
             cursor: pointer;
             -webkit-filter: blur(0px);
@@ -320,6 +321,7 @@
 }
 
 .assort-slider-sprite {
+    @extend .sm;
     position: relative;
     z-index: 1;
     display: block;
@@ -394,6 +396,7 @@ $sliderAnimTime: 0.30s;
         
         .assort-slider-sprite-bg {
             @include animation(assortAnimateBack, $sliderAnimTime, linear);
+            @extend .sm;
             animation-timing-function: steps(29);
             -webkit-animation-timing-function: steps(29);
             -ms-animation-timing-function: steps(29);
@@ -701,7 +704,7 @@ div.assort-desc-item {
     left: 0;
     right: 0;
 
-    @include animation(fadeOut, 0.8s, linear);
+    @include animation(fadeOut, 0.4s, linear);
     display: none;
 
     p {
@@ -713,7 +716,7 @@ div.assort-desc-item {
     }
 
     &.show {
-        @include animation(fadeIn, 1s, linear);
+        @include animation(fadeIn, 0.55s, linear);
         display: block;
     }
 }
