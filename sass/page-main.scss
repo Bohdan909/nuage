@@ -222,12 +222,14 @@ div.scroll-helper {
     @include transition(all, 0.5s, linear);
     @include border-rad(20px);
     position: absolute;
+    max-width: 300px;
     left: 0;
     top: 90px;
     opacity: 0;
     padding: 11px 15px;
     background-color: #fff;
     font-size: 13px;
+    line-height: 18px;
 
     &.show {
         opacity: 1;

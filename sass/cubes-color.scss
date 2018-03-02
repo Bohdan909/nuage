@@ -96,6 +96,7 @@ ul.cubes-1 {
     }
 
     li:nth-child(4) {
+        display: none;
         background: url(../images/cube-14.svg) no-repeat 0 0;
     }
 
@@ -192,7 +193,7 @@ ul.cubes-2 {
     }
 
     li:nth-child(4){
-        right: -120px;
+        right: 20px;
         bottom: 264px;
     }
 
