@@ -159,12 +159,18 @@
 
 .assort-slider .slick-slide {
     @include transition(opacity, 0.3s, linear);
-    opacity: 0.28;
-    -webkit-filter: blur(2px);
-    filter: blur(2px);
+    opacity: 0.48;
 
     .slick-slider-inner {
-        cursor: default;
+        cursor: pointer;
+        -webkit-filter: blur(2px);
+        filter: blur(2px);
+
+        &:hover {
+            cursor: pointer;
+            -webkit-filter: blur(0px);
+            filter: blur(0px);
+        }
     }
 
     img {
@@ -186,11 +192,12 @@
 
     &.slick-current {
         opacity: 1;
-        -webkit-filter: blur(0px);
-        filter: blur(0px);
+        
 
         .slick-slider-inner {
             cursor: pointer;
+            -webkit-filter: blur(0px);
+            filter: blur(0px);
         }
     }
 }

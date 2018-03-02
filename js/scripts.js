@@ -348,7 +348,10 @@ document.documentElement.className = document.documentElement.className.replace(
                 swipe: false,
                 useTransform: true,
                 cssEase: 'cubic-bezier(0.11,0,0.45,1)',
-
+                touchMove: false,
+                draggable: false,
+                lazyLoad: 'progressive',
+                
                 responsive: [{
                     breakpoint: 1025,
                     settings: {
@@ -383,7 +386,15 @@ document.documentElement.className = document.documentElement.className.replace(
                         
                         // Setup Classes
                         $slideItems.text(items);
-                        $(".figures-1").addClass("show");
+
+                        function displaySliderFugure(figIndex) {
+                            $(".figures").removeClass("show");	
+                            $(".figures-" + figIndex).addClass("show");
+                        }
+                        let curSlideIndex = parseInt($curSlideInd.text());
+
+                        displaySliderFugure(curSlideIndex);
+
                         setTimeout(function(){
                             $(".assort-bg-list").addClass("bg-1");
                         }, 1000);
@@ -391,12 +402,16 @@ document.documentElement.className = document.documentElement.className.replace(
                         $slider.on( "click", ".slick-slider-inner", function( e ) {
                             if (!$(this).parent().hasClass("slick-current") || $(this).parent().hasClass("slick-cloned")) { 
                                 e.preventDefault();
-                                var currentSlideIndex = $slider.slick("slickCurrentSlide");
+                                let currentSlideIndex = $slider.slick("slickCurrentSlide");
+                                let figureIndex = currentSlideIndex + 2;
                                 if (currentSlideIndex == 5) {
+                                    figureIndex = 1;
                                     $slider.slick("slickGoTo", 0, true);
                                 } else {
                                     $slider.slick("slickNext");
-                                }                        
+                                }
+                                
+                                displaySliderFugure(figureIndex);
                             }	
                         });
                                 
@@ -410,9 +425,8 @@ document.documentElement.className = document.documentElement.className.replace(
                             } else {
                                 if (curIndex == items) loader()
                             }
-                    
-                            $(".figures").removeClass("show");	
-                            $(".figures-" + curIndex).addClass("show");	
+
+                            displaySliderFugure(curIndex);
                         });
         
                         function loader(){
@@ -728,7 +742,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 // CUSTOM EVENT HANDLERS FOR SCROLL AND NAVIGATION
                 document.onkeydown = customScrollKeysHandler;
-                window.ontouchmove = customScrollTouchHandler;
+                //window.ontouchmove = customScrollTouchHandler;
                 window.onhashchange = hashUrlChangeHandler;
 
                 // add custom scroll only for devices with screen more than 1025px
@@ -945,7 +959,7 @@ document.documentElement.className = document.documentElement.className.replace(
             // it's time to fire the callback
             return callback(event);
 
-        }, useCapture || false);
+        }, {passive: true}, useCapture || false);
     }
 
 }(jQuery))
