@@ -595,13 +595,12 @@ body {
     }
 
     .like {
+        padding-left: 27px;
         left: 0;
         top: 6px;
 
         span {
-            left: 27px;
-            top: 4px;
-            position: absolute;
+            line-height: 17px;
             color: #697c94;
         }
     }

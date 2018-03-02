@@ -241,9 +241,17 @@ $arrowPos: -52%;
 }
 
 .like {
-    width: 19px;
     height: 17px;
-    background: url(../images/heart.svg) no-repeat 0 0;
+    background: none;
+
+    &:after {
+        @extend .ps;
+        width: 19px;
+        height: 17px;
+        left: 0;
+        top: 0;
+        background: url(../images/heart.svg) no-repeat 0 0;
+    }
 }
 
 .btn-wrap {
