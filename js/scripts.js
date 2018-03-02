@@ -128,7 +128,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 if ($(e.target).closest(".drop-wrap").length) return;
                 dropClose();
                 $dropBlock.classList.remove("show");
-                event.stopPropagation();
+                e.stopPropagation();
             });
 
             function dropClose(){
@@ -835,7 +835,98 @@ document.documentElement.className = document.documentElement.className.replace(
 
                     scrollManager.displayPage(newUrlId);
                 }
-            }    
+            }
+            
+            if (!Array.prototype.includes) {
+                Object.defineProperty(Array.prototype, 'includes', {
+                  value: function(searchElement, fromIndex) {
+              
+                    if (this == null) {
+                      throw new TypeError('"this" is null or not defined');
+                    }
+              
+                    // 1. Let O be ? ToObject(this value).
+                    var o = Object(this);
+              
+                    // 2. Let len be ? ToLength(? Get(O, "length")).
+                    var len = o.length >>> 0;
+              
+                    // 3. If len is 0, return false.
+                    if (len === 0) {
+                      return false;
+                    }
+              
+                    // 4. Let n be ? ToInteger(fromIndex).
+                    //    (If fromIndex is undefined, this step produces the value 0.)
+                    var n = fromIndex | 0;
+              
+                    // 5. If n ≥ 0, then
+                    //  a. Let k be n.
+                    // 6. Else n < 0,
+                    //  a. Let k be len + n.
+                    //  b. If k < 0, let k be 0.
+                    var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+              
+                    function sameValueZero(x, y) {
+                      return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+                    }
+              
+                    // 7. Repeat, while k < len
+                    while (k < len) {
+                      // a. Let elementK be the result of ? Get(O, ! ToString(k)).
+                      // b. If SameValueZero(searchElement, elementK) is true, return true.
+                      if (sameValueZero(o[k], searchElement)) {
+                        return true;
+                      }
+                      // c. Increase k by 1. 
+                      k++;
+                    }
+              
+                    // 8. Return false
+                    return false;
+                  }
+                });
+              }
+
+            // FILTER FOR ASSORTMENT
+            function AssortmentFilter(){
+                this.surface = null;
+                this.absorbtion = null;
+                this.quantity = null;
+    
+                this.surfaceTypes = {
+                    grid: [2,3],
+                    soft: [1,4,5,6]
+                }
+                this.absorbLevels = {
+                    one: [6],
+                    two: [1],
+                    three: [],
+                    four: [2],
+                    five: [3,4,5]
+                }
+                this.quantities = {
+                    six: [5],
+                    eight: [4],
+                    ten: [1,2,3],
+                    twenty: [6]
+                }
+    
+                this.apply = function(indexesArray) {
+                    console.log(($.inArray(2, indexesArray) != -1));
+                    
+                    $slider.slick("slickFilter", function(indexesArray){
+                        return ($.inArray($(this).attr("data-slick-index"), indexesArray) != -1);
+                    });
+                };
+    
+                this.reset = function() {
+                    
+                }
+    
+            }
+            let assortFilter = new AssortmentFilter();
+            //assortFilter.apply(assortFilter.absorbLevels.three);
         }
     });
 
@@ -925,6 +1016,8 @@ document.documentElement.className = document.documentElement.className.replace(
         if (typeof NodeList.prototype.forEach === "function") return false;
         NodeList.prototype.forEach = Array.prototype.forEach;
     }());
+
+    
 
 
     /*********************************
