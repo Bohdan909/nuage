@@ -768,7 +768,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 } else {
                     // window width is less than 1025px
                     //window.ontouchmove = customScrollTouchHandler;
-                    ontouch(window, customScrollTouchHandler);
+                    ontouch(window, customScrollTouchHandler, true);
                 }
             }
 
@@ -806,7 +806,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
             function customScrollTouchHandler(evt, dir, phase, swipetype, distance) {
                 // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
-                console.log("Swipe direction: " + swipetype);
+                
                 if (phase == "end") {
                     if (swipetype == "left") {
                         scrollManager.scrollToNextPage();
@@ -986,7 +986,7 @@ document.documentElement.className = document.documentElement.className.replace(
      * SWIPE HANDLER (Returns direction) 
      ************************************/
     // http://www.javascriptkit.com/javatutors/touchevents3.shtml
-    function ontouch(el, callback){
+    function ontouch(el, callback, capture){
  
         var touchsurface = el,
         dir,
@@ -996,7 +996,7 @@ document.documentElement.className = document.documentElement.className.replace(
         distX,
         distY,
         threshold = 150, //required min distance traveled to be considered swipe
-        restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+        restraint = 50, // maximum distance allowed at the same time in perpendicular direction
         allowedTime = 500, // maximum time allowed to travel that distance
         elapsedTime,
         startTime,
@@ -1013,7 +1013,7 @@ document.documentElement.className = document.documentElement.className.replace(
             handletouch(e, 'none', 'start', swipeType, 0) // fire callback function with params dir="none", phase="start", swipetype="none" etc
             //e.preventDefault()
      
-        }, false)
+        }, capture || false)
      
         touchsurface.addEventListener('touchmove', function(e){
             var touchobj = e.changedTouches[0]
@@ -1028,7 +1028,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 handletouch(e, dir, 'move', swipeType, distY) // fire callback function with params dir="up|down", phase="move", swipetype="none" etc
             }
             //e.preventDefault() // prevent scrolling when inside DIV
-        }, false)
+        }, capture || false)
      
         touchsurface.addEventListener('touchend', function(e){
             var touchobj = e.changedTouches[0]
@@ -1044,7 +1044,7 @@ document.documentElement.className = document.documentElement.className.replace(
             // Fire callback function with params dir="left|right|up|down", phase="end", swipetype=dir etc:
             handletouch(e, dir, 'end', swipeType, (dir =='left' || dir =='right')? distX : distY)
             //e.preventDefault()
-        }, false)
+        }, capture || false)
     }
      
     // USAGE:
