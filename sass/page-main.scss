@@ -254,9 +254,9 @@ div.scroll-helper {
                 top: 12vh;
             }
 
-            @media (max-height: 750px) and (min-width: 1025px){
-                top: 11vh;
-            }
+            // @media (max-height: 750px) and (min-width: 1025px){
+            //     top: 12vh;
+            // }
 
             @media (max-height: 650px) and (min-width: 1025px){
                 top: 10vh;
@@ -364,78 +364,65 @@ ul.cubes-main {
     &.top {
 
         li:nth-child(1) {
-            @include transform(translateY(18vh));
+            @include transform(translateY(17vh));
         }
 
         li:nth-child(2) {
-            @include transform(translateY(20vh));
+            @include transform(translateY(19vh));
         }
 
         li:nth-child(3) {
-            @include transform(translateY(26vh));
+            @include transform(translateY(25vh));
         }
 
         li:nth-child(4) {
-            @include transform(translateY(28vh));
+            @include transform(translateY(27vh));
         }
     }
 
     &.mid {
 
         li:nth-child(1) {
-            @include transform(translateY(31vh));
+            @include transform(translateY(30vh));
         }
 
         li:nth-child(2) {
-            @include transform(translateY(33vh));
+            @include transform(translateY(34vh));
         }
 
         li:nth-child(3) {
-            @include transform(translateY(36vh));
+            @include transform(translateY(35vh));
         }
 
         li:nth-child(4) {
-            @include transform(translateY(38vh));
+            @include transform(translateY(37vh));
         }
     }
 
     &.btm {
 
         li:nth-child(1) {
-            @include transform(translateY(45vh));
+            @include transform(translateY(44vh));
         }
 
         li:nth-child(2) {
-            @include transform(translateY(48vh));
+            @include transform(translateY(47vh));
         }
 
         li:nth-child(3) {
-            @include transform(translateY(53vh));
+            @include transform(translateY(52vh));
         }
 
         li:nth-child(4) {
-            @include transform(translateY(55vh));
+            @include transform(translateY(54vh));
         }
     }
-
 
     li:nth-child(1) {
         right: -14vw;
 
         .loaded & {
             right: 80px;
-        }
-
-        .face-1 {
-            background-color: #c39fca;
-        }
-
-        .face-2 {
-            background-color: #a971b0;
-        }
-
-        .face-3 {
-            background-color: #e1d3e1;
         }
     }
 
@@ -446,18 +433,6 @@ ul.cubes-main {
         .loaded & {
             right: 0;
         }
-
-        .face-1 {
-            background-color: #a971b0;
-        }
-
-        .face-2 {
-            background-color: #9b5ba4;
-        }
-
-        .face-3 {
-            background-color: #c39fca;
-        }
     }
 
     li:nth-child(3) {
@@ -466,18 +441,6 @@ ul.cubes-main {
 
         .loaded & {
             right: 140px;
-        }
-
-        .face-1 {
-            background-color: #a971b0;
-        }
-
-        .face-2 {
-            background-color: #9b5ba4;
-        }
-
-        .face-3 {
-            background-color: #c39fca;
         }
     }
 
@@ -491,18 +454,6 @@ ul.cubes-main {
 
         .top &, .mid &, .btm & {
             @include transform(translateY(8px));
-        }
-
-        .face-1 {
-            background-color: #e1d3e1;
-        }
-
-        .face-2 {
-            background-color: #e1d3e1;
-        }
-
-        .face-3 {
-            background-color: #ceafd3;
         }
     }
 }
@@ -815,7 +766,7 @@ ul.cubes-main {
     .quote-wrap .slide {
 
         &:nth-child(1) {
-            top: 8vh;
+            top: 7vh;
         }
 
         &:nth-child(2) {

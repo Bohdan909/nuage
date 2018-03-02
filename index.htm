@@ -111,35 +111,11 @@
 						</div><!-- / Quote Rotator -->
 						
 						<!-- Cubes -->
-						<ul class="cubes cubes-main figures top">
-							<li>
-								<div>
-									<span class="face-1"></span>
-									<span class="face-2"></span>
-									<span class="face-3"></span>
-								</div>
-							</li>
-							<li>
-								<div>
-									<span class="face-1"></span>
-									<span class="face-2"></span>
-									<span class="face-3"></span>
-								</div>
-							</li>
-							<li>
-								<div>
-									<span class="face-1"></span>
-									<span class="face-2"></span>
-									<span class="face-3"></span>
-								</div>
-							</li>
-							<li>
-								<div>
-									<span class="face-1"></span>
-									<span class="face-2"></span>
-									<span class="face-3"></span>
-								</div>
-							</li>
+						<ul class="cubes cubes-main cubes-2 figures top">
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
 						</ul><!-- / Cubes -->
 
 						<!-- Footer -->
@@ -477,6 +453,7 @@
 								<li></li>
 								<li></li>
 							</ul>
+
 							<div class="assort-slider animate-fade">
 								<div class="slide slide-1">
 									<a href="product-1.htm" class="slick-slider-inner">
@@ -928,108 +905,24 @@
 				</div><!-- / Content -->
 
 				<!-- Figures -->
-				<ul class="cubes figures figures-1">
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
+				<ul class="cubes cubes-1 figures figures-1">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
 				</ul>
 
-				<ul class="cubes cubes-f figures figures-2">
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="face-1"></span>
-							<span class="face-2"></span>
-							<span class="face-3"></span>
-						</div>
-					</li>
+				<ul class="cubes cubes-2 cubes-f figures figures-2">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
 				</ul>
 
 				<ul class="cuttings figures figures-3">
@@ -2231,7 +2124,7 @@
 				var slides = document.querySelectorAll(".rotator > div");
 				var cubes  = document.querySelector(".cubes");
 				var currentSlide  = 0;
-				var slideInterval = setInterval(nextSlide, 500000);
+				var slideInterval = setInterval(nextSlide, 5000);
 				var cubesClasses  = ["top", "mid", "btm"];
 
 				function nextSlide(){
@@ -2240,7 +2133,7 @@
 						currentSlide = (currentSlide + 1) % slides.length;
 						
 						slides[currentSlide].className = "slide show";
-						cubes.className = "cubes cubes cubes-main " + cubesClasses[currentSlide];
+						cubes.className = "cubes cubes-2 cubes-main " + cubesClasses[currentSlide];
 				}
 
 				// Lic
