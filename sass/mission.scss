@@ -442,6 +442,7 @@ div.mission-text-slider {
     -ms-transition: width 0.6s $easing, height 0.6s $easing;
     transition: width 0.6s $easing, height 0.6s $easing;
     backface-visibility: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
 
     &.open {
         @include transition(all, 4.0s, $easing);
