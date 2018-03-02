@@ -222,19 +222,19 @@
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(37%) translateX(11%) scale(0.6));
+        @include transform(translateY(37%) translateX(11%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(7%) scale(0.4));
+        @include transform(translateY(7%) scale(0.5));
     }
 
     .assort-slider .slick-active-last + .slick-slide .slick-slider-inner {
-        @include transform(translateY(-33%) scale(0.4));
+        @include transform(translateY(-33%) scale(0.5));
     }
 
     .assort-slider .slick-slide-prev .slick-slider-inner {
-        @include transform(translateY(350%) translateX(70%) scale(0.6));
+        @include transform(translateY(350%) translateX(70%) scale(0.7));
     }
 
     .slick-all-prev .slick-slider-inner {
@@ -916,11 +916,11 @@ ul.desc-list {
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(24%) translateX(11%) scale(0.6));
+        @include transform(translateY(24%) translateX(11%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(2%) scale(0.4));
+        @include transform(translateY(2%) scale(0.5));
     }
 
     .assort-bg-list {
@@ -947,13 +947,60 @@ ul.desc-list {
     .assort-slider-wrap .slick-arrow.slick-prev {
         right: 180px;
     }
+
+    .figures-1 {
+        li:nth-child(1) { bottom: 183px; }
+        li:nth-child(2) { bottom: 200px; }
+        li:nth-child(3) { bottom: 210px; }
+        li:nth-child(5) { bottom: 135px; }
+        li:nth-child(6) { bottom: 138px; }
+        li:nth-child(4), li:nth-child(7), li:nth-child(8) { display: none; }
+    }
+
+    .figures-2 {
+        li:nth-child(1) { bottom: 215px; }
+        li:nth-child(2) { bottom: 195px; }
+        li:nth-child(3) { bottom: 145px; }
+        li:nth-child(4) { bottom: 120px; }
+        li:nth-child(5) { bottom: 165px; }
+    }
+
+    .figures-3 {
+        li:nth-child(1) { bottom: 195px; }
+        li:nth-child(2) { bottom: 230px; }
+        li:nth-child(3) { bottom: 183px; }
+        li:nth-child(4) { bottom: 240px; }
+        li:nth-child(5) { bottom: 140px; }
+        li:nth-child(6) { bottom: 120px; }
+    }
+
+    .figures-4 {
+        li:nth-child(1) { bottom: 200px; }
+        li:nth-child(2) { bottom: 175px; }
+        li:nth-child(3) { bottom: 197px; }
+        li:nth-child(4) { bottom: 173px; }
+        li:nth-child(5) { bottom: 130px; }
+        li:nth-child(6) { bottom: 110px; }
+    }
+
+    .figures-5 {
+        li:nth-child(1) { bottom: 190px; }
+        li:nth-child(2) { bottom: 145px; }
+        li:nth-child(3) { bottom: 194px; }
+        li:nth-child(4) { bottom: 132px; }
+        li:nth-child(5), li:nth-child(6) { display: none; }
+    }
+
+    .figures-6 {
+        li:nth-child(1) { bottom: 192px; }
+        li:nth-child(2) { bottom: 198px; }
+        li:nth-child(3) { bottom: 180px; }
+        li:nth-child(4) { bottom: 128px; }
+        li:nth-child(5) { bottom: 114px; }
+    }
 }
 
 @media (min-width: 1025px) and (max-height: 760px) {
-
-    .figures-1 {
-        bottom: -40px;
-    }
 
     .assort-desc-wrap {
         padding-top: 20px;
@@ -990,11 +1037,11 @@ ul.desc-list {
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(8%) translateX(11%) scale(0.6));
+        @include transform(translateY(8%) translateX(11%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(-12%) scale(0.4));
+        @include transform(translateY(-12%) scale(0.5));
     }
 }
 
@@ -1024,11 +1071,11 @@ ul.desc-list {
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(0%) translateX(11%) scale(0.6));
+        @include transform(translateY(0%) translateX(11%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(-16%) scale(0.4));
+        @include transform(translateY(-16%) scale(0.5));
     }
 }
 
