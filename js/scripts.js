@@ -120,7 +120,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 if ($dropBlock.classList.contains("show")) {
                     $dropInner.setAttribute("style", "max-height: " + height + "px");
                 } else {
-                    $dropInner.setAttribute("style", "max-height: 0px");
+                    dropClose();
                 }
             });
 

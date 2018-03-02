@@ -64,11 +64,10 @@
     right: 0;
     width: 70%;
     height: 100%;
-    padding-left: 2%;
     z-index: 100;
 
     @include mid {
-        width: 67%;
+        width: 68.5%;
     }
 
     @include laptop {
@@ -196,6 +195,8 @@
         opacity: 1;
         
         .slick-slider-inner {
+            position: relative;
+            left: 40px;
             cursor: pointer;
             -webkit-filter: blur(0px);
             filter: blur(0px);
@@ -222,11 +223,11 @@
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(37%) translateX(11%) scale(0.7));
+        @include transform(translateY(37%) translateX(20%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
-        @include transform(translateY(7%) scale(0.5));
+        @include transform(translateY(8%) scale(0.5));
     }
 
     .assort-slider .slick-active-last + .slick-slide .slick-slider-inner {
@@ -501,9 +502,9 @@ $sliderAnimTime: 0.30s;
     @include mid {
 
         .assort-slider-sprite {
-            @include transform(scale(0.85) translateX(-50%));
-            @include origin(left, bottom);
-            margin-top: -25px;
+            // @include transform(scale(0.85) translateX(-50%));
+            // @include origin(left, bottom);
+            // margin-top: -25px;
         }
 
         .assort-det {
@@ -514,8 +515,9 @@ $sliderAnimTime: 0.30s;
     @media (max-width: 1280px){
 
         .assort-slider-sprite {
-            @include transform(scale(0.75) translateX(-50%));
-            margin-top: -75px;
+            @include transform(scale(0.93) translateX(-50%));
+            left: 48%;
+            margin-top: -65px;
         }
 
         .assort-det {
@@ -531,7 +533,7 @@ $sliderAnimTime: 0.30s;
         .assort-slider .slick-slide {
 
             .title-2 {
-                margin-top: -25px;
+                margin-top: -37px;
             }
         }
     }
@@ -539,8 +541,15 @@ $sliderAnimTime: 0.30s;
     @media (max-width: 1150px){
 
         .assort-slider-sprite {
-            @include transform(scale(0.6) translateX(-50%));
+            @include transform(scale(0.75) translateX(-50%));
+            @include origin(left, bottom);
             margin-top: -85px;
+            left: 50%;
+        }
+
+        .assort-slider .slick-slide .title-2 {
+            top: -22px;
+            margin-bottom: 0;
         }
 
         .assort-det {
@@ -916,7 +925,7 @@ ul.desc-list {
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(24%) translateX(11%) scale(0.7));
+        @include transform(translateY(24%) translateX(20%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
@@ -1037,7 +1046,7 @@ ul.desc-list {
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(8%) translateX(11%) scale(0.7));
+        @include transform(translateY(8%) translateX(20%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
@@ -1071,7 +1080,7 @@ ul.desc-list {
     }
 
     .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-        @include transform(translateY(0%) translateX(11%) scale(0.7));
+        @include transform(translateY(0%) translateX(20%) scale(0.7));
     }
 
     .assort-slider .slick-active-last .slick-slider-inner {
@@ -1106,7 +1115,6 @@ ul.desc-list {
 
     .assort-slider-wrap {
         width: 61%;
-        padding-left: 0;
 
         width: calc(100% - 360px);
         width: -webkit-calc(100% - 360px);
