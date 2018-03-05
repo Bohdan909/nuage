@@ -145,32 +145,52 @@ body {
         font-size: 0;
         position: relative;
 
-        li {
-            display: inline-block;
+        
+    }
 
-            > a {
-                @extend .transDef;
-                display: block;
-                line-height: 16px;
-                text-transform: uppercase;
-                font-size: 10px;
-                letter-spacing: 0.7px;
-                font-family: $fontMed;
-                color: $textCol;
-                border-bottom: 1px solid #fff;
+    .menu-item {
+        position: relative;
+        display: inline-block;
+        height: 18px;
 
-                .no-touchevents &:hover {
-                    //color: #a4caef;
-                    border-bottom: 2px solid $textCol;
-                }
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            border-bottom: 2px solid;
+            width: 0;
+            left: 0;
+            bottom: 0;
+            -webkit-transition: width 0.3s $easing;
+            transition: width 0.3s $easing;
+        }
+        
+        &:hover::after{
+            width: 100%;
+        }
+
+        > a {
+            @extend .transDef;
+            display: block;
+            line-height: 16px;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.7px;
+            font-family: $fontMed;
+            color: $textCol;
+            //border-bottom: 1px solid #fff;
+
+            .no-touchevents &:hover {
+                //color: #a4caef;
+                //border-bottom: 2px solid $textCol;
             }
+        }
 
-            &.active > a {
-                border-bottom: 2px solid $textCol;
+        &.active > a {
+            border-bottom: 2px solid $textCol;
 
-                &:hover {
-                    text-decoration: none;
-                }
+            &:hover {
+                text-decoration: none;
             }
         }
     }
@@ -178,7 +198,7 @@ body {
     .moving-underline {
         position: absolute;
         bottom: 0;
-        transition: 0.3s ease-in-out;
+        transition: 0.3s $easing;
         width: 0;
         height: 2px;
         left: 0;
@@ -209,25 +229,26 @@ body {
             right: 0;
             padding-top: 77px;
             max-height: 0;
-            overflow: hidden;
+            overflow: hidden;            
+        }
 
-            li {
+        .menu-item {
+            display: block;
+            border-top: 1px solid #ebedf0;
+            height: auto;
+
+            > a {
                 display: block;
-                border-top: 1px solid #ebedf0;
+                height: 78px;
+                border-bottom: none;
+                line-height: 78px;
+                font-size: 16px;
+                color: #728399;
+            }
 
-                > a {
-                    display: block;
-                    height: 78px;
-                    border-bottom: none;
-                    line-height: 78px;
-                    font-size: 16px;
-                    color: #728399;
-                }
-
-                &.active a {
-                    color: #7caadb;
-                    border-bottom: none;
-                }
+            &.active a {
+                color: #7caadb;
+                border-bottom: none;
             }
         }
 
@@ -381,7 +402,9 @@ body {
     .menu {
         top: 20px;
 
-        ul li {
+        .menu-item {
+            height: auto;
+
             > a {
                 height: 65px;
                 line-height: 65px;
