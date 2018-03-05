@@ -185,7 +185,6 @@ $arrowPos: -52%;
             
             li {
                 @include border-rad(50%);
-                @include transition(all, 0.35s, ease-out);
                 display: inline-block;
                 vertical-align: top;
                 margin: 0 2px 0 3px;
@@ -193,25 +192,11 @@ $arrowPos: -52%;
                 height: 4px;
                 background-color: #7caadb;
 
+                transition: transform 0.35s $easing, opacity 0.01s linear 0s;
+
                 &:nth-child(2) {
                     @include origin(center, center);
                 }
-            }
-        }
-
-        &:hover {
-            
-            li:nth-child(1) {
-                @include transform(translateX(-50px));
-            }
-
-            li:nth-child(3) {
-                @include transform(translateX(50px));
-            }
-
-            li:nth-child(2) {
-                width: 12px;
-                height: 12px;
             }
         }
     }
@@ -235,6 +220,23 @@ $arrowPos: -52%;
             img {
                 @include transform(translateX(-2px) translateY(-52%));
                 opacity: 1;
+            }
+        }
+
+        .btn-consist:hover {
+
+            li {
+                transition: transform 0.35s $easing, opacity 0.25s linear 0.25s;
+            }
+            
+            li:nth-child(1) {
+                @include transform(translateX(10px));
+                opacity: 0;
+            }
+
+            li:nth-child(3) {
+                @include transform(translateX(-9px));
+                opacity: 0;
             }
         }
     }
