@@ -142,6 +142,16 @@ div.main {
 }
 
 @font-face {
+    font-family: "PTSerif-Regular";
+    src: url("fonts/PTSerif-Regular.eot");
+    src: url("fonts/PTSerif-Regular.eot?#iefix") format("embedded-opentype"),
+         url("fonts/PTSerif-Regular.woff") format("woff"),
+         url("fonts/PTSerif-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: "FiraSans-ExtraLight";
     src: url("fonts/FiraSans-ExtraLight.eot");
     src: url("fonts/FiraSans-ExtraLight.eot?#iefix") format("embedded-opentype"),
