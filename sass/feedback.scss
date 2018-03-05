@@ -115,8 +115,16 @@ $heightPanel: 90px;
 
     &.show .answer-head .point-btn.plus {
 
+        .point-btn-bg:before {
+            top: 0;
+        }
+
         i {
-            @include transform(rotate(45deg));
+            @include transform(rotate(225deg));
+
+            &:before, &:after {
+                background-color: #fff;
+            }
         }
     }
 
@@ -142,9 +150,9 @@ $heightPanel: 90px;
             box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
             -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
 
-            &:before, &:after {
-                background-color: $textCol;
-            }
+            // &:before, &:after {
+            //     background-color: $textCol;
+            // }
         }
 
         span {
@@ -178,9 +186,16 @@ $heightPanel: 90px;
 
 .no-touchevents .answer-head {
 
-    .point-btn:hover {
-        box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
-        -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
+    .point-btn {
+
+        &.plus:not(.active):hover i {
+            @include transform(rotate(225deg));
+        }
+
+        &:hover {
+            box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
+            -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
+        }
     }
 
     &:hover span {
@@ -208,22 +223,27 @@ $heightPanel: 90px;
 }
 
 .feedback-filter {
+    position: relative;
     margin: 0 2%;
 
     section {
         margin: 0 !important;
+
+        > div {
+            //flex: none;
+
+            // a {
+            //     padding: 0 23px;
+            // }
+        }
     }
 
     @media (max-width: 850px) and (orientation: portrait){
         margin: 0;
 
-        section > div {
-            flex: none;
-
-            a {
-                padding: 0 10px;
-            }
-        }
+        section > div a {
+            padding: 0 12px !important;
+        }    
     }
 }
 

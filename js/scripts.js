@@ -301,7 +301,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
         if (document.body.contains(document.querySelector(".product-list"))){
             let point = document.querySelectorAll(".product-list section > div");
-            let pointAct = findPonintAct(point);
+            let pointAct = findPointAct(point);
             let pointWidth = pointAct.offsetWidth;
             let pointPos = pointAct.offsetLeft;
             let pointBg = document.querySelector(".product-list > span");
@@ -310,33 +310,38 @@ document.documentElement.className = document.documentElement.className.replace(
 
             for (let i = 0; i < point.length; i++){
                 
-                
                 point[i].addEventListener("mouseover", function(){
-                    pointWidth = this.offsetWidth;
-                    pointPos = this.offsetLeft;
-
-                    setBg(pointWidth, pointPos);
+                    changeBg(this);
                 });
 
                 point[i].addEventListener("mouseleave", function(){
-                    pointWidth = pointAct.offsetWidth;
-                    pointPos = pointAct.offsetLeft;
+                    if (!this.classList.contains("active")){
+                        pointAct = findPointAct(point);
+                        changeBg(pointAct);
+                    }
+                });
 
-                    setBg(pointWidth, pointPos);
+                point[i].addEventListener("click", function(){                    
+                    changeBg(this);
                 });
             }
 
             window.addEventListener("resize", function(){
-                pointWidth = pointAct.offsetWidth;
-                pointPos = pointAct.offsetLeft;
-                setBg(pointWidth, pointPos);
+                pointAct = findPointAct(point);
+                changeBg(pointAct);
             });
+
+            function changeBg(pnt){
+                pointWidth = pnt.offsetWidth;
+                pointPos = pnt.offsetLeft;
+                setBg(pointWidth, pointPos);
+            }
 
             function setBg(width, pos){
                 pointBg.setAttribute("style", "width: " + width + "px; left: " + pos + "px");
             }
 
-            function findPonintAct(point){
+            function findPointAct(point){
 
                 for (let i = 0; i < point.length; i++){
                     if (point[i].classList.contains("active")){
