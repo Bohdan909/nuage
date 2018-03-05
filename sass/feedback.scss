@@ -207,6 +207,26 @@ $heightPanel: 90px;
     border-top: 1px solid $borColor;
 }
 
+.feedback-filter {
+    margin: 0 2%;
+
+    section {
+        margin: 0 !important;
+    }
+
+    @media (max-width: 850px) and (orientation: portrait){
+        margin: 0;
+
+        section > div {
+            flex: none;
+
+            a {
+                padding: 0 10px;
+            }
+        }
+    }
+}
+
 ul.feedback-filter {
     @include flex(space-between);
     padding: 0 5%;

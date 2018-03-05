@@ -452,9 +452,11 @@ div.product-view-block {
 // }
 
 .product-list {
+    position: relative;
     
     section {
         @include flex(space-between);
+        position: relative;
         margin: 0 40px;
         font-size: 0;
         text-align: center;
@@ -464,6 +466,10 @@ div.product-view-block {
             position: relative;
             z-index: 1;
             display: inline-block;
+            font-size: 10px;
+            font-family: $fontMed;
+            text-transform: uppercase;
+            cursor: pointer;
 
             a {
                 @extend .transDef;

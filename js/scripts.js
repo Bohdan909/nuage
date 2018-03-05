@@ -267,7 +267,7 @@ document.documentElement.className = document.documentElement.className.replace(
            FILTER FEEDBACK
         =================== */
 
-        var ffItem = document.querySelectorAll(".feedback-filter li");
+        var ffItem = document.querySelectorAll(".feedback-filter div");
         var feedback = document.querySelectorAll(".feedback-item");
 
         ffItem.forEach(function (item) {
@@ -294,6 +294,57 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
             });
         });
+
+        /* ================
+           PRODUCT HOVER
+        =================== */
+
+        if (document.body.contains(document.querySelector(".product-list"))){
+            let point = document.querySelectorAll(".product-list section > div");
+            let pointAct = findPonintAct(point);
+            let pointWidth = pointAct.offsetWidth;
+            let pointPos = pointAct.offsetLeft;
+            let pointBg = document.querySelector(".product-list > span");
+
+            setBg(pointWidth, pointPos);
+
+            for (let i = 0; i < point.length; i++){
+                
+                
+                point[i].addEventListener("mouseover", function(){
+                    pointWidth = this.offsetWidth;
+                    pointPos = this.offsetLeft;
+
+                    setBg(pointWidth, pointPos);
+                });
+
+                point[i].addEventListener("mouseleave", function(){
+                    pointWidth = pointAct.offsetWidth;
+                    pointPos = pointAct.offsetLeft;
+
+                    setBg(pointWidth, pointPos);
+                });
+            }
+
+            window.addEventListener("resize", function(){
+                pointWidth = pointAct.offsetWidth;
+                pointPos = pointAct.offsetLeft;
+                setBg(pointWidth, pointPos);
+            });
+
+            function setBg(width, pos){
+                pointBg.setAttribute("style", "width: " + width + "px; left: " + pos + "px");
+            }
+
+            function findPonintAct(point){
+
+                for (let i = 0; i < point.length; i++){
+                    if (point[i].classList.contains("active")){
+                        return point[i];
+                    }
+                }
+            }
+        }
 
         /* ==============
            FORMS
