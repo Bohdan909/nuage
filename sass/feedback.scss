@@ -215,11 +215,11 @@ $heightPanel: 90px;
         margin: 0 !important;
 
         > div {
-            flex: none;
+            //flex: none;
 
-            a {
-                padding: 0 23px;
-            }
+            // a {
+            //     padding: 0 23px;
+            // }
         }
     }
 
@@ -227,7 +227,7 @@ $heightPanel: 90px;
         margin: 0;
 
         section > div a {
-            padding: 0 12px;
+            padding: 0 12px !important;
         }    
     }
 }
