@@ -452,11 +452,9 @@ div.product-view-block {
 // }
 
 .product-list {
-    position: relative;
     
     section {
         @include flex(space-between);
-        position: relative;
         margin: 0 40px;
         font-size: 0;
         text-align: center;

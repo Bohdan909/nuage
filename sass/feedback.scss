@@ -208,22 +208,27 @@ $heightPanel: 90px;
 }
 
 .feedback-filter {
+    position: relative;
     margin: 0 2%;
 
     section {
         margin: 0 !important;
+
+        > div {
+            flex: none;
+
+            a {
+                padding: 0 23px;
+            }
+        }
     }
 
     @media (max-width: 850px) and (orientation: portrait){
         margin: 0;
 
-        section > div {
-            flex: none;
-
-            a {
-                padding: 0 10px;
-            }
-        }
+        section > div a {
+            padding: 0 12px;
+        }    
     }
 }
 
