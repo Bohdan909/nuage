@@ -543,14 +543,21 @@ document.documentElement.className = document.documentElement.className.replace(
                         });
         
                         // Filter Click
-                        var filterItem = $(".filter-item .drops li, .filter-item .ico-list li, .filter-item .items-list li");
+                        var filterItem = $(".filter-item .filter-option");
         
-                        filterItem.on("click", function(){
-                            $(".drop-block").removeClass("show");
-                            $(".drop-inner").attr("style", "max-height: 0px;");	
+                        filterItem.on("click", function(e){
+                            assortFilter.reset();
+                            //$(".drop-block").removeClass("show");
+                            //$(".drop-inner").attr("style", "max-height: 0px;");
+                            let elem = $(this);
+                            console.log(elem.data("filter-option") + ": " + elem.data("filter-value"));
+
+                            elem.toggleClass("selected");
+                            
+                            assortFilter.apply(elem.data("filter-value"));
                         });
                         break;
-                        default:
+                    default:
                         break;
                 }
             }
@@ -942,44 +949,90 @@ document.documentElement.className = document.documentElement.className.replace(
               }
 
             // FILTER FOR ASSORTMENT
+            /** Assortment filter oject to handle filter states 
+             * and functionality */
             function AssortmentFilter(){
                 this.surface = null;
                 this.absorbtion = null;
                 this.quantity = null;
-    
+                this.filterArray = [];
+
                 this.surfaceTypes = {
-                    grid: [2,3],
-                    soft: [1,4,5,6]
-                }
+                    grid: ["1","2"],
+                    soft: ["0","3","4","5"]
+                };
                 this.absorbLevels = {
-                    one: [6],
-                    two: [1],
+                    one: ["5"],
+                    two: ["0"],
                     three: [],
-                    four: [2],
-                    five: [3,4,5]
-                }
+                    four: ["1"],
+                    five: ["2","3","4"]
+                };
                 this.quantities = {
-                    six: [5],
-                    eight: [4],
-                    ten: [1,2,3],
-                    twenty: [6]
-                }
-    
+                    six: ["4"],
+                    eight: ["3"],
+                    ten: ["0","1","2"],
+                    twenty: ["5"]
+                };
+
+                this.mergeFilters = function() {
+                    // push into filterArray only values, that are common to merging arrays
+                    let tempArray = [];
+                    $.grep(this.surface, function(el) {
+                        if ($.inArray(el, this.absorbtion) != -1) tempArray.push(el);
+                    });
+
+                    $.grep(tempArray, function(el) {
+                        if ($.inArray(el, this.quantity) != -1) filterArray.push(el);
+                    });
+                };
+
+                /** resets assortment filter */
+                this.reset = function() {
+                    this.filterArray.length = 0;
+                    $slider.slick("slickUnfilter");
+                    $slider.slick("slickGoTo", 0, true);
+                };
+                /** Calls slick slider filter() method.
+                 * @param {array} indexesArray - array of slick slider indexes
+                 */
                 this.apply = function(indexesArray) {
-                    console.log(($.inArray(2, indexesArray) != -1));
-                    
-                    $slider.slick("slickFilter", function(indexesArray){
+                    $slider.slick("slickFilter", function(index){
                         return ($.inArray($(this).attr("data-slick-index"), indexesArray) != -1);
                     });
                 };
-    
-                this.reset = function() {
-                    
-                }
+
+                /** adds array to assortment filter 
+                 * @param {string} option - Indicates filter group and passed from data-filter-option attribute
+                 * @param {array} array - Array of elements to display from data-filter-value.
+                */
+                this.add = function(option, array) {
+                    switch (option) {
+                        case "surface":
+                            this.surface = array;
+                            break;
+                        case "absorb":
+                            this.absorbtion = array;
+                            break;
+                        case "quantity":
+                            this.quantity = array;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    this.mergeFilters();
+
+                };
+
+                /** removes array from assortment filter */
+                this.remove = function(option, array) {
+
+                };
     
             }
             let assortFilter = new AssortmentFilter();
-            //assortFilter.apply(assortFilter.absorbLevels.three);
+            //assortFilter.apply(assortFilter.quantities.ten);
         }
     });
 
