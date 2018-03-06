@@ -69,7 +69,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
                     $likeBg.forEach(function(item){
                         item.beginElement();
-                        console.log(item);
                     });
 
                     // if ($socDrop.classList.contains("show")){
