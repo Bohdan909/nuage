@@ -113,7 +113,10 @@ document.documentElement.className = document.documentElement.className.replace(
            Drops
         ================= */
 
-        let $dropBtn = document.querySelector(".drop-wrap .btn");
+        
+        let $filterWrap = document.querySelector(".filter-wrap");
+        let $dropBtn = $filterWrap.querySelector(".drop-wrap .btn");
+        let $filterBtnText = $filterWrap.querySelector(".filter-btn-text");
 
         if (document.body.contains($dropBtn)) {
             let $dropBlock = document.querySelector(".drop-block");
@@ -122,10 +125,20 @@ document.documentElement.className = document.documentElement.className.replace(
             $dropBtn.addEventListener("click", function () {
                 let height = $dropBlock.querySelector(".drop-h").offsetHeight;
 
-                $dropBlock.classList.toggle("show");
+                //$dropBlock.classList.toggle("show");
                 if ($dropBlock.classList.contains("show")) {
+                    $dropBlock.classList.remove("show");
+                    $filterWrap.classList.remove("show");
+                } else {
+                    $dropBlock.classList.add("show");
+                    $filterWrap.classList.add("show");
+                }
+
+                if ($dropBlock.classList.contains("show")) {
+                    $filterBtnText.innerHTML = "Закрыть";
                     $dropInner.setAttribute("style", "max-height: " + height + "px");
                 } else {
+                    $filterBtnText.innerHTML = "Открыть";
                     dropClose();
                 }
             });

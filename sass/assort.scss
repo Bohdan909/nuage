@@ -705,6 +705,12 @@ $sliderAnimTime: 0.30s;
         position: absolute;
         left: 0;
         bottom: 30px;
+
+        &.show {
+            .btn img {
+                transform: translateY(-5px) rotate(90deg);
+            }
+        }
     }
 }
 
