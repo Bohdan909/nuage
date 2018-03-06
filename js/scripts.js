@@ -60,19 +60,25 @@ document.documentElement.className = document.documentElement.className.replace(
         });
         
         let $like = document.querySelectorAll(".like");
+        let $likeBg = document.querySelectorAll(".social-drop-bg-animate");
 
         if (pageScroll){
             Array.prototype.forEach.call($like, function(likeItem){
-                likeItem.addEventListener("click", function(){
+                likeItem.addEventListener("mouseover", function(){
                     let $socDrop = this.parentNode.querySelector(".social-drop");
 
-                    if ($socDrop.classList.contains("show")){
-                        $socDrop.classList.add("hide");
-                        $socDrop.classList.remove("show");
-                    } else {
-                        $socDrop.classList.add("show");
-                        $socDrop.classList.remove("hide");
-                    }
+                    $likeBg.forEach(function(item){
+                        item.beginElement();
+                        console.log(item);
+                    });
+
+                    // if ($socDrop.classList.contains("show")){
+                    //     $socDrop.classList.add("hide");
+                    //     $socDrop.classList.remove("show");
+                    // } else {
+                    //     $socDrop.classList.add("show");
+                    //     $socDrop.classList.remove("hide");
+                    // }
                 });
             });
         }
