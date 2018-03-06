@@ -83,7 +83,6 @@
     }
 }
 
-
 div.scroll-helper {
     @include border-rad(50%);
     @include transform(translateX(-50%) scale(0));

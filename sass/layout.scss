@@ -207,6 +207,23 @@ body {
     }
 }
 
+.no-touchevents {
+
+    .menu .menu-item > a {
+        position: relative;
+        z-index: 1;
+
+        &:after {
+            @extend .ps;
+            height: 5px;
+            width: 100%;
+            bottom: -5px;
+            top: auto;
+            left: 0;
+        }
+    }
+}
+
 @include tablet {
 
     #header {
