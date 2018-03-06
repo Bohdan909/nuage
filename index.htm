@@ -71,18 +71,37 @@
 							
 							<div class="lic-wrap">
 								<ul class="lic-list">
-									<li class="animate-slide" data-desc="Одобрено Российским обществом акушеров-гинекологов">
+									<li class="animate-slide">
 										<img src="images/lic-3.svg" alt="">
 									</li>
-									<li class="animate-slide" data-desc="Сертифицировано ISO 9001">
+									<li class="animate-slide">
 										<img src="images/lic-2.svg" alt="">
 									</li>
-									<li class="animate-slide" data-desc="Производство и контроль качества по стандартам GMP">
+									<li class="animate-slide">
 										<img src="images/lic-1.svg" alt="">
 									</li>
 								</ul>
 
-								<div class="lic-desc"></div>
+								<ul class="lic-desc">
+									<li>
+										<img width="72" height="72" src="images/ico-l-1.svg" alt="">
+										<span>
+											Одобрено Российским обществом акушеров-гинекологов
+										</span>
+									</li>
+									<li>
+										<img width="72" height="72" src="images/ico-l-2.svg" alt="">
+										<span>
+											Сертифицировано ISO 9001
+										</span>
+									</li>
+									<li>
+										<img width="72" height="72" src="images/ico-l-3.svg" alt="">
+										<span>
+											Производство и контроль качества по стандартам GMP
+										</span>
+									</li>
+								</ul>
 							</div>
 						</div>
 						
@@ -142,7 +161,6 @@
 													to="M 92.4,79 C 136,79 156,79.1 200,79.4 244,79.7 262,79 308,79 354,79 381,111 381,150 381,189 346,220 308,221 270,222 236,221 200,221 164,221 130,222 92.4,221 54.4,220 19,189 19,150 19,111 48.6,79 92.4,79 Z">
 														
 												</animate>
-
 											</path>
 										</svg>
 									</div>
@@ -2233,18 +2251,18 @@
 				}
 
 				// Lic
-				var $licDesc = document.querySelector(".lic-desc");
+				var $licDesc = document.querySelectorAll(".lic-desc li");
 				var $licItem = document.querySelectorAll(".lic-list li");
 				
 				for (let i = 0; i < $licItem.length; i++){
 					
 					$licItem[i].addEventListener("mouseover", function(){
-						$licDesc.classList.add("show");
-						$licDesc.innerHTML = this.getAttribute("data-desc");
+						console.log();
+						$licDesc[i].classList.add("show");
 					});
 
 					$licItem[i].addEventListener("mouseleave", function(){
-						$licDesc.classList.remove("show");
+						$licDesc[i].classList.remove("show");
 					});
 				}
 				
