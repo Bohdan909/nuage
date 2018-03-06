@@ -138,7 +138,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     $filterBtnText.innerHTML = "Закрыть";
                     $dropInner.setAttribute("style", "max-height: " + height + "px");
                 } else {
-                    $filterBtnText.innerHTML = "Открыть";
                     dropClose();
                 }
             });
@@ -147,10 +146,12 @@ document.documentElement.className = document.documentElement.className.replace(
                 if ($(e.target).closest(".drop-wrap").length) return;
                 dropClose();
                 $dropBlock.classList.remove("show");
+                $filterWrap.classList.remove("show");
                 e.stopPropagation();
             });
 
             function dropClose(){
+                $filterBtnText.innerHTML = "Открыть";
                 $dropInner.setAttribute("style", "max-height: 0px");
             }
         }
