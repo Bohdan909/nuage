@@ -456,9 +456,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // Filter Click        
             filterItem.on("click", function(e){
-                //assortFilter.reset();
-                //$(".drop-block").removeClass("show");
-                //$(".drop-inner").attr("style", "max-height: 0px;");
                 let elem = $(this);
                 //console.log(elem.data("filter-option") + ": " + elem.data("filter-value"));
 
@@ -500,8 +497,14 @@ document.documentElement.className = document.documentElement.className.replace(
                         function displaySliderFugure(figIndex) {
                             $(".figures").removeClass("show");	
                             $(".figures-" + figIndex).addClass("show");
+                            $slider.slick("slickGoTo", figIndex - 1, true);
+                            localStorage.setItem("currentSlide", figIndex);
                         }
-                        let curSlideIndex = parseInt($curSlideInd.text());
+
+                        // TODO: save and restore current slide index to localStorage
+                        let lsCurrentSlideIndex = localStorage.getItem("currentSlide");
+
+                        let curSlideIndex = (lsCurrentSlideIndex != null) ? lsCurrentSlideIndex : parseInt($curSlideInd.text());
 
                         displaySliderFugure(curSlideIndex);
 
@@ -955,6 +958,18 @@ document.documentElement.className = document.documentElement.className.replace(
                     ten: ["0","1","2"],
                     twenty: ["5"]
                 };
+                
+
+                this.save = function(array) {
+                    localStorage.setItem("assortmentFilter", array);
+                };
+
+                this.load = function() {
+                    let lsValue = localStorage.getItem("assortmentFilter");
+                    this.filterArray = lsValue != null ? lsValue : []; 
+
+                    this.apply(this.filterArray);
+                };
 
                 this.arrayDiff = function(array1, array2) {
                     return array1.filter(function(i) {
@@ -999,6 +1014,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     this.filterArray.length = 0;
                     $slider.slick("slickUnfilter");
                     $slider.slick("slickGoTo", 0, true);
+                    localStorage.removeItem("assortmentFilter");
                 };
 
                 /** Calls slick slider filter() method.
@@ -1012,6 +1028,7 @@ document.documentElement.className = document.documentElement.className.replace(
                             return ($.inArray($(this).attr("data-slick-index"), indexesArray) != -1);
                         });
                     }
+                    this.save(indexesArray);
                 };
 
                 /** adds array to assortment filter 
@@ -1066,6 +1083,8 @@ document.documentElement.className = document.documentElement.className.replace(
                 this.remove = function(option, array) {
 
                 };
+
+                this.load();
     
             }
             let assortFilter = new AssortmentFilter();
