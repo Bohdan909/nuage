@@ -207,8 +207,13 @@ $arrowPos: -52%;
     .main {
 
         .btn:hover {
-            box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.25);
-            -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.25);
+            box-shadow: 0px 22px 40px 2.58px rgba(143, 159, 174, 0.25);
+            -webkit-box-shadow: 0px 22px 40px 2.58px rgba(143, 159, 174, 0.25);
+        }
+
+        .btn:active {
+            box-shadow: 0px 22px 20px 2.58px rgba(143, 159, 174, 0.13);
+            -webkit-box-shadow: 0px 22px 20px 2.58px rgba(143, 159, 174, 0.13);
         }
 
         .btn-arrow-show:hover {
