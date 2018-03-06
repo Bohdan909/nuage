@@ -897,14 +897,14 @@
 														Поверхность
 													</div>
 													<ul class="ico-list">
-														<li>
+														<li class="filter-option" data-filter-option="surface" data-filter-value='["1","2"]'>
 															<div class="ico">
 																<img src="images/ico-p-1.png" alt="">
 															</div>
 
 															Сетка
 														</li>
-														<li>
+														<li class="filter-option" data-filter-option="surface" data-filter-value='["0","3","4","5"]'>
 															<div class="ico">
 																<img src="images/ico-p-2.png" alt="">
 															</div>
@@ -918,11 +918,11 @@
 														Обьем впитывания
 													</div>
 													<ul class="drops">
-														<li class="full"></li>
-														<li class="full"></li>
-														<li class="full"></li>
-														<li></li>
-														<li></li>
+														<li class="filter-option full" data-filter-option="absorb" data-filter-value='["5"]'></li>
+														<li class="filter-option full" data-filter-option="absorb" data-filter-value='["0"]'></li>
+														<li class="filter-option full" data-filter-option="absorb" data-filter-value='[]'></li>
+														<li class="filter-option" data-filter-option="absorb" data-filter-value='["1"]'></li>
+														<li class="filter-option" data-filter-option="absorb" data-filter-value='["2","3","4"]'></li>
 													</ul>
 												</div>
 												<div class="filter-item">
@@ -930,10 +930,10 @@
 														Количество 
 													</div>
 													<ul class="items-list">
-														<li class="active">6</li>
-														<li>8</li>
-														<li>10</li>
-														<li>20</li>
+														<li class="filter-option active" data-filter-option="quantity" data-filter-value='["4"]'>6</li>
+														<li class="filter-option" data-filter-option="quantity" data-filter-value='["3"]'>8</li>
+														<li class="filter-option" data-filter-option="quantity" data-filter-value='["0","1","2"]'>10</li>
+														<li class="filter-option" data-filter-option="quantity" data-filter-value='["5"]'>20</li>
 													</ul>
 												</div>
 											</div>
@@ -2246,7 +2246,7 @@
 				}
 
 				video.addEventListener('canplay', function() {
-					console.log(video.readyState);
+					console.log("Video state: " + video.readyState);
 					
 					if(video.readyState >= 3) {
 						videoPlay.querySelector(".preview-image").style.opacity = "0";

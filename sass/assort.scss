@@ -952,6 +952,16 @@ ul.desc-list {
         }
     }
 
+    .filter-option {
+        opacity: 0.5;
+        filter: grayscale(100%);
+    }
+
+    .filter-option.selected {
+        opacity: 1;
+        filter: grayscale(0);
+    }
+
     @include mobile {
         padding: 15px 10px 15px 15px;
     }
