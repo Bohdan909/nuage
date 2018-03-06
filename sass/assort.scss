@@ -1027,11 +1027,11 @@ ul.desc-list {
 
         @include mid {
             .assort-slider .slick-current .slick-slider-inner {
-                @include transform(translateY(28%));
+                @include transform(translateY(32%));
             }
 
             .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-                @include transform(translateY(4%) translateX(27%) scale(0.7));
+                @include transform(translateY(7%) translateX(27%) scale(0.7));
             }
 
             .assort-slider .slick-active-last .slick-slider-inner {
