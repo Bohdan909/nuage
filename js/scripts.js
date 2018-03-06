@@ -113,12 +113,11 @@ document.documentElement.className = document.documentElement.className.replace(
            Drops
         ================= */
 
-        
-        let $filterWrap = document.querySelector(".filter-wrap");
-        let $dropBtn = $filterWrap.querySelector(".drop-wrap .btn");
-        let $filterBtnText = $filterWrap.querySelector(".filter-btn-text");
+        if (document.body.contains(document.querySelector(".drop-wrap"))) {
+            let $filterWrap = document.querySelector(".filter-wrap");
+            let $dropBtn = $filterWrap.querySelector(".drop-wrap .btn");
+            let $filterBtnText = $filterWrap.querySelector(".filter-btn-text");
 
-        if (document.body.contains($dropBtn)) {
             let $dropBlock = document.querySelector(".drop-block");
             let $dropInner = $dropBlock.querySelector(".drop-inner");
             
@@ -135,7 +134,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
 
                 if ($dropBlock.classList.contains("show")) {
-                    $filterBtnText.innerHTML = "Закрыть";
+                    // $filterBtnText.innerHTML = "Закрыть";
                     $dropInner.setAttribute("style", "max-height: " + height + "px");
                 } else {
                     dropClose();
@@ -151,7 +150,7 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             function dropClose(){
-                $filterBtnText.innerHTML = "Открыть";
+                //$filterBtnText.innerHTML = "Открыть";
                 $dropInner.setAttribute("style", "max-height: 0px");
             }
         }
