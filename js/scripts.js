@@ -133,7 +133,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
 
                 if ($dropBlock.classList.contains("show")) {
-                    // $filterBtnText.innerHTML = "Закрыть";
+                    $filterBtnText.innerHTML = "Закрыть";
                     $dropInner.setAttribute("style", "max-height: " + height + "px");
                 } else {
                     dropClose();
@@ -149,7 +149,7 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             function dropClose(){
-                //$filterBtnText.innerHTML = "Открыть";
+                $filterBtnText.innerHTML = "Открыть";
                 $dropInner.setAttribute("style", "max-height: 0px");
             }
         }
