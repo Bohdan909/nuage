@@ -431,6 +431,26 @@ document.documentElement.className = document.documentElement.className.replace(
                 }]
             });
 
+            // slider filter
+            var filterItem = $(".filter-item .filter-option");
+
+            // Filter Click        
+            filterItem.on("click", function(e){
+                //assortFilter.reset();
+                //$(".drop-block").removeClass("show");
+                //$(".drop-inner").attr("style", "max-height: 0px;");
+                let elem = $(this);
+                //console.log(elem.data("filter-option") + ": " + elem.data("filter-value"));
+
+                if (elem.hasClass("selected")) {
+                    elem.removeClass("selected");
+                    assortFilter.add(elem.data("filter-option"), elem.data("filter-value"), true);
+                } else {
+                    elem.addClass("selected");
+                    assortFilter.add(elem.data("filter-option"), elem.data("filter-value"), false);
+                }
+            });
+
             // ONE-TIME INITIALIZATIONS END //
             //////////////////////////////////
 
@@ -547,20 +567,7 @@ document.documentElement.className = document.documentElement.className.replace(
                             
                         });
         
-                        // Filter Click
-                        var filterItem = $(".filter-item .filter-option");
-        
-                        filterItem.on("click", function(e){
-                            assortFilter.reset();
-                            //$(".drop-block").removeClass("show");
-                            //$(".drop-inner").attr("style", "max-height: 0px;");
-                            let elem = $(this);
-                            console.log(elem.data("filter-option") + ": " + elem.data("filter-value"));
-
-                            elem.toggleClass("selected");
-                            
-                            assortFilter.apply(elem.data("filter-value"));
-                        });
+                        
                         break;
                     default:
                         break;
@@ -902,64 +909,13 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
             }
             
-            if (!Array.prototype.includes) {
-                Object.defineProperty(Array.prototype, 'includes', {
-                  value: function(searchElement, fromIndex) {
-              
-                    if (this == null) {
-                      throw new TypeError('"this" is null or not defined');
-                    }
-              
-                    // 1. Let O be ? ToObject(this value).
-                    var o = Object(this);
-              
-                    // 2. Let len be ? ToLength(? Get(O, "length")).
-                    var len = o.length >>> 0;
-              
-                    // 3. If len is 0, return false.
-                    if (len === 0) {
-                      return false;
-                    }
-              
-                    // 4. Let n be ? ToInteger(fromIndex).
-                    //    (If fromIndex is undefined, this step produces the value 0.)
-                    var n = fromIndex | 0;
-              
-                    // 5. If n ≥ 0, then
-                    //  a. Let k be n.
-                    // 6. Else n < 0,
-                    //  a. Let k be len + n.
-                    //  b. If k < 0, let k be 0.
-                    var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
-              
-                    function sameValueZero(x, y) {
-                      return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-                    }
-              
-                    // 7. Repeat, while k < len
-                    while (k < len) {
-                      // a. Let elementK be the result of ? Get(O, ! ToString(k)).
-                      // b. If SameValueZero(searchElement, elementK) is true, return true.
-                      if (sameValueZero(o[k], searchElement)) {
-                        return true;
-                      }
-                      // c. Increase k by 1. 
-                      k++;
-                    }
-              
-                    // 8. Return false
-                    return false;
-                  }
-                });
-              }
-
             // FILTER FOR ASSORTMENT
             /** Assortment filter oject to handle filter states 
              * and functionality */
             function AssortmentFilter(){
-                this.surface = null;
-                this.absorbtion = null;
-                this.quantity = null;
+                this.surface = [];
+                this.absorbtion = [];
+                this.quantity = [];
                 this.filterArray = [];
 
                 this.surfaceTypes = {
@@ -969,7 +925,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 this.absorbLevels = {
                     one: ["5"],
                     two: ["0"],
-                    three: [],
+                    three: ["1","2","3","4"],
                     four: ["1"],
                     five: ["2","3","4"]
                 };
@@ -980,16 +936,42 @@ document.documentElement.className = document.documentElement.className.replace(
                     twenty: ["5"]
                 };
 
+                this.arrayDiff = function(array1, array2) {
+                    return array1.filter(function(i) {
+                        return array2.indexOf(i) < 0;
+                    });
+                };
+
+                this.arrayIntersect = function(array1, array2) {
+                    //console.log("Intersect input: [" + array1 + "] | [" + array2 + "]");
+                    let result = [];
+                    if (array1.length === 0) {
+                        result = array2.slice();
+                        return result;
+                    } else if (array2.length === 0) {
+                        result = array1.slice();
+                        return result;
+                    } 
+
+                    if (array1.length > array2.length) {
+                        return array1.filter(function(i) {
+                            return array2.indexOf(i) >= 0;
+                        });
+                    } else {
+                        return array2.filter(function(i) {
+                            return array1.indexOf(i) >= 0;
+                        });
+                    }
+                    
+                }
+
                 this.mergeFilters = function() {
                     // push into filterArray only values, that are common to merging arrays
                     let tempArray = [];
-                    $.grep(this.surface, function(el) {
-                        if ($.inArray(el, this.absorbtion) != -1) tempArray.push(el);
-                    });
 
-                    $.grep(tempArray, function(el) {
-                        if ($.inArray(el, this.quantity) != -1) filterArray.push(el);
-                    });
+                    tempArray = this.arrayIntersect(this.arrayIntersect(this.surface, this.absorbtion), this.quantity);
+                    //console.log("Merged Array: " + tempArray);
+                    return tempArray;
                 };
 
                 /** resets assortment filter */
@@ -998,35 +980,65 @@ document.documentElement.className = document.documentElement.className.replace(
                     $slider.slick("slickUnfilter");
                     $slider.slick("slickGoTo", 0, true);
                 };
+
                 /** Calls slick slider filter() method.
                  * @param {array} indexesArray - array of slick slider indexes
                  */
                 this.apply = function(indexesArray) {
-                    $slider.slick("slickFilter", function(index){
-                        return ($.inArray($(this).attr("data-slick-index"), indexesArray) != -1);
-                    });
+                    $slider.slick("slickUnfilter");
+                    
+                    if (indexesArray.length > 0) {
+                        $slider.slick("slickFilter", function(index){
+                            return ($.inArray($(this).attr("data-slick-index"), indexesArray) != -1);
+                        });
+                    }
                 };
 
                 /** adds array to assortment filter 
-                 * @param {string} option - Indicates filter group and passed from data-filter-option attribute
-                 * @param {array} array - Array of elements to display from data-filter-value.
+                 * @param {string} option Indicates filter group and passed from data-filter-option attribute
+                 * @param {array} array Array of elements to display from data-filter-value.
+                 * @param {boolean} subtract Indicates that option is unselected and we need to subtract array 
                 */
-                this.add = function(option, array) {
+                this.add = function(option, array, subtract) {
+                    // add array for same group
+                    // subtract if unchecked
                     switch (option) {
                         case "surface":
-                            this.surface = array;
+                            if (subtract === true) {
+                                this.surface = this.arrayDiff(this.surface, array);
+                            } else {
+                                this.surface = this.surface.concat(array);
+                            }
                             break;
                         case "absorb":
-                            this.absorbtion = array;
+                            if (subtract === true) {
+                                this.absorbtion = this.arrayDiff(this.absorbtion, array);
+                            } else {
+                                this.absorbtion = this.absorbtion.concat(array);
+                            }
+                            
                             break;
                         case "quantity":
-                            this.quantity = array;
+                            if (subtract === true) {
+                                this.quantity = this.arrayDiff(this.quantity, array);
+                            } else {
+                                this.quantity = this.quantity.concat(array);
+                            }
                             break;
                         default:
                             break;
                     }
 
-                    this.mergeFilters();
+                    // console.log("Surface array: [" + this.surface + "]");
+                    // console.log("Absorbtion array: [" + this.absorbtion + "]");
+                    // console.log("Quantity array: [" + this.quantity + "]");
+                    
+                    // find intersection for different groups
+                    this.filterArray = this.mergeFilters();
+
+                    console.log("filterArray after merging: " + this.filterArray);
+
+                    this.apply(this.filterArray);
 
                 };
 
