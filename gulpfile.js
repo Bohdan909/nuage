@@ -9,9 +9,12 @@ const autoprefixer = require('gulp-autoprefixer');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const del = require('del');
+const plumber = require('gulp-plumber');
+const beeper = require('beeper');
 
 gulp.task('sass', function () {
  return gulp.src('./sass/main.scss')
+  .pipe(plumber(errorHandler))
   .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
   .pipe(cleanCSS({compatibility: 'ie10'}))
@@ -19,6 +22,12 @@ gulp.task('sass', function () {
   .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest('./css'));
 });
+
+function errorHandler(error) {
+  // 3 beeps for error
+  beeper('****-*-*');
+  return true;
+};
 
 function html() {
   return gulp.src(['*.html','*.htm'])
