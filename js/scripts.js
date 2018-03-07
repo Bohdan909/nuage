@@ -260,6 +260,8 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             activePane.classList.add("active");
+            indexDetect(activePane);
+            changeClone(indexActive);
         }
 
         Array.prototype.forEach.call(tabs, function (tab) {
@@ -280,7 +282,12 @@ document.documentElement.className = document.documentElement.className.replace(
             }
         }
 
-
+        // SVG Drowing Set
+        $(".point-ico-svg").length && (function(){
+            replaceWithPaths($(".point-ico-svg"));
+            setDash($(".point-ico-svg"));
+        }());
+        
         /* ================
            FILTER FEEDBACK
         =================== */
