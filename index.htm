@@ -2175,7 +2175,6 @@
 
 		<script>
 			window.addEventListener("load", function(){
-				
 
 				// Hover 3D
 				// const frames = 30;
@@ -2240,10 +2239,10 @@
 				function nextSlide(){
 					slides[currentSlide].className = "slide";
 					cubes.className = "cubes cubes-main";
-						currentSlide = (currentSlide + 1) % slides.length;
+					currentSlide = (currentSlide + 1) % slides.length;
 						
-						slides[currentSlide].className = "slide show";
-						cubes.className = "cubes cubes-2 cubes-main " + cubesClasses[currentSlide];
+					slides[currentSlide].className = "slide show";
+					cubes.className = "cubes cubes-2 cubes-main " + cubesClasses[currentSlide];
 				}
 
 				// Lic
