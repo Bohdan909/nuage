@@ -537,6 +537,10 @@ document.documentElement.className = document.documentElement.className.replace(
 
                         // TODO: save and restore current slide index to localStorage
                         let lsCurrentSlideIndex = localStorage.getItem("currentSlide");
+                        if (lsCurrentSlideIndex) {
+                            $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
+                        }
+                        
 
                         let curSlideIndex = (lsCurrentSlideIndex != null) ? lsCurrentSlideIndex : parseInt($curSlideInd.text());
 
@@ -601,6 +605,7 @@ document.documentElement.className = document.documentElement.className.replace(
         
                                 $sliderDesc[currentSlide].classList.add("show");
                             }
+                            localStorage.setItem("currentSlide", nextSlide);
                             
                             setTimeout(changeSliderDesc, 0);
         
