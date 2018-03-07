@@ -423,9 +423,43 @@ document.documentElement.className = document.documentElement.className.replace(
             var $bgItem = $(".assort-bg-list li");
             var $curSlideInd = $(".assort-slider-ind span");
             var $slideItems = $(".assort-slider-ind i");
-            var items = $(".assort-slider > div").length;
             var $cubes = $(".cubes-b");
-            
+            var $slidesCount = 0;
+
+            function displaySliderFugure(figIndex) {
+                $(".figures").removeClass("show");	
+                $(".figures-" + figIndex).addClass("show");
+            }
+
+            function setSlideVisualAttributes(slick, slideId) {
+                var currentSlideElement = slick.$slides.get(slideId);
+                var currentSlideSlickIndex = $(currentSlideElement).data("slick-index");
+                
+                displaySliderFugure(currentSlideSlickIndex + 1);
+
+                var $curSlide = $bgItem.eq(currentSlideSlickIndex);
+        
+                $bgItem.removeClass("show");
+                $curSlide.addClass("show");
+
+                setTimeout(function(){
+                    $(".assort-bg-list").attr("class", "assort-bg-list");
+                    $(".assort-bg-list").addClass("bg-" + (currentSlideSlickIndex + 1));
+                    //$bgItem.not(":eq(" + currentSlide + ")").removeClass("show");
+                }, 900);
+            }
+
+            $slider.on("init reInit", function(event, slick){
+                console.log("slick slider init / re-init");
+                
+                $slidesCount = slick.slideCount;
+                
+                $slideItems.text($slidesCount);
+
+                setSlideVisualAttributes(slick, 0);
+                
+            });
+
             $slider.slick({
                 centerMode: false,
                 infinite: true,
@@ -435,7 +469,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 focusOnSelect: false,
                 swipe: false,
                 useTransform: true,
-                cssEase: 'cubic-bezier(0.11,0,0.45,1)',
+                //cssEase: 'cubic-bezier(0.11,0,0.45,1)',
                 touchMove: false,
                 draggable: false,
                 lazyLoad: 'progressive',
@@ -490,54 +524,45 @@ document.documentElement.className = document.documentElement.className.replace(
                         $slider.slick('setPosition');
                         
                         // Setup Classes
-                        $slideItems.text(items);
+                        //$slideItems.text($slidesCount);
 
-                        function displaySliderFugure(figIndex) {
-                            $(".figures").removeClass("show");	
-                            $(".figures-" + figIndex).addClass("show");
-                            $slider.slick("slickGoTo", figIndex - 1, true);
-                            localStorage.setItem("currentSlide", figIndex);
-                        }
+                        
 
                         // TODO: save and restore current slide index to localStorage
                         let lsCurrentSlideIndex = localStorage.getItem("currentSlide");
 
                         let curSlideIndex = (lsCurrentSlideIndex != null) ? lsCurrentSlideIndex : parseInt($curSlideInd.text());
 
-                        displaySliderFugure(curSlideIndex);
+                        //displaySliderFugure(curSlideIndex);
 
-                        setTimeout(function(){
-                            $(".assort-bg-list").addClass("bg-1");
-                        }, 1000);
+                        // setTimeout(function(){
+                        //     $(".assort-bg-list").addClass("bg-1");
+                        // }, 1000);
+
+                        function checkSliderEdge(index){
+                            if (index == 5) {
+                                $slider.slick("slickGoTo", 0, true);
+                            } else {
+                                $slider.slick("slickNext");
+                            }
+                        }
                         
                         $slider.on( "click", ".slick-slider-inner", function( e ) {
                             if (!$(this).parent().hasClass("slick-current") || $(this).parent().hasClass("slick-cloned")) { 
                                 e.preventDefault();
                                 let currentSlideIndex = $slider.slick("slickCurrentSlide");
-                                let figureIndex = currentSlideIndex + 2;
-                                if (currentSlideIndex == 5) {
-                                    figureIndex = 1;
-                                    $slider.slick("slickGoTo", 0, true);
-                                } else {
-                                    $slider.slick("slickNext");
-                                }
                                 
-                                displaySliderFugure(figureIndex);
+                                checkSliderEdge(currentSlideIndex);
                             }	
                         });
                                 
                         // Loader		
                         $(".slick-arrow").on("click", function(event){
                             let target = $(event.target);
-                            let curIndex = parseInt($curSlideInd.text());
-        
-                            if (target.is(".slick-next")){
-                                if (curIndex == 1) loader()
-                            } else {
-                                if (curIndex == items) loader()
-                            }
+                            let curIndex = $slider.slick("slickCurrentSlide"); 
 
-                            displaySliderFugure(curIndex);
+                            checkSliderEdge(curIndex);
+
                         });
         
                         function loader(){
@@ -552,20 +577,11 @@ document.documentElement.className = document.documentElement.className.replace(
                         
                         // Change
                         $slider.on("beforeChange", function(event, slick, currentSlide, nextSlide){
-        
+
+                            setSlideVisualAttributes(slick, nextSlide);
+
                             currentSlide = nextSlide;
-        
-                            var $curSlide = $bgItem.eq(currentSlide);
-        
-                            $bgItem.removeClass("show");
-                            $curSlide.addClass("show");
-        
-                            setTimeout(function(){
-                                $(".assort-bg-list").attr("class", "assort-bg-list");
-                                $(".assort-bg-list").addClass("bg-" + (currentSlide + 1));
-                                //$bgItem.not(":eq(" + currentSlide + ")").removeClass("show");
-                            }, 900);
-        
+                            
                             $curSlideInd.text(currentSlide + 1);
         
                             // Slider Description
@@ -587,6 +603,8 @@ document.documentElement.className = document.documentElement.className.replace(
                                 .addClass("page-style-" + (currentSlide + 1));
                             
                         });
+
+                        
         
                         
                         break;
@@ -1082,7 +1100,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 };
 
-                this.load();
+                //this.load();
     
             }
             let assortFilter = new AssortmentFilter();
