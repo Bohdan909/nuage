@@ -4,8 +4,8 @@
     ------------------- */  
 
 @mixin object-mid {
-    width: 550px;
-    height: 297px;
+    // width: 550px;
+    // height: 297px;
 }
 
 @mixin object-mob {
@@ -22,12 +22,14 @@
 .object-main-wrap {
     //@include transform(translateY(-50%));
     //top: 50%;
-    bottom: 157px;
+    bottom: 140px;
     position: absolute;
     width: 765px;
     height: 413px;    
-    left: 412px;
-    z-index: 150;
+    z-index: 1000;
+    //left: 412px;
+    transform: translateX(-50%);
+    left: 53%;
 }
 
 .object-main {
@@ -514,9 +516,17 @@ ul.cubes-main {
     width: 160px;
     height: 160px;
     right: -100px;
+
+    @include heightMin {
+        display: none;
+    }
 }
 
 @media (max-height: 800px) and (min-width: 1025px){
+
+    .page-main .lic-desc {
+        top: -115px;
+    }
 
     div.scroll-helper .ico-mouse {
         top: 120px;
@@ -531,10 +541,6 @@ ul.cubes-main {
             @include transform(translateY(0));
             top: 27px;
         }
-
-        .lic-desc {
-            top: -115px;
-        }
     }
 
     .object-main, .object-main-wrap {
@@ -542,10 +548,8 @@ ul.cubes-main {
     }
 
     .object-main-wrap {
-        // @include transform(translateY(-50%));
-        // top: 50%;
         bottom: 128px;
-        left: 504px;
+        //left: 504px;
     }
 
     div.scroll-helper {
@@ -588,7 +592,7 @@ ul.cubes-main {
 @include mid {
 
     .object-main-wrap {
-        left: 279px;
+        //left: 279px;
     }
 
     .quote-wrap {
@@ -607,21 +611,32 @@ ul.cubes-main {
 @media (min-width: 1281px) { // Min Middle
 
     @media (max-height: 800px){
+
         .object-main-wrap {
-            bottom: 130px;
+            bottom: 105px;
+        }
+
+        @include mid {
+            .object-main-wrap {
+                bottom: 120px;
+            }
         }
     }
 
     @media (max-height: 600px){
+
         .object-main-wrap {
-            @include transform(translateY(-50%));
-            top: 48%;
+            bottom: 15% !important;
         }
     }
 
     @media (max-width: 1550px) and (max-height: 700px){
+
         .object-main-wrap {
-            left: 371px;
+            transform: scale(0.9) translate(-50%);
+            transform-origin: left bottom;
+            bottom: 105px;
+            //left: 371px;
         }
     }
 }
@@ -695,10 +710,10 @@ ul.cubes-main {
     }
 
     .object-main-wrap {
-        @include transform(scale(0.9));
+        @include transform(scale(0.9) translateX(-50%));
         @include origin(top, top);
-        bottom: 98px;
-        left: 270px;
+        bottom: 80px;
+        left: 51%;
     }
 
     div.scroll-helper {
@@ -718,6 +733,13 @@ ul.cubes-main {
             .text-block {
                 top: 50px;
             }
+        }
+    }
+
+    @media (max-height: 600px){
+
+        .object-main-wrap {
+            bottom: 50px;
         }
     }
 }
@@ -744,8 +766,9 @@ ul.cubes-main {
     }
 
     .object-main-wrap {
-        @include transform(scale(1) translateX(-50%));
-        left: 54%;
+        //@include transform(scale(1) translateX(-50%));
+        //left: 54%;
+        bottom: 70px;
     }
 
     ul.cubes-main {
@@ -847,16 +870,19 @@ ul.cubes-main {
         }
     }
 
-    @media (max-height: 870px){
+    @media (max-height: 890px){
+
         .lic-wrap {
             display: none;
         }
     }
 
     @include port {
+
         .object-main-wrap {
             @include transform(scale(0.87) translateX(-50%));
-            @include origin(left, center);
+            left: 49.5%;
+            //@include origin(left, center);
         }
 
         .quote-wrap {
@@ -924,6 +950,15 @@ ul.cubes-main {
     }
 
 }//  END TABLET
+
+@media (max-width: 880px) {
+
+    .object-main-wrap {
+        transform: scale(0.8) translateX(-50%);
+        bottom: 55px;
+        left: 44%;
+    }
+}
 
 
 // iPad Pro Portraite

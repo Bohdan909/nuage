@@ -400,8 +400,8 @@ document.documentElement.className = document.documentElement.className.replace(
             var $scheme = $('.object-scheme');
 
             $object.rotate3d({
-                'source': 'images/object-1/1_',
-                'count' : 39,
+                'source': 'images/object-1/1_000',
+                'count' : 41,
                 'auto'  : true
             });
 
