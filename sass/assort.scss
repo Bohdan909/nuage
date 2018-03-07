@@ -917,18 +917,19 @@ ul.desc-list {
         text-align: left;
         unicode-bidi: bidi-override;
         direction: rtl;
+
+        .filter-option:hover,
+        .filter-option:hover ~ .filter-option,
+        .filter-option.selected ~ .filter-option {
+            opacity: 1;
+            filter: grayscale(0);
+        }
     }
 
     .ico-list, .drops {
 
         .filter-option {
             cursor: pointer;
-        }
-        .filter-option:hover,
-        .filter-option:hover ~ .filter-option,
-        .filter-option.selected ~ .filter-option {
-            opacity: 1;
-            filter: grayscale(0);
         }
     }
 
