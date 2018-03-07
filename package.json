@@ -7,6 +7,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015-ie": "^6.7.0",
     "babel-preset-latest": "^6.24.1",
+    "beeper": "^1.1.1",
     "del": "^3.0.0",
     "grunt": "latest",
     "grunt-autoprefixer": "latest",
@@ -22,6 +23,7 @@
     "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.9.2",
     "gulp-concat": "^2.6.1",
+    "gulp-plumber": "^1.2.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0"
@@ -30,5 +32,8 @@
     "type": "git",
     "url": "https://github.com/Bohdan909/nuage.git"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "npm": "^5.7.1"
+  }
 }

@@ -915,11 +915,20 @@ ul.desc-list {
 
     .drops {
         text-align: left;
+        unicode-bidi: bidi-override;
+        direction: rtl;
+
+        .filter-option:hover,
+        .filter-option:hover ~ .filter-option,
+        .filter-option.selected ~ .filter-option {
+            opacity: 1;
+            filter: grayscale(0);
+        }
     }
 
     .ico-list, .drops {
 
-        li {
+        .filter-option {
             cursor: pointer;
         }
     }
