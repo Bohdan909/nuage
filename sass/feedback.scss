@@ -161,6 +161,13 @@ $heightPanel: 90px;
             font-size: 13px;
             line-height: 18px;
             color: #364e6e;
+            letter-spacing: 0.3px;
+
+            i {
+                @extend .not-blurry;
+                display: block;
+                font-style: normal;
+            }
         }
     }
 

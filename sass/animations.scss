@@ -85,6 +85,20 @@
     }
 }
 
+// Title
+// .title-1:not(.not-animate), .title-2:not(.not-animate), .title-3:not(.not-animate), .title-4:not(.not-animate) {
+//     transition: letter-spacing 1s $easing;
+//     transition-delay: 0.4s;
+//     letter-spacing: 8px;
+//     white-space: nowrap;
+
+//     .loaded & {
+//         letter-spacing: 0.3px;
+//         white-space: normal;
+//         transition: white-space 1s linear 0.4s;
+//     }
+// }
+
 ////////////// TIMING /////////
 
 .footer {
@@ -145,6 +159,30 @@
     li:nth-child(6) { @include a-delay(0.28s) }
     li:nth-child(7) { @include a-delay(0.32s) }
     li:nth-child(8) { @include a-delay(0.35s) }
+}
+
+.assort-desc-item {
+
+    > p {
+        @extend .sm;
+        animation-delay: 0.2s;
+    }
+}
+
+.desc-list li {
+    @extend .sm;
+
+    &:nth-child(1) {
+        animation-delay: 0.4s;
+    }
+
+    &:nth-child(2) {
+        animation-delay: 0.5s;
+    }
+
+    &:nth-child(3) {
+        animation-delay: 0.6s;
+    }
 }
 
 // Product Table
@@ -243,6 +281,10 @@
     p {
         @include a-delay(0.2s);
     }
+
+    p:last-child {
+        @include a-delay(0.4s);
+    }
 }
 
 .mission-text-slider {
@@ -253,9 +295,89 @@
     @include a-delay(0.4s);
 }
 
+// Feedback
+.feedback-title .title-1 {
+    transition: letter-spacing 1s $easing;
+    transition-delay: 0.4s;
+    letter-spacing: 5px;
+
+    .loaded & {
+        letter-spacing: 0.3px;
+    }
+}
+
+.answer-item {
+
+    &:nth-child(1) .answer-head span i {
+        animation-delay: 0.1s;
+    }
+
+    &:nth-child(2) .answer-head span i {
+        animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) .answer-head span i {
+        animation-delay: 0.3s;
+    }
+
+    &:nth-child(4) .answer-head span i {
+        animation-delay: 0.4s;
+    }
+
+    &:nth-child(5) .answer-head span i {
+        animation-delay: 0.5s;
+    }
+
+    &:nth-child(6) .answer-head span i {
+        animation-delay: 0.6s;
+    }
+
+    &:nth-child(7) .answer-head span i {
+        animation-delay: 0.7s;
+    }
+
+    &:nth-child(8) .answer-head span i {
+        animation-delay: 0.8s;
+    }
+
+    &:nth-child(9) .answer-head span i {
+        animation-delay: 0.9s;
+    }
+
+    &:nth-child(10) .answer-head span i {
+        animation-delay: 1.0s;
+    }
+}
+
+.feedback-item {
+
+    .feedback-name {
+        animation-delay: 0.2s;
+    }
+
+    .feedback-status {
+        animation-delay: 0.4s;
+    }
+
+    p {
+        animation-delay: 0.6s !important;
+    }
+}
+
 // Advantaged
 .page-adv .point {
     @include a-delay(0.7s);
+}
+
+.scheme-desc {
+
+    p {
+        animation-delay: 0.2s;
+    }
+}
+
+.scheme-desc-inner .btn {
+    animation-delay: 0.4s;
 }
 
 // Consultation
