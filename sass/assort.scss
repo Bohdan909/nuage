@@ -64,8 +64,7 @@
     right: 0;
     height: 100%;
     z-index: 100;
-
-    width: 60%;    
+    width: 60%;
 
     // @include mid {
     //     width: 68.5%;
@@ -523,7 +522,7 @@ $sliderAnimTime: 0.30s;
         .assort-det {
             width: 100px;
             height: 100px;
-            top: 38px;
+            top: -10px;
 
             i {
                 font-size: 10px;

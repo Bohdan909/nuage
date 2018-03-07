@@ -5,9 +5,11 @@ function initialize() {
   let mapOptions = {
    	zoom: 14,
    	scrollwheel: false,
+    draggable: true,
    	center: new google.maps.LatLng(55.819515, 37.490370)
  	};
 
+  
   let styles = [
       {
         "featureType": "all",
@@ -228,11 +230,10 @@ function initialize() {
   setStyles();
 
   var point = new google.maps.LatLng(55.819515, 37.490370);
-
-  // var image = new google.maps.MarkerImage(
-  //     'images/marker.png',
-  //     new google.maps.Size(34,53)
-  // );
+  var image = new google.maps.MarkerImage(
+    'images/marker.png',
+    new google.maps.Size(33,33)
+  );
 
   setMarker();
 
@@ -288,7 +289,7 @@ function initialize() {
 
   function setMarker(){
     new google.maps.Marker({
-      //icon: image,
+      icon: image,
       draggable: false,
       raiseOnDrag: false,
       map: map,
@@ -300,7 +301,6 @@ function initialize() {
     map.setOptions({styles: styles});
   }
 }
-
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
