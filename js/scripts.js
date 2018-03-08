@@ -26,8 +26,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 blockWidth = blockCal.offsetWidth;
                 fontSize = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
                 lineLength = blockWidth / (fontSize * 0.59);
-
-                console.log(lineLength);
             }
 
             function linesWrap(text, maxLength) {
@@ -57,8 +55,6 @@ document.documentElement.className = document.documentElement.className.replace(
             linesWrap(text, lineLength);
             resultHTML = resultArr.join("");
             block.innerHTML = resultHTML;
-
-            
         });
 
         /* ===================
