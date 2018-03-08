@@ -455,7 +455,12 @@ document.documentElement.className = document.documentElement.className.replace(
                     $(".assort-bg-list").addClass("bg-" + (currentSlideSlickIndex + 1));
                     //$bgItem.not(":eq(" + currentSlide + ")").removeClass("show");
                 }, 900);
+
+                $("body")
+                    .attr("class", "")
+                    .addClass("page-style-" + (currentSlideSlickIndex + 1));
             }
+
             function getCurrentSlickSlideFromStorage(){
                 let lsCurrentSlideIndex = localStorage.getItem("currentSlide");
                 if (lsCurrentSlideIndex) {
@@ -604,11 +609,6 @@ document.documentElement.className = document.documentElement.className.replace(
                             localStorage.setItem("currentSlide", nextSlide);
                             
                             setTimeout(changeSliderDesc, 0);
-        
-                            // Cubes
-                            $("body")
-                                .attr("class", "")
-                                .addClass("page-style-" + (currentSlide + 1));
                             
                         });
 
