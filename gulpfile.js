@@ -11,6 +11,7 @@ const concat = require('gulp-concat');
 const del = require('del');
 const plumber = require('gulp-plumber');
 const beeper = require('beeper');
+const imagemin = require('gulp-imagemin');
 
 gulp.task('sass', function () {
  return gulp.src('./sass/main.scss')
@@ -48,11 +49,37 @@ function js(){
 
 gulp.task('images', function() {
   return gulp.src(['images/**/*'])
+      .pipe(imagemin([
+        imagemin.gifsicle({interlaced: true}),
+        imagemin.jpegtran({progressive: true}),
+        imagemin.optipng({optimizationLevel: 5}),
+        imagemin.svgo({
+          plugins: [
+            {removeViewBox: false},
+            {cleanupIDs: false}
+          ]
+        })
+      ], {
+        verbose: true
+      }))
       .pipe(gulp.dest('dist/images'));
 });
 
 gulp.task('img', function() {
   return gulp.src(['img/**/*'])
+      .pipe(imagemin([
+        imagemin.gifsicle({interlaced: true}),
+        imagemin.jpegtran({progressive: true}),
+        imagemin.optipng({optimizationLevel: 5}),
+        imagemin.svgo({
+          plugins: [
+            {removeViewBox: false},
+            {cleanupIDs: false}
+          ]
+        })
+      ], {
+        verbose: true
+      }))
       .pipe(gulp.dest('dist/img'));
 });
 
