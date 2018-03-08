@@ -522,6 +522,8 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
             });
 
+            let video = document.querySelector(".mission-video video");
+
             // ONE-TIME INITIALIZATIONS END //
             //////////////////////////////////
 
@@ -533,16 +535,19 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 switch (blockId) {
                     case "main":
+                        video.pause();
                         $object.animateOpen(true, function () {
                             setTimeout($object.animateClose, 300);
                         });
                         break;
                     case "advantages":
+                        video.pause();
                         $scheme.animateOpen(true, function () {
                             console.log("andvantages animation ended");
                         });
                         break;
                     case "assortment":
+                        video.pause();
                         $slider.slick('setPosition');
                         
                         // Setup Classes
@@ -612,6 +617,18 @@ document.documentElement.className = document.documentElement.className.replace(
                             
                         });
 
+                        break;
+                    case "mission":
+                        video.play();
+                        break;
+                    case "faq":
+                        video.pause();
+                        break;
+                    case "buy":
+                        video.pause();
+                        break;
+                    case "consultation":
+                        video.pause();
                         break;
                     default:
                         break;
