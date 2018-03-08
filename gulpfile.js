@@ -50,9 +50,9 @@ function js(){
 gulp.task('images', function() {
   return gulp.src(['images/**/*'])
       .pipe(imagemin([
-        imagemin.gifsicle({interlaced: true}),
+        /*imagemin.gifsicle({interlaced: true}),
         imagemin.jpegtran({progressive: true}),
-        imagemin.optipng({optimizationLevel: 5}),
+        imagemin.optipng({optimizationLevel: 5}),*/
         imagemin.svgo({
           plugins: [
             {removeViewBox: false},
@@ -68,9 +68,9 @@ gulp.task('images', function() {
 gulp.task('img', function() {
   return gulp.src(['img/**/*'])
       .pipe(imagemin([
-        imagemin.gifsicle({interlaced: true}),
+        /*imagemin.gifsicle({interlaced: true}),
         imagemin.jpegtran({progressive: true}),
-        imagemin.optipng({optimizationLevel: 5}),
+        imagemin.optipng({optimizationLevel: 5}),*/
         imagemin.svgo({
           plugins: [
             {removeViewBox: false},
@@ -129,5 +129,5 @@ gulp.task('media', media);
 const defaultTask = gulp.series('sass', 'watch');
 gulp.task('default', defaultTask);
 
-const build =  gulp.series('sass', gulp.parallel('css', html, js, 'media','favicon'));
+const build =  gulp.series('sass', gulp.parallel('css', html, js, 'favicon'));
 gulp.task('build', build);
