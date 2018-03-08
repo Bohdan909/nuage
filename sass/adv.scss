@@ -676,43 +676,50 @@
 .scheme-desc {
 
 	.title-1 {
-		line-height: 47px;
-	}
-	
-	.title-1, p {
-		@include animation(textAnimateOut, 0.3s, ease-out);
-		opacity: 0;
-		transform: translateY(10px);
-	}
-
-	p {
-		@include a-delay(0.2s);
-	}
-
-	&.active {	
-
-		.title-1, p {
-			@include animation(textAnimate, 0.4s, ease-out);
-		}
-	}	
-
-	@include ie10 {
-
-		.title-1, p {
-			opacity: 1;
-			transform: translateY(0px);
-		}
-
-		&.active {	
-
-			.title-1, p {
-				animation: none;
-				-ms-animation: none;
-				-webkit-animation: none;
-			}
-		}	
+		letter-spacing: 0.1px;
 	}
 }
+
+// .scheme-desc {
+
+// 	.title-1 {
+// 		line-height: 47px;
+// 	}
+	
+// 	.title-1, p {
+// 		@include animation(textAnimateOut, 0.3s, ease-out);
+// 		opacity: 0;
+// 		transform: translateY(10px);
+// 	}
+
+// 	p {
+// 		@include a-delay(0.2s);
+// 	}
+
+// 	&.active {	
+
+// 		.title-1 {
+// 			@include animation(textAnimate, 0.4s, ease-out);
+// 		}
+// 	}	
+
+// 	@include ie10 {
+
+// 		.title-1, p {
+// 			opacity: 1;
+// 			transform: translateY(0px);
+// 		}
+
+// 		&.active {	
+
+// 			.title-1, p {
+// 				animation: none;
+// 				-ms-animation: none;
+// 				-webkit-animation: none;
+// 			}
+// 		}	
+// 	}
+// }
 
 .tab-pane:not(.feedback-column) {
 	@include animation(fadeOut, 0.3s, linear);

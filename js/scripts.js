@@ -2,19 +2,72 @@ document.documentElement.className = document.documentElement.className.replace(
 
 (function($){
     $(document).ready(function() {
+
         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
-        
-        // setTimeout(function(){
-        //     document.querySelector(".page").classList.add("loaded");
-        // }, 500);
 
-        /* ==============
-          Consultation 
-       ================= */
+        /* ===================
+           Text Lines Animate 
+        ====================== */
 
-        let formWrap = $(".consult-form-wrap, .consult-top");
+        let textBlock = document.querySelectorAll(".animate-text");
+
+        textBlock.forEach(function(block){
+            let text = block.innerText || block.textContent;
+            let blockWidth = block.offsetWidth;
+            let fontSize = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
+            let lineLength = blockWidth / (fontSize * 0.59);
+            let resultArr = [];
+            let resultHTML;
+
+            if (block.classList.contains("animate-text-hide")){
+                let parBlock = block.parentNode;
+                let blockCal = parBlock.parentNode.children[0].querySelector(".animate-text");
+
+                blockWidth = blockCal.offsetWidth;
+                fontSize = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
+                lineLength = blockWidth / (fontSize * 0.59);
+
+                console.log(lineLength);
+            }
+
+            function linesWrap(text, maxLength) {
+                
+                let line = [];
+                let length = 0;
+
+                text.split(" ").forEach(function(word){
+
+                    if ((length + word.length) >= maxLength) {
+                        resultArr.push("<div>" + line.join(" ") + "</div>");
+                        line = []; 
+                        length = 0;
+                    }
+
+                    length += word.length + 1;
+                    line.push(word);
+                });
+
+                if (line.length > 0) {
+                    resultArr.push("<div>" + line.join(" ") + "</div>");
+                }
+
+                return resultArr;
+            };
+
+            linesWrap(text, lineLength);
+            resultHTML = resultArr.join("");
+            block.innerHTML = resultHTML;
+
+            
+        });
+
+        /* ===================
+           Consultation 
+        ===================== */
+
+        let formWrap   = $(".consult-form-wrap, .consult-top");
         let mesConsult = $(".message-consult");
-        let copyRight = $(".copyright-mobile");
+        let copyRight  = $(".copyright-mobile");
 
         $(".btn-send").length && $(".btn-send").on("click", function (e) {
             formWrap.fadeOut(200);
@@ -34,7 +87,7 @@ document.documentElement.className = document.documentElement.className.replace(
         });
         
         /* ==============
-           MENU 
+           Menu
         ================= */
 
         let $body = document.querySelector("body");
@@ -177,7 +230,7 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         /* ==================
-           NAVIGATION SCHEME
+           Navigation Scheme
         ==================== */
 
         let btnScheme = document.querySelectorAll(".scheme-nav button");
@@ -224,7 +277,7 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         /* ==============
-           TABS
+           Tabs
         ================= */
 
         function findAncestor(el, cls) {
@@ -289,7 +342,7 @@ document.documentElement.className = document.documentElement.className.replace(
         }());
         
         /* ================
-           FILTER FEEDBACK
+           Filter Feedback
         =================== */
 
         var ffItem = document.querySelectorAll(".feedback-filter div");
@@ -321,7 +374,7 @@ document.documentElement.className = document.documentElement.className.replace(
         });
 
         /* ================
-           PRODUCT HOVER
+           Product Hover
         =================== */
 
         if (document.body.contains(document.querySelector(".product-list"))){
@@ -377,7 +430,7 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         /* ==============
-           FORMS
+           Forms
         ================= */
 
         $("input, textarea").focus(function () {
@@ -1206,8 +1259,12 @@ document.documentElement.className = document.documentElement.className.replace(
         if (typeof NodeList.prototype.forEach === "function") return false;
         NodeList.prototype.forEach = Array.prototype.forEach;
     }());
-
     
+    // Find Parent
+    function findParent(el, cls){
+       while ((el = el.parentElement) && !el.classList.contains(cls));
+       return el;
+    }
 
 
     /*********************************

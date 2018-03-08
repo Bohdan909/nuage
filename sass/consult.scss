@@ -340,6 +340,7 @@ ul.tabs.tabs-panel {
 
             span {
                 @extend .text-min;
+                display: block;
                 color: #9da9b9;
             }
 
@@ -359,6 +360,7 @@ ul.tabs.tabs-panel {
             }
 
             i {
+                display: block;
                 font-style: normal;
                 font-size: 13px;
             }
