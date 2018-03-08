@@ -103,6 +103,11 @@ gulp.task('css', function() {
       .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('assets', function() {
+  return gulp.src(['assets/**/*'])
+      .pipe(gulp.dest('dist/assets'));
+});
+
 function watch() {
   gulp.watch('sass/*.scss', gulp.series('sass','css'));
   gulp.watch('js/**/*.js', js);
@@ -129,5 +134,5 @@ gulp.task('media', media);
 const defaultTask = gulp.series('sass', 'watch');
 gulp.task('default', defaultTask);
 
-const build =  gulp.series('sass', gulp.parallel('css', html, js, 'favicon'));
+const build =  gulp.series('sass', gulp.parallel('css', html, js, 'assets', 'favicon'));
 gulp.task('build', build);
