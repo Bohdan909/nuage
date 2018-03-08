@@ -485,6 +485,7 @@ document.documentElement.className = document.documentElement.className.replace(
             var $slideItems = $(".assort-slider-ind i");
             var $cubes = $(".cubes-b");
             var $slidesCount = 0;
+            
 
             function displaySliderFugure(figIndex) {
                 $(".figures").removeClass("show");	
@@ -507,7 +508,21 @@ document.documentElement.className = document.documentElement.className.replace(
                     $(".assort-bg-list").addClass("bg-" + (currentSlideSlickIndex + 1));
                     //$bgItem.not(":eq(" + currentSlide + ")").removeClass("show");
                 }, 900);
+
+                $("body")
+                    .attr("class", "")
+                    .addClass("page-style-" + (currentSlideSlickIndex + 1));
             }
+
+            function getCurrentSlickSlideFromStorage(){
+                let lsCurrentSlideIndex = localStorage.getItem("currentSlide");
+                if (lsCurrentSlideIndex) {
+                } else {
+                    lsCurrentSlideIndex = 0;
+                }
+                return lsCurrentSlideIndex;
+            }
+            let lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
 
             $slider.on("init reInit", function(event, slick){
                 console.log("slick slider init / re-init");
@@ -516,7 +531,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 
                 $slideItems.text($slidesCount);
 
-                setSlideVisualAttributes(slick, 0);
+                setSlideVisualAttributes(slick, lsCurrentSlideIndex);
                 
             });
 
@@ -560,6 +575,8 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
             });
 
+            let video = document.querySelector(".mission-video video");
+
             // ONE-TIME INITIALIZATIONS END //
             //////////////////////////////////
 
@@ -571,37 +588,26 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 switch (blockId) {
                     case "main":
+                        video.pause();
                         $object.animateOpen(true, function () {
                             setTimeout($object.animateClose, 300);
                         });
                         break;
                     case "advantages":
+                        video.pause();
                         $scheme.animateOpen(true, function () {
                             console.log("andvantages animation ended");
                         });
                         break;
                     case "assortment":
+                        video.pause();
                         $slider.slick('setPosition');
                         
                         // Setup Classes
-                        //$slideItems.text($slidesCount);
+                        lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
+                        $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
+                        $curSlideInd.text(parseInt(lsCurrentSlideIndex,10) + 1);
 
-                        
-
-                        // TODO: save and restore current slide index to localStorage
-                        let lsCurrentSlideIndex = localStorage.getItem("currentSlide");
-                        if (lsCurrentSlideIndex) {
-                            $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
-                        }
-                        
-
-                        let curSlideIndex = (lsCurrentSlideIndex != null) ? lsCurrentSlideIndex : parseInt($curSlideInd.text());
-
-                        //displaySliderFugure(curSlideIndex);
-
-                        // setTimeout(function(){
-                        //     $(".assort-bg-list").addClass("bg-1");
-                        // }, 1000);
 
                         function checkSliderEdge(index){
                             if (index == 5) {
@@ -661,17 +667,21 @@ document.documentElement.className = document.documentElement.className.replace(
                             localStorage.setItem("currentSlide", nextSlide);
                             
                             setTimeout(changeSliderDesc, 0);
-        
-                            // Cubes
-                            $("body")
-                                .attr("class", "")
-                                .addClass("page-style-" + (currentSlide + 1));
                             
                         });
 
-                        
-        
-                        
+                        break;
+                    case "mission":
+                        video.play();
+                        break;
+                    case "faq":
+                        video.pause();
+                        break;
+                    case "buy":
+                        video.pause();
+                        break;
+                    case "consultation":
+                        video.pause();
                         break;
                     default:
                         break;
