@@ -541,7 +541,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         $slider.slick('setPosition');
                         
                         // Setup Classes
-
+                        lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
                         $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
                         $curSlideInd.text(parseInt(lsCurrentSlideIndex,10) + 1);
 
