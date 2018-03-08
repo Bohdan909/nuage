@@ -1215,6 +1215,13 @@ ul.desc-list {
 
 // Tablet
 @include tablet {
+
+    .page-assort {
+
+        .cubes-2 li:nth-child(1) {
+            display: none;
+        }
+    }
     
     .assort-slider .slick-slide .slick-slider-inner {
         @include transform(translateY(-50%));
