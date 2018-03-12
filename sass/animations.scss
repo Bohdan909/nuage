@@ -287,15 +287,15 @@ $textA: 15px;
 // Product
 .product-view-block {
 
-    &:nth-child(2) {
+    &:nth-child(2) .slide-text {
         @include a-delay(0.15s);
     }
 
-    &:nth-child(3) {
+    &:nth-child(3) .slide-text {
         @include a-delay(0.3s);
     }
 
-    &:nth-child(4) {
+    &:nth-child(4) .slide-text {
         @include a-delay(0.45s);
     }
 }
@@ -419,6 +419,13 @@ $textA: 15px;
     }
 }
 
+@for $i from 1 through 17 {
+
+    .answer-item:nth-child(#{$i}) .answer-head span i {
+        animation-delay: calc(#{0.1 + ($i * 0.1)}s);
+    }
+}
+
 // .answer-item {
 
 //     &:nth-child(1) .answer-head span i {
@@ -462,12 +469,7 @@ $textA: 15px;
 //     }
 // }
 
-@for $i from 1 through 15 {
 
-    .answer-item:nth-child(#{$i}) .answer-head span i {
-        animation-delay: calc(#{0.1 + $i * 0.1}s);
-    }
-}
 
 .feedback-item {
 
