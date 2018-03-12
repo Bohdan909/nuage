@@ -1067,7 +1067,7 @@ ul.desc-list {
     @media (max-height: 660px) {
 
         .assort-slider .slick-current .slick-slider-inner {
-            @include transform(translateY(10%));
+            @include transform(translateY(13%));
         }
 
         .assort-slider .slick-current + .slick-slide .slick-slider-inner {
@@ -1075,7 +1075,21 @@ ul.desc-list {
         }
 
         .assort-slider .slick-active-last .slick-slider-inner {
-            @include transform(translateY(-19%) translateX(8%) scale(0.5));
+            @include transform(translateY(-16%) translateX(8%) scale(0.5));
+        }
+
+        @include laptop {
+            .assort-slider .slick-current .slick-slider-inner {
+                @include transform(translateY(20%));
+            }
+
+            .assort-slider .slick-current + .slick-slide .slick-slider-inner {
+                @include transform(translateY(4%) translateX(27%) scale(0.7));
+            }
+
+            .assort-slider .slick-active-last .slick-slider-inner {
+                @include transform(translateY(-5%) translateX(8%) scale(0.5));
+            }
         }
     }
 }
