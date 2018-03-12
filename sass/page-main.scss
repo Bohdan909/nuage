@@ -41,6 +41,14 @@
         @include Center;
         width: 100%;
     }
+
+    svg {
+        transition: opacity 0.3s $easing;
+    }
+
+    &:hover svg {
+        opacity: 0;
+    }
 }
 
 .page-main {
