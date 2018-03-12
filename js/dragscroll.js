@@ -43,6 +43,10 @@
                 (cont = el.container || el)[addEventListener](
                     mousedown,
                     cont.md = function(e) {
+                        el.style['webkitCursor'] = 'grabbing';
+                        el.style['mozCursor'] = 'grabbing';
+                        el.style.cursor = 'grabbing';
+                        el.classList.add('dragging');
                         if (!el.hasAttribute('nochilddrag') ||
                             _document.elementFromPoint(
                                 e.pageX, e.pageY
@@ -58,7 +62,13 @@
                 );
 
                 _window[addEventListener](
-                    mouseup, cont.mu = function() {pushed = 0;}, 0
+                    mouseup, cont.mu = function() {
+                        pushed = 0;
+                        el.style['webkitCursor'] = 'grab';
+                        el.style['mozCursor'] = 'grab';
+                        el.classList.remove('dragging');
+                        el.style.cursor = 'grab';
+                    }, 0
                 );
 
                 _window[addEventListener](
