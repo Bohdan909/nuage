@@ -956,7 +956,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     Array.prototype.forEach.call(scrollBlocks, function(scrollBlock){
                         addWheelListener( scrollBlock, customScrollForScrollable, true);
                         scrollBlock.classList.add("dragscroll");
-                        scrollBlock.style.cursor = "grab";
                     });
                 } else {
                     // window width is less than 1025px
