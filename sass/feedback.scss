@@ -99,6 +99,19 @@ $heightPanel: 90px;
         }
     }
 }
+/* styles for dragscroll */
+.dragscroll {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+
+.dragscroll.dragging {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
+
 
 .feedback-bottom {
     padding-top: 24px;
