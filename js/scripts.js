@@ -20,22 +20,13 @@ document.documentElement.className = document.documentElement.className.replace(
             let resultHTML;
 
             if (block.classList.contains("animate-text-hide")){
-                //let parBlock = block.parentNode;
-                //let blockCal = parBlock.parentNode.children[0].querySelector(".animate-text");
                 let blockHide = document.querySelector("animate-text-hide");
                 let blockWrap = block.closest(".animate-text-wrap");
                 let blockCal  = blockWrap.children[0].querySelector(".animate-text");
 
-                console.log(block);
-
                 blockWidth = blockCal.offsetWidth;
                 fontSize = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
                 lineLength = blockWidth / (fontSize * 0.63);
-            }
-
-            function findParent(el, cls){
-               while ((el = el.parentElement) && !el.classList.contains(cls));
-               return el;
             }
 
             function linesWrap(text, maxLength){

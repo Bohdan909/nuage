@@ -287,15 +287,15 @@ $textA: 15px;
 // Product
 .product-view-block {
 
-    &:nth-child(2) {
+    &:nth-child(2) .slide-text {
         @include a-delay(0.15s);
     }
 
-    &:nth-child(3) {
+    &:nth-child(3) .slide-text {
         @include a-delay(0.3s);
     }
 
-    &:nth-child(4) {
+    &:nth-child(4) .slide-text {
         @include a-delay(0.45s);
     }
 }
@@ -419,48 +419,57 @@ $textA: 15px;
     }
 }
 
-.answer-item {
+@for $i from 1 through 17 {
 
-    &:nth-child(1) .answer-head span i {
-        animation-delay: 0.1s;
-    }
-
-    &:nth-child(2) .answer-head span i {
-        animation-delay: 0.2s;
-    }
-
-    &:nth-child(3) .answer-head span i {
-        animation-delay: 0.3s;
-    }
-
-    &:nth-child(4) .answer-head span i {
-        animation-delay: 0.4s;
-    }
-
-    &:nth-child(5) .answer-head span i {
-        animation-delay: 0.5s;
-    }
-
-    &:nth-child(6) .answer-head span i {
-        animation-delay: 0.6s;
-    }
-
-    &:nth-child(7) .answer-head span i {
-        animation-delay: 0.7s;
-    }
-
-    &:nth-child(8) .answer-head span i {
-        animation-delay: 0.8s;
-    }
-
-    &:nth-child(9) .answer-head span i {
-        animation-delay: 0.9s;
-    }
-
-    &:nth-child(10) .answer-head span i {
-        animation-delay: 1.0s;
+    .answer-item:nth-child(#{$i}) .answer-head span i {
+        animation-delay: calc(#{0.1 + ($i * 0.1)}s);
     }
 }
+
+// .answer-item {
+
+//     &:nth-child(1) .answer-head span i {
+//         animation-delay: 0.1s;
+//     }
+
+//     &:nth-child(2) .answer-head span i {
+//         animation-delay: 0.2s;
+//     }
+
+//     &:nth-child(3) .answer-head span i {
+//         animation-delay: 0.3s;
+//     }
+
+//     &:nth-child(4) .answer-head span i {
+//         animation-delay: 0.4s;
+//     }
+
+//     &:nth-child(5) .answer-head span i {
+//         animation-delay: 0.5s;
+//     }
+
+//     &:nth-child(6) .answer-head span i {
+//         animation-delay: 0.6s;
+//     }
+
+//     &:nth-child(7) .answer-head span i {
+//         animation-delay: 0.7s;
+//     }
+
+//     &:nth-child(8) .answer-head span i {
+//         animation-delay: 0.8s;
+//     }
+
+//     &:nth-child(9) .answer-head span i {
+//         animation-delay: 0.9s;
+//     }
+
+//     &:nth-child(10) .answer-head span i {
+//         animation-delay: 1.0s;
+//     }
+// }
+
+
 
 .feedback-item {
 
