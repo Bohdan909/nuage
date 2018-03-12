@@ -571,7 +571,122 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
             });
 
-            let video = document.querySelector(".mission-video video");
+            // VIDEO
+            let videoBlock = document.querySelector(".video-block-wrap");
+            let video   = document.querySelector(".mission-video video");
+            let btnPlay = document.querySelector(".btn-play");
+            let btnName = document.querySelector(".video-name");
+
+            const timeAnim = 5000;
+            const timeAnimBack = 600;
+            let touch = document.querySelector("html").classList.contains("touchevents");
+            let radius = "310px";
+            let scrollTop = $(window).scrollTop();
+            let videoWrap  = document.querySelector(".video-calibrate");
+            let videoPlay  = document.querySelector(".mission-video-play");
+            let videoCal   = document.querySelector(".video-calibrate");
+            let videoCloseBtn = document.querySelector(".mission-video-close");
+            let videoContent = videoWrap.querySelector(".mission-video-content");
+            let siteHeader = document.getElementById("header");
+            let topPosPlay, leftPosPlay, topPos, leftPos, timer;
+
+            var supportsVideo = !!document.createElement('video').canPlayType;
+            if (supportsVideo) {
+                video.controls = false;
+                
+            }
+
+            video.addEventListener('canplay', function() {
+                console.log("Video state: " + video.readyState);
+                
+                if(video.readyState >= 3) {
+                    videoPlay.querySelector(".preview-image").style.opacity = "0";
+                }
+            }, false);
+            
+            function playVideoFromStart(videoElem, soundMuted) {
+                videoElem.currentTime = 0;
+                videoElem.muted = soundMuted;
+                videoElem.play();
+            }
+
+            videoWrap.addEventListener("click", function() {
+                if (!videoWrap.classList.contains("open")){
+                    timer = setTimeout(videoOpen, 600);
+                }
+            });
+
+            function hideSiteHeader() {
+                siteHeader.style.opacity = "0";
+            }
+
+            function showSiteHeader() {
+                siteHeader.style.opacity = "1";
+            }
+
+            function showSiteControls(callback) {
+                if (videoCloseBtn.style.opacity != "1") {
+                    videoCloseBtn.style.opacity = "1";
+                }
+                
+                // hide menu
+                if (callback) {
+                    callback();
+                }
+            }
+
+            function hideSiteControls() {
+                videoCloseBtn.style.opacity = "0";
+
+            }
+
+            function handleVideoTouch(event){
+                showSiteControls(function(){
+                    setTimeout(hideSiteControls, 1500);
+                });
+            }
+
+            videoWrap.addEventListener("mouseleave", function(){
+                clearTimeout(timer);
+                //setTimeout(videoClose, 200);
+            });
+
+            videoCloseBtn.addEventListener("click", function(){
+                setTimeout(videoClose, 200);
+            });
+            
+            function videoOpen(){
+                console.log("video Open");
+                hideSiteHeader();
+                //setCirclePos("2000px");
+                //video.play();
+                playVideoFromStart(video, false);
+                
+                videoWrap.classList.add("open");
+                
+                videoWrap.addEventListener("mousemove", handleVideoTouch, false);
+                videoWrap.addEventListener("touchstart", handleVideoTouch, false);
+            }
+
+            function videoClose(){
+                console.log("video Close");
+                video.muted = true;
+                showSiteHeader();
+                //setCirclePos(radius);
+                videoWrap.classList.remove("open");
+                setTimeout(function(){ video.pause() }, 500);
+                
+                videoWrap.removeEventListener("mousemove", handleVideoTouch, false);
+                videoWrap.removeEventListener("touchstart", handleVideoTouch, false);
+            }
+
+            // window.addEventListener("resize", function(){
+    
+            // 	if (!videoWrap.classList.contains("open")){
+            // 		setCirclePos(radius);
+            // 		videoPlay.classList.remove("hide");
+            // 	} 
+            // });
 
             // ONE-TIME INITIALIZATIONS END //
             //////////////////////////////////
@@ -584,19 +699,19 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 switch (blockId) {
                     case "main":
-                        video.pause();
+                        videoClose()
                         $object.animateOpen(true, function () {
                             setTimeout($object.animateClose, 300);
                         });
                         break;
                     case "advantages":
-                        video.pause();
+                        videoClose();
                         $scheme.animateOpen(true, function () {
                             console.log("andvantages animation ended");
                         });
                         break;
                     case "assortment":
-                        video.pause();
+                        videoClose();
                         $slider.slick('setPosition');
                         
                         // Setup Classes
@@ -671,13 +786,13 @@ document.documentElement.className = document.documentElement.className.replace(
                         video.play();
                         break;
                     case "faq":
-                        video.pause();
+                        videoClose();
                         break;
                     case "buy":
-                        video.pause();
+                        videoClose();
                         break;
                     case "consultation":
-                        video.pause();
+                        videoClose();
                         break;
                     default:
                         break;
