@@ -1,0 +1,40 @@
+{
+  "name": "Forpost",
+  "version": "0.0.1",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015-ie": "^6.7.0",
+    "babel-preset-latest": "^6.24.1",
+    "beeper": "^1.1.1",
+    "del": "^3.0.0",
+    "grunt": "latest",
+    "grunt-autoprefixer": "latest",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "latest",
+    "grunt-remove-logging": "latest",
+    "grunt-sass": "^2.1.0",
+    "grunt-string-replace": "latest",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bohdan909/nuage.git"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "npm": "^5.7.1"
+  }
+}

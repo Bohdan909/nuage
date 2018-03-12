@@ -15,27 +15,37 @@ document.documentElement.className = document.documentElement.className.replace(
             let text = block.innerText || block.textContent;
             let blockWidth = block.offsetWidth;
             let fontSize = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
-            let lineLength = blockWidth / (fontSize * 0.59);
+            let lineLength = blockWidth / (fontSize * 0.63);
             let resultArr = [];
             let resultHTML;
 
             if (block.classList.contains("animate-text-hide")){
-                let parBlock = block.parentNode;
-                let blockCal = parBlock.parentNode.children[0].querySelector(".animate-text");
+                //let parBlock = block.parentNode;
+                //let blockCal = parBlock.parentNode.children[0].querySelector(".animate-text");
+                let blockHide = document.querySelector("animate-text-hide");
+                let blockWrap = block.closest(".animate-text-wrap");
+                let blockCal  = blockWrap.children[0].querySelector(".animate-text");
+
+                console.log(block);
 
                 blockWidth = blockCal.offsetWidth;
                 fontSize = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
-                lineLength = blockWidth / (fontSize * 0.59);
+                lineLength = blockWidth / (fontSize * 0.63);
             }
 
-            function linesWrap(text, maxLength) {
+            function findParent(el, cls){
+               while ((el = el.parentElement) && !el.classList.contains(cls));
+               return el;
+            }
+
+            function linesWrap(text, maxLength){
                 
                 let line = [];
                 let length = 0;
 
                 text.split(" ").forEach(function(word){
 
-                    if ((length + word.length) >= maxLength) {
+                    if ((length + word.length) >= maxLength){
                         resultArr.push("<div>" + line.join(" ") + "</div>");
                         line = []; 
                         length = 0;
@@ -45,9 +55,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     line.push(word);
                 });
 
-                if (line.length > 0) {
-                    resultArr.push("<div>" + line.join(" ") + "</div>");
-                }
+                if (line.length > 0) resultArr.push("<div>" + line.join(" ") + "</div>");
 
                 return resultArr;
             };
