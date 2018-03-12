@@ -172,6 +172,7 @@
             cursor: pointer;
             -webkit-filter: blur(0px);
             filter: blur(0px);
+            @include transition(filter, 0.3s, $easing);
         }
     }
 
@@ -207,7 +208,7 @@
 
 .assort-slider .slick-slide .slick-slider-inner {
     //@include transition(transform, 0.7s, cubic-bezier(.11,0,.45,1));
-    transition: transform 0.7s cubic-bezier(.11,0,.45,1);
+    transition: transform 0.7s cubic-bezier(.11,0,.45,1), 0.3s filter 0.3s cubic-bezier(.11,0,.45,1);
 
     // transition-delay: 0.4s !important;
     // -webkit-transition-delay: 0.4s !important;
@@ -578,37 +579,37 @@ $sliderAnimTime: 0.30s;
 
 @keyframes assortAnimate {
     from { 
-        transform: translateX(0); 
+        transform: translate3d(0,0,0); 
     }
     to { 
-        transform: translateX(-96.666666%); 
+        transform: translate3d(-96.666666%,0,0); 
     }
 }
 
 @keyframes assortAnimateBack {
     from { 
-        transform: translateX(-96.666666%); 
+        transform: translate3d(-96.666666%,0,0); 
     }
     to { 
-        transform: translateX(0); 
+        transform: translate3d(0,0,0); 
     }
 }
 
 @-webkit-keyframes assortAnimate {
     from { 
-        transform: translateX(0); 
+        transform: translate3d(0,0,0); 
     }
     to { 
-        transform: translateX(-96.666666%); 
+        transform: translate3d(-96.666666%,0,0); 
     }
 }
 
 @-webkit-keyframes assortAnimateBack {
     from { 
-        transform: translateX(-96.666666%); 
+        transform: translate3d(-96.666666%,0,0); 
     }
     to { 
-        transform: translateX(0); 
+        transform: translate3d(0,0,0); 
     }
 }
 
@@ -703,7 +704,7 @@ $sliderAnimTime: 0.30s;
 
         &.show {
             .btn img {
-                transform: translateY(-5px) rotate(90deg);
+                transform: translate3d(0, -5px, 0) rotate(90deg);
             }
         }
     }
@@ -774,56 +775,56 @@ div.assort-desc-item {
 @keyframes ttl-rotate-in {
     0% {
         opacity: 0;
-        @include transform(translateY(15px));
+        @include transform(translate3d(0, 15px, 0));
     }
     50% {
         opacity: 1;
     }
     100%{
         opacity: 1;
-        @include transform(translateY(0));
+        @include transform(translate3d(0, 0, 0));
     }
 }
 
 @keyframes ttl-rotate-out {
     0% {
         opacity: 1;
-        @include transform(translateY(0px));
+        @include transform(translate3d(0, 0px, 0));
     }
     50% {
         opacity: 0.5;
     }
     100%{
         opacity: 0;
-        @include transform(translateY(-15px));
+        @include transform(translate3d(0, -15px,0));
     }
 }
 
 @-webkit-keyframes ttl-rotate-in {
     0% {
         opacity: 0;
-        @include transform(translateY(15px));
+        @include transform(translate3d(0, 15px, 0));
     }
     50% {
         opacity: 1;
     }
     100%{
         opacity: 1;
-        @include transform(translateY(0));
+        @include transform(translate3d(0, 0, 0));
     }
 }
 
 @-webkit-keyframes ttl-rotate-out {
     0% {
         opacity: 1;
-        @include transform(translateY(0px));
+        @include transform(translate3d(0, 0px, 0));
     }
     50% {
         opacity: 0.5;
     }
     100%{
         opacity: 0;
-        @include transform(translateY(-15px));
+        @include transform(translate3d(0, -15px, 0));
     }
 }
 
@@ -1050,28 +1051,28 @@ ul.desc-list {
 
     @media (max-height: 760px) {
         .assort-slider .slick-current .slick-slider-inner {
-            @include transform(translateY(37%));
+            @include transform(translate3d(0, 37%, 0));
         }
 
         .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-            @include transform(translateY(12%) translateX(27%) scale(0.7));
+            @include transform(translate3d(27%, 12%, 0) scale(0.7));
         }
 
         .assort-slider .slick-active-last .slick-slider-inner {
-            @include transform(translateY(-3%) translateX(8%) scale(0.5));
+            @include transform(translate3d(8%, -3%, 0) scale(0.5));
         }
 
         @include mid {
             .assort-slider .slick-current .slick-slider-inner {
-                @include transform(translateY(32%));
+                @include transform(translate3d(0,32%,0));
             }
 
             .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-                @include transform(translateY(7%) translateX(27%) scale(0.7));
+                @include transform(translate3d(27%, 7%, 0) scale(0.7));
             }
 
             .assort-slider .slick-active-last .slick-slider-inner {
-                @include transform(translateY(-12%) translateX(8%) scale(0.5));
+                @include transform(translate3d(8%, -12%, 0) scale(0.5));
             }
         }
     }
@@ -1079,28 +1080,28 @@ ul.desc-list {
     @media (max-height: 660px) {
 
         .assort-slider .slick-current .slick-slider-inner {
-            @include transform(translateY(13%));
+            @include transform(translate3d(0,13%,0));
         }
 
         .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-            @include transform(translateY(-6%) translateX(27%) scale(0.7));
+            @include transform(translate3d(27%, -6%, 0) scale(0.7));
         }
 
         .assort-slider .slick-active-last .slick-slider-inner {
-            @include transform(translateY(-16%) translateX(8%) scale(0.5));
+            @include transform(translate3d(8%, -16%, 0) scale(0.5));
         }
 
         @include laptop {
             .assort-slider .slick-current .slick-slider-inner {
-                @include transform(translateY(20%));
+                @include transform(translate3d(0,20%,0));
             }
 
             .assort-slider .slick-current + .slick-slide .slick-slider-inner {
-                @include transform(translateY(4%) translateX(27%) scale(0.7));
+                @include transform(translate3d(27%, 4%, 0) scale(0.7));
             }
 
             .assort-slider .slick-active-last .slick-slider-inner {
-                @include transform(translateY(-5%) translateX(8%) scale(0.5));
+                @include transform(translate3d(8%, -5%, 0) scale(0.5));
             }
         }
     }
@@ -1193,7 +1194,7 @@ ul.desc-list {
     }
 
     div.assort-desc-item {
-        @include transform(translateY(0));
+        @include transform(translate3d(0,0,0));
         position: static;
         top: auto;
     }
