@@ -338,6 +338,10 @@ ul.tabs.tabs-panel {
         section {
             @include vertCenter;
 
+            * {
+                @extend .not-blurry;
+            }
+
             span {
                 @extend .text-min;
                 display: block;

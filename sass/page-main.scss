@@ -58,11 +58,15 @@
         left: 0;
         top: 20vh;
         width: 360px;
-        z-index: 999;
+        z-index: 1001;
 
         .btn {
             margin-bottom: 30px;
         }
+    }
+
+    .footer {
+        z-index: 1002;
     }
 
     .footer-social {
@@ -739,7 +743,7 @@ ul.cubes-main {
         .page-main {
 
             .text-block {
-                top: 50px;
+                top: 35px;
             }
         }
     }

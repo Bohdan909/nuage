@@ -21,11 +21,12 @@ document.documentElement.className = document.documentElement.className.replace(
 
             if (block.classList.contains("animate-text-hide")){
                 let blockHide = document.querySelector("animate-text-hide");
-                let blockWrap = block.closest(".animate-text-wrap");
+                // let blockWrap = block.closest(".animate-text-wrap");
+                let blockWrap = findParent(block, "animate-text-wrap");
                 let blockCal  = blockWrap.children[0].querySelector(".animate-text");
 
                 blockWidth = blockCal.offsetWidth;
-                fontSize = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
+                fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
                 lineLength = blockWidth / (fontSize * 0.63);
             }
 
@@ -275,11 +276,6 @@ document.documentElement.className = document.documentElement.className.replace(
            Tabs
         ================= */
 
-        function findAncestor(el, cls) {
-            while ((el = el.parentElement) && !el.classList.contains(cls));
-            return el;
-        }
-
         // another implementation
         let tabs = document.querySelectorAll(".tabs");
         function tabClick(event) {
@@ -290,7 +286,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 tabElement.classList.remove("active");
             });
 
-            let targetTab = findAncestor(event.target, "tab");
+            let targetTab = findParent(event.target, "tab");
             if (targetTab != null) {
                 targetTab.classList.add("active");
             }

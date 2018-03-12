@@ -265,6 +265,7 @@ div.product-view-block {
     }
 
     section {
+        margin-bottom: 10px;
         
         &:first-child {
             margin-bottom: 30px;
@@ -409,7 +410,7 @@ div.product-view-block {
                     display: block;
                     position: absolute;
                     width: 38px;
-                    left: 37px;
+                    left: 40px;
                     top: 3px;
                     border-top: 2px dashed #d2d8e0;
                 }
@@ -535,12 +536,20 @@ div.product-view-block {
         height: $prodFooterHeightMin;
     }
 
+    .cd-product-viewer-handle {
+        margin-top: -7px;
+    }
+
    .object-360-wrap {
-        top: 0px !important;
+        top: -10px !important;
     }
 
     div.product-view-block {
         margin-bottom: 17px;
+
+        section {
+            margin-bottom: 0;
+        }
 
         section:first-child {
             margin-bottom: 20px;
