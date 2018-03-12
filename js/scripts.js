@@ -680,6 +680,11 @@ document.documentElement.className = document.documentElement.className.replace(
                 videoWrap.removeEventListener("touchstart", handleVideoTouch, false);
             }
 
+            window.addEventListener('blur', function() {
+                videoClose();
+            });
+
+
             // window.addEventListener("resize", function(){
     
             // 	if (!videoWrap.classList.contains("open")){
