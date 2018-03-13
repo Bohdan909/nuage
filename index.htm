@@ -2291,20 +2291,19 @@
 				}
 
 				// Lic
-				var $licDesc = document.querySelectorAll(".lic-desc li");
-				var $licItem = document.querySelectorAll(".lic-list li");
-				
-				for (let i = 0; i < $licItem.length; i++){
-					
-					$licItem[i].addEventListener("mouseover", function(){
-						$licDesc[i].classList.add("show");
+				let $licDesc = document.querySelectorAll(".lic-desc li");
+				let $licItem = document.querySelectorAll(".lic-list li");
+
+				$licItem.forEach(function(item, index){
+
+					item.addEventListener("mouseover", function(){
+						$licDesc[index].classList.add("show");
 					});
 
-					$licItem[i].addEventListener("mouseleave", function(){
-						$licDesc[i].classList.remove("show");
+					item.addEventListener("mouseleave", function(){
+						$licDesc[index].classList.remove("show");
 					});
-				}
-				
+				});
 				
 				
 				// Popup
@@ -2314,7 +2313,6 @@
 
 					document.querySelector("#popup-policy").classList.add("open");
 				});
-
 
 				btnClose.forEach(function(btn){
 					let popupWrap = btn.parentNode.parentNode;
