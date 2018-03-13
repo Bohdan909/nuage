@@ -328,6 +328,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
         // SVG Drowing Set
         $(".point-ico-svg").length && (function(){
+            
             replaceWithPaths($(".point-ico-svg"));
             setDash($(".point-ico-svg"));
         }());
@@ -523,19 +524,18 @@ document.documentElement.className = document.documentElement.className.replace(
                 'auto'  : true
             });
 
-            var $slider = $(".assort-slider");
-            var $slide = $slider.find(".slide");
-            var $sliderLoader = $(".assort-slider-loader");
-            var $bgItem = $(".assort-bg-list li");
-            var $curSlideInd = $(".assort-slider-ind span");
-            var $slideItems = $(".assort-slider-ind i");
-            var $cubes = $(".cubes-b");
-            var $slidesCount = 0;
+            let $slider = $(".assort-slider");
+            let $slide = $slider.find(".slide");
+            let $sliderLoader = $(".assort-slider-loader");
+            let $bgItem = $(".assort-bg-list li");
+            let $curSlideInd = $(".assort-slider-ind span");
+            let $slideItems = $(".assort-slider-ind i");
+            let $cubes = $(".cubes-b");
+            let $slidesCount = 0;
             let $indRev = $(".assort-slider-rev section");
             let $indRevItem = $indRev.find("div");
             let indArr = [0, -30, -60, -90, -120, -150];
             
-
             function displaySliderFugure(figIndex) {
                 $(".figures").removeClass("show");	
                 $(".figures-" + figIndex).addClass("show");
@@ -550,7 +550,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 console.log(indArr[slideId]);
             }
-
 
             // Slider Description
             function changeSliderDesc(slideIndex){

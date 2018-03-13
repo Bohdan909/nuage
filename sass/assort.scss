@@ -1267,6 +1267,10 @@ ul.desc-list {
             display: none;
         }
     }
+
+    .assort-slider .slick-track {
+        left: -40px;
+    }
     
     .assort-slider .slick-slide .slick-slider-inner {
         @include transform(translateY(-50%));
