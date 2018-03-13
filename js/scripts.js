@@ -483,11 +483,27 @@ document.documentElement.className = document.documentElement.className.replace(
                 $(".figures-" + figIndex).addClass("show");
             }
 
+            function displayCurrentSlideNumber(slideId){
+                $curSlideInd.text(slideId);
+            }
+
+            // Slider Description
+            function changeSliderDesc(slideIndex){
+                var $sliderDesc = document.querySelectorAll(".assort-desc-wrap .assort-desc-item");	
+
+                for (let i = 0; i < $sliderDesc.length; i++){
+                    $sliderDesc[i].classList.remove("show");
+                }
+
+                $sliderDesc[slideIndex].classList.add("show");
+            }
+
             function setSlideVisualAttributes(slick, slideId) {
                 var currentSlideElement = slick.$slides.get(slideId);
                 var currentSlideSlickIndex = $(currentSlideElement).data("slick-index");
                 
                 displaySliderFugure(currentSlideSlickIndex + 1);
+                displayCurrentSlideNumber(slideId + 1);
 
                 var $curSlide = $bgItem.eq(currentSlideSlickIndex);
         
@@ -503,20 +519,22 @@ document.documentElement.className = document.documentElement.className.replace(
                 $("body")
                     .attr("class", "")
                     .addClass("page-style-" + (currentSlideSlickIndex + 1));
+
+                setTimeout(changeSliderDesc.bind(this, currentSlideSlickIndex), 0);
             }
 
             function getCurrentSlickSlideFromStorage(){
-                let lsCurrentSlideIndex = localStorage.getItem("currentSlide");
-                if (lsCurrentSlideIndex) {
+                let currentSlideIndex = localStorage.getItem("currentSlide");
+                if (currentSlideIndex) {
                 } else {
-                    lsCurrentSlideIndex = 0;
+                    currentSlideIndex = 0;
                 }
-                return lsCurrentSlideIndex;
+                return currentSlideIndex;
             }
             let lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
 
-            $slider.on("init reInit", function(event, slick){
-                console.log("slick slider init / re-init");
+            $slider.on("init", function(event, slick){
+                console.log("slick slider init");
                 
                 $slidesCount = slick.slideCount;
                 
@@ -524,6 +542,17 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 setSlideVisualAttributes(slick, lsCurrentSlideIndex);
                 
+            });
+
+            $slider.on("reInit", function(event, slick){
+                console.log("slick slider re-init");
+                
+                $slidesCount = slick.slideCount;
+                
+                $slideItems.text($slidesCount);
+
+                setSlideVisualAttributes(slick, slick.currentSlide);
+
             });
 
             $slider.slick({
@@ -548,7 +577,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     }
                 }]
             });
-
+            
             // slider filter
             var filterItem = $(".filter-item .filter-option");
 
@@ -717,7 +746,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         // Setup Classes
                         lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
                         $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
-                        $curSlideInd.text(parseInt(lsCurrentSlideIndex,10) + 1);
+                        displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
 
 
                         function checkSliderEdge(index){
@@ -763,21 +792,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
                             currentSlide = nextSlide;
                             
-                            $curSlideInd.text(currentSlide + 1);
-        
-                            // Slider Description
-                            function changeSliderDesc(){
-                                var $sliderDesc = document.querySelectorAll(".assort-desc-wrap .assort-desc-item");	
-        
-                                for (let i = 0; i < $sliderDesc.length; i++){
-                                    $sliderDesc[i].classList.remove("show");
-                                }
-        
-                                $sliderDesc[currentSlide].classList.add("show");
-                            }
                             localStorage.setItem("currentSlide", nextSlide);
-                            
-                            setTimeout(changeSliderDesc, 0);
                             
                         });
 
