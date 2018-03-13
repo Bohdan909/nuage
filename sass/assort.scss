@@ -123,7 +123,7 @@
     right: 193px;
     bottom: 88px;
 
-    i, span {
+    i, span, section > div {
         position: relative;
         display: inline-block;
         font-style: normal;
@@ -136,19 +136,37 @@
         font-size: 20px;
     }
 
-    span {
-        font-size: 30px;
-        padding-right: 21px;
-    }
+    // span {
+    //     font-size: 30px;
+    //     padding-right: 21px;
+    // }
 
-    span:after {
+    span {
         @extend .ps;
         @include rot(-40deg);
-        right: 8px;
-        top: 2px;
+        right: 6px;
+        top: -4px;
         width: 1px;
         height: 10px;
         background-color: #fff;
+    }
+
+    .assort-slider-rev {
+        position: absolute;
+        left: -35px;
+        width: 37px;
+        height: 30px;
+        padding-right: 21px !important;
+        overflow: hidden;
+
+        section {
+            transition: transform 0.7s $easing;
+
+            div {
+                display: block;
+                font-size: 30px;
+            }
+        }
     }
 }
 

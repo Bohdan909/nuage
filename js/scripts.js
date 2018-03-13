@@ -531,6 +531,9 @@ document.documentElement.className = document.documentElement.className.replace(
             var $slideItems = $(".assort-slider-ind i");
             var $cubes = $(".cubes-b");
             var $slidesCount = 0;
+            let $indRev = $(".assort-slider-rev section");
+            let $indRevItem = $indRev.find("div");
+            let indArr = [0, -30, -60, -90, -120, -150];
             
 
             function displaySliderFugure(figIndex) {
@@ -539,8 +542,15 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function displayCurrentSlideNumber(slideId){
-                $curSlideInd.text(slideId);
+                //$curSlideInd.text(slideId);
+                $indRevItem.removeClass("active");
+                $indRevItem.eq(slideId).addClass("active");
+
+                $indRev.css({ "transform": "translateY(" + indArr[slideId] + "px" });
+
+                console.log(indArr[slideId]);
             }
+
 
             // Slider Description
             function changeSliderDesc(slideIndex){
@@ -558,7 +568,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 var currentSlideSlickIndex = $(currentSlideElement).data("slick-index");
                 
                 displaySliderFugure(currentSlideSlickIndex + 1);
-                displayCurrentSlideNumber(slideId + 1);
+                displayCurrentSlideNumber(slideId);
 
                 var $curSlide = $bgItem.eq(currentSlideSlickIndex);
         
