@@ -21,9 +21,9 @@ function init() {
     
     // Camera
     camera = new THREE.PerspectiveCamera(45, 1.0, 1, 1000);
-    camera.position.z = 150;
-    camera.position.x = 150;
-    camera.position.y = 150;
+    camera.position.z = 200;
+    camera.position.x = 200;
+    camera.position.y = 200;
     camera.zoom = -10;
 
     // Scene
@@ -47,7 +47,7 @@ function init() {
 
     texLoader = new THREE.TextureLoader();
     texLoader.setPath('./assets/');
-    texture = texLoader.load( "product3d-1/tex/Nuage_texture_03.jpg" );
+    //texture = texLoader.load( "product3d-1/tex/Nuage_texture_03.jpg" );
     //texture.wrapS = THREE.RepeatWrapping;
     //texture.wrapT = THREE.RepeatWrapping;
     //texture.repeat.set( 4, 4 );
@@ -56,7 +56,7 @@ function init() {
     var mtlLoader = new THREE.MTLLoader();
     //mtlLoader.setBaseUrl('./assets/');
     mtlLoader.setPath('./assets/');
-    mtlLoader.setTexturePath('./product3d-1/tex/');
+    //mtlLoader.setTexturePath('./product3d-1/tex/');
     mtlLoader.load('product3d-1/Model_01.mtl', function (materials) {
 
         materials.preload();
@@ -72,15 +72,14 @@ function init() {
             object.traverse(function(child) {
 
                 if (child instanceof THREE.Mesh) {
-          
-                  child.material.map = texture;
-          
+            
+                    //child.material.map = texture;
+            
                 }
-          
-              });
-
+        
+            });
+            //camera.lookAt(object.position.x,object.position.y,object.position.x);
             scene.add(object);
-
         });
 
     });
@@ -88,7 +87,7 @@ function init() {
     renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(500, 500);
-    renderer.setClearColor(0x000000, 0);
+    renderer.setClearColor(0x000000, 1);
 
     container.appendChild(renderer.domElement);
 
