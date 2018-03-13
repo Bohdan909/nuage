@@ -421,6 +421,52 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         /* ==============
+           Product Zoom
+        ================= */
+
+        (function(){
+            const prodImg      = document.querySelector(".product-popup");
+            const prodImgStart = document.querySelector(".product-viewer-wrap");
+            const prodBg       = document.querySelector(".product-popup-bg");
+            const prodImgBtn   = document.querySelectorAll(".product-popup-btns li");
+            const img      = document.querySelector(".product-popup-img");
+            const imgFront = document.querySelector(".product-front");
+            const imgBack  = document.querySelector(".product-back");
+
+            prodImgStart.addEventListener("click", function(){
+                if (window.innerWidth > 767){
+                    prodImg.classList.add("open");
+                    prodImg.classList.remove("close");
+                }
+            });
+
+            prodBg.addEventListener("click", function(){
+                prodImg.classList.remove("open");
+                prodImg.classList.add("close");
+            });
+
+            prodImgBtn.forEach(function(btn){
+                btn.addEventListener("click", function(){
+                    let cls = btn.classList;
+
+                    img.classList.toggle("flip");
+
+                    // switch(true){
+                    //     case cls.contains("front"):
+                    //         imgFront.classList.add("flip");
+                    //     break;
+
+                    //     case cls.contains("back"):
+                    //         console.log("back");
+                    //     break;
+                    // }
+                });
+            });
+        }());
+        
+
+
+        /* ==============
            Forms
         ================= */
 
