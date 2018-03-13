@@ -450,15 +450,21 @@ document.documentElement.className = document.documentElement.className.replace(
                     btn.addEventListener("click", function(){
                         let cls = btn.classList;
 
-                        img.classList.toggle("flip");
+                        if (!cls.contains("active")){    
+                            prodImgBtn.forEach(function(btnAll){
+                                btnAll.classList.remove("active");
+                            });
+                            img.classList.toggle("flip");
+                            btn.classList.add("active");
+                        }
 
                         // switch(true){
                         //     case cls.contains("front"):
-                        //         imgFront.classList.add("flip");
+                        //         btn.classList.add("active");
                         //     break;
 
                         //     case cls.contains("back"):
-                        //         console.log("back");
+                        //         btn.classList.add("active");    
                         //     break;
                         // }
                     });
