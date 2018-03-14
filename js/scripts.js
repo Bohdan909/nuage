@@ -328,6 +328,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
         // SVG Drowing Set
         $(".point-ico-svg").length && (function(){
+            
             replaceWithPaths($(".point-ico-svg"));
             setDash($(".point-ico-svg"));
         }());
@@ -421,6 +422,61 @@ document.documentElement.className = document.documentElement.className.replace(
         }
 
         /* ==============
+           Product Zoom
+        ================= */
+
+        (function(){
+            const prodImg      = document.querySelector(".product-popup");
+            const prodImgStart = document.querySelector(".product-viewer-wrap");
+            const prodBg       = document.querySelector(".product-popup-bg");
+            const prodImgBtn   = document.querySelectorAll(".product-popup-btns li");
+            const img      = document.querySelector(".product-popup-img");
+            const imgFront = document.querySelector(".product-front");
+            const imgBack  = document.querySelector(".product-back");
+
+            if (document.body.contains(prodImg)){
+                prodImgStart.addEventListener("click", function(){
+                    if (window.innerWidth > 767){
+                        prodImg.classList.add("open");
+                        prodImg.classList.remove("close");
+                    }
+                });
+
+                prodBg.addEventListener("click", function(){
+                    prodImg.classList.remove("open");
+                    prodImg.classList.add("close");
+                });
+
+                prodImgBtn.forEach(function(btn){
+                    btn.addEventListener("click", function(){
+                        let cls = btn.classList;
+
+                        if (!cls.contains("active")){    
+                            prodImgBtn.forEach(function(btnAll){
+                                btnAll.classList.remove("active");
+                            });
+                            img.classList.toggle("flip");
+                            btn.classList.add("active");
+                        }
+
+                        // switch(true){
+                        //     case cls.contains("front"):
+                        //         btn.classList.add("active");
+                        //     break;
+
+                        //     case cls.contains("back"):
+                        //         btn.classList.add("active");    
+                        //     break;
+                        // }
+                    });
+                });
+            }
+            
+        }());
+        
+
+
+        /* ==============
            Forms
         ================= */
 
@@ -468,23 +524,31 @@ document.documentElement.className = document.documentElement.className.replace(
                 'auto'  : true
             });
 
-            var $slider = $(".assort-slider");
-            var $slide = $slider.find(".slide");
-            var $sliderLoader = $(".assort-slider-loader");
-            var $bgItem = $(".assort-bg-list li");
-            var $curSlideInd = $(".assort-slider-ind span");
-            var $slideItems = $(".assort-slider-ind i");
-            var $cubes = $(".cubes-b");
-            var $slidesCount = 0;
+            let $slider = $(".assort-slider");
+            let $slide = $slider.find(".slide");
+            let $sliderLoader = $(".assort-slider-loader");
+            let $bgItem = $(".assort-bg-list li");
+            let $curSlideInd = $(".assort-slider-ind span");
+            let $slideItems = $(".assort-slider-ind i");
+            let $cubes = $(".cubes-b");
+            let $slidesCount = 0;
+            let $indRev = $(".assort-slider-rev section");
+            let $indRevItem = $indRev.find("div");
+            let indArr = [0, -30, -60, -90, -120, -150];
             
-
             function displaySliderFugure(figIndex) {
                 $(".figures").removeClass("show");	
                 $(".figures-" + figIndex).addClass("show");
             }
 
             function displayCurrentSlideNumber(slideId){
-                $curSlideInd.text(slideId);
+                //$curSlideInd.text(slideId);
+                $indRevItem.removeClass("active");
+                $indRevItem.eq(slideId).addClass("active");
+
+                $indRev.css({ "transform": "translateY(" + indArr[slideId] + "px" });
+
+                console.log(indArr[slideId]);
             }
 
             // Slider Description
@@ -503,7 +567,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 var currentSlideSlickIndex = $(currentSlideElement).data("slick-index");
                 
                 displaySliderFugure(currentSlideSlickIndex + 1);
-                displayCurrentSlideNumber(slideId + 1);
+                displayCurrentSlideNumber(slideId);
 
                 var $curSlide = $bgItem.eq(currentSlideSlickIndex);
         
