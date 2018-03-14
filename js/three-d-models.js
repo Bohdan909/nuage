@@ -21,10 +21,10 @@ function init() {
     
     // Camera
     camera = new THREE.PerspectiveCamera(45, 1.0, 1, 1000);
-    camera.position.z = 200;
-    camera.position.x = 200;
-    camera.position.y = 200;
-    camera.zoom = -10;
+    camera.position.x = 0;
+    camera.position.y = 0;
+    camera.position.z = 40;
+    camera.zoom = 1;
 
     // Scene
     scene = new THREE.Scene();
@@ -32,14 +32,18 @@ function init() {
     scene.add(ambient);
 
     // Lights
-    keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
-    keyLight.position.set(-100, 0, 100);
+    keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    keyLight.position.set(10, 10, -2);
+    keyLight.castShadow = true;
+    //keyLight.shadowCameraVisible = true;
 
-    fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240, 100%, 75%)'), 0.75);
-    fillLight.position.set(100, 0, 100);
 
-    backLight = new THREE.DirectionalLight(0xffffff, 1.0);
-    backLight.position.set(100, 0, -100).normalize();
+
+    fillLight = new THREE.DirectionalLight(0xffffff, 0.4);
+    fillLight.position.set(20, 10, 10);
+
+    backLight = new THREE.DirectionalLight(0xffffff, 0.75);
+    backLight.position.set(0, 0, -100).normalize();
 
     scene.add(keyLight);
     scene.add(fillLight);
@@ -55,30 +59,54 @@ function init() {
     // Model and material
     var mtlLoader = new THREE.MTLLoader();
     //mtlLoader.setBaseUrl('./assets/');
-    mtlLoader.setPath('./assets/');
-    //mtlLoader.setTexturePath('./product3d-1/tex/');
-    mtlLoader.load('product3d-1/Model_01.mtl', function (materials) {
+    mtlLoader.setPath('./assets/product3d-1/');
+    //mtlLoader.setTexturePath('./product3d-1/');
+
+    // uniforms
+    var uniforms = {
+        color: { type: "c", value: new THREE.Color( 0xffffff ) },
+        texture: { type: "t", value: texture },
+    };
+    // custom shader material to work with transparent PNG
+    var shMaterial = new THREE.ShaderMaterial({
+        uniforms        : uniforms,
+        vertexShader    : document.getElementById( 'vertex_shader' ).textContent,
+        fragmentShader  : document.getElementById( 'fragment_shader' ).textContent
+    });
+
+    mtlLoader.load('OBJ_01.mtl', function (materials) {
 
         materials.preload();
 
-        // materials.materials.default.map.magFilter = THREE.NearestFilter;
-        // materials.materials.default.map.minFilter = THREE.LinearFilter;
+        var matArray = materials.getAsArray();
+        //matArray.push(shMaterial);
 
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
-        objLoader.setPath('./assets/');
-        objLoader.load('product3d-1/Model_01.obj', function (object) {
+        objLoader.setPath('./assets/product3d-1/');
+        objLoader.load('OBJ_01.obj', function (object) {
 
             object.traverse(function(child) {
 
                 if (child instanceof THREE.Mesh) {
-            
-                    //child.material.map = texture;
-            
+                    
+                    child.material.blending = THREE.CustomBlending;
+                    //THREE.NormalBlending
+                    //THREE.AdditiveBlending
+                    //THREE.SubtractiveBlending
+                    //THREE.MultiplyBlending
+                    //THREE.CustomBlending
+                    //child.material.transparent = false;
+                    //child.material.opacity = 0.5;
                 }
         
             });
-            //camera.lookAt(object.position.x,object.position.y,object.position.x);
+            //object.material = shMaterial;
+            object.castShadow = true;
+            object.receiveShadow = true;
+            //object.transparent = true;
+            console.log(object);
+            camera.lookAt(object.position.x,object.position.y,object.position.x);
             scene.add(object);
         });
 
@@ -87,7 +115,11 @@ function init() {
     renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(500, 500);
-    renderer.setClearColor(0x000000, 1);
+    renderer.setClearColor(0x000000, 0);
+
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 
     container.appendChild(renderer.domElement);
 
