@@ -24,7 +24,7 @@
     -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
 
     &:after, &:before {
-        @include transition(all, 0.4s, ease-out);
+        @include transition(all, 0.01s, linear);
         @extend .ps;
     }
 
@@ -1241,7 +1241,11 @@ ul.desc-list {
 
 @media (min-width: 768px) and (max-height: 620px) {
 
-    .page-assort .figures {
+    // .page-assort .figures {
+    //     display: none;
+    // }
+
+    .figures-2 li:nth-child(6){
         display: none;
     }
 

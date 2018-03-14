@@ -4,6 +4,7 @@ document.documentElement.className = document.documentElement.className.replace(
     $(document).ready(function() {
 
         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
+        let mobile = window.innerWidth < 768;
 
         /* ===================
            Text Lines Animate 
@@ -21,12 +22,16 @@ document.documentElement.className = document.documentElement.className.replace(
 
             if (block.classList.contains("animate-text-hide")){
                 let blockHide = document.querySelector("animate-text-hide");
-                // let blockWrap = block.closest(".animate-text-wrap");
                 let blockWrap = findParent(block, "animate-text-wrap");
                 let blockCal  = blockWrap.children[0].querySelector(".animate-text");
 
                 blockWidth = blockCal.offsetWidth;
                 fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
+                lineLength = blockWidth / (fontSize * 0.63);
+                
+            } else if (block.parentNode.classList.contains("feedback-item") && mobile){
+                blockWidth = window.innerWidth - 35;
+                fontSize = 13;
                 lineLength = blockWidth / (fontSize * 0.63);
             }
 
@@ -472,7 +477,9 @@ document.documentElement.className = document.documentElement.className.replace(
             //     });
             // }
 
-            if (document.body.contains(document.querySelector(".product-viewer-wrap")) && document.querySelector("html").classList.contains("no-touchevents")){
+            if (document.body.contains(document.querySelector(".product-viewer-wrap")) && 
+                document.querySelector("html").classList.contains("no-touchevents")){
+                
                 let zoomSpeed = "100ms",
                     zoomFunction = "ease",
                     zoomMoveSpeed = "100ms",
