@@ -17,6 +17,22 @@
 	<body>
 		<div class="main">
 			<div class="page page-product">
+				
+				<!-- Popup Image -->
+				<div class="product-popup close">
+					<div class="product-popup-bg"></div>
+					<div class="product-popup-img-block">
+						<div class="product-popup-img">
+							<img class="product-front" src="images/img-zoom-1.jpg" alt="">
+							<img class="product-back" src="images/img-zoom-1-back.jpg" alt="">
+						</div>
+
+						<ul class="product-popup-btns">
+							<li class="front active"></li>
+							<li class="back"></li>
+						</ul>
+					</div>
+				</div>
 
 				<!-- Header -->
 				<header id="header"> 
@@ -53,6 +69,7 @@
 
  								<div class="object-360 cd-product-viewer-wrapper" data-frame="89" data-friction="0.1">
 									<div class="product-viewer-wrap">
+
 	 									<figure class="product-viewer animate-slide">
 											<img class="img-preload" src="images/img-loading-1.png">
 											<div class="product-sprite product-sprite-1" data-image="images/sprites/img-sprite-1.png" ></div>
@@ -110,11 +127,11 @@
 	 									</ul>
 	 								</div>
 	 							</div>
-	 							<div class="product-view-block animate-slide">
-	 								<div class="ttl-line">
+	 							<div class="product-view-block">
+	 								<div class="ttl-line animate-slide">
 	 									надежные
 	 								</div>
-	 								<p>
+	 								<p class="animate-text">
 	 									Крылышки и удерживающая прокладку
 										на белье основа надежно фиксируют
 										и предотвращают протекание.
@@ -126,10 +143,10 @@
 	 							</div>
 
 	 							<div class="product-view-block animate-slide">
-	 								<div class="ttl-line">
+	 								<div class="ttl-line animate-slide">
 	 									Современные
 	 								</div>
-	 								<p>
+	 								<p class="animate-text">
 	 									Содержат 5 слоев, выполненных из 
 										современных материалов, что позволяет 
 										обеспечивать максимальную 
@@ -137,11 +154,11 @@
 	 								</p>
 	 							</div>
 
-	 							<div class="product-view-block animate-slide">
-	 								<div class="ttl-line">
+	 							<div class="product-view-block">
+	 								<div class="ttl-line animate-slide">
 	 									Гипоаллергенные
 	 								</div>
-	 								<p>
+	 								<p class="animate-text">
 	 									Не содержат ароматизаторов 
 										и красителей. Только естественные 
 										ощущения свежести, <br>
@@ -197,6 +214,7 @@
 		<script>
 			window.addEventListener("load", function(){
 				document.querySelector(".page").classList.add("loaded");
+				localStorage.setItem("currentSlide", 0);
 			});
 		</script>
 	

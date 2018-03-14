@@ -55,7 +55,7 @@
 									<div class="product-viewer-wrap">
 	 									<figure class="product-viewer animate-slide">
 											<img class="img-preload" src="images/img-loading-6.png">
-											<div class="product-sprite product-sprite-6" ></div>
+											<div class="product-sprite product-sprite-6" data-image="images/sprites/img-sprite-6.png"></div>
 										</figure> 	
 									</div>
  									<div class="cd-product-viewer-handle animate-fade">
@@ -101,7 +101,7 @@
 	 									<ul>
 	 										<li>
 	 											<i class="ico-sizes"></i>
-	 											> 1 мм
+	 											< 1 мм
 	 										</li>
 	 										<li>
 	 											<i class="ico-sizes"></i>
@@ -113,44 +113,44 @@
 	 							<div class="product-view-block animate-slide">
 	 								<section>
 		 								<div class="ttl-line">
-		 									Естественные
+		 									ВЫСОКОТЕХНОЛОГИЧНЫЕ
 		 								</div>
-		 								<p>
-		 									Не содержат ароматизаторов и красителей. <br>
-											Только естественные ощущения свежести,
-											легкости и чистоты.
+		 								<p class="animate-text">
+		 									3 высокотехнологичных слоя, сдерживающих запахи и влагу внутри прокладки.
 		 								</p>
 	 								</section>
+
 	 								<section>
 		 								<div class="ttl-line">
 		 									надежные
 		 								</div>
-		 								<p>
-		 									Мягкая нежная поверхность <br>
-		 									легко касается тела.
+		 								<p class="animate-text">
+		 									Мягкая нежная поверхность легко касается тела. Предотвращающая протекание основа надежно удерживает прокладку на белье
 		 								</p>
 	 								</section>
 	 								<div class="sizes">
-	 									<span><i class="ico-sizes"></i>> 1 мм</span>
+	 									<span><i class="ico-sizes"></i>< 1 мм</span>
 	 									<span><i class="ico-sizes"></i>155 мм</span>
 	 								</div>
 	 							</div>
 
 	 							<div class="product-view-block animate-slide">
 	 								<div class="ttl-line">
-	 									ВЫСОКОТЕХНОЛОГИЧНЫЕ
+	 									Гипоаллергенные
 	 								</div>
-	 								<p>
-	 									3 высокотехнологичных слоя, сдерживающих запахи и влагу внутри прокладки.
+	 								<p  class="animate-text">
+	 									Не содержат ароматизаторов и красителей. <br>
+										Только естественные ощущения свежести,
+										легкости и чистоты.
 	 								</p>
 	 							</div>
 
 	 							<div class="product-view-block animate-slide">
 	 								<div class="ttl-line">
-	 									ИНДИВИДУАЛЬНЫЕ
+	 									В индивидуальной упаковке
 	 								</div>
-	 								<p>
-	 									Индивидуальная упаковка каждой прокладки.
+	 								<p class="animate-text">
+	 									Каждая прокладка в индивидуальной упаковке
 	 								</p>
 	 							</div>
  							</div>
@@ -202,6 +202,7 @@
 		<script>
 			window.addEventListener("load", function(){
 				document.querySelector(".page").classList.add("loaded");
+				localStorage.setItem("currentSlide", 5);
 			});
 		</script>
 	

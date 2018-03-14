@@ -51,13 +51,24 @@
 
 						<!-- Object Main -->
 						<div class="object-main-wrap">
-							<div class="object-main object-auto animate-slide object-hover"></div>
+							<div class="object-main object-auto animate-slide object-hover">
+								<svg width="100%" height="100%" 
+									xmlns="http://www.w3.org/2000/svg" 
+									style="position: absolute;z-index: 1;">
+									<polygon points="512,100, 512,323, 470,332, 462,323, 456,310, 455,300, 455,257, 438,242, 426,225, 426,195, 438,180, 455,165, 455,115, 456,107, 463,95, 473,90, 512,100"
+										fill="#FFFFFF" fill-opacity="0.6">
+										<animate attributeName="fill-opacity"
+											values="0.1;0.4;0.1" dur="2s"
+											repeatCount="indefinite"/>
+									</polygon>
+								</svg>
+							</div>
 						</div>
 
 						<!-- Text Block -->
 						<div class="text-block">
 							<div class="title-main animate-t">Nuage</div>
-							<p class="animate-slide">
+							<p class="animate-text">
 								Консультации с врачами-гинекологами и экспертная 
 								работа лабораторий Renewal позволили создать 
 								эффективные, надежные и безопасные средства 
@@ -153,7 +164,9 @@
 													attributeType="XML" 
 													dur="0.3s" 
 													fill="freeze"
+
 													from="M 92.4,79 C 136,79 154,115 200,116 246,117 263,80.4 308,79 353,77.6 381,111 381,150 381,189 346,220 308,221 270,222 236,188 200,188 164,188 130,222 92.4,221 54.4,220 19,189 19,150 19,111 48.6,79 92.4,79 Z" 
+
 													to="M 92.4,79 C 136,79 156,79.1 200,79.4 244,79.7 262,79 308,79 354,79 381,111 381,150 381,189 346,220 308,221 270,222 236,221 200,221 164,221 130,222 92.4,221 54.4,220 19,189 19,150 19,111 48.6,79 92.4,79 Z">
 												</animate>
 											</path>
@@ -402,38 +415,38 @@
 									<button class="btn-nav-right"></button>
 								</div>
 
-								<section>
+								<section class="animate-text-wrap">
 									<div id="tab-1" class="scheme-desc tab-pane active">
-										<div class="title-1 animate-slide not-animate">Нежная поверхность</div>
-										<p class="animate-slide">
+										<div class="title-1 animate-slide">Нежная поверхность</div>
+										<p class="animate-text">
 											Микроперфорированный нежный верхний слой прокладок обеспечивает «естественное» дыхание кожи без «парникового» эффекта, что сохраняет кожные покровы в здоровом состоянии.
 										</p>
 									</div>
 
 									<div id="tab-2" class="scheme-desc tab-pane">
-										<div class="title-1">Распределяющий слой</div>
-										<p class="animate-slide">
+										<div class="title-1 animate-slide">Распределяющий слой</div>
+										<p class="animate-text animate-text-hide">
 											Ультрасовременный распределяющий влагу слой. Многослойная конструкция прокладок Nuage содержит слой, равномерно распределяющий влагу и не позволяющий ей скапливаться локально, в одном месте. Предотвращает протекание.
 										</p>
 									</div>
 
 									<div id="tab-3" class="scheme-desc tab-pane">
 										<div class="title-1 animate-slide">Впитывающие слои</div>
-										<p class="animate-slide">
+										<p class="animate-text animate-text-hide">
 											Композиция впитывающих оборачивающих слоев для лучшей защиты.
 										</p>
 									</div>
 
 									<div id="tab-4" class="scheme-desc tab-pane">
 										<div class="title-1 animate-slide">Мелкомоллекулярный суперабсорбент.</div>
-										<p class="animate-slide">
+										<p class="animate-text animate-text-hide">
 											Ультратонкие прокладки NUAGE выполнены из ультрасовременных материалов, что позволило создать многослойную конструкцию с мелкомоллекулярным суперабсорбентом (превращается в гель) толщиной до 3 мм.
 										</p>
 									</div>
 
 									<div id="tab-5" class="scheme-desc tab-pane">
 										<div class="title-1 animate-slide">Ультратонкие и незаметные</div>
-										<p class="animate-slide">
+										<p class="animate-text animate-text-hide">
 											Ультратонкие прокладки NUAGE разработаны с учетом анатомических особенностей женщин, поэтому NUAGE остаются незаметными в любой ситуации. NUAGE - защита без стеснения.
 										</p>
 									</div>
@@ -470,7 +483,6 @@
 													to="M 92.4,79 C 136,79 156,79.1 200,79.4 244,79.7 262,79 308,79 354,79 381,111 381,150 381,189 346,220 308,221 270,222 236,221 200,221 164,221 130,222 92.4,221 54.4,220 19,189 19,150 19,111 48.6,79 92.4,79 Z">
 														
 												</animate>
-
 											</path>
 										</svg>
 									</div>
@@ -550,7 +562,18 @@
 						<!-- Assort Slider -->
 						<div class="assort-slider-wrap">
 							<div class="assort-slider-ind animate-fade">
-								<span>1</span>
+								<div class="assort-slider-rev">
+									<div class="assort-slider-rev-mask"></div>
+									<section>
+										<div class="assort-slider-rev-item active">1</div>
+										<div class="assort-slider-rev-item">2</div>
+										<div class="assort-slider-rev-item">3</div>
+										<div class="assort-slider-rev-item">4</div>
+										<div class="assort-slider-rev-item">5</div>
+										<div class="assort-slider-rev-item">6</div>
+									</section>
+								</div>
+								<span></span>
 								<i></i>
 							</div>
 							<ul class="assort-bg-list">
@@ -635,7 +658,7 @@
 
 										<div class="title-2">Super</div>
 										<p>
-											Мягкая поверхность, 10 штук
+											С поверхностью «сетка», 10 штук
 										</p>
 										<ul class="drops drops-3">
 											<li class="full"></li>
@@ -730,14 +753,14 @@
 						<!-- Description -->
 						<div class="socket clearfix">
 							<div class="assort-column">
-								<div class="assort-desc-wrap animate-fade">
+								<div class="assort-desc-wrap animate-fade animate-text-wrap">
 									<div class="assort-desc-item show">
 										<div class="title-rt title-2">
 											<section>
 												Nuage <span>Light</span>
 											</section>
 										</div>
-										<p class="animate-slide">
+										<p class="animate-text">
 											Миниатюрные прокладки с крылышками NUAGE LIGHT специально созданы для женщин с необильными менструальными выделениями.
 										</p>
 										<ul class="desc-list">
@@ -745,19 +768,21 @@
 												<div class="ico">
 													<img width="50" src="images/ico-11.svg" alt="">
 												</div>
-												Не содержат красителей и ароматизаторов
+												<div class="animate-text">Не содержат красителей и ароматизаторов</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="30" src="images/ico-12.svg" alt="">
 												</div>
-												Комфортное применение в качестве дополнительной защиты при использовании тампонов в критические дни и в конце цикла
+												<div class="animate-text">
+													Комфортное применение в качестве дополнительной защиты при использовании тампонов в критические дни и в конце цикла
+												</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="29" src="images/ico-13.svg" alt="">
 												</div>
-												Ультратонкие, менее 3 мм
+												<div class="animate-text">Ультратонкие, менее 3 мм</div>
 											</li>
 										</ul>
 										<a class="btn btn-next animate-slide" href="product-1.htm">
@@ -772,7 +797,7 @@
 												Nuage <span>Normal</span>
 											</section>
 										</div>
-										<p class="animate-slide">
+										<p class="animate-text animate-text-hide">
 											Прокладки Nuage Normal с нежной микроперфорированной поверхностью или с мягкой сеточкой при нормальных выделениях.
 										</p>
 										<ul class="desc-list">
@@ -780,21 +805,19 @@
 												<div class="ico">
 													<img width="50" src="images/ico-21.svg" alt="">
 												</div>
-												Не содержат красителей и ароматизаторов
+												<div class="animate-text animate-text-hide">Не содержат красителей и ароматизаторов</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="50" src="images/ico-22.svg" alt="">
 												</div>
-												Обеспечивают бережный уход за кожей
-												в интимной области, без трения
-												и раздражений кожи.
+												<div class="animate-text animate-text-hide">Обеспечивают бережный уход за кожей в интимной области, без трения и раздражений кожи.</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="29" src="images/ico-23.svg" alt="">
 												</div>
-												Ультратонкие, менее 3 мм
+												<div class="animate-text animate-text-hide">Ультратонкие, менее 3 мм</div>
 											</li>
 										</ul>
 										<a class="btn btn-next animate-slide" href="product-2.htm">
@@ -809,31 +832,26 @@
 												Nuage <span>Super</span>
 											</section>
 										</div>
-										<p class="animate-slide">
-											Прокладки Nuage Super для обильных
-											выделений с увеличенной скоростью и
-											объемом впитывания.
-										</p>
+										<p class="animate-text animate-text-hide">Прокладки Nuage Super для обильных выделений с увеличенной скоростью и
+										объемом впитывания.</p>
 										<ul class="desc-list">
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="50" src="images/ico-31.svg" alt="">
 												</div>
-												Нормальное применение в качестве дополнительной тампонов в критические дни и в конце цикла
+												<div class="animate-text animate-text-hide">Не содержат красителей и ароматизаторов</div>
 											</li>	
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="48" src="images/ico-32.svg" alt="">
 												</div>
-												Нежная микроперфорированная поверхность или
-												мягкая сеточка обеспечивают бережный уход за кожей
-												в интимной области, без трения и раздражений кожи.
+												<div class="animate-text animate-text-hide">Обеспечивают бережный уход за кожей в интимной области, без трения и раздражений кожи.</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="29" src="images/ico-33.svg" alt="">
 												</div>
-												Ультратонкие, менее 3 мм.
+												<div class="animate-text animate-text-hide">Ультратонкие, менее 3 мм.</div>
 											</li>
 										</ul>
 										<a class="btn btn-next animate-slide" href="product-3.htm">
@@ -846,30 +864,27 @@
 										<div class="title-rt title-2">
 											<section>
 												Nuage <span>Night</span>
-
 											</section>
 										</div>
-										<p class="animate-slide">
-											Прокладки Nuage Night ночные удлиненные.
-										</p>
+										<p class="animate-text animate-text-hide">Прокладки Nuage Night ночные удлиненные с нежной микроперфорированной поверхностью или с мягкой сеточкой.</p>
 										<ul class="desc-list">
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="50" src="images/ico-41.svg" alt="">
 												</div>
-												Не содержат красителей и ароматизаторов
+												<div class="animate-text animate-text-hide">Не содержат красителей и ароматизаторов</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="42" src="images/ico-42.svg" alt="">
 												</div>
-												2X надежней, чем раньше. Двойная фиксация.
+												<div class="animate-text animate-text-hide">2X надежней, чем раньше. Двойная фиксация.</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="29" src="images/ico-43.svg" alt="">
 												</div>
-												Ультратонкие, менее 3 мм
+												<div class="animate-text animate-text-hide">Ультратонкие, менее 3 мм</div>
 											</li>
 										</ul>
 										<a class="btn btn-next animate-slide" href="product-4.htm">
@@ -884,11 +899,7 @@
 												Nuage <span>Night Plus</span>
 											</section>
 										</div>
-										<p class="animate-slide">
-											Прокладки Nuage Night Plus специальной формы
-											длиной 36 сантиметров ночные и при очень
-											обильных выделениях.
-										</p>
+										<p class="animate-text animate-text-hide">Прокладки NUAGE NIGHT PLUS специальной формы длиной 36 сантиметров ночные и при очень обильных выделениях с мягкой поверхностью.</p>
 										<ul class="desc-list">
 											<li class="animate-slide">
 												<div class="ico">
@@ -900,16 +911,13 @@
 												<div class="ico">
 													<img width="62" src="images/ico-52.svg" alt="">
 												</div>
-												Двойные крылышки в средней и задней части 
-												прокладки и удерживающая прокладку на белье
-												основа надежно фиксируют и предотвращаю 
-												протекание
+												<div class="animate-text animate-text-hide">Двойные крылышки в средней и задней части прокладки и удерживающая прокладку на белье основа надежно фиксируют и предотвращают протекание</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="29" src="images/ico-53.svg" alt="">
 												</div>
-												Ультратонкие, менее 3 мм
+												<div class="animate-text animate-text-hide">Ультратонкие, менее 3 мм</div>
 											</li>
 										</ul>
 										<a class="btn btn-next animate-slide" href="product-5.htm">
@@ -924,29 +932,25 @@
 												Nuage <span>Daily</span>
 											</section>
 										</div>
-										<p class="animate-slide">
-											Ежедневные прокладки классической
-											формы, повторяющей
-											изгибы тела.
-										</p>
+										<p class="animate-text animate-text-hide">Ежедневные прокладки классической формы, повторяющей изгибы тела.</p>
 										<ul class="desc-list">
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="50" src="images/ico-61.svg" alt="">
 												</div>
-												Не содержат красителей и ароматизаторов
+												<div class="animate-text animate-text-hide">Не содержат красителей и ароматизаторов</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="43" src="images/ico-62.svg" alt="">
 												</div>
-												В миниатюрной упаковке, легко помещаются в сумочку.
+												<div class="animate-text animate-text-hide">В миниатюрной упаковке, легко помещаются в сумочку.</div>
 											</li>
 											<li class="animate-slide">
 												<div class="ico">
 													<img width="29" src="images/ico-63.svg" alt="">
 												</div>
-												Ультратонкие, менее 1 мм
+												<div class="animate-text animate-text-hide">Ультратонкие, менее 1 мм</div>
 											</li>
 										</ul>
 										<a class="btn btn-next animate-slide" href="product-6.htm">
@@ -1176,10 +1180,10 @@
 									<div class="title-3 animate-slide">
 										Самое дорогое - женское здоровье
 									</div>
-									<p class="animate-slide">
+									<p class="animate-text">
 										Мы стали тщательно продумывать покупки продуктов для наших семей, отдавая предпочтение натуральным. Мы ищем на полках магазинов безопасную, но эффективную бытовую химию и косметику.
 									</p>
-									<p class="animate-slide">
+									<p class="animate-text">
 										Несколько сотен прокладок используются женщиной за год ее жизни, тысячи женщин по всему миру не задумываются о том, что средства гигиены непосредственно могут влиять на самое дорогое – женское здоровье.
 									</p>
 								</section>
@@ -1274,6 +1278,7 @@
 				</div><!-- / Content -->
 
 			</div>
+
 			<div id="faq" class="page page-feedback loaded">
 				
 				<!-- Content -->
@@ -1282,10 +1287,10 @@
 						<ul class="tabs-panel tabs animate-fade">
 							<span class="line"></span>
 							<li class="tab active">
-								<span data-tab="tab-31">отзывы </span>
+								<span data-tab="tab-31">отзывы</span>
 							</li>
 							<li class="tab">
-								<span data-tab="tab-32">ответы экспертов </span>
+								<span data-tab="tab-32">ответы экспертов</span>
 							</li>
 						</ul>
 
@@ -1645,7 +1650,9 @@
 													<i></i>
 												</div>
 												<span>
+													<i class="animate-slide">
 													Влияет ли кесарево сечение на восстановление менструаций?
+													</i>
 												</span>
 											</div>
 											<div class="answer-body">
@@ -1664,7 +1671,9 @@
 													<i></i>
 												</div>
 												<span>
+													<i class="animate-slide">
 													Сколько идут месячные после родов?
+													</i>
 												</span>
 											</div>
 											<div class="answer-body">
@@ -1711,7 +1720,7 @@
 											</div>
 											<div class="feedback-name animate-slide">Олег сафронов</div>
 											<div class="feedback-status animate-slide">Врач</div>
-											<p class="animate-slide">
+											<p class="animate-text">
 												Самое пристальное внимание при разработке прокладок уделено гипоаллергенности материалов, воздухопроницаемости слоев и отсутствию красителей, отдушек и запаха абсорбента. Прокладки Nuage сохраняют женское здоровье.
 											</p>
 										</div>
@@ -1722,7 +1731,7 @@
 											</div>
 											<div class="feedback-name animate-slide">Юлия Иванова</div>
 											<div class="feedback-status animate-slide">Сотрудник лаборатории «NUAGE»</div>
-											<p class="animate-slide"> 
+											<p class="animate-text"> 
 												Понимание женской физиологии и потребностей дало возможность разработать прокладки NUAGE c заботой о сохранении женского здоровья. Высокое фармацевтическое качество – это строгий контроль на каждом этапе производства. Знак одобрения на упаковке Российским обществом акушеров – гинекологов – тому подтверждение.
 											</p>
 										</div>
@@ -1732,7 +1741,7 @@
 											</div>
 											<div class="feedback-name animate-slide">Оксана Попова</div>
 											<div class="feedback-status animate-slide">Потребитель из тестовой группы</div>
-											<p class="animate-slide">
+											<p class="animate-text">
 												Cупертонкие прокладки премиального качества. Абсолютно комфортные к телу. Удобно хранить и использовать за счет клапана на упаковке. Очень здорово, что нет никакого запаха. Отлично держат форму и практически не ощущаются.
 											</p>
 										</div>
@@ -2085,13 +2094,13 @@
 											<span>e-mail</span>
 										</div>
 										<section>
-											<span>Горячая линия</span>
-											<div>
+											<span class="animate-slide">Горячая линия</span>
+											<div class="animate-slide">
 												<a href="mailto: hello@nuage.su">		
 													hello@nuage.su
 												</a>
 											</div>
-											<i>Всегда рады ответить</i>
+											<i class="animate-slide">Всегда рады ответить</i>
 										</section>
 									</div>
 
@@ -2101,13 +2110,13 @@
 											<span>телефон</span>
 										</div>
 										<section>
-											<span>Горячая линия</span>
-											<div>
+											<span class="animate-slide">Горячая линия</span>
+											<div class="animate-slide">
 												<a href="tel: +388002000994">	
 													8-800-200-0994
 												</a>
 											</div>
-											<i>Звонки по России бесплатно</i>
+											<i class="animate-slide">Звонки по России бесплатно</i>
 										</section>
 									</div>
 								</div>
@@ -2119,13 +2128,13 @@
 											<span>e-mail</span>
 										</div>
 										<section>
-											<span>партнерам</span>
-											<div>
+											<span class="animate-slide">партнерам</span>
+											<div class="animate-slide">
 												<a href="mailto: partners@nuage.su">
 													partners@nuage.su
 												</a>
 											</div>
-											<i>Всегда рады ответить</i>
+											<i class="animate-slide">Всегда рады ответить</i>
 										</section>
 									</div>
 
@@ -2135,13 +2144,13 @@
 											<span>телефон</span>
 										</div>
 										<section>
-											<span>партнерам</span>
-											<div>
+											<span class="animate-slide">партнерам</span>
+											<div class="animate-slide">
 												<a href="tel: +388002000995">		
 													8-800-200-0995
 												</a>
 											</div>
-											<i>Звонки по России бесплатно</i>
+											<i class="animate-slide">Звонки по России бесплатно</i>
 										</section>
 									</div>
 								</div>
@@ -2304,215 +2313,20 @@
 				}
 
 				// Lic
-				var $licDesc = document.querySelectorAll(".lic-desc li");
-				var $licItem = document.querySelectorAll(".lic-list li");
-				
-				for (let i = 0; i < $licItem.length; i++){
-					
-					$licItem[i].addEventListener("mouseover", function(){
-						$licDesc[i].classList.add("show");
+				let $licDesc = document.querySelectorAll(".lic-desc li");
+				let $licItem = document.querySelectorAll(".lic-list li");
+
+				$licItem.forEach(function(item, index){
+
+					item.addEventListener("mouseover", function(){
+						$licDesc[index].classList.add("show");
 					});
 
-					$licItem[i].addEventListener("mouseleave", function(){
-						$licDesc[i].classList.remove("show");
+					item.addEventListener("mouseleave", function(){
+						$licDesc[index].classList.remove("show");
 					});
-				}
-				
-				// Video
-				let videoBlock = document.querySelector(".video-block-wrap");
-				let video   = document.querySelector(".mission-video video");
-				let btnPlay = document.querySelector(".btn-play");
-				let btnName = document.querySelector(".video-name");
-
-				const timeAnim = 5000;
-				const timeAnimBack = 600;
-				let touch = document.querySelector("html").classList.contains("touchevents");
-				let radius = "310px";
-				let scrollTop = $(window).scrollTop();
-				let videoWrap  = document.querySelector(".video-calibrate");
-				let videoPlay  = document.querySelector(".mission-video-play");
-				let videoCal   = document.querySelector(".video-calibrate");
-				let videoCloseBtn = document.querySelector(".mission-video-close");
-				let videoContent = videoWrap.querySelector(".mission-video-content");
-				let siteHeader = document.getElementById("header");
-				let topPosPlay, leftPosPlay, topPos, leftPos, timer;
-
-				var supportsVideo = !!document.createElement('video').canPlayType;
-				if (supportsVideo) {
-					video.controls = false;
-					
-				}
-
-				video.addEventListener('canplay', function() {
-					console.log("Video state: " + video.readyState);
-					
-					if(video.readyState >= 3) {
-						videoPlay.querySelector(".preview-image").style.opacity = "0";
-					}
-				}, false);
-				
-				function playVideoFromStart(videoElem, soundMuted) {
-					videoElem.currentTime = 0;
-					videoElem.muted = soundMuted;
-					videoElem.play();
-				}
-
-				// video.setAttribute("controls", "false");
-				//setAttributes(video, {"autoplay": "true", "loop": "true"});
-
-				// function setAttributes(el, options) {
-				//     Object.keys(options).forEach(function(attr) {
-				//     	el.setAttribute(attr, options[attr]);
-				//     });
-				// }
-				
-				// videoBlock.addEventListener("mouseover", function(){
-				// 	checkPlay("hover", "leave");
-				// });
-
-				// videoBlock.addEventListener("mouseleave", function(){
-				// 	checkPlay("leave", "hover");
-				// });
-
-				// videoBlock.addEventListener("click", function(){
-				// 	video.play();
-				// 	video.controls = false;
-
-				// 	setTimeout(function(){
-				// 		videoBlock.classList.add("play");
-				// 		videoBlock.classList.remove("leave");
-				// 		videoBlock.classList.remove("hover");
-				// 	}, 200);
-					
-				// 	btnPlay.classList.add("hide");
-				// 	btnName.classList.add("hide");
-				// });
-
-				// function checkPlay(classNameA, classNameU){
-				// 	if (!videoBlock.classList.contains("play")){
-				// 		videoBlock.classList.add(classNameA);
-				// 		videoBlock.classList.remove(classNameU);
-				// 	}
-				// };
-
-
-				
-				
-				// videoWrap.addEventListener("mouseover", function(){
-				// 	//window.scrollTo(0, 0);
-				// 	if (!videoWrap.classList.contains("open")){
-				// 		timer = setTimeout(videoOpen, 600);
-				// 	}
-
-				// });
-
-				videoWrap.addEventListener("click", function() {
-					if (!videoWrap.classList.contains("open")){
-						timer = setTimeout(videoOpen, 600);
-					}
-				});
-
-				
-
-				function hideSiteHeader() {
-					siteHeader.style.opacity = "0";
-				}
-
-				function showSiteHeader() {
-					siteHeader.style.opacity = "1";
-				}
-
-				function showSiteControls(callback) {
-					if (videoCloseBtn.style.opacity != "1") {
-						videoCloseBtn.style.opacity = "1";
-					}
-					
-					// hide menu
-					if (callback) {
-						callback();
-					}
-				}
-
-				function hideSiteControls() {
-					videoCloseBtn.style.opacity = "0";
-
-				}
-
-				function handleVideoTouch(event){
-					showSiteControls(function(){
-						setTimeout(hideSiteControls, 1500);
-					});
-				}
-
-				videoWrap.addEventListener("mouseleave", function(){
-					clearTimeout(timer);
-					//setTimeout(videoClose, 200);
-				});
-
-				videoCloseBtn.addEventListener("click", function(){
-					setTimeout(videoClose, 200);
 				});
 				
-
-				//setCirclePos(radius);
-
-				// function scrollDisable(){
-				// 	document.addEventListener('touchstart', this.touchstart);
-				// 	document.addEventListener('touchmove', this.touchmove);
-
-				// 	function touchstart(e){
-				// 	    e.preventDefault()
-				// 	}
-
-				// 	function touchmove(e){
-				// 	    e.preventDefault()
-				// 	}
-				// }
-
-				// function setCirclePos(rad){
-				// 	topPosPlay  = videoCal.getBoundingClientRect().top + scrollTop;
-				// 	leftPosPlay = videoCal.getBoundingClientRect().left;
-				// 	topPos  = topPosPlay + 155;
-				// 	leftPos = leftPosPlay + 155;
-	
-				// 	// if (window.innerWidth < 359) rad = "140px";
-				// 	videoWrap.style.width = rad;
-				// 	videoWrap.style.height = rad;
-				// 	//videoWrap.setAttribute("style","clip-path:circle("+rad+" at "+leftPos+"px"+" "+topPos+"px);");
-				// 	//videoPlay.setAttribute("style","top:"+topPosPlay+"px; left:"+leftPosPlay+"px;");
-				// }
-				
-				function videoOpen(){
-					console.log("video Open");
-					hideSiteHeader();
-					//setCirclePos("2000px");
-					//video.play();
-					playVideoFromStart(video, false);
-					
-					videoWrap.classList.add("open");
-					
-					videoWrap.addEventListener("mousemove", handleVideoTouch, false);
-					videoWrap.addEventListener("touchstart", handleVideoTouch, false);
-				}
-
-				function videoClose(){
-					console.log("video Close");
-					showSiteHeader();
-					//setCirclePos(radius);
-					videoWrap.classList.remove("open");
-					setTimeout(function(){ video.pause() }, 500);
-					
-					videoWrap.removeEventListener("mousemove", handleVideoTouch, false);
-					videoWrap.removeEventListener("touchstart", handleVideoTouch, false);
-				}
-
-				// window.addEventListener("resize", function(){
-		
-				// 	if (!videoWrap.classList.contains("open")){
-				// 		setCirclePos(radius);
-				// 		videoPlay.classList.remove("hide");
-				// 	} 
-				// });
 				
 				// Popup
 				let btnClose = document.querySelectorAll(".popup-close");
@@ -2521,7 +2335,6 @@
 
 					document.querySelector("#popup-policy").classList.add("open");
 				});
-
 
 				btnClose.forEach(function(btn){
 					let popupWrap = btn.parentNode.parentNode;

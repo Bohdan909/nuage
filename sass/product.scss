@@ -74,6 +74,7 @@ $prodFooterHeightMin: 85px;
     margin: auto;
     overflow: hidden;
     text-align: center;
+    cursor: pointer;
 
     &:after {
         @extend .ps;
@@ -244,6 +245,153 @@ $prodFooterHeightMin: 85px;
     }
 }
 
+.product-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+
+    .product-popup-bg {
+        @include full;
+        display: block;
+        background-color: rgba(0,0,0, 0.7); 
+    }
+
+    .product-popup-img-block {
+        position: absolute;
+        width: 572px;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .product-popup-img {
+        position: relative;
+        transform: scale(0) translateX(-50%);
+        left: 50%;
+        height: 647px;
+        //transform-style: preserve-3d;
+        transform-origin: left center;
+        transition: transform 0.5s $easing;
+    }
+
+    img {
+        position: absolute;
+        z-index: 1;
+        max-height: 647px;
+        max-width: 572px;
+        backface-visibility: hidden;
+        transition: transform 0.6s linear;
+        transform: translateX(-50%);
+        left: 50%;
+
+        &.product-back {
+            //transform: rotateY(180deg);
+            z-index: 2;
+            animation: fadeOut-l 0.4s linear forwards;
+        }
+    }
+
+    &.open {
+        animation: fadeIn-l 0.4s linear forwards;
+
+        .product-popup-btns {
+            opacity: 1;
+        }
+
+        .product-popup-img {
+            transform: scale(1) translateX(-50%);
+            //transition-duration: 0.15s;
+
+            &.flip {
+                // transform: rotateY(-180deg) scale(1) translateX(-50%);
+                
+                .product-back {
+                    animation: fadeIn-l 0.4s linear forwards;
+                }
+            }
+        }
+
+        img {
+            // top: 50%;
+            // left: 50%;
+            // transform: scale(1) translateX(-50%) translateY(-50%);
+        }
+    }
+
+    &.close {
+        animation: fadeOut-l 1.4s linear forwards;
+
+        .product-popup-img {
+            transition-duration: 0.15s;
+        }
+
+        img {
+            // top: 50%;
+            // left: 50%;
+            // transform: scale(0) translateX(-50%) translateY(-50%);
+        }
+
+        .product-popup-btns {
+            transition-duration: 0.1s;
+            transition-delay: 0s;
+        }
+    }
+
+    @media (max-height: 740px){
+
+        .product-popup-img, img {
+            height: 85vh;    
+        }
+    }
+
+    @media (max-width: 585px){
+        
+        .product-popup-img, img {
+            width: 94vw;    
+        }
+    }
+}
+
+.product-popup-btns {
+    position: relative;
+    display: inline-block;
+    padding-top: 20px !important;
+    transform: translateX(-50%);
+    left: 50%;
+    opacity: 0;
+    transition: opacity 1.0s;
+    transition-delay: 0.5s;
+
+    li {
+        border-radius: 50%;
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        vertical-align: top;
+        margin: 0 5px;
+        cursor: pointer;    
+        border: 2px solid #000;
+        backface-visibility: hidden;
+
+        &.active {
+            border-color: red;
+            cursor: default;
+        }
+
+        &.front {
+            background-color: #fff;
+        }
+
+        &.back {
+            background-color: darkorange;
+        }
+    }
+}
 
 // Description
 .product-view-section {
@@ -265,6 +413,7 @@ div.product-view-block {
     }
 
     section {
+        margin-bottom: 10px;
         
         &:first-child {
             margin-bottom: 30px;
@@ -409,7 +558,7 @@ div.product-view-block {
                     display: block;
                     position: absolute;
                     width: 38px;
-                    left: 37px;
+                    left: 40px;
                     top: 3px;
                     border-top: 2px dashed #d2d8e0;
                 }
@@ -535,12 +684,20 @@ div.product-view-block {
         height: $prodFooterHeightMin;
     }
 
+    .cd-product-viewer-handle {
+        margin-top: -7px;
+    }
+
    .object-360-wrap {
-        top: 0px !important;
+        top: -10px !important;
     }
 
     div.product-view-block {
         margin-bottom: 17px;
+
+        section {
+            margin-bottom: 0;
+        }
 
         section:first-child {
             margin-bottom: 20px;
