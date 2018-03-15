@@ -24,7 +24,7 @@
     -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
 
     &:after, &:before {
-        @include transition(all, 0.01s, linear);
+        //@include transition(all, 0.01s, linear);
         @extend .ps;
     }
 

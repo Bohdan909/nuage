@@ -591,9 +591,9 @@ $btn-col-delay: 0.35s;
 .assort-slider-wrap .slick-arrow.slick-prev:before,
 .assort-slider-wrap .slick-arrow.slick-next:after, 
 .assort-slider-wrap .slick-arrow.slick-prev:after {
-    transition: all 0.5s ease-out 0s,  background 0.4s linear $btn-col-delay, border-color 0.4s linear $btn-col-delay;
-    -webkit-transition: all 0.5s ease-out 0s,  background 0.4s linear $btn-col-delay, border-color 0.4s linear $btn-col-delay;
-    -ms-transition: all 0.5s ease-out 0s,  background 0.4s linear $btn-col-delay, border-color 0.4s linear $btn-col-delay;
+    transition: all 0.2s linear 0s,  background 0.4s linear $btn-col-delay, border-color 0.4s linear $btn-col-delay;
+    -webkit-transition: all 0.2s linear 0s,  background 0.4s linear $btn-col-delay, border-color 0.4s linear $btn-col-delay;
+    -ms-transition: all 0.2s linear 0s,  background 0.4s linear $btn-col-delay, border-color 0.4s linear $btn-col-delay;
 
     @include mobile {
         @include delay(0s);
