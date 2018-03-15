@@ -481,12 +481,14 @@ document.documentElement.className = document.documentElement.className.replace(
             const prodWrap  = document.querySelector(".product-viewer-wrap"); 
             const prodZoom  = document.querySelector(".product-zoom");
             const zoomImg   = document.querySelectorAll(".zoom-img");
-            const prodFront = prodWrap.classList.contains("product-viewer-front");
-            const prodBack  = prodWrap.classList.contains("product-viewer-back");
+            
 
             if (document.body.contains(prodWrap) && 
                 html.classList.contains("no-touchevents") &&
                 (prodFront || prodBack)){
+
+                const prodFront = prodWrap.classList.contains("product-viewer-front");
+                const prodBack  = prodWrap.classList.contains("product-viewer-back");
 
                 let zoomSpeed = "100ms",
                     zoomFunction = "ease",
