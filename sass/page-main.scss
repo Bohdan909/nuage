@@ -30,6 +30,16 @@
     //left: 412px;
     transform: translateX(-50%);
     left: 53%;
+
+    svg {
+        // display: none;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        height: 168%;
+        width: 117%;
+        top: 54%;
+        left: 57%;
+    }
 }
 
 .object-main {
@@ -39,6 +49,7 @@
     
     img {
         @include Center;
+        @extend .sm;
         width: 100%;
     }
 
@@ -662,6 +673,10 @@ ul.cubes-main {
     .object-main-wrap {
         left: 55%;
         bottom: 200px;
+
+        // svg {
+        //     display: none;
+        // }
     }
 
     @media (max-height: 1000px){
