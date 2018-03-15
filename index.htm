@@ -2220,18 +2220,35 @@
 
 
 		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
-		<script src="./js/jquery-3.3.1.slim.min.js"></script> 
+		<script src="./js/jquery-3.3.1.min.js"></script> 
 		<script src="./js/modernizr-custom.js"></script> 
 		<script async src="./js/jquery.mousewheel.min.js"></script>
 		<script async src="./js/perfect-scrollbar.jquery.min.js"></script>
 		<script async src="./js/jquery.threesixty.js"></script> 
-		<script async src="./js/selectize.min.js"></script>
+		<!-- <script async src="./js/selectize.min.js"></script> -->
 		<script src="./js/svgline.js"></script>
 		<script src="./js/rotate.js" defer></script>
 		<script async src="./js/slick.js" defer></script>
-		<script src="./js/scripts.js" defer></script>
+		
 		<script async src="./js//dragscroll.js"></script>
 		<script>
+			function loadScript(url, callback)
+{
+				// Adding the script tag to the head as suggested before
+				var head = document.getElementsByTagName('head')[0];
+				var script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.src = url;
+
+				// Then bind the event to the callback function.
+				// There are several events for cross browser compatibility.
+				script.onreadystatechange = callback;
+				script.onload = callback;
+
+				// Fire the loading
+				head.appendChild(script);
+			}
+
 			function initMaps() {
 
 			let mapOptions = {
@@ -2475,8 +2492,8 @@
 			var btnLoc = document.querySelectorAll('.ico-loc');
 
 			submit.addEventListener('click', function(){
-			var address = document.getElementById('address').value;
-			geocodeAddress(geocoder, map, address);
+				var address = document.getElementById('address').value;
+				geocodeAddress(geocoder, map, address);
 			});
 
 			Array.prototype.forEach.call(btnLoc, function(item){
@@ -2497,40 +2514,47 @@
 			});
 			});
 
-			var selectize = $("#select-city").selectize({
-			allowEmptyOption: true,
-			create: true,
+			
 
-			onChange: function(val){
-				var address = val;
-				geocodeAddress(geocoder, map, address);
-			},
+				function scrollSelectInit(){
+					$(".selectize-dropdown").perfectScrollbar({
+						wheelSpeed: 0.5,
+						wheelPropagation: false,
+						minScrollbarLength: 20
+					});
+				}
 
-			onDropdownOpen: function(){
-				scrollSelectInit();
-			}
-			});
+				loadScript("./js/selectize.min.js", function(){
+					console.log("selectize dynamically loaded");
+					
+					var selectize = $("#select-city").selectize({
+						allowEmptyOption: true,
+						create: true,
 
-			function scrollSelectInit(){
-			$(".selectize-dropdown").perfectScrollbar({
-				wheelSpeed: 0.5,
-				wheelPropagation: false,
-				minScrollbarLength: 20
-			});
-			}
+						onChange: function(val){
+							var address = val;
+							geocodeAddress(geocoder, map, address);
+						},
+
+						onDropdownOpen: function(){
+							scrollSelectInit();
+						}
+					});
+				});
+
 
 			function setMarker(){
-			new google.maps.Marker({
-				icon: image,
-				draggable: false,
-				raiseOnDrag: false,
-				map: map,
-				position: point
-			});
+				new google.maps.Marker({
+					icon: image,
+					draggable: false,
+					raiseOnDrag: false,
+					map: map,
+					position: point
+				});
 			};
 
 			function setStyles(){
-			map.setOptions({styles: styles});
+				map.setOptions({styles: styles});
 			}
 			}
 
@@ -2538,23 +2562,23 @@
 
 			function geocodeAddress(geocoder, resultsMap, address){
 
-			geocoder.geocode({'address': address}, function(results, status) {
-			if (status === 'OK') {
-				resultsMap.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
-				map: resultsMap,
-				position: results[0].geometry.location
+				geocoder.geocode({'address': address}, function(results, status) {
+					if (status === 'OK') {
+						resultsMap.setCenter(results[0].geometry.location);
+						var marker = new google.maps.Marker({
+						map: resultsMap,
+						position: results[0].geometry.location
+						});
+					} else {
+						alert('Geocode was not successful for the following reason: ' + status);
+					}
 				});
-			} else {
-				alert('Geocode was not successful for the following reason: ' + status);
-			}
-			});
 			}
 
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCffH-0iEsLpkHn31rDlWyWdLsZBC11XCY&v=3.exp&callback=initMaps"></script>
 		<!-- <script src="./js/map.js" defer></script> -->
-		
+		<script src="./js/scripts.js" defer></script>
 
 		<script>
 			window.addEventListener("load", function(){
