@@ -1,3 +1,4 @@
+
 /* =========================
    Functions
    =========================*/
@@ -138,6 +139,13 @@ $ultra-hd-width : 3840px;
 // IE10>=
 @mixin ie10 {
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        @content;
+    }
+}
+
+// IE Edge
+@mixin edge {
+    @supports (-ms-ime-align:auto) {
         @content;
     }
 }
