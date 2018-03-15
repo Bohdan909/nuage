@@ -522,6 +522,9 @@ $textA: 15px;
         opacity: 1 !important;
         letter-spacing: 0px !important;
     }
+    #loader {
+        display: none;
+    }
 }
 
 @keyframes animateCurrentPageUp {
@@ -613,4 +616,95 @@ $textA: 15px;
         }
     }
     
+}
+
+@keyframes animateCurrentPageLeft {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    99% {
+        transform: translate3d(-100vw, 0, 0); 
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        //display: none;
+        z-index: -1;
+    }
+}
+@keyframes animateCurrentPageRight {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    99% {
+        transform: translate3d(100vw, 0, 0); 
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        //display: none;
+        z-index: -1;
+    }
+}
+@keyframes animateNextPageLeft {
+    0% {
+        visibility: visible;
+        display: block;
+        z-index: 2;
+        opacity: 0;
+    }
+    1% {
+        transform: translate3d(100vw, 0, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes animatePrevPageRight {
+    0% {
+        display: block;
+        visibility: visible;
+        z-index: 2;
+        opacity: 0;
+    }
+    1% {
+        transform: translate3d(-100vw, 0, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .page {
+        &.loaded {
+            &.prev {
+                @include animation(animateCurrentPageLeft, 0.7s, $easing);
+                animation-fill-mode: forwards;
+            }
+        
+            &.next {
+                @include animation(animateCurrentPageRight, 0.7s, $easing);
+                animation-fill-mode: forwards;
+            }
+        }
+        &.loading {
+            display: block;
+            visibility: visible;
+            z-index: 2;
+    
+            &.prev {
+                @include animation(animatePrevPageRight, 0.7s, $easing);
+                animation-fill-mode: forwards;
+            }
+            &.next {
+                @include animation(animateNextPageLeft, 0.7s, $easing);
+                animation-fill-mode: forwards;
+            }
+        }
+    }
 }
