@@ -383,6 +383,10 @@ ul.tabs.tabs-panel {
     margin-left: -235px;
     text-align: center;
 
+    &.fade-in {
+        display: block;
+    }
+
     .title-1 {
         font-size: 35px;
         line-height: 51px;

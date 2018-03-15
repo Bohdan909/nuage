@@ -72,16 +72,16 @@ document.documentElement.className = document.documentElement.className.replace(
         let copyRight  = $(".copyright-mobile");
 
         $(".btn-send").length && $(".btn-send").on("click", function (e) {
-            formWrap.fadeOut(200);
+            formWrap.removeClass("fade-in").addClass("fade-out");
             copyRight.hide();
-            mesConsult.fadeIn(300);
+            mesConsult.removeClass("fade-out").addClass("fade-in");
 
             e.preventDefault();
         });
 
         $(".btn-back-form") && $(".btn-back-form").on("click", function (e) {
-            formWrap.fadeIn(200);
-            mesConsult.fadeOut(300);
+            formWrap.removeClass("fade-out").addClass("fade-in");
+            mesConsult.removeClass("fade-in").addClass("fade-out");
 
             if (window.innerWidth < 768) copyRight.show();
 

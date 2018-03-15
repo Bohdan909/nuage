@@ -48,6 +48,13 @@ body {
     @include tbl;
 }
 
+.fade-in {
+    animation: fadeIn-l 0.4s linear forwards;
+}
+
+.fade-out {
+    animation: fadeOut-l 0.4s linear forwards;
+}
 
 /* =========================
    Header
