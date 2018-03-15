@@ -110,10 +110,14 @@ jQuery(document).ready(function($){
 	    });
 
 	    // Pos Drag
-	    if (widthValue < 15){
-	    	$(".product-viewer-wrap").addClass("product-viewer-front");
-	    } else if (widthValue > 85){
-	    	$(".product-viewer-wrap").addClass("product-viewer-back");
+	    if (widthValue < 15 || widthValue > 85){
+	    	$(".product-viewer-wrap")
+		    	.removeClass("product-viewer-back")
+		    	.addClass("product-viewer-front");
+	    } else if (widthValue > 46 && widthValue < 54){
+	    	$(".product-viewer-wrap")
+	    		.removeClass("product-viewer-front")
+	    		.addClass("product-viewer-back");
 	    } else {
 	    	$(".product-viewer-wrap").removeClass("product-viewer-front product-viewer-back");
 	    }
