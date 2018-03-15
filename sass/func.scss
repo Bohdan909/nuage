@@ -145,7 +145,7 @@ $ultra-hd-width : 3840px;
 
 // IE Edge
 @mixin edge {
-    @supports (-ms-ime-align:auto) {
+    @supports (-ms-ime-align: auto) {
         @content;
     }
 }
