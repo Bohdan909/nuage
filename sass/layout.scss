@@ -34,7 +34,6 @@ body {
 
     background: #f2f5f9;
     background-image: linear-gradient(0deg, rgb(221,229,240) 0%, rgb(238,242,248) 33%, rgb(255,255,255) 100%);
-    background-color: #000;
 }
 
 .socket {
@@ -755,6 +754,22 @@ body {
         .social-drop {
             visibility: visible;
         }
+    }
+}
+
+@include ie10 {
+
+    .social-drop-bg {
+        border-radius: 70px;
+        background-color: #fff;
+    }
+}
+
+@include edge {
+
+    .social-drop-bg {
+        border-radius: 70px;
+        background-color: #fff;
     }
 }
 
