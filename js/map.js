@@ -1,4 +1,4 @@
-var map;
+
 
 function initialize() {
 
@@ -226,7 +226,7 @@ function initialize() {
       }
   ]
 
- 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   setStyles();
 
   var point = new google.maps.LatLng(55.819515, 37.490370);
@@ -302,7 +302,7 @@ function initialize() {
   }
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(window, 'load', initialize);
 
 function geocodeAddress(geocoder, resultsMap, address){
 
