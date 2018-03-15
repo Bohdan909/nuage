@@ -337,6 +337,7 @@
 
 		.point-ico-svg {
 			width: 30px;
+			height: 54px;
 		}
 		
 		// img {
@@ -363,6 +364,7 @@
 
 		.point-ico-svg {
 			width: 35px;
+			height: 57px;
 		}
 	}
 
@@ -413,6 +415,7 @@
 
 		.point-ico-svg {
 			width: 55px;
+
 			transform: translateY(-50%) translateX(0);
 			top: 50%;
 			left: -7px;
@@ -441,6 +444,7 @@
 
 		.point-ico-svg {
 			width: 47px;
+			height: 61px;
 			top: -2px;
 		}
 		
@@ -476,15 +480,19 @@
 
 	path {
 		animation: draw-lines 0.85s linear forwards;
+		-ms-animation: draw-lines 0.85s linear forwards;
 		animation-delay: 0.3s;
+		-ms-animation-delay: 0.3s;
 	}
 
 	.core {
 		animation-delay: 0.5s;
+		-ms-animation-delay: 0.5s !important;
 	}
 
 	.core-2 {
 		animation-delay: 0.6s;
+		-ms-animation-delay: 0.6s !important;
 	}
 	
 	.path-fade-in {
@@ -503,6 +511,29 @@
     to {
         stroke-dashoffset: 0;
     }
+}
+
+@-ms-keyframes draw-lines {
+    to {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 0;
+    }
+}
+
+@include ie10 {
+
+	.active.point .point-ico .point-ico-svg path {
+		stroke-dashoffset: 0 !important;
+		stroke-dasharray: 0 !important;
+	}
+}
+
+@include edge {
+
+	.active.point .point-ico .point-ico-svg path {
+		stroke-dashoffset: 0 !important;
+		stroke-dasharray: 0 !important;
+	}
 }
 
 .cls-1,.cls-3 {fill:none;stroke:#8faddb;stroke-miterlimit:10;}
