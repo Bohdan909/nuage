@@ -72,16 +72,16 @@ document.documentElement.className = document.documentElement.className.replace(
         let copyRight  = $(".copyright-mobile");
 
         $(".btn-send").length && $(".btn-send").on("click", function (e) {
-            formWrap.fadeOut(200);
+            formWrap.removeClass("fade-in").addClass("fade-out");
             copyRight.hide();
-            mesConsult.fadeIn(300);
+            mesConsult.removeClass("fade-out").addClass("fade-in");
 
             e.preventDefault();
         });
 
         $(".btn-back-form") && $(".btn-back-form").on("click", function (e) {
-            formWrap.fadeIn(200);
-            mesConsult.fadeOut(300);
+            formWrap.removeClass("fade-out").addClass("fade-in");
+            mesConsult.removeClass("fade-in").addClass("fade-out");
 
             if (window.innerWidth < 768) copyRight.show();
 
@@ -334,7 +334,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
         // SVG Drowing Set
         $(".point-ico-svg").length && (function(){
-            
             replaceWithPaths($(".point-ico-svg"));
             setDash($(".point-ico-svg"));
         }());
@@ -510,14 +509,12 @@ document.documentElement.className = document.documentElement.className.replace(
                             showedImg.classList.add("show");
                             prodZoom.classList.add("show");
                         }
-
-                        console.log(showedImg);
                         
                         mouseX = e.pageX - this.getBoundingClientRect().left;
                         mouseY = e.pageY - this.getBoundingClientRect().top;
 
-                        offsetX = -1 * 1.1 * mouseX;
-                        offsetY = -1 * 1.4 * mouseY;
+                        offsetX = -1 * 1.95 * mouseX;
+                        offsetY = -1 * 1.7 * mouseY;
 
                         zoomPosX = e.pageX - 270;
                         zoomPosY = e.pageY - 260;
@@ -539,8 +536,8 @@ document.documentElement.className = document.documentElement.className.replace(
                             mouseX = e.pageX - this.getBoundingClientRect().left;
                             mouseY = e.pageY - this.getBoundingClientRect().top;
 
-                            offsetX = -1 * 1.1 * mouseX;
-                            offsetY = -1 * 1.4 * mouseY;
+                            offsetX = -1 * 1.95 * mouseX;
+                            offsetY = -1 * 1.7 * mouseY;
 
                             zoomPosX = e.pageX - 270;
                             zoomPosY = e.pageY - 260;
@@ -562,8 +559,11 @@ document.documentElement.className = document.documentElement.className.replace(
 
                         if (scale !== 1) showedImg.classList.add("z-exiting");
                         
-                        showedImg.classList.add("z-exiting")
-                        showedImg.setAttribute("style", styles);
+                        showedImg.classList.add("z-exiting");
+                        setTimeout(function(){
+                            showedImg.setAttribute("style", styles);
+                        }, 1000);
+                        
 
                         showedImg.addEventListener("transitionend", function(){
                             showedImg.classList.remove("z-exiting");
@@ -575,7 +575,78 @@ document.documentElement.className = document.documentElement.className.replace(
             }
             
         }());
-        
+
+        /* ==================
+           FAQ Custom Cursor
+        ===================== */
+
+        let cursor = $(".cursor-move");
+        let blockTarget = $(".cursor-target");
+        let btnCursorLock = $(".product-list section > div a, .point-btn");
+
+        var ElementCursor = {
+
+            setCursor: function(e){
+                cursor.show().addClass("show").removeClass("drag");
+                blockTarget.addClass("hover");
+                $('html').mousedown(function (e){return false});
+                ElementCursor.updateCursor();
+            },
+
+            dragCursor: function(){
+               cursor.addClass("drag");        
+            },
+
+            removeCursor: function(){
+                cursor.removeClass("show drag");
+                blockTarget.removeClass("hover");
+            },
+
+            hideCursor: function(){
+                cursor.hide();
+            },
+
+            updateCursor: function(){
+
+                $(document).mousemove(function (e){
+                    cursor.css({
+                        'top' : e.pageY + 3 + 'px',
+                        'left': e.pageX + 3 + 'px'
+                    });
+                });
+            }
+        };
+
+        blockTarget.on("mouseenter", function(e){
+            ElementCursor.setCursor();
+        });
+
+        btnCursorLock.on("click", function(){
+            ElementCursor.hideCursor();
+        });
+
+        btnCursorLock.on({
+            "mouseenter": function(){
+                ElementCursor.removeCursor();
+            },
+
+            "mouseleave": function(){
+                ElementCursor.setCursor();
+            }
+        });
+
+        blockTarget.on("mouseleave", function(){
+            ElementCursor.removeCursor();
+        });
+
+        blockTarget.on("mousedown", function(){
+            ElementCursor.dragCursor();
+        });
+
+        blockTarget.on("mouseup", function(){
+            ElementCursor.setCursor();
+        });
+
 
         /* ==============
            Forms
