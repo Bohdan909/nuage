@@ -32,6 +32,10 @@ $prodFooterHeightMin: 85px;
     width: 50%;   
 }
 
+.product-view-wrap {
+    z-index: 1;
+}
+
 .product-sprite {
     position: relative;
     z-index: 1;
@@ -64,6 +68,31 @@ $prodFooterHeightMin: 85px;
 
     &.product-sprite-6 {
         background-image: url(../images/sprites/img-sprite-6.png);
+    }
+}
+
+.product-zoom {
+    border-radius: 50%;
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 1px solid #000;
+    background: #fff;
+    visibility: hidden;
+    z-index: 9999;
+    overflow: hidden;
+    //transition: all 0.1s linear; 
+    animation: fadeOut-l 0.3s linear forwards;
+
+    // img {
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translateX(-50%) translateY(-50%);
+    // }
+
+    &.show {
+        animation: fadeIn-l 0.1s linear forwards;
     }
 }
 
