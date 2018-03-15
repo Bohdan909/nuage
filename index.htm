@@ -2348,9 +2348,16 @@
 			window.addEventListener("load", function(event) {
 				var preloader = document.getElementById("loader");
 				preloader.classList.add("finished");
-				preloader.onanimationend = function(event) {
+				var hidePreloader = function(event) {
 					preloader.classList.add("up");
+					preloader.removeEventListener("animationend",hidePreloader);
+					preloader.removeEventListener("oAnimationEnd",hidePreloader);
+					preloader.removeEventListener("webkitAnimationEnd",hidePreloader);
 				};
+				preloader.addEventListener("animationend",hidePreloader);
+				preloader.addEventListener("oAnimationEnd",hidePreloader);
+				preloader.addEventListener("webkitAnimationEnd",hidePreloader);
+
 			});
 		</script>
 		<!-- Live Reload -->
