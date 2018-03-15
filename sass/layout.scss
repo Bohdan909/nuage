@@ -1,5 +1,9 @@
 @import "func";
 
+#loader {
+    display: none;
+}
+
 html { @include border-box; }
 *, *:before, *:after { box-sizing: inherit; }
 

@@ -559,7 +559,6 @@ document.documentElement.className = document.documentElement.className.replace(
                             prodZoom.classList.remove("show");
                         }, 400);
                         
-
                         styles = "transform: matrix(1,0,0,1,0,0); transition: transform " + zoomSpeed + " " + zoomFunction;
 
                         if (scale !== 1) showedImg.classList.add("z-exiting");
@@ -570,7 +569,6 @@ document.documentElement.className = document.documentElement.className.replace(
                         showedImg.addEventListener("transitionend", function(){
                             showedImg.classList.remove("z-exiting");
                         });
-                        
                     });
                 };
 
