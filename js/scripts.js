@@ -3,9 +3,10 @@ document.documentElement.className = document.documentElement.className.replace(
 (function($){
     $(document).ready(function() {
 
+        const html     = document.querySelector("html");
         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
-        let mobile = window.innerWidth < 768;
-
+        let mobile     = window.innerWidth < 768;
+        
         /* ===================
            Text Lines Animate 
         ====================== */
@@ -477,8 +478,13 @@ document.documentElement.className = document.documentElement.className.replace(
             //     });
             // }
 
-            if (document.body.contains(document.querySelector(".product-viewer-wrap")) && 
-                document.querySelector("html").classList.contains("no-touchevents")){
+            const prodWrap = document.querySelector(".product-viewer-wrap"); 
+            const prodZoom = document.querySelector(".product-zoom");
+            const zoomImg  = document.querySelector(".zoom-img");
+
+            if (document.body.contains(prodWrap) && 
+                html.classList.contains("no-touchevents") && 
+                prodWrap){
                 
                 let zoomSpeed = "100ms",
                     zoomFunction = "ease",
@@ -486,22 +492,8 @@ document.documentElement.className = document.documentElement.className.replace(
                     zoomMoveFunction = "linear",
                     scale = 1.05, mouseX, mouseY, offsetX, offsetY, zoomPosX, zoomPosY;
 
-                const prodWrap = document.querySelector(".product-viewer-wrap");
-                const prodZoom = document.querySelector(".product-zoom");
-                const zoomImg  = document.querySelector(".zoom-img");
 
-                // let refreshZoomables = function () {
-                //     $('.zoomable').each(function () {
-                //         el = $(this);
-                //         h = el.height();
-                //         w = el.width();
-
-                //         $(this).wrap("<div class='zoomable-wrapper' style='overflow: hidden; position: relative; margin-left: auto; margin-right: auto; cursor: zoom-in; width:100%;height:100%;'></div>");
-                //     });
-                // };
-
-
-                let initZoomableEventHandlers = function (){
+                var initZoomableEventHandlers = function (){
 
                     prodWrap.addEventListener("mouseenter", function(e){
                         
@@ -513,8 +505,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
                         mouseX = e.pageX - this.getBoundingClientRect().left;
                         mouseY = e.pageY - this.getBoundingClientRect().top;
-                        // let wrapH = $(this).outerHeight();
-                        // let wrapW = $(this).outerWidth();
 
                         console.log(this.offsetLeft);
 
@@ -539,10 +529,6 @@ document.documentElement.className = document.documentElement.className.replace(
                         if (!zoomImg.classList.contains("z-entering") && !zoomImg.classList.contains("z-exiting")) {
                             mouseX = e.pageX - this.getBoundingClientRect().left;
                             mouseY = e.pageY - this.getBoundingClientRect().top;
-                            // let wrapH = $(this).outerHeight();
-                            // let wrapW = $(this).outerWidth();
-
-                            //console.log($(this).offset().left);
 
                             offsetX = -1 * 1.1 * mouseX;
                             offsetY = -1 * 1.4 * mouseY;
