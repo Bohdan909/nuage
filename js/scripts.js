@@ -334,7 +334,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
         // SVG Drowing Set
         $(".point-ico-svg").length && (function(){
-            
             replaceWithPaths($(".point-ico-svg"));
             setDash($(".point-ico-svg"));
         }());
@@ -575,7 +574,78 @@ document.documentElement.className = document.documentElement.className.replace(
             }
             
         }());
-        
+
+        /* ==================
+           FAQ Custom Cursor
+        ===================== */
+
+        let cursor = $(".cursor-move");
+        let blockTarget = $(".cursor-target");
+        let btnCursorLock = $(".product-list section > div a, .point-btn");
+
+        var ElementCursor = {
+
+            setCursor: function(e){
+                cursor.show().addClass("show").removeClass("drag");
+                blockTarget.addClass("hover");
+                $('html').mousedown(function (e){return false});
+                ElementCursor.updateCursor();
+            },
+
+            dragCursor: function(){
+               cursor.addClass("drag");        
+            },
+
+            removeCursor: function(){
+                cursor.removeClass("show drag");
+                blockTarget.removeClass("hover");
+            },
+
+            hideCursor: function(){
+                cursor.hide();
+            },
+
+            updateCursor: function(){
+
+                $(document).mousemove(function (e){
+                    cursor.css({
+                        'top' : e.pageY + 3 + 'px',
+                        'left': e.pageX + 3 + 'px'
+                    });
+                });
+            }
+        };
+
+        blockTarget.on("mouseenter", function(e){
+            ElementCursor.setCursor();
+        });
+
+        btnCursorLock.on("click", function(){
+            ElementCursor.hideCursor();
+        });
+
+        btnCursorLock.on({
+            "mouseenter": function(){
+                ElementCursor.removeCursor();
+            },
+
+            "mouseleave": function(){
+                ElementCursor.setCursor();
+            }
+        });
+
+        blockTarget.on("mouseleave", function(){
+            ElementCursor.removeCursor();
+        });
+
+        blockTarget.on("mousedown", function(){
+            ElementCursor.dragCursor();
+        });
+
+        blockTarget.on("mouseup", function(){
+            ElementCursor.setCursor();
+        });
+
 
         /* ==============
            Forms
