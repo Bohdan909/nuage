@@ -478,35 +478,44 @@ document.documentElement.className = document.documentElement.className.replace(
             //     });
             // }
 
-            const prodWrap = document.querySelector(".product-viewer-wrap"); 
-            const prodZoom = document.querySelector(".product-zoom");
-            const zoomImg  = document.querySelector(".zoom-img");
+            const prodWrap  = document.querySelector(".product-viewer-wrap"); 
+            const prodZoom  = document.querySelector(".product-zoom");
+            const zoomImg   = document.querySelectorAll(".zoom-img");
+            
 
             if (document.body.contains(prodWrap) && 
-                html.classList.contains("no-touchevents") && 
-                prodWrap){
-                
+                html.classList.contains("no-touchevents") &&
+                (prodFront || prodBack)){
+
+                const prodFront = prodWrap.classList.contains("product-viewer-front");
+                const prodBack  = prodWrap.classList.contains("product-viewer-back");
+
                 let zoomSpeed = "100ms",
                     zoomFunction = "ease",
                     zoomMoveSpeed = "100ms",
                     zoomMoveFunction = "linear",
-                    scale = 1.05, mouseX, mouseY, offsetX, offsetY, zoomPosX, zoomPosY;
-
+                    scale = 1.05, mouseX, mouseY, offsetX, offsetY, zoomPosX, zoomPosY, showedImg;
 
                 var initZoomableEventHandlers = function (){
 
                     prodWrap.addEventListener("mouseenter", function(e){
                         
-                        setTimeout(function(){
+                        for (let i = 0; i < zoomImg.length; i++){
+                            zoomImg[i].classList.remove("show");
+                        }
+
+                        if (prodWrap.classList.contains("product-viewer-front")){
+                            showedImg = prodZoom.querySelector(".zoom-img-front");
+                            showedImg.classList.add("show");
                             prodZoom.classList.add("show");
-                        }, 0);
-
-                        if (scale !== 1) zoomImg.classList.add("z-entering");
-
+                        } else if (prodWrap.classList.contains("product-viewer-back")){
+                            showedImg = prodZoom.querySelector(".zoom-img-back");
+                            showedImg.classList.add("show");
+                            prodZoom.classList.add("show");
+                        }
+                        
                         mouseX = e.pageX - this.getBoundingClientRect().left;
                         mouseY = e.pageY - this.getBoundingClientRect().top;
-
-                        console.log(this.offsetLeft);
 
                         offsetX = -1 * 1.1 * mouseX;
                         offsetY = -1 * 1.4 * mouseY;
@@ -517,16 +526,17 @@ document.documentElement.className = document.documentElement.className.replace(
                         prodZoom.setAttribute("style", "left:" + zoomPosX + "px; top: " + zoomPosY + "px;");
 
                         styles = "transform: matrix(" + scale + ",0,0," + scale + "," + offsetX + "," + offsetY + "); transition: transform " + zoomSpeed + " " + zoomFunction;
-                        zoomImg.setAttribute("style", styles);
-
-                        zoomImg.addEventListener("transitionend", function(){
-                            zoomImg.classList.remove("z-entering");
+                        showedImg.setAttribute("style", styles);
+                        
+                        showedImg.addEventListener("transitionend", function(){
+                            showedImg.classList.remove("z-entering");
                         });
+                        
                     });
 
                     prodWrap.addEventListener("mousemove", function(e){
 
-                        if (!zoomImg.classList.contains("z-entering") && !zoomImg.classList.contains("z-exiting")) {
+                        if (!showedImg.classList.contains("z-entering") && !showedImg.classList.contains("z-exiting")) {
                             mouseX = e.pageX - this.getBoundingClientRect().left;
                             mouseY = e.pageY - this.getBoundingClientRect().top;
 
@@ -539,7 +549,7 @@ document.documentElement.className = document.documentElement.className.replace(
                             prodZoom.setAttribute("style", "left:" + zoomPosX + "px; top: " + zoomPosY + "px;");
 
                             styles = "transform: matrix(" + scale + ",0,0," + scale + "," + offsetX + "," + offsetY + "); transition: transform " + zoomSpeed + " " + zoomFunction;
-                            zoomImg.setAttribute("style", styles);
+                            showedImg.setAttribute("style", styles);
                         }
                     });
 
@@ -549,15 +559,15 @@ document.documentElement.className = document.documentElement.className.replace(
                             prodZoom.classList.remove("show");
                         }, 400);
                         
-                        if (scale !== 1) zoomImg.classList.add("z-exiting");
-
                         styles = "transform: matrix(1,0,0,1,0,0); transition: transform " + zoomSpeed + " " + zoomFunction;
 
-                        zoomImg.classList.add("z-exiting")
-                        zoomImg.setAttribute("style", styles);
+                        if (scale !== 1) showedImg.classList.add("z-exiting");
+                        
+                        showedImg.classList.add("z-exiting")
+                        showedImg.setAttribute("style", styles);
 
-                        zoomImg.addEventListener("transitionend", function(){
-                            zoomImg.classList.remove("z-exiting");
+                        showedImg.addEventListener("transitionend", function(){
+                            showedImg.classList.remove("z-exiting");
                         });
                     });
                 };

@@ -252,7 +252,6 @@ div.scroll-helper {
     width: 300px;
 
     li {
-        @include transition(opacity, 0.2s, linear);
         @include border-rad(15px);
         width: 100%;
         position: absolute;
@@ -262,10 +261,10 @@ div.scroll-helper {
         padding-right: 15px;
         height: 100px;
         background-color: #fff;
-        opacity: 0;
+        animation: fadeOut-l 0.2s linear forwards;
 
         &.show {
-            opacity: 1;
+            animation: fadeIn-l 0.2s linear forwards;
         }
 
         img {
@@ -537,8 +536,13 @@ ul.cubes-main {
 
 @media (max-height: 800px) and (min-width: 1025px){
 
-    .page-main .lic-desc {
-        top: -115px;
+    .page-main {
+        .lic-desc { top: -115px; }
+
+        .text-block {
+            @include transform(translateY(0));
+            top: 27px;
+        }
     }
 
     div.scroll-helper .ico-mouse {
@@ -548,14 +552,7 @@ ul.cubes-main {
 
 @media (max-height: 700px) and (min-width: 1025px){
 
-    .page-main {
-
-        .text-block {
-            @include transform(translateY(0));
-            top: 27px;
-        }
-    }
-
+   
     .object-main, .object-main-wrap {
         @include object-mid;
     }
