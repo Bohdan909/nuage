@@ -70,6 +70,7 @@ jQuery(document).ready(function($){
 	        self.xPosition = self.handle.offset().left + dragWidth - e.pageX;
 
 	        self.element.on('mousemove vmousemove', function (e) {
+
 	        	if( !self.animating) {
 	        		self.animating =  true;
 		        	( !window.requestAnimationFrame )
@@ -100,13 +101,22 @@ jQuery(document).ready(function($){
 
 	    var widthValue = Math.ceil( (leftValue + dragWidth / 2 - containerOffset) * 1000 / containerWidth)/10;
 	    self.visibleFrame = Math.ceil( (widthValue * (self.frames-1))/100 );
-
+		
 	    //update image frame
 	    self.updateFrame();
 	    //update handle position
 	    $('.cd-draggable', self.handleContainer).css('left', widthValue + '%').one('mouseup vmouseup', function () {
 	        $(this).removeClass('cd-draggable');
 	    });
+
+	    // Pos Drag
+	    if (widthValue < 15){
+	    	$(".product-viewer-wrap").addClass("product-viewer-front");
+	    } else if (widthValue > 85){
+	    	$(".product-viewer-wrap").addClass("product-viewer-back");
+	    } else {
+	    	$(".product-viewer-wrap").removeClass("product-viewer-front product-viewer-back");
+	    }
 
 	    self.animating = false;
 	}
