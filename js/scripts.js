@@ -482,13 +482,10 @@ document.documentElement.className = document.documentElement.className.replace(
             const prodZoom  = document.querySelector(".product-zoom");
             const zoomImg   = document.querySelectorAll(".zoom-img");
             
-
             if (document.body.contains(prodWrap) && 
                 html.classList.contains("no-touchevents") &&
-                (prodFront || prodBack)){
-
-                const prodFront = prodWrap.classList.contains("product-viewer-front");
-                const prodBack  = prodWrap.classList.contains("product-viewer-back");
+                (prodWrap.classList.contains("product-viewer-front") ||
+                 prodWrap.classList.contains("product-viewer-back"))){
 
                 let zoomSpeed = "100ms",
                     zoomFunction = "ease",
@@ -513,6 +510,8 @@ document.documentElement.className = document.documentElement.className.replace(
                             showedImg.classList.add("show");
                             prodZoom.classList.add("show");
                         }
+
+                        console.log(showedImg);
                         
                         mouseX = e.pageX - this.getBoundingClientRect().left;
                         mouseY = e.pageY - this.getBoundingClientRect().top;
