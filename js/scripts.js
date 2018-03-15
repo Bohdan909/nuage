@@ -509,14 +509,12 @@ document.documentElement.className = document.documentElement.className.replace(
                             showedImg.classList.add("show");
                             prodZoom.classList.add("show");
                         }
-
-                        console.log(showedImg);
                         
                         mouseX = e.pageX - this.getBoundingClientRect().left;
                         mouseY = e.pageY - this.getBoundingClientRect().top;
 
-                        offsetX = -1 * 1.1 * mouseX;
-                        offsetY = -1 * 1.4 * mouseY;
+                        offsetX = -1 * 1.95 * mouseX;
+                        offsetY = -1 * 1.7 * mouseY;
 
                         zoomPosX = e.pageX - 270;
                         zoomPosY = e.pageY - 260;
@@ -538,8 +536,8 @@ document.documentElement.className = document.documentElement.className.replace(
                             mouseX = e.pageX - this.getBoundingClientRect().left;
                             mouseY = e.pageY - this.getBoundingClientRect().top;
 
-                            offsetX = -1 * 1.1 * mouseX;
-                            offsetY = -1 * 1.4 * mouseY;
+                            offsetX = -1 * 1.95 * mouseX;
+                            offsetY = -1 * 1.7 * mouseY;
 
                             zoomPosX = e.pageX - 270;
                             zoomPosY = e.pageY - 260;
@@ -561,8 +559,11 @@ document.documentElement.className = document.documentElement.className.replace(
 
                         if (scale !== 1) showedImg.classList.add("z-exiting");
                         
-                        showedImg.classList.add("z-exiting")
-                        showedImg.setAttribute("style", styles);
+                        showedImg.classList.add("z-exiting");
+                        setTimeout(function(){
+                            showedImg.setAttribute("style", styles);
+                        }, 1000);
+                        
 
                         showedImg.addEventListener("transitionend", function(){
                             showedImg.classList.remove("z-exiting");

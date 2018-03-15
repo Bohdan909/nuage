@@ -529,6 +529,7 @@ ul.feedback-filter {
     background-color: #a6ccf0;
     transform: scale(0);
     z-index: 99999;
+    font-family: $fontMed;
     transition: transform 0.27s linear;
 
     span {
