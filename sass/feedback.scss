@@ -176,7 +176,6 @@ $heightPanel: 90px;
             letter-spacing: 0.3px;
 
             i {
-                @extend .not-blurry;
                 display: block;
                 font-style: normal;
             }

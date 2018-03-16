@@ -86,7 +86,6 @@ $textA: 15px;
 .animate-text {
 
     div {
-        @extend .not-blurry;
         @extend .sm;
         position: relative;
         transform: translate3d(0, $textA, 0);
