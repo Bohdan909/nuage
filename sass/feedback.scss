@@ -532,6 +532,10 @@ ul.feedback-filter {
     font-family: $fontMed;
     transition: transform 0.27s linear;
 
+    .touchevents & {
+        display: none !important;
+    }
+
     span {
         display: block;
         text-align: center;
@@ -556,7 +560,7 @@ ul.feedback-filter {
     }
 }
 
-.cursor-target.hover {
+.no-touchevents .cursor-target.hover {
     cursor: none !important;
 
     .scroll-block {
