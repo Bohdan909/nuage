@@ -130,6 +130,10 @@ $textA: 15px;
         &:nth-child(10) {
             animation-delay: 1.65s !important;
         }
+
+        &:nth-child(11) {
+            animation-delay: 1.7s !important;
+        }
     }
 
     .loaded & div {
@@ -176,6 +180,10 @@ $textA: 15px;
 
         &:nth-child(10) {
             animation-delay: 1.45s !important;
+        }
+
+        &:nth-child(11) {
+            animation-delay: 1.5s !important;
         }
     }
 }

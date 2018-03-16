@@ -9,8 +9,13 @@
 }
 
 @mixin object-mob {
-    width: 350px;
-    height: 189px;
+    width: 500px;
+    height: 300px;
+}
+
+@mixin object-mob-min {
+    width: 400px;
+    height: 230px;
 }
 
 @mixin scroll-helper-min {
@@ -1093,8 +1098,7 @@ ul.cubes-main {
     .object-main-wrap {
         @include transform(translate(0));
         position: static;
-        margin-left: -55px;
-        margin-bottom: 20px;
+        margin-left: -65px;
     }
 
     .object-main {
@@ -1102,10 +1106,6 @@ ul.cubes-main {
     }
 
     .page-main {
-
-        .socket {
-            padding-top: 20px;
-        }
 
         .title-main {
             font-size: 45px;
@@ -1171,6 +1171,17 @@ ul.cubes-main {
             width: calc(100vw - 329px);
             width: -webkit-calc(100vw - 329px);
         }
+    }
+}
+
+@media (max-width: 374px){
+    
+    .object-main, .object-main-wrap {
+        @include object-mob-min;
+    }
+
+    .object-main-wrap {
+        margin-left: -50px;
     }
 }
 
