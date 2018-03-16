@@ -614,6 +614,11 @@ div.mission-text-slider {
         .mission-video-wrap {
             height: 480px;
         }
+
+        .video-block-wrapper {
+            transform: translate3d(0, 100px, 0);
+            z-index: 1;
+        }
     }
     
     .mission-column.to-right {
