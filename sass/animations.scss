@@ -119,6 +119,18 @@ $textA: 15px;
         &:nth-child(7) {
             animation-delay: 1.4s !important;
         }
+
+        &:nth-child(8) {
+            animation-delay: 1.5s !important;
+        }
+
+        &:nth-child(9) {
+            animation-delay: 1.57s !important;
+        }
+
+        &:nth-child(10) {
+            animation-delay: 1.65s !important;
+        }
     }
 
     .loaded & div {
@@ -153,6 +165,18 @@ $textA: 15px;
 
         &:nth-child(7) {
             animation-delay: 1.3s !important;
+        }
+
+        &:nth-child(8) {
+            animation-delay: 1.3s !important;
+        }
+
+        &:nth-child(9) {
+            animation-delay: 1.37s !important;
+        }
+
+        &:nth-child(10) {
+            animation-delay: 1.45s !important;
         }
     }
 }
