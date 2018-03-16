@@ -496,6 +496,14 @@ div.mission-text-slider {
     &.hide {
         opacity: 0;
     }
+
+    &:hover .btn-play {
+        background-color: #9cc5eb;
+
+        &:after {
+            border-color: transparent transparent transparent #fff;
+        }
+    }
 }
 
 .mission-video {
