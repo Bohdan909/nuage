@@ -16,11 +16,11 @@
 }     
 
 .animate-slide {
-    transition: transform 1s $easing;
     opacity: 0;   
+    transform: translateY(20px);
 
     .loaded &, .start & {
-        @include animation(animateSlide, 1s, $easing);
+        @include animation(animateSlide, 1.2s, $easing);
     }
 }
 
