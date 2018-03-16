@@ -16,11 +16,11 @@
 }     
 
 .animate-slide {
-    transition: transform 1s $easing;
     opacity: 0;   
+    transform: translateY(20px);
 
     .loaded &, .start & {
-        @include animation(animateSlide, 1s, $easing);
+        @include animation(animateSlide, 1.2s, $easing);
     }
 }
 
@@ -130,6 +130,10 @@ $textA: 15px;
         &:nth-child(10) {
             animation-delay: 1.65s !important;
         }
+
+        &:nth-child(11) {
+            animation-delay: 1.7s !important;
+        }
     }
 
     .loaded & div {
@@ -176,6 +180,10 @@ $textA: 15px;
 
         &:nth-child(10) {
             animation-delay: 1.45s !important;
+        }
+
+        &:nth-child(11) {
+            animation-delay: 1.5s !important;
         }
     }
 }

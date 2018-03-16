@@ -231,7 +231,7 @@ function initialize() {
 
   var point = new google.maps.LatLng(55.819515, 37.490370);
   var image = new google.maps.MarkerImage(
-    'images/marker.png',
+    'images/marker.svg',
     new google.maps.Size(33,33)
   );
 

@@ -567,6 +567,26 @@ ul.feedback-filter {
     }
 }
 
+@include ie10 {
+    .no-touchevents .cursor-target.hover {
+        cursor: default !important;
+
+        .scroll-block {
+            cursor: default !important;
+        }
+    }
+}
+
+@include edge {
+    .no-touchevents .cursor-target.hover {
+        cursor: default !important;
+
+        .scroll-block {
+            cursor: default !important;
+        }
+    }
+}
+
 // .cursor-target:hover {
 //     cursor: url(../images/marker.png), auto !important;
 

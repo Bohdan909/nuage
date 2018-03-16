@@ -11,57 +11,69 @@ document.documentElement.className = document.documentElement.className.replace(
            Text Lines Animate 
         ====================== */
 
-        let textBlock = document.querySelectorAll(".animate-text");
+        function setLines(){
+            let textBlock = document.querySelectorAll(".animate-text");
 
-        textBlock.forEach(function(block){
-            let text = block.innerText || block.textContent;
-            let blockWidth = block.offsetWidth;
-            let fontSize = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
-            let lineLength = blockWidth / (fontSize * 0.63);
-            let resultArr = [];
-            let resultHTML;
+            textBlock.forEach(function(block){
+                let text = block.innerText || block.textContent;
+                let blockWidth = block.offsetWidth;
+                let fontSize = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
+                let lineLength = blockWidth / (fontSize * 0.62);
+                let resultArr = [];
+                let resultHTML;
 
-            if (block.classList.contains("animate-text-hide")){
-                let blockHide = document.querySelector("animate-text-hide");
-                let blockWrap = findParent(block, "animate-text-wrap");
-                let blockCal  = blockWrap.children[0].querySelector(".animate-text");
+                if (block.classList.contains("animate-text-hide")){
+                    let blockHide = document.querySelector("animate-text-hide");
+                    let blockWrap = findParent(block, "animate-text-wrap");
+                    let blockCal  = blockWrap.children[0].querySelector(".animate-text");
 
-                blockWidth = blockCal.offsetWidth;
-                fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
-                lineLength = blockWidth / (fontSize * 0.63);
-                
-            } else if (block.parentNode.classList.contains("feedback-item") && mobile){
-                blockWidth = window.innerWidth - 35;
-                fontSize = 13;
-                lineLength = blockWidth / (fontSize * 0.63);
-            }
+                    blockWidth = blockCal.offsetWidth;
+                    fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
+                    lineLength = blockWidth / (fontSize * 0.62);
+                    
+                } else if (block.parentNode.classList.contains("feedback-item") && mobile){
+                    blockWidth = window.innerWidth - 35;
+                    fontSize = 13;
+                    lineLength = blockWidth / (fontSize * 0.63);
+                }
 
-            function linesWrap(text, maxLength){
-                
-                let line = [];
-                let length = 0;
+                console.log(lineLength);
 
-                text.split(" ").forEach(function(word){
+                function linesWrap(text, maxLength){
+                    
+                    let line = [];
+                    let length = 0;
 
-                    if ((length + word.length) >= maxLength){
-                        resultArr.push("<div>" + line.join(" ") + "</div>");
-                        line = []; 
-                        length = 0;
-                    }
+                    text.split(" ").forEach(function(word){
 
-                    length += word.length + 1;
-                    line.push(word);
-                });
+                        if ((length + word.length) >= maxLength){
+                            resultArr.push("<div>" + line.join(" ") + "</div>");
+                            line = []; 
+                            length = 0;
+                        }
 
-                if (line.length > 0) resultArr.push("<div>" + line.join(" ") + "</div>");
+                        length += word.length + 1;
+                        line.push(word);
+                    });
 
-                return resultArr;
-            };
+                    if (line.length > 0) resultArr.push("<div>" + line.join(" ") + "</div>");
 
-            linesWrap(text, lineLength);
-            resultHTML = resultArr.join("");
-            block.innerHTML = resultHTML;
+                    return resultArr;
+                };
+
+                linesWrap(text, lineLength);
+                resultHTML = resultArr.join("");
+                block.innerHTML = resultHTML;
+            
+            });
+        }    
+
+        setLines();
+
+        window.addEventListener('resize', function(){
+            if (window.matchMedia("(max-width: 767px)").matches) setLines();
         });
+
 
         /* ===================
            Consultation 
