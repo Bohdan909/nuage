@@ -220,62 +220,9 @@ div.mission-text-slider {
     }
 }
 
-
-.video-block-wrap {
-    @include border-rad(50%);
-    @include Center;
-    @include trans(0.9s);
-    width: 400px;
-    height: 400px;
-    cursor: pointer;
-    z-index: 100;
-
-    .loaded & {
-        @include delay(0.52s);
-        
-    }
-
-    &:hover {
-        @include delay(0s);
-        @include trans(0.4s);
-        box-shadow: none;
-        -webkit-box-shadow: none;
-    }
-}
-
-// .video-block {
-//     @include transition(all, 0.6s, $easing);
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     overflow: hidden;
-//     -webkit-clip-path: circle(5% at 50% 50%);
-//     clip-path: circle(5% at 50% 50%);
-//     opacity: 0;
-
-
-//     .video {
-//         position: absolute;
-//         width: 400px;
-//         height: 400px;
-//         left: 0;
-//         top: 0;
-//         z-index: 100;
-//     }
-
-//     .video-name, .btn-play {
-//         z-index: 101;
-
-//         &.hide {
-//             opacity: 0;
-//         }
-//     }
-// }
-
 .btn-play {
-    @include trans(0.5s);
+    //@include trans(0.5s);
+    transition: background-color 0.5s $easing;
     @include border-rad(50%);
     @include Center;
     width: 57px;
@@ -293,93 +240,13 @@ div.mission-text-slider {
     }
 }
 
-// .video-block-shadow {
-//     @include transition(all, 0.8s, $easing);
-//     @include delay(0.55s);
-//     @include origin(center, center);
-//     @extend .ctr;
-//     @extend .circ;
-//     position: absolute;
-//     width: 310px;
-//     height: 310px;
-//     box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-//     -webkit-box-shadow: 0px 22px 40.42px 2.58px rgba(143, 159, 174, 0.17);
-
-//     opacity: 0;
-
-//     .loaded & {
-//         opacity: 1;
-//     }
-// }
-
-// .no-touchevents .loaded {
-
-//     .video-block-wrap {
-
-//         .video-block {
-//             @include animation(circleOpen, 0.5s, $easing);
-//         }
-
-//         &.hover {
-
-//             .video-block {
-//                 @include animation(circleHover, 0.7s, $easing);
-//             }
-
-//             .video-block-shadow {
-//                 @include delay(0s);
-//                 @include transform(translateY(-50%) translateX(-50%) scale(1.2));
-//             }
-//         }
-
-//         &.leave {
-
-//             .video-block {
-//                 @include animation(circleLeave, 0.7s, $easing);
-//             }
-
-//             .video-block-shadow {
-//                 @include delay(0s);
-//                 @include transform(translateY(-50%) translateX(-50%) scale(1));
-//             }
-//         }
-
-//         &.play {
-
-//             .video-block {
-//                 @include transition(all, 0.5s, $easing);
-//                 clip-path: circle(50% at 50% 50%) !important;
-//                 -webkit-clip-path: circle(50% at 50% 50%) !important;
-//                 animation: none !important;
-//                 -webkit-animation: none !important;
-//                 -ms-animation: none !important;
-//                 animation-play-state: paused !important;
-//                 -webkit-animation-play-state: paused !important;
-//                 -ms-animation-play-state: paused !important;
-//                 opacity: 1;
-//             }
-//         }
-//     }
-// }
-
-
-.mission-video-wrap, .mission-video-play {
+.mission-video-play {
     position: absolute;
-}
-
-.mission-video-wrap {
-    @include transition(all, 0.6s, $easing);
-    width: 100vw;
-    height: 100vh;
-    left: 0;
-    top: 0;
-    z-index: 998;    
-    overflow: hidden;
 }
 
 .mission-video-close {
     @include transform(translateY(-50%));
-    @include transition(all, 0.5s, $easing);
+    @include transition(opacity, 0.5s, $easing);
     @extend .circ;
     position: absolute;
     width: 100px;
@@ -448,7 +315,7 @@ div.mission-text-slider {
         }
 
         .mission-video-play {
-            @include transition(opacity, 0.2s, $easing);
+            
             
             opacity: 0;
         }
@@ -456,20 +323,11 @@ div.mission-text-slider {
 }
 
 .mission-video-play {
-    @include transition(opacity, 0.2s, $easing);
-    @include delay(0.6s);
+    transition: width 0.6s $easing, height 0.6s $easing, opacity 0.2s $easing;
     cursor: pointer;
-    position: absolute;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    // top: -50%;
-    // bottom: -50%;
-    // left: -50%;
-    // right: -50%;
     margin: auto;
     z-index: 1;
+    @include Center;
 
     .btn-play {
         @include Center;
@@ -632,83 +490,6 @@ div.mission-text-slider {
         margin-top: 0;
     }
 }
-
-
-
-
-
-// @keyframes circleHover {
-//     0% {
-//        clip-path: circle(39% at 50% 50%);
-//        opacity: 1;
-//     }
-
-//     100% {
-//         clip-path: circle(50% at 50% 50%);
-//         opacity: 1;
-//     }
-// }
-
-// @-webkit-keyframes circleHover {
-//     0% {
-//        -webkit-clip-path: circle(39% at 50% 50%);
-//        opacity: 1;
-//     }
-
-//     100% {
-//         -webkit-clip-path: circle(50% at 50% 50%);
-//         opacity: 1;
-//     }
-// }
-
-// @keyframes circleLeave {
-//     0% {
-//        clip-path: circle(50% at 50% 50%);
-//        opacity: 1;
-//     }
-
-//     100% {
-//         clip-path: circle(39% at 50% 50%);
-//         opacity: 1;
-//     }
-// }
-
-// @-webkit-keyframes circleLeave {
-//     0% {
-//        -webkit-clip-path: circle(50% at 50% 50%);
-//        opacity: 1;
-//     }
-
-//     100% {
-//         -webkit-clip-path: circle(39% at 50% 50%);
-//         opacity: 1;
-//     }
-// }
-
-// @keyframes circleOpen {
-//     0% {
-//         clip-path: circle(0% at 50% 50%);
-//         opacity: 0;
-//     }
-
-//     100% {
-//         clip-path: circle(39% at 50% 50%);
-//         opacity: 1;
-//     }
-// }
-
-// @-webkit-keyframes circleOpen {
-//     0% {
-//         -webkit-clip-path: circle(0% at 50% 50%);
-//         opacity: 0;
-//     }
-
-//     100% {
-//         -webkit-clip-path: circle(39% at 50% 50%);
-//         opacity: 1;
-//     }
-// }
-
 
 @media (min-width: 1025px) and (max-height: 770px){
 
@@ -1086,3 +867,12 @@ div.mission-text-slider {
         margin-top: 25%;
     }
 }
+@media only screen
+    and (min-width: 1280px) {
+        .video-calibrate:not(.open):hover,
+        .video-calibrate:not(.open):hover .mission-video-play{
+            width: 380px;
+            height: 380px;
+        }
+    }
+    
