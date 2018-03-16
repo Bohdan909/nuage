@@ -1004,15 +1004,15 @@ ul.cubes-main {
             font-size: 85px;
         }
 
-        .page-main {
+        // .page-main {
 
-            .text-block {
+        //     .text-block {
 
-                p {
-                    display: none;
-                }
-            }
-        }
+        //         p {
+        //             display: none;
+        //         }
+        //     }
+        // }
     }
 
     @media screen and (max-width: 1023px) and (orientation: portrait) { // PORTRAIT
@@ -1162,14 +1162,17 @@ ul.cubes-main {
     @include land {
 
         .object-main-wrap {
-            float: left;
+            position: absolute;
+            margin-left: 0;
+            top: -25px;
+            left: -77px;
         }
 
         .page-main .text-block {
-            float: right;
-            width: 200px;
-            width: calc(100vw - 329px);
-            width: -webkit-calc(100vw - 329px);
+            padding: 35px 0 30px 350px;
+            // width: 200px;
+            // width: calc(100vw - 329px);
+            // width: -webkit-calc(100vw - 329px);
         }
     }
 }
