@@ -843,21 +843,22 @@ document.documentElement.className = document.documentElement.className.replace(
                 jqElem = $(elem);
 
                 let dropsElem = findParent(elem, "drops");
-                if (dropsElem != null) {
-                    // remove "selected" from descendant options
-                    let allDrops = dropsElem.querySelectorAll(".filter-option");
-                    Array.prototype.forEach.call(allDrops, function (drop) {
-                        if (drop.classList.contains("selected")) {
-                            assortFilter.add($(drop).data("filter-option"), $(drop).data("filter-value"), true);
-                        }
-                        drop.classList.remove("selected");
-                    });
-                }
+                
                 
                 if (elem.classList.contains("selected")) {
                     elem.classList.remove("selected");
                     assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), true);
                 } else {
+                    if (dropsElem != null) {
+                        let allDrops = dropsElem.querySelectorAll(".filter-option");
+                        Array.prototype.forEach.call(allDrops, function (drop) {
+                            if (drop.classList.contains("selected")) {
+                                assortFilter.add($(drop).data("filter-option"), $(drop).data("filter-value"), true);
+                            }
+                            drop.classList.remove("selected");
+                        });
+                    }
+                    
                     elem.classList.add("selected");
                     assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), false);
                 }
