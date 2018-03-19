@@ -37,8 +37,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     lineLength = blockWidth / (fontSize * 0.63);
                 }
 
-                console.log(lineLength);
-
                 function linesWrap(text, maxLength){
                     
                     let line = [];
@@ -70,9 +68,11 @@ document.documentElement.className = document.documentElement.className.replace(
 
         setLines();
 
-        window.addEventListener('resize', function(){
-            if (window.matchMedia("(max-width: 767px)").matches) setLines();
-        });
+        // window.addEventListener("resize", function(){
+        //     setTimeout(function(){
+        //         setLines();
+        //     }, 300);
+        // });
 
 
         /* ===================
