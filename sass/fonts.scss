@@ -82,9 +82,8 @@ div.main {
 
 @font-face {
     font-family: "FiraSans-Medium";
-    src: url("fonts/FiraSans-Medium.eot");
-    src: url("fonts/FiraSans-Medium.eot?#iefix") format("embedded-opentype"),
-         url("fonts/FiraSans-Medium.woff") format("woff"),
+    src: url("fonts/FiraSans-Medium.woff") format("woff"),
+         url("fonts/FiraSans-Medium.eot") format("embedded-opentype"),
          url("fonts/FiraSans-Medium.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -92,9 +91,9 @@ div.main {
 
 @font-face {
     font-family: "FiraSans-SemiBold";
-    src: url("fonts/FiraSans-SemiBold.eot");
-    src: url("fonts/FiraSans-SemiBold.eot?#iefix") format("embedded-opentype"),
-         url("fonts/FiraSans-SemiBold.woff") format("woff"),
+
+    src: url("fonts/FiraSans-SemiBold.woff") format("woff"),
+         url("fonts/FiraSans-SemiBold.eot") format("embedded-opentype"),
          url("fonts/FiraSans-SemiBold.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -102,9 +101,9 @@ div.main {
 
 @font-face {
     font-family: "FiraSans-SemiBoldItalic";
-    src: url("fonts/FiraSans-SemiBoldItalic.eot");
-    src: url("fonts/FiraSans-SemiBoldItalic.eot?#iefix") format("embedded-opentype"),
-         url("fonts/FiraSans-SemiBoldItalic.woff") format("woff"),
+
+    src: url("fonts/FiraSans-SemiBoldItalic.woff") format("woff"),
+         url("fonts/FiraSans-SemiBoldItalic.eot") format("embedded-opentype"),
          url("fonts/FiraSans-SemiBoldItalic.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -112,9 +111,9 @@ div.main {
 
 @font-face {
     font-family: "FiraSans-Regular";
-    src: url("fonts/FiraSans-Regular.eot");
-    src: url("fonts/FiraSans-Regular.eot?#iefix") format("embedded-opentype"),
-         url("fonts/FiraSans-Regular.woff") format("woff"),
+
+    src: url("fonts/FiraSans-Regular.woff") format("woff"),
+         url("fonts/FiraSans-Regular.eot") format("embedded-opentype"),
          url("fonts/FiraSans-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -122,9 +121,9 @@ div.main {
 
 @font-face {
     font-family: "PTSerif-Bold";
-    src: url("fonts/PTSerif-Bold.eot");
-    src: url("fonts/PTSerif-Bold.eot?#iefix") format("embedded-opentype"),
-         url("fonts/PTSerif-Bold.woff") format("woff"),
+
+    src: url("fonts/PTSerif-Bold.woff") format("woff"),
+         url("fonts/PTSerif-Bold.eot") format("embedded-opentype"),
          url("fonts/PTSerif-Bold.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -132,9 +131,9 @@ div.main {
 
 @font-face {
     font-family: "PTSerif-Italic";
-    src: url("fonts/PTSerif-Italic.eot");
-    src: url("fonts/PTSerif-Italic.eot?#iefix") format("embedded-opentype"),
-         url("fonts/PTSerif-Italic.woff") format("woff"),
+
+    src: url("fonts/PTSerif-Italic.woff") format("woff"),
+         url("fonts/PTSerif-Italic.eot") format("embedded-opentype"),
          url("fonts/PTSerif-Italic.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -142,9 +141,9 @@ div.main {
 
 @font-face {
     font-family: "PTSerif-Regular";
-    src: url("fonts/PTSerif-Regular.eot");
-    src: url("fonts/PTSerif-Regular.eot?#iefix") format("embedded-opentype"),
-         url("fonts/PTSerif-Regular.woff") format("woff"),
+
+    src: url("fonts/PTSerif-Regular.woff") format("woff"),
+         url("fonts/PTSerif-Regular.eot") format("embedded-opentype"),
          url("fonts/PTSerif-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -152,9 +151,8 @@ div.main {
 
 @font-face {
     font-family: "FiraSans-ExtraLight";
-    src: url("fonts/FiraSans-ExtraLight.eot");
-    src: url("fonts/FiraSans-ExtraLight.eot?#iefix") format("embedded-opentype"),
-         url("fonts/FiraSans-ExtraLight.woff") format("woff"),
+    src: url("fonts/FiraSans-ExtraLight.woff") format("woff"),
+         url("fonts/FiraSans-ExtraLight.eot") format("embedded-opentype"),
          url("fonts/FiraSans-ExtraLight.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
