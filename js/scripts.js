@@ -731,8 +731,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 $indRevItem.eq(slideId).addClass("active");
 
                 $indRev.css({ "transform": "translateY(" + indArr[slideId] + "px" });
-
-                console.log(indArr[slideId]);
+                console.log("Current slide offset: " + indArr[slideId]);
             }
 
             // Slider Description
@@ -994,7 +993,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         // Setup Classes
                         lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
                         $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
-                        displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
+                        //displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
 
 
                         function checkSliderEdge(index){
