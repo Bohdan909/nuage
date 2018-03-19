@@ -731,8 +731,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 $indRevItem.eq(slideId).addClass("active");
 
                 $indRev.css({ "transform": "translateY(" + indArr[slideId] + "px" });
-
-                console.log(indArr[slideId]);
+                console.log("Current slide offset: " + indArr[slideId]);
             }
 
             // Slider Description
@@ -827,19 +826,41 @@ document.documentElement.className = document.documentElement.className.replace(
             });
             
             // slider filter
-            var filterItem = $(".filter-item .filter-option");
+            var filterItem = $(".filter-item");
 
             // Filter Click        
             filterItem.on("click", function(e){
-                let elem = $(this);
+                let elem = null;
                 //console.log(elem.data("filter-option") + ": " + elem.data("filter-value"));
 
-                if (elem.hasClass("selected")) {
-                    elem.removeClass("selected");
-                    assortFilter.add(elem.data("filter-option"), elem.data("filter-value"), true);
+                if (e.target.classList.contains("filter-option")) {
+                    elem = e.target;
                 } else {
-                    elem.addClass("selected");
-                    assortFilter.add(elem.data("filter-option"), elem.data("filter-value"), false);
+                    elem = findParent(e.target, "filter-option");
+                }
+
+                // create jQuery instance to use data() method which is more convinient than getAttribute()
+                jqElem = $(elem);
+
+                let dropsElem = findParent(elem, "drops");
+                
+                
+                if (elem.classList.contains("selected")) {
+                    elem.classList.remove("selected");
+                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), true);
+                } else {
+                    if (dropsElem != null) {
+                        let allDrops = dropsElem.querySelectorAll(".filter-option");
+                        Array.prototype.forEach.call(allDrops, function (drop) {
+                            if (drop.classList.contains("selected")) {
+                                assortFilter.add($(drop).data("filter-option"), $(drop).data("filter-value"), true);
+                            }
+                            drop.classList.remove("selected");
+                        });
+                    }
+                    
+                    elem.classList.add("selected");
+                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), false);
                 }
             });
 
@@ -994,7 +1015,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         // Setup Classes
                         lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
                         $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
-                        displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
+                        //displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
 
 
                         function checkSliderEdge(index){

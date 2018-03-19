@@ -947,6 +947,26 @@ ul.desc-list {
         border: none;
     }
 
+    .ico-list, .drops {
+
+        .filter-option {
+            cursor: pointer;
+        }
+    }
+
+    .filter-option {
+        opacity: 0.5;
+        filter: grayscale(100%);
+        transition: opacity 0.3s $easing, filter 0.3s $easing;
+    }
+
+    .filter-option:hover,
+    .filter-option.selected {
+        opacity: 1;
+        filter: grayscale(0);
+    }
+
+    
     .drops {
         text-align: left;
         unicode-bidi: bidi-override;
@@ -959,22 +979,19 @@ ul.desc-list {
             filter: grayscale(0);
         }
     }
-
-    .ico-list, .drops {
-
-        .filter-option {
-            cursor: pointer;
+    .drops:hover {
+        .filter-option,
+        .filter-option.selected ~ .filter-option {
+            opacity: 0.5;
+            filter: grayscale(100%);
         }
-    }
 
-    .filter-option {
-        opacity: 0.5;
-        filter: grayscale(100%);
-    }
-
-    .filter-option.selected {
-        opacity: 1;
-        filter: grayscale(0);
+        .filter-option:hover,
+        .filter-option:hover ~ .filter-option,
+        .filter-option.selected ~ .filter-option:hover  {
+            opacity: 1;
+            filter: grayscale(0);
+        }
     }
 
     @include mobile {
