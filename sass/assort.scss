@@ -947,9 +947,6 @@ ul.desc-list {
         border: none;
     }
 
-    
-    
-
     .ico-list, .drops {
 
         .filter-option {
@@ -993,8 +990,6 @@ ul.desc-list {
             opacity: 1;
             filter: grayscale(0);
         }
-        
-        
     }
 
     @include mobile {
