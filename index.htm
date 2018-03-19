@@ -471,8 +471,6 @@
 							</div>
 						</div>
 
-					   
-
 						<!-- Footer -->
 						<div class="footer">
 							<div class="footer-social">
@@ -2498,50 +2496,48 @@
 			});
 
 			Array.prototype.forEach.call(btnLoc, function(item){
-			item.addEventListener('click', function(){
-				navigator.geolocation.getCurrentPosition(function(position){
+				item.addEventListener('click', function(){
+					navigator.geolocation.getCurrentPosition(function(position){
 
-				var userLat  = position.coords.latitude;
-				var userLong = position.coords.longitude;
+					var userLat  = position.coords.latitude;
+					var userLong = position.coords.longitude;
 
-				address.value = "";
-				mapOptions.center = new google.maps.LatLng(userLat, userLong);
-				map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-				point = new google.maps.LatLng(userLat, userLong);
+					address.value = "";
+					mapOptions.center = new google.maps.LatLng(userLat, userLong);
+					map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+					point = new google.maps.LatLng(userLat, userLong);
 
-				setMarker();
-				setStyles();
-				});
-			});
-			});
-
-			
-
-				function scrollSelectInit(){
-					$(".selectize-dropdown").perfectScrollbar({
-						wheelSpeed: 0.5,
-						wheelPropagation: false,
-						minScrollbarLength: 20
-					});
-				}
-
-				loadScript("./js/selectize.min.js", function(){
-					console.log("selectize dynamically loaded");
-					
-					var selectize = $("#select-city").selectize({
-						allowEmptyOption: true,
-						create: true,
-
-						onChange: function(val){
-							var address = val;
-							geocodeAddress(geocoder, map, address);
-						},
-
-						onDropdownOpen: function(){
-							scrollSelectInit();
-						}
+					setMarker();
+					setStyles();
 					});
 				});
+			});
+
+			function scrollSelectInit(){
+				$(".selectize-dropdown").perfectScrollbar({
+					wheelSpeed: 0.5,
+					wheelPropagation: false,
+					minScrollbarLength: 20
+				});
+			}
+
+			loadScript("./js/selectize.min.js", function(){
+				console.log("selectize dynamically loaded");
+				
+				var selectize = $("#select-city").selectize({
+					allowEmptyOption: true,
+					create: true,
+
+					onChange: function(val){
+						var address = val;
+						geocodeAddress(geocoder, map, address);
+					},
+
+					onDropdownOpen: function(){
+						scrollSelectInit();
+					}
+				});
+			});
 
 
 			function setMarker(){

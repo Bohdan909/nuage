@@ -10,31 +10,36 @@ document.documentElement.className = document.documentElement.className.replace(
         /* ===================
            Text Lines Animate 
         ====================== */
+        
+        
 
-        function setLines(){
-            let textBlock = document.querySelectorAll(".animate-text");
+        function setLines(){    
+
+            let textBlock = document.querySelectorAll(".animate-text");        
 
             textBlock.forEach(function(block){
                 let text = block.innerText || block.textContent;
                 let blockWidth = block.offsetWidth;
                 let fontSize = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
-                let lineLength = blockWidth / (fontSize * 0.62);
+                let lineLength = blockWidth / (fontSize * 0.64);
                 let resultArr = [];
                 let resultHTML;
 
                 if (block.classList.contains("animate-text-hide")){
-                    let blockHide = document.querySelector("animate-text-hide");
+                    //let blockHide = document.querySelector("animate-text-hide");
                     let blockWrap = findParent(block, "animate-text-wrap");
                     let blockCal  = blockWrap.children[0].querySelector(".animate-text");
 
                     blockWidth = blockCal.offsetWidth;
                     fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
-                    lineLength = blockWidth / (fontSize * 0.62);
+                    lineLength = blockWidth / (fontSize * 0.64);
+
+                    console.log(blockWidth);
                     
                 } else if (block.parentNode.classList.contains("feedback-item") && mobile){
                     blockWidth = window.innerWidth - 35;
                     fontSize = 13;
-                    lineLength = blockWidth / (fontSize * 0.63);
+                    lineLength = blockWidth / (fontSize * 0.64);
                 }
 
                 function linesWrap(text, maxLength){
@@ -62,16 +67,13 @@ document.documentElement.className = document.documentElement.className.replace(
                 linesWrap(text, lineLength);
                 resultHTML = resultArr.join("");
                 block.innerHTML = resultHTML;
-            
             });
         }    
 
         setLines();
 
-        // window.addEventListener("resize", function(){
-        //     setTimeout(function(){
-        //         setLines();
-        //     }, 300);
+        // window.addEventListener('resize', function(){
+        //     if (window.matchMedia("(max-width: 767px)").matches) setLines();
         // });
 
 
@@ -731,7 +733,8 @@ document.documentElement.className = document.documentElement.className.replace(
                 $indRevItem.eq(slideId).addClass("active");
 
                 $indRev.css({ "transform": "translateY(" + indArr[slideId] + "px" });
-                console.log("Current slide offset: " + indArr[slideId]);
+
+                console.log(indArr[slideId]);
             }
 
             // Slider Description
@@ -826,41 +829,19 @@ document.documentElement.className = document.documentElement.className.replace(
             });
             
             // slider filter
-            var filterItem = $(".filter-item");
+            var filterItem = $(".filter-item .filter-option");
 
             // Filter Click        
             filterItem.on("click", function(e){
-                let elem = null;
+                let elem = $(this);
                 //console.log(elem.data("filter-option") + ": " + elem.data("filter-value"));
 
-                if (e.target.classList.contains("filter-option")) {
-                    elem = e.target;
+                if (elem.hasClass("selected")) {
+                    elem.removeClass("selected");
+                    assortFilter.add(elem.data("filter-option"), elem.data("filter-value"), true);
                 } else {
-                    elem = findParent(e.target, "filter-option");
-                }
-
-                // create jQuery instance to use data() method which is more convinient than getAttribute()
-                jqElem = $(elem);
-
-                let dropsElem = findParent(elem, "drops");
-                
-                
-                if (elem.classList.contains("selected")) {
-                    elem.classList.remove("selected");
-                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), true);
-                } else {
-                    if (dropsElem != null) {
-                        let allDrops = dropsElem.querySelectorAll(".filter-option");
-                        Array.prototype.forEach.call(allDrops, function (drop) {
-                            if (drop.classList.contains("selected")) {
-                                assortFilter.add($(drop).data("filter-option"), $(drop).data("filter-value"), true);
-                            }
-                            drop.classList.remove("selected");
-                        });
-                    }
-                    
-                    elem.classList.add("selected");
-                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), false);
+                    elem.addClass("selected");
+                    assortFilter.add(elem.data("filter-option"), elem.data("filter-value"), false);
                 }
             });
 
@@ -1015,7 +996,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         // Setup Classes
                         lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
                         $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
-                        //displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
+                        displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
 
 
                         function checkSliderEdge(index){
