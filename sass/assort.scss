@@ -947,18 +947,8 @@ ul.desc-list {
         border: none;
     }
 
-    .drops {
-        text-align: left;
-        unicode-bidi: bidi-override;
-        direction: rtl;
-
-        .filter-option:hover,
-        .filter-option:hover ~ .filter-option,
-        .filter-option.selected ~ .filter-option {
-            opacity: 1;
-            filter: grayscale(0);
-        }
-    }
+    
+    
 
     .ico-list, .drops {
 
@@ -975,6 +965,36 @@ ul.desc-list {
     .filter-option.selected {
         opacity: 1;
         filter: grayscale(0);
+    }
+
+    
+    .drops {
+        text-align: left;
+        unicode-bidi: bidi-override;
+        direction: rtl;
+
+        .filter-option:hover,
+        .filter-option:hover ~ .filter-option,
+        .filter-option.selected ~ .filter-option {
+            opacity: 1;
+            filter: grayscale(0);
+        }
+    }
+    .drops:hover {
+        .filter-option,
+        .filter-option.selected ~ .filter-option {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .filter-option:hover,
+        .filter-option:hover ~ .filter-option,
+        .filter-option.selected ~ .filter-option:hover  {
+            opacity: 1;
+            filter: grayscale(0);
+        }
+        
+        
     }
 
     @include mobile {
