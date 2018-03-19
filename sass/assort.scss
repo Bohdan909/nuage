@@ -957,8 +957,10 @@ ul.desc-list {
     .filter-option {
         opacity: 0.5;
         filter: grayscale(100%);
+        transition: opacity 0.3s $easing, filter 0.3s $easing;
     }
 
+    .filter-option:hover,
     .filter-option.selected {
         opacity: 1;
         filter: grayscale(0);
