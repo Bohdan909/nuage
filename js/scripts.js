@@ -1086,10 +1086,21 @@ document.documentElement.className = document.documentElement.className.replace(
             let movingMenuUnderline = document.querySelector(".menu .moving-underline");
             let menuListElem = document.querySelector(".menu ul");
 
+            function clearClassForChildren(parentElement, childSelector, classToRemove) {
+                let children = parentElement.querySelectorAll(childSelector);
+
+                Array.prototype.forEach.call(children, function (child) {
+                    child.classList.remove(classToRemove);
+                });
+            }
+
             function playMenuUnderlineAnimation(currentBlockId) {
                 let currentNavElement = document.querySelector("li." + currentBlockId);
-            
+
+                clearClassForChildren(menuListElem, ".menu-item", "active");
+                
                 if (currentNavElement) {
+                    currentNavElement.classList.add("active");
                     let navElemOffset = currentNavElement.getBoundingClientRect().left - menuListElem.getBoundingClientRect().left;
                     movingMenuUnderline.style.width = currentNavElement.offsetWidth + "px";
                     movingMenuUnderline.style.transform = "translateX(" + navElemOffset + "px)";
