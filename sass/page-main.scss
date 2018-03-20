@@ -1089,7 +1089,8 @@ ul.cubes-main {
 }
 
 
-@include mobile {
+@media screen and (max-width: 767px), 
+       screen and (max-width: 815px) and (orientation: landscape) {
 
     .object-main, .object-main-wrap {
         @include object-mob;
