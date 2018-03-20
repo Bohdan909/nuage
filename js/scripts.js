@@ -996,7 +996,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         // Setup Classes
                         lsCurrentSlideIndex = getCurrentSlickSlideFromStorage();
                         $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
-                        displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
+                        // displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
 
 
                         function checkSliderEdge(index){
