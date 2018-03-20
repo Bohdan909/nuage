@@ -1271,10 +1271,13 @@ ul.cubes-main {
 
 @include mobile-min {
 
-    .page-main {
+    @include land {
         
-        .text-block {
-            padding-bottom: 0;
+        .page-main {
+        
+            .text-block {
+                padding-bottom: 0;
+            }
         }
     }
 }
