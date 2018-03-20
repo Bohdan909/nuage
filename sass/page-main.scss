@@ -147,10 +147,29 @@ div.scroll-helper {
 
 .ico-swipe {
     display: none;
-    width: 27px;
-    height: 29px;
-    background: url(../images/ico-swipe.png) no-repeat;
-    background-size: 100% auto;
+    height: 24px;
+    padding-left: 36px;
+    
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        background: url(../images/ico-swipe.svg) no-repeat;
+        background-size: 100% auto;
+    }
+
+    span {
+        text-transform: uppercase;
+        color: #fff;
+        white-space: nowrap;
+        font-size: 9px;
+        line-height: 24px;
+        font-family: $fontMed;
+    }
 }
 
 .ico-mouse {
@@ -1064,7 +1083,7 @@ ul.cubes-main {
         bottom: -185px;
 
         .ico-swipe {
-            top: 85px;
+            top: 92px;
         }
     }
 
@@ -1107,6 +1126,7 @@ ul.cubes-main {
     }
 
     .page-main {
+        padding-bottom: 65px;
 
         .title-main {
             font-size: 45px;
@@ -1156,8 +1176,31 @@ ul.cubes-main {
         }
     }
 
-    .footer, .scroll-helper, .strip, .circle-main {
+    .footer, .strip, .circle-main {
         display: none;
+    }
+
+    div.scroll-helper {
+        @include border-rad(0px);
+        @include transform(translateX(0));
+        @include transition(all, 0.5s, $easing);
+        position: fixed;
+        width: 100%;
+        height: 65px;
+        left: 0;
+        bottom: -70px;
+        z-index: 999;
+
+        .loaded & {
+            @include transform(translateX(0));
+            bottom: -2px;
+        }
+
+        .ico-swipe {
+            @include transform(translateX(-50%) translateY(-50%));
+            @include delay(0.7s);
+            top: 50%;
+        }
     }
 
     @include land {
@@ -1201,6 +1244,7 @@ ul.cubes-main {
     }
 
     .page-main {
+        padding-bottom: 0;
 
         .title-main {
             font-size: 45px;
