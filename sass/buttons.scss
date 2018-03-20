@@ -51,6 +51,7 @@ $arrowPos: -52%;
         span {
             @include transition(color, 0.4s, $easing);
             @extend .not-blurry;
+            @extend .sm;
             color: $textCol;
             font-size: 10px;
             font-family: $fontMed;
