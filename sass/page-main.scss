@@ -1258,7 +1258,14 @@ ul.cubes-main {
         }
     }
 
-    .footer, .scroll-helper, .page-main .cubes-main {
+    .footer, .page-main .cubes-main {
+        display: none;
+    }
+}
+
+@media (max-width: 815px) and (orientation: landscape){
+
+    .scroll-helper {
         display: none;
     }
 }

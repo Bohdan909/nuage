@@ -178,19 +178,23 @@
 .assort-slider .slick-slide {
     @include transition(opacity, 0.3s, linear);
     @extend .sm;
-    opacity: 0.48;
+   // @extend .not-blurry;
+    //opacity: 0.24;
 
     .slick-slider-inner {
         @extend .sm;
+        @extend .not-blurry;
         cursor: pointer;
-        -webkit-filter: blur(2px);
-        filter: blur(2px);
+        opacity: 0.24;
+        // -webkit-filter: blur(2px);
+        // filter: blur(2px);
+        transition: transform 0.7s $easing, 0.3s filter 0.3s $easing, opacity 1.5s;
 
         &:hover {
             cursor: pointer;
-            -webkit-filter: blur(0px);
-            filter: blur(0px);
-            @include transition(filter, 0.3s, $easing);
+            opacity: 0.7;
+            // -webkit-filter: blur(0px);
+            // filter: blur(0px);
         }
     }
 
@@ -212,9 +216,10 @@
     }
 
     &.slick-current {
-        opacity: 1;
+        //opacity: 1;
         
         .slick-slider-inner {
+            opacity: 1;
             position: relative;
             left: 40px;
             cursor: pointer;
@@ -226,7 +231,7 @@
 
 .assort-slider .slick-slide .slick-slider-inner {
     //@include transition(transform, 0.7s, cubic-bezier(.11,0,.45,1));
-    transition: transform 0.7s $easing, 0.3s filter 0.3s $easing;
+    
 
     // transition-delay: 0.4s !important;
     // -webkit-transition-delay: 0.4s !important;
@@ -401,6 +406,7 @@ $sliderAnimTime: 0.30s;
             animation-timing-function: steps(29);
             -webkit-animation-timing-function: steps(29);
             -ms-animation-timing-function: steps(29);
+
             
             position: absolute;
             left: 0;
