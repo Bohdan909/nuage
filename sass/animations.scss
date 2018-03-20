@@ -5,7 +5,7 @@
     ------------------- */  
 
 .animate-t {
-    @include transition(all, 1.3s, ease-out);
+    transition: opacity 1.3s ease-out, letter-spacing 1.3s ease-out;
     letter-spacing: 20px;
     opacity: 0;
 

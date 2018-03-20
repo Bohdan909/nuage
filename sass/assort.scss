@@ -241,7 +241,8 @@
 
 
 .assort-slider .slick-list {
-    @include transition(all, 0.4s, ease-out);
+    //@include transition(all, 0.4s, ease-out);
+    transition: opacity 0.4s ease-out, transform 0.4s $easing; 
     @include animation(fadeIn, 0.2s, linear);
     @include transform(scale(1));
 
@@ -365,8 +366,9 @@ $sliderAnimTime: 0.30s;
 
     .assort-det {
         @extend .circ; 
-        @include transition(all, 0.4s, $easing);
-        @include a-delay(0.3s);
+        //@include transition(all, 0.4s, $easing);
+        transition: transform 0.4s $easing 0.3s;
+        //@include a-delay(0.3s);
         @include origin(center, bottom);
         @include transform(scale(0));
         position: absolute;
@@ -378,8 +380,9 @@ $sliderAnimTime: 0.30s;
 
         i {
             @include vertCenter;
-            @include delay(0s);
-            @include transition(all, 0.4s, linear);
+            //@include delay(0s);
+            //@include transition(transform, 0.4s, linear);
+            transition: transform 0.4s linear 0s, opacity 0.4s linear 0s;
             @extend .not-blurry;
             opacity: 0;
             display: block;

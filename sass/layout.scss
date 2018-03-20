@@ -808,7 +808,7 @@ body {
     }
 
     &.open {
-        @include transition(all, 0.5s, linear);
+        @include transition(opacity, 0.5s, linear);
         @include animation(fadeIn, 0.4s, linear);
         visibility: visible;
     }
