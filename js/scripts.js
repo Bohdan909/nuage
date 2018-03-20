@@ -296,10 +296,49 @@ document.documentElement.className = document.documentElement.className.replace(
            Tabs
         ================= */
 
+        function changeMissionTab() {
+            let missinTabsParent = document.querySelector(".mission-text-slider-wrap");
+            if (!missinTabsParent) {
+                return;
+            }
+            let missionTextTabs = missinTabsParent.querySelectorAll(".mission-tabs .tab");
+            let activeTabIndex = null;
+
+            for (let i = 0; i < missionTextTabs.length; i++) {
+                const element = missionTextTabs[i];
+                if (element.classList.contains("active")) {
+                    activeTabIndex = i;
+                    break;
+                }
+            }
+
+            missionTextTabs[activeTabIndex].classList.remove("active");
+            let correspondingTabId = missionTextTabs[activeTabIndex].querySelector("span").getAttribute("data-tab");
+            document.getElementById(correspondingTabId).classList.remove("active");
+
+            if (activeTabIndex >= (missionTextTabs.length - 1)) {
+                activeTabIndex = 0;
+            } else {
+                activeTabIndex += 1;
+            }
+
+            missionTextTabs[activeTabIndex].classList.add("active");
+            correspondingTabId = missionTextTabs[activeTabIndex].querySelector("span").getAttribute("data-tab");
+            document.getElementById(correspondingTabId).classList.add("active");
+        }
+
+        var missionTabsIntervalID = window.setInterval(changeMissionTab, 2000);
+
         // another implementation
         let tabs = document.querySelectorAll(".tabs");
         function tabClick(event) {
             event.preventDefault();
+
+            // TODO: check if it is mission tab
+            if(event.currentTarget.classList.contains("mission-tabs") && missionTabsIntervalID) {
+                window.clearInterval(missionTabsIntervalID);
+                missionTabsIntervalID = false;
+            }
 
             let tabElements = event.currentTarget.querySelectorAll(".tab");
             Array.prototype.forEach.call(tabElements, function (tabElement) {
@@ -958,7 +997,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 videoClose();
             });
 
-
+            
             // window.addEventListener("resize", function(){
     
             // 	if (!videoWrap.classList.contains("open")){
@@ -1049,6 +1088,10 @@ document.documentElement.className = document.documentElement.className.replace(
                         break;
                     case "mission":
                         video.play();
+                        
+                        if (!missionTabsIntervalID) {
+                            missionTabsIntervalID = window.setInterval(changeMissionTab, 5000);
+                        }
                         break;
                     case "faq":
                         videoClose();
