@@ -1455,6 +1455,8 @@ ul.desc-list {
         .slick-slider-inner {
             @include transform(translate(0));
             top: auto;
+            transition: none;
+            filter: none;
 
             img {
                 @include transform(scale(1));
