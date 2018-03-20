@@ -1332,6 +1332,7 @@ document.documentElement.className = document.documentElement.className.replace(
 
             // media query change
             function WidthChange(mq) {
+
                 // window width is at least 1025px
                 mainElem.classList.add("stop-scrolling");
 
@@ -1640,7 +1641,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 $scroll.perfectScrollbar("update");
             } else {
                 $scroll.perfectScrollbar({
-                    wheelSpeed: 0.5,
+                    wheelSpeed: 0.9,
                     wheelPropagation: false,
                     minScrollbarLength: 20
                 });

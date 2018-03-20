@@ -1480,6 +1480,10 @@ ul.desc-list {
         }
     }
 
+    .assort-slider .slick-track {
+        left: 0;
+    }
+
     .assort-slider .slick-slide  {
         height: 270px;
         
@@ -1531,6 +1535,7 @@ ul.desc-list {
 }
 
 @media (max-width: 375px){
+    
     .assort-slider .slick-slide .slick-slider-inner {
         text-align: left;
     }
