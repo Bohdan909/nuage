@@ -6,7 +6,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const babel = require("gulp-babel");
 const autoprefixer = require('gulp-autoprefixer');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const concat = require('gulp-concat');
 const del = require('del');
 const plumber = require('gulp-plumber');
@@ -20,7 +20,6 @@ gulp.task('sass', function () {
   .pipe(plumber(errorHandler))
   .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
-  .pipe(cleanCSS({compatibility: 'ie10'}))
   .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
   .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest('./css'));
@@ -44,18 +43,18 @@ function js(){
   return gulp.src(['js/**/*'])
       //.pipe(sourcemaps.init())
       //.pipe(babel({"presets": ["env"]}))
-      //.pipe(uglify())
+      .pipe(uglify())
       //.pipe(concat('main.min.js'))
       //.pipe(sourcemaps.write("."))
       .pipe(gulp.dest('dist/js'));
 };
 
 gulp.task('images', function() {
-  return gulp.src(['images/**/*.jpg','images/**/*.svg'])
-      /*.pipe(imagemin([
+  return gulp.src(['images/**/*.gif','images/**/*.jpg','images/**/*.svg'])
+      .pipe(imagemin([
         imagemin.gifsicle({interlaced: true}),
         imagemin.jpegtran({progressive: true}),
-        imagemin.optipng({optimizationLevel: 7}),
+        /*imagemin.optipng({optimizationLevel: 7}),*/
         
         imagemin.svgo({
           plugins: [
@@ -65,7 +64,7 @@ gulp.task('images', function() {
         })
       ], {
         verbose: true
-      }))*/
+      }))
       .pipe(gulp.dest('dist/images'));
 });
 
@@ -83,8 +82,8 @@ gulp.task('video', function() {
 });
 
 gulp.task('fonts', function(){
-  return gulp.src(['fonts/**/*'])
-      .pipe(gulp.dest('dist/fonts'));
+  return gulp.src(['css/fonts/**/*'])
+      .pipe(gulp.dest('dist/css/fonts'));
 });
 
 gulp.task('pdf', function() {
@@ -93,7 +92,8 @@ gulp.task('pdf', function() {
 });
 
 gulp.task('css', function() {
-  return gulp.src(['css/**/*'])
+  return gulp.src(['css/**/*.css'])
+      .pipe(cleanCSS({compatibility: 'ie10'}))
       .pipe(gulp.dest('dist/css'));
 });
 
@@ -117,7 +117,7 @@ exports.html = html;
 exports.js = js;
 exports.watch = watch;
 
-const media = gulp.parallel('images', 'png', 'video', 'pdf');
+const media = gulp.parallel('images', 'png', 'video', 'pdf', 'fonts');
 gulp.task('media', media);
 
 const defaultTask = gulp.series('sass', 'watch');
