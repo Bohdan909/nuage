@@ -85,6 +85,16 @@ $textA: 15px;
 
 .animate-text {
 
+    .orientation-change .loaded & {
+
+        div {
+            transform: translate3d(0, 0, 0) !important;
+            animation: none !important;
+            opacity: 1 !important;
+            animation-delay: 0 !important;
+        }
+    }
+
     div {
         @extend .sm;
         position: relative;

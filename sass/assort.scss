@@ -772,9 +772,22 @@ div.assort-desc-item {
         display: none;
     }
 
+    // .animate-text div {
+    //     transform: translate3d(0, $textA, 0) !important;
+    // }
+
+    // .animate-text div {
+    //     animation: textUp 1.2s $easing forwards !important;
+    // }
+
     &.show {
         @include animation(fadeIn, 0.55s, linear);
         display: block;
+        z-index: 1;
+
+        // .animate-text div {
+        //     animation: textUp 1.2s $easing forwards !important;
+        // }
     }
 }
 
@@ -1321,6 +1334,7 @@ ul.desc-list {
     div.assort-desc-item {
         @include transform(translateY(0));
         top: 30px;
+        margin-right: -15px;
     }
 
     .assort-bg-list {

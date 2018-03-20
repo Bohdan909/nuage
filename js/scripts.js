@@ -30,7 +30,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     let blockWrap = findParent(block, "animate-text-wrap");
                     let blockCal  = blockWrap.children[0].querySelector(".animate-text");
 
-                    blockWidth = blockCal.offsetWidth;
+                    blockWidth = blockWrap.offsetWidth;
                     fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
                     lineLength = blockWidth / (fontSize * 0.64);
 
@@ -75,6 +75,16 @@ document.documentElement.className = document.documentElement.className.replace(
         // window.addEventListener('resize', function(){
         //     if (window.matchMedia("(max-width: 767px)").matches) setLines();
         // });
+
+        window.addEventListener("orientationchange", function(){
+            //html.classList.add("orientation-change");
+            
+            setTimeout(function(){
+               setLines();
+               //html.classList.remove("orientation-change");
+            }, 1000);
+
+        }, true);
 
 
         /* ===================
@@ -1043,7 +1053,9 @@ document.documentElement.className = document.documentElement.className.replace(
                             currentSlide = nextSlide;
                             
                             localStorage.setItem("currentSlide", nextSlide);
-                            
+
+
+                            html.classList.remove("orientation-change");
                         });
 
                         break;
