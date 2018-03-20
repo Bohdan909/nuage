@@ -305,7 +305,7 @@ div.mission-text-slider {
     -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
 
     &.open {
-        transition: width 4.0s $easing, height 4.0s $easing;
+        transition: width 2.0s $easing, height 2.0s $easing;
 
         width: 2880px;
         height: 2880px;
