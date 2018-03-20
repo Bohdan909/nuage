@@ -29,7 +29,7 @@
     "gulp-pngquant": "^1.0.12",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify-es": "^1.0.1"
   },
   "repository": {
     "type": "git",
