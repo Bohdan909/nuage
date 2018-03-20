@@ -222,7 +222,7 @@ ul.tabs.tabs-panel {
         border-color: red;
 
         &:before {
-            @include trans(0.5s); 
+            transition: opacity 0.5s ease-out;
             opacity: 1;
         }
     }

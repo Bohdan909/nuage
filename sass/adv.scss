@@ -62,7 +62,7 @@
 
 .object-scheme-wrap {
 	 @include Center;
-	 @include trans(0.5s);
+	 transition: opacity 0.5s ease-out;
 	 opacity: 0;
 
 	 .loaded & {
@@ -170,7 +170,8 @@
 	}
 
 	i {
-		@include transition(all, 0.35s, linear);
+		//@include transition(background-color, 0.35s, linear);
+		transition: background-color 0.35s linear, transform 0.35s ease-out;
 		@include origin(50%, 50%);
 		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
@@ -184,7 +185,7 @@
 
 		&:before, &:after {
 			@extend .ps;
-			@extend .transDef;
+			transition: background-color 0.2s ease-out;
 			background-color: $textCol;
 		}
 
@@ -259,7 +260,7 @@
 }
 
 .point-name, .point-line {
-	@include transition(all, 0.7s, linear);
+	@include transition(opacity, 0.7s, linear);
 	opacity: 0;
 	
 	.active & {

@@ -134,6 +134,7 @@ $heightPanel: 90px;
 
         i {
             @include transform(rotate(225deg));
+            transition: transform 0.5s ease-out;
 
             &:before, &:after {
                 background-color: #fff;
@@ -152,15 +153,16 @@ $heightPanel: 90px;
         }
 
         .point-btn {
-            @include trans(0.5s);
+            //@include trans(0.5s);
+            transition: box-shadow 0.5s ease-out, background-image 0.5s ease-out;
             @include border-rad(35px);
             position: absolute;
             left: 20px;
             background-image: -webkit-linear-gradient( -90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 19%, rgb(255,255,255) 100%);
             background-image: -ms-linear-gradient( -90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 19%, rgb(255,255,255) 100%);
             background-image: linear-gradient( -90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 19%, rgb(255,255,255) 100%);
-            box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
             -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
+            box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
 
             // &:before, &:after {
             //     background-color: $textCol;
@@ -168,7 +170,7 @@ $heightPanel: 90px;
         }
 
         span {
-            @include trans(0.5s);
+            transition: color 0.5s ease-out;
             display: block;
             font-size: 13px;
             line-height: 18px;
@@ -176,6 +178,7 @@ $heightPanel: 90px;
             letter-spacing: 0.3px;
 
             i {
+                transition: transform 0.5s ease-out;
                 display: block;
                 font-style: normal;
             }
@@ -208,11 +211,12 @@ $heightPanel: 90px;
 
         &.plus:not(.active):hover i {
             @include transform(rotate(225deg));
+            transition: transform 0.5s ease-out, color 0.5s ease-out;
         }
 
         &:hover {
-            box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
             -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
+            box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.85);
         }
     }
 

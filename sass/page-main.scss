@@ -136,7 +136,7 @@ div.scroll-helper {
 
 .ico-swipe, .ico-mouse {
     @include horCenter;
-    @include trans(0.7s);
+    transition: opacity 0.7s ease-out;
     position: absolute;
     opacity: 0;
 
@@ -271,7 +271,7 @@ div.scroll-helper {
         cursor: pointer;
 
         img {
-            @include transition(all, 0.3s, linear);
+            //@include transition(all, 0.3s, linear);
             width: 72px;
             height: 72px;
         }   
@@ -410,8 +410,7 @@ div.scroll-helper {
     > div .quote-block {
 
         b, span {
-            @include transition(all, 0.7s, ease-out);
-            @include delay(0.3s);
+            transition: transform 0.7s ease-out 0.3s, opacity 0.7s ease-out 0.3s;
             @include transform(translateY(10px));
             @extend .not-blurry;
             opacity: 0;  
@@ -544,7 +543,7 @@ ul.cubes-main {
 }
 
 .circle {
-    @include transition(all, 0.9s, ease-out);
+    @include transition(transform, 0.9s, ease-out);
     @include border-rad(50%);
     @include delay(0.7s);
     @include transform(scale(0));

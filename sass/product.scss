@@ -709,7 +709,7 @@ div.product-view-block {
 
     span {
         @include border-rad(35px);
-        @include transition(all, 0.55s, $easing);
+        transition: background-color 0.55s $easing, left 0.55s $easing, width 0.55s $easing;
         position: absolute;
         top: 0;
         display: block;

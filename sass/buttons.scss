@@ -49,7 +49,7 @@ $arrowPos: -52%;
         }
 
         span {
-            @include transition(all, 0.4s, $easing);
+            @include transition(color, 0.4s, $easing);
             @extend .not-blurry;
             @extend .sm;
             color: $textCol;
@@ -61,7 +61,7 @@ $arrowPos: -52%;
         }
 
         img {
-            @include transition(all, 0.4s, $easing);
+            @include transition(transform, 0.4s, $easing);
             @include transform(translateY($arrowPos));
             @extend .sm;
             top: 50%;
@@ -161,7 +161,7 @@ $arrowPos: -52%;
             z-index: 1;
 
             img {
-                @include transition(all, 0.3s, ease-out);
+                @include transition(transform, 0.3s, ease-out);
                 @include origin(center, center);
             }
         }
