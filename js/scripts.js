@@ -11,8 +11,6 @@ document.documentElement.className = document.documentElement.className.replace(
            Text Lines Animate 
         ====================== */
         
-        
-
         function setLines(){    
 
             let textBlock = document.querySelectorAll(".animate-text");        
@@ -24,6 +22,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 let lineLength = blockWidth / (fontSize * 0.64);
                 let resultArr = [];
                 let resultHTML;
+                
 
                 if (block.classList.contains("animate-text-hide")){
                     //let blockHide = document.querySelector("animate-text-hide");
@@ -34,7 +33,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
                     lineLength = blockWidth / (fontSize * 0.64);
 
-                    console.log(blockWidth);
+                    console.log(" width: " + blockWidth);
                     
                 } else if (block.parentNode.classList.contains("feedback-item") && mobile){
                     blockWidth = window.innerWidth - 35;
@@ -68,23 +67,26 @@ document.documentElement.className = document.documentElement.className.replace(
                 resultHTML = resultArr.join("");
                 block.innerHTML = resultHTML;
             });
+
+            console.log("=== SET LINES ===");
         }    
 
         setLines();
 
         // window.addEventListener('resize', function(){
-        //     if (window.matchMedia("(max-width: 767px)").matches) setLines();
+        //     //if (window.matchMedia("(max-width: 767px)").matches) setLines();
+        //     setTimeout(setLines, 1200);    
         // });
 
-        window.addEventListener("orientationchange", function(){
-            //html.classList.add("orientation-change");
+        // window.addEventListener("orientationchange", function(){
+        //     //html.classList.add("orientation-change");
             
-            setTimeout(function(){
-               setLines();
-               //html.classList.remove("orientation-change");
-            }, 1000);
+        //     setTimeout(function(){
+        //        setLines();
+        //        //html.classList.remove("orientation-change");
+        //     }, 1200);
 
-        }, true);
+        // }, true);
 
 
         /* ===================
@@ -743,8 +745,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 $indRevItem.eq(slideId).addClass("active");
 
                 $indRev.css({ "transform": "translateY(" + indArr[slideId] + "px" });
-
-                console.log(indArr[slideId]);
             }
 
             // Slider Description
@@ -1008,7 +1008,6 @@ document.documentElement.className = document.documentElement.className.replace(
                         $slider.slick("slickGoTo", lsCurrentSlideIndex, true);
                         // displayCurrentSlideNumber(parseInt(lsCurrentSlideIndex,10) + 1);
 
-
                         function checkSliderEdge(index){
                             if (index == 5) {
                                 $slider.slick("slickGoTo", 0, true);
@@ -1032,7 +1031,6 @@ document.documentElement.className = document.documentElement.className.replace(
                             let curIndex = $slider.slick("slickCurrentSlide"); 
 
                             checkSliderEdge(curIndex);
-
                         });
         
                         function loader(){
@@ -1054,8 +1052,7 @@ document.documentElement.className = document.documentElement.className.replace(
                             
                             localStorage.setItem("currentSlide", nextSlide);
 
-
-                            html.classList.remove("orientation-change");
+                           // html.classList.remove("orientation-change");
                         });
 
                         break;
@@ -1074,6 +1071,8 @@ document.documentElement.className = document.documentElement.className.replace(
                     default:
                         break;
                 }
+
+                //setLines();
             }
 
             let movingMenuUnderline = document.querySelector(".menu .moving-underline");
@@ -1116,7 +1115,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     this.pageElement.classList.remove('loading');
                     this.clearNext();
                     this.clearPrev();
-                    
+                     
                 };
                 this.loaded = this.loaded.bind(this);
                 
@@ -1235,7 +1234,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     this.currentPage = this.pagesArray[index];
                     console.log('set current page ' + this.currentPage.id);
                     window.location.href = '#' + this.currentPage.id;
-                    
+
                 };
 
                 this.setCurrentPage = function(pageId){
