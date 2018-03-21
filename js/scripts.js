@@ -220,6 +220,7 @@ document.documentElement.className = document.documentElement.className.replace(
         /* ==============
            Drops
         ================= */
+        let assortFilter = new AssortmentFilter();
 
         if (document.body.contains(document.querySelector(".drop-wrap"))) {
             let $filterWrap = document.querySelector(".filter-wrap");
@@ -236,6 +237,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 if ($dropBlock.classList.contains("show")) {
                     $dropBlock.classList.remove("show");
                     $filterWrap.classList.remove("show");
+                    assortFilter.reset();
                 } else {
                     $dropBlock.classList.add("show");
                     $filterWrap.classList.add("show");
@@ -367,7 +369,7 @@ document.documentElement.className = document.documentElement.className.replace(
             document.getElementById(correspondingTabId).classList.add("active");
         }
 
-        var missionTabsIntervalID = window.setInterval(changeMissionTab, 2000);
+        var missionTabsIntervalID = window.setInterval(changeMissionTab, 3000);
 
         // another implementation
         let tabs = document.querySelectorAll(".tabs");
@@ -761,7 +763,7 @@ document.documentElement.className = document.documentElement.className.replace(
             CUSTOM SCROLL AND NAVIGATION
         ================================ */
 
-        if (pageScroll){
+        //if (pageScroll){
 
             //////////////////////////////
             // ONE-TIME INITIALIZATIONS 
@@ -771,24 +773,22 @@ document.documentElement.className = document.documentElement.className.replace(
             var $object = $('.object-main');
             var $scheme = $('.object-scheme');
 
-            $object.rotate3d({
-                'source': 'images/object-1/1_000',
-                'count' : 41,
-                'auto'  : true
-            });
-
-            // $scheme.rotate3d({
-            //     'source': 'images/object-2/Vzruv_02.Alpha_',
-            //     'count' : 70,
-            //     'auto'  : true
-            // });
-
-            $scheme.rotate3d({
-                'source': 'images/scheme/1_000',
-                'count' : 70,
-                'auto'  : true
-            });
-
+            if ($object.length) {
+                $object.rotate3d({
+                    'source': 'images/object-1/1_000',
+                    'count' : 41,
+                    'auto'  : true
+                });
+            }
+            
+            if ($scheme.length) {
+                $scheme.rotate3d({
+                    'source': 'images/scheme/1_000',
+                    'count' : 70,
+                    'auto'  : true
+                });
+            }
+            
             let $slider = $(".assort-slider");
             let $slide = $slider.find(".slide");
             let $sliderLoader = $(".assort-slider-loader");
@@ -882,28 +882,30 @@ document.documentElement.className = document.documentElement.className.replace(
 
             });
 
-            $slider.slick({
-                centerMode: false,
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                speed: 500,
-                focusOnSelect: false,
-                swipe: false,
-                useTransform: true,
-                //cssEase: 'cubic-bezier(0.11,0,0.45,1)',
-                touchMove: false,
-                draggable: false,
-                lazyLoad: 'progressive',
-                
-                responsive: [{
-                    breakpoint: 1025,
-                    settings: {
-                        slidesToShow: 1,
-                        fade: true
-                    }
-                }]
-            });
+            if ($slider.length) {
+                $slider.slick({
+                    centerMode: false,
+                    infinite: true,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    speed: 500,
+                    focusOnSelect: false,
+                    swipe: false,
+                    useTransform: true,
+                    //cssEase: 'cubic-bezier(0.11,0,0.45,1)',
+                    touchMove: false,
+                    draggable: false,
+                    lazyLoad: 'progressive',
+                    
+                    responsive: [{
+                        breakpoint: 1025,
+                        settings: {
+                            slidesToShow: 1,
+                            fade: true
+                        }
+                    }]
+                });
+            }
             
             // slider filter
             var filterItem = $(".filter-item .filter-option");
@@ -923,49 +925,55 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             // VIDEO
-            let videoBlock = document.querySelector(".video-block-wrap");
             let video   = document.querySelector(".mission-video video");
-            let btnPlay = document.querySelector(".btn-play");
-            let btnName = document.querySelector(".video-name");
+            let timer;
 
-            const timeAnim = 5000;
-            const timeAnimBack = 600;
             let touch = document.querySelector("html").classList.contains("touchevents");
-            let radius = "310px";
-            let scrollTop = $(window).scrollTop();
             let videoWrap  = document.querySelector(".video-calibrate");
             let videoPlay  = document.querySelector(".mission-video-play");
-            let videoCal   = document.querySelector(".video-calibrate");
             let videoCloseBtn = document.querySelector(".mission-video-close");
-            let videoContent = videoWrap.querySelector(".mission-video-content");
             let siteHeader = document.getElementById("header");
-            let topPosPlay, leftPosPlay, topPos, leftPos, timer;
-
-            var supportsVideo = !!document.createElement('video').canPlayType;
-            if (supportsVideo) {
+            
+            // var supportsVideo = !!document.createElement('video').canPlayType;
+            // if (supportsVideo) {
+                
+            // }
+            if (video) {
                 video.controls = false;
-                
-            }
+                video.addEventListener('canplay', function() {
+                    console.log("Video state: " + video.readyState);
+                    
+                    if(video.readyState >= 3) {
+                        videoPlay.querySelector(".preview-image").style.opacity = "0";
+                    }
+                }, false);
 
-            video.addEventListener('canplay', function() {
-                console.log("Video state: " + video.readyState);
-                
-                if(video.readyState >= 3) {
-                    videoPlay.querySelector(".preview-image").style.opacity = "0";
-                }
-            }, false);
+                videoWrap.addEventListener("click", function() {
+                    if (!videoWrap.classList.contains("open")){
+                        timer = setTimeout(videoOpen, 600);
+                    }
+                });
+
+                videoWrap.addEventListener("mouseleave", function(){
+                    clearTimeout(timer);
+                    //setTimeout(videoClose, 200);
+                });
+    
+                videoCloseBtn.addEventListener("click", function(){
+                    setTimeout(videoClose, 200);
+                });
+
+                window.addEventListener('blur', function() {
+                    videoClose();
+                });
+            }
+            
             
             function playVideoFromStart(videoElem, soundMuted) {
                 videoElem.currentTime = 0;
                 videoElem.muted = soundMuted;
                 videoElem.play();
             }
-
-            videoWrap.addEventListener("click", function() {
-                if (!videoWrap.classList.contains("open")){
-                    timer = setTimeout(videoOpen, 600);
-                }
-            });
 
             function hideSiteHeader() {
                 siteHeader.style.opacity = "0";
@@ -997,15 +1005,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 });
             }
 
-            videoWrap.addEventListener("mouseleave", function(){
-                clearTimeout(timer);
-                //setTimeout(videoClose, 200);
-            });
-
-            videoCloseBtn.addEventListener("click", function(){
-                setTimeout(videoClose, 200);
-            });
-            
             function videoOpen(){
                 console.log("video Open");
                 hideSiteHeader();
@@ -1031,9 +1030,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 videoWrap.removeEventListener("touchstart", handleVideoTouch, false);
             }
 
-            window.addEventListener('blur', function() {
-                videoClose();
-            });
+            
 
             
             // window.addEventListener("resize", function(){
@@ -1196,41 +1193,52 @@ document.documentElement.className = document.documentElement.className.replace(
                 this.loaded = this.loaded.bind(this);
                 
                 this.load = function(){
-                    if (this.pageElement.classList.contains('next') || this.pageElement.classList.contains('prev')) {
-                        this.pageElement.classList.add('loading');
-                        setTimeout(this.setLoaded, 300);
-                        //this.pageElement.addEventListener("transitionend", this.loaded, true);
-                        setTimeout(this.loaded, 700);
-                    } else {
-                        this.setLoaded();
+                    if (this.pageElement) {
+                        if (this.pageElement.classList.contains('next') || this.pageElement.classList.contains('prev')) {
+                            this.pageElement.classList.add('loading');
+                            setTimeout(this.setLoaded, 300);
+                            //this.pageElement.addEventListener("transitionend", this.loaded, true);
+                            setTimeout(this.loaded, 700);
+                        } else {
+                            this.setLoaded();
+                        }
+
+                        playMenuUnderlineAnimation(this.id);
+                        executePageSpecificScript(this.id);
                     }
-                    playMenuUnderlineAnimation(this.id);
-                    executePageSpecificScript(this.id);
+                    
+                    
                 };
 
                 this.unload = function() {
-                    this.pageElement.classList.remove('loaded');
-                    this.pageElement.removeEventListener("transitionend", this.unload, true);
+                    if (this.pageElement) {
+                        this.pageElement.classList.remove('loaded');
+                        this.pageElement.removeEventListener("transitionend", this.unload, true);
+                    }
+                    
                 };
                 this.unload = this.unload.bind(this);
 
                 this.setNext = function() {
-                    if (this.pageElement.classList.contains('prev')) {
-                        this.pageElement.classList.remove('prev');
+                    if (this.pageElement) {
+                        if (this.pageElement.classList.contains('prev')) {
+                            this.pageElement.classList.remove('prev');
+                        }
+                        this.pageElement.classList.add('next');
+                        //this.pageElement.addEventListener("transitionend", this.unload, true);
+                        setTimeout(this.unload, 700);
                     }
-                    this.pageElement.classList.add('next');
-                    //this.pageElement.addEventListener("transitionend", this.unload, true);
-                    setTimeout(this.unload, 700);
-                    
                 };
 
                 this.setPrev = function() {
-                    if (this.pageElement.classList.contains('next')) {
-                        this.pageElement.classList.remove('next');
+                    if (this.pageElement) {
+                        if (this.pageElement.classList.contains('next')) {
+                            this.pageElement.classList.remove('next');
+                        }
+                        this.pageElement.classList.add('prev');
+                        //this.pageElement.addEventListener("transitionend", this.unload, true);
+                        setTimeout(this.unload, 700);
                     }
-                    this.pageElement.classList.add('prev');
-                    //this.pageElement.addEventListener("transitionend", this.unload, true);
-                    setTimeout(this.unload, 700);
                 };
 
                 this.clearPrev = function() {
@@ -1428,7 +1436,9 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 // add custom scroll only for devices with screen more than 1025px
                 if (mq.matches) {
-                    addWheelListener( window, customScrollWheelHandler, false);
+                    if (pageScroll) {
+                        addWheelListener( window, customScrollWheelHandler, false);
+                    }
                     
                     // add drag handlers for scrollable blocks
                     let scrollBlocks = document.querySelectorAll(".page .scroll-block");
@@ -1456,18 +1466,21 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             function customScrollWheelHandler(e) {
-                //limit handling rate to prevent scrolling trough all pages
-                if (Date.now() - lastScrollTime > 1400) {
-                    if (e.deltaY > 0) {
-                        //scrollToNextBlock();
-                        scrollManager.scrollToNextPage();
-                    } else if (e.deltaY < 0) {
-                        //scrollToPrevBlock();
-                        scrollManager.scrollToPrevPage();
-                    }
+                if (pageScroll) {
+                    //limit handling rate to prevent scrolling trough all pages
+                    if (Date.now() - lastScrollTime > 1400) {
+                        if (e.deltaY > 0) {
+                            //scrollToNextBlock();
+                            scrollManager.scrollToNextPage();
+                        } else if (e.deltaY < 0) {
+                            //scrollToPrevBlock();
+                            scrollManager.scrollToPrevPage();
+                        }
 
-                    lastScrollTime = Date.now();
+                        lastScrollTime = Date.now();
+                    }
                 }
+                
             }
 
             function customScrollForScrollable(e) {
@@ -1477,14 +1490,16 @@ document.documentElement.className = document.documentElement.className.replace(
 
             function customScrollTouchHandler(evt, dir, phase, swipetype, distance) {
                 // https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
-                
-                if (phase == "end") {
-                    if (swipetype == "left") {
-                        scrollManager.scrollToNextPage();
-                    } else if (swipetype == "right") {
-                        scrollManager.scrollToPrevPage();
+                if (pageScroll) {
+                    if (phase == "end") {
+                        if (swipetype == "left") {
+                            scrollManager.scrollToNextPage();
+                        } else if (swipetype == "right") {
+                            scrollManager.scrollToPrevPage();
+                        }
                     }
                 }
+                
             }
 
             // called when user navigates back or clicks on link
@@ -1497,164 +1512,165 @@ document.documentElement.className = document.documentElement.className.replace(
                 }
             }
             
-            // FILTER FOR ASSORTMENT
-            /** Assortment filter oject to handle filter states 
-             * and functionality */
-            function AssortmentFilter(){
-                this.surface = [];
-                this.absorbtion = [];
-                this.quantity = [];
-                this.filterArray = [];
+            
+        //}
 
-                this.surfaceTypes = {
-                    grid: ["1","2"],
-                    soft: ["0","3","4","5"]
-                };
-                this.absorbLevels = {
-                    one: ["5"],
-                    two: ["0"],
-                    three: ["1","2","3","4"],
-                    four: ["1"],
-                    five: ["2","3","4"]
-                };
-                this.quantities = {
-                    six: ["4"],
-                    eight: ["3"],
-                    ten: ["0","1","2"],
-                    twenty: ["5"]
-                };
-                
+        // FILTER FOR ASSORTMENT
+        /** Assortment filter oject to handle filter states 
+         * and functionality */
+        function AssortmentFilter(){
+            this.surface = [];
+            this.absorbtion = [];
+            this.quantity = [];
+            this.filterArray = [];
 
-                this.save = function(array) {
-                    localStorage.setItem("assortmentFilter", array);
-                };
+            this.surfaceTypes = {
+                grid: ["1","2"],
+                soft: ["0","3","4","5"]
+            };
+            this.absorbLevels = {
+                one: ["5"],
+                two: ["0"],
+                three: ["1","2","3","4"],
+                four: ["1"],
+                five: ["2","3","4"]
+            };
+            this.quantities = {
+                six: ["4"],
+                eight: ["3"],
+                ten: ["0","1","2"],
+                twenty: ["5"]
+            };
+            
 
-                this.load = function() {
-                    let lsValue = localStorage.getItem("assortmentFilter");
-                    this.filterArray = lsValue != null ? lsValue : []; 
+            this.save = function(array) {
+                localStorage.setItem("assortmentFilter", array);
+            };
 
-                    this.apply(this.filterArray);
-                };
+            this.load = function() {
+                let lsValue = localStorage.getItem("assortmentFilter");
+                this.filterArray = lsValue != null ? lsValue : []; 
 
-                this.arrayDiff = function(array1, array2) {
+                this.apply(this.filterArray);
+            };
+
+            this.arrayDiff = function(array1, array2) {
+                return array1.filter(function(i) {
+                    return array2.indexOf(i) < 0;
+                });
+            };
+
+            this.arrayIntersect = function(array1, array2) {
+                //console.log("Intersect input: [" + array1 + "] | [" + array2 + "]");
+                let result = [];
+                if (array1.length === 0) {
+                    result = array2.slice();
+                    return result;
+                } else if (array2.length === 0) {
+                    result = array1.slice();
+                    return result;
+                } 
+
+                if (array1.length > array2.length) {
                     return array1.filter(function(i) {
-                        return array2.indexOf(i) < 0;
+                        return array2.indexOf(i) >= 0;
                     });
-                };
+                } else {
+                    return array2.filter(function(i) {
+                        return array1.indexOf(i) >= 0;
+                    });
+                }
+                
+            }
 
-                this.arrayIntersect = function(array1, array2) {
-                    //console.log("Intersect input: [" + array1 + "] | [" + array2 + "]");
-                    let result = [];
-                    if (array1.length === 0) {
-                        result = array2.slice();
-                        return result;
-                    } else if (array2.length === 0) {
-                        result = array1.slice();
-                        return result;
-                    } 
+            this.mergeFilters = function() {
+                // push into filterArray only values, that are common to merging arrays
+                let tempArray = [];
 
-                    if (array1.length > array2.length) {
-                        return array1.filter(function(i) {
-                            return array2.indexOf(i) >= 0;
-                        });
-                    } else {
-                        return array2.filter(function(i) {
-                            return array1.indexOf(i) >= 0;
-                        });
-                    }
-                    
+                tempArray = this.arrayIntersect(this.arrayIntersect(this.surface, this.absorbtion), this.quantity);
+                //console.log("Merged Array: " + tempArray);
+                return tempArray;
+            };
+
+            /** resets assortment filter */
+            this.reset = function() {
+                this.filterArray.length = 0;
+                $slider.slick("slickUnfilter");
+                $slider.slick("slickGoTo", 0, true);
+                localStorage.removeItem("assortmentFilter");
+            };
+
+            /** Calls slick slider filter() method.
+             * @param {array} indexesArray - array of slick slider indexes
+             */
+            this.apply = function(indexesArray) {
+                $slider.slick("slickUnfilter");
+                
+                if (indexesArray.length > 0) {
+                    $slider.slick("slickFilter", function(index){
+                        return ($.inArray($(this).attr("data-slick-index"), indexesArray) != -1);
+                    });
+                }
+                this.save(indexesArray);
+            };
+
+            /** adds array to assortment filter 
+             * @param {string} option Indicates filter group and passed from data-filter-option attribute
+             * @param {array} array Array of elements to display from data-filter-value.
+             * @param {boolean} subtract Indicates that option is unselected and we need to subtract array 
+            */
+            this.add = function(option, array, subtract) {
+                // add array for same group
+                // subtract if unchecked
+                switch (option) {
+                    case "surface":
+                        if (subtract === true) {
+                            this.surface = this.arrayDiff(this.surface, array);
+                        } else {
+                            this.surface = this.surface.concat(array);
+                        }
+                        break;
+                    case "absorb":
+                        if (subtract === true) {
+                            this.absorbtion = this.arrayDiff(this.absorbtion, array);
+                        } else {
+                            this.absorbtion = this.absorbtion.concat(array);
+                        }
+                        
+                        break;
+                    case "quantity":
+                        if (subtract === true) {
+                            this.quantity = this.arrayDiff(this.quantity, array);
+                        } else {
+                            this.quantity = this.quantity.concat(array);
+                        }
+                        break;
+                    default:
+                        break;
                 }
 
-                this.mergeFilters = function() {
-                    // push into filterArray only values, that are common to merging arrays
-                    let tempArray = [];
+                // console.log("Surface array: [" + this.surface + "]");
+                // console.log("Absorbtion array: [" + this.absorbtion + "]");
+                // console.log("Quantity array: [" + this.quantity + "]");
+                
+                // find intersection for different groups
+                this.filterArray = this.mergeFilters();
 
-                    tempArray = this.arrayIntersect(this.arrayIntersect(this.surface, this.absorbtion), this.quantity);
-                    //console.log("Merged Array: " + tempArray);
-                    return tempArray;
-                };
+                console.log("filterArray after merging: " + this.filterArray);
 
-                /** resets assortment filter */
-                this.reset = function() {
-                    this.filterArray.length = 0;
-                    $slider.slick("slickUnfilter");
-                    $slider.slick("slickGoTo", 0, true);
-                    localStorage.removeItem("assortmentFilter");
-                };
+                this.apply(this.filterArray);
 
-                /** Calls slick slider filter() method.
-                 * @param {array} indexesArray - array of slick slider indexes
-                 */
-                this.apply = function(indexesArray) {
-                    $slider.slick("slickUnfilter");
-                    
-                    if (indexesArray.length > 0) {
-                        $slider.slick("slickFilter", function(index){
-                            return ($.inArray($(this).attr("data-slick-index"), indexesArray) != -1);
-                        });
-                    }
-                    this.save(indexesArray);
-                };
+            };
 
-                /** adds array to assortment filter 
-                 * @param {string} option Indicates filter group and passed from data-filter-option attribute
-                 * @param {array} array Array of elements to display from data-filter-value.
-                 * @param {boolean} subtract Indicates that option is unselected and we need to subtract array 
-                */
-                this.add = function(option, array, subtract) {
-                    // add array for same group
-                    // subtract if unchecked
-                    switch (option) {
-                        case "surface":
-                            if (subtract === true) {
-                                this.surface = this.arrayDiff(this.surface, array);
-                            } else {
-                                this.surface = this.surface.concat(array);
-                            }
-                            break;
-                        case "absorb":
-                            if (subtract === true) {
-                                this.absorbtion = this.arrayDiff(this.absorbtion, array);
-                            } else {
-                                this.absorbtion = this.absorbtion.concat(array);
-                            }
-                            
-                            break;
-                        case "quantity":
-                            if (subtract === true) {
-                                this.quantity = this.arrayDiff(this.quantity, array);
-                            } else {
-                                this.quantity = this.quantity.concat(array);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+            /** removes array from assortment filter */
+            this.remove = function(option, array) {
 
-                    // console.log("Surface array: [" + this.surface + "]");
-                    // console.log("Absorbtion array: [" + this.absorbtion + "]");
-                    // console.log("Quantity array: [" + this.quantity + "]");
-                    
-                    // find intersection for different groups
-                    this.filterArray = this.mergeFilters();
+            };
 
-                    console.log("filterArray after merging: " + this.filterArray);
+            //this.load();
 
-                    this.apply(this.filterArray);
-
-                };
-
-                /** removes array from assortment filter */
-                this.remove = function(option, array) {
-
-                };
-
-                //this.load();
-    
-            }
-            let assortFilter = new AssortmentFilter();
-            //assortFilter.apply(assortFilter.quantities.ten);
         }
+        
     });
 
 
