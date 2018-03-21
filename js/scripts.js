@@ -339,7 +339,7 @@ document.documentElement.className = document.documentElement.className.replace(
             document.getElementById(correspondingTabId).classList.add("active");
         }
 
-        var missionTabsIntervalID = window.setInterval(changeMissionTab, 2000);
+        var missionTabsIntervalID = window.setInterval(changeMissionTab, 3000);
 
         // another implementation
         let tabs = document.querySelectorAll(".tabs");
