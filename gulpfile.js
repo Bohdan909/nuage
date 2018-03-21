@@ -43,7 +43,9 @@ function js(){
   return gulp.src(['js/**/*'])
       .pipe(sourcemaps.init())
       //.pipe(babel({"presets": ["env"]}))
-      .pipe(uglify())
+      .pipe(uglify({mangle: {
+        safari10: true,
+      }}))
       //.pipe(concat('main.min.js'))
       .pipe(sourcemaps.write("./"))
       .pipe(gulp.dest('dist/js'));
