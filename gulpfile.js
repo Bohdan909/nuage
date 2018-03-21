@@ -41,11 +41,11 @@ function html() {
 
 function js(){
   return gulp.src(['js/**/*'])
-      //.pipe(sourcemaps.init())
+      .pipe(sourcemaps.init())
       //.pipe(babel({"presets": ["env"]}))
       .pipe(uglify())
       //.pipe(concat('main.min.js'))
-      //.pipe(sourcemaps.write("."))
+      .pipe(sourcemaps.write("./"))
       .pipe(gulp.dest('dist/js'));
 };
 
