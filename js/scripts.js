@@ -73,7 +73,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     linesWrap(text, lineLength);
                     resultHTML = resultArr.join("");
                     block.innerHTML = resultHTML;
-                    console.log(resultHTML);
                 }
             });
 

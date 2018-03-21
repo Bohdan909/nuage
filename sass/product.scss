@@ -261,16 +261,48 @@ $prodFooterHeightMin: 85px;
 .product-viewer-indicator {
     animation-delay: 0.2s !important;
     //position: absolute;
+    margin-top: -10px;
     margin-bottom: 8px;
     bottom: 9px;
     left: 0;
     text-align: center;
     width: 100%;
-    font-size: 12px;
+    font-size: 0;
+
+    > div {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 5px;
+
+        span {
+            display: inline-block;
+            vertical-align: top;
+            line-height: 32px;
+            font-size: 12px;
+            font-family: $fontMed;
+
+            @include mobile {
+                font-size: 11px;
+            }
+        }
+
+        &.no-active {
+
+            span {
+                color: #c4cbd2;
+            }
+        }
+    }
+
+    img {
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
 
     @include mobile {
         text-align: left;
         padding-top: 10px;
+        margin-top: 0;
         margin-bottom: 12px;
     }
 }
