@@ -120,8 +120,8 @@ exports.watch = watch;
 const media = gulp.parallel('images', 'png', 'video', 'pdf', 'fonts');
 gulp.task('media', media);
 
-const defaultTask = gulp.series('sass', 'watch');
-gulp.task('default', defaultTask);
-
 const build =  gulp.series('sass', gulp.parallel('css', html, js, 'favicon'));
 gulp.task('build', build);
+
+const defaultTask = gulp.series(build, 'watch');
+gulp.task('default', defaultTask);
