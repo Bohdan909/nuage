@@ -221,6 +221,13 @@ document.documentElement.className = document.documentElement.className.replace(
         ================= */
         let assortFilter = new AssortmentFilter();
 
+        function clearAssortmentFilter() {
+            let allFilterOptions = document.querySelectorAll(".filter-wrap .filter-option");
+            Array.prototype.forEach.call(allFilterOptions, function (filterOption) {
+                filterOption.classList.remove("selected");
+            });
+        }
+
         if (document.body.contains(document.querySelector(".drop-wrap"))) {
             let $filterWrap = document.querySelector(".filter-wrap");
             let $dropBtn = $filterWrap.querySelector(".drop-wrap .btn");
@@ -237,6 +244,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     $dropBlock.classList.remove("show");
                     $filterWrap.classList.remove("show");
                     assortFilter.reset();
+                    clearAssortmentFilter();
                 } else {
                     $dropBlock.classList.add("show");
                     $filterWrap.classList.add("show");
