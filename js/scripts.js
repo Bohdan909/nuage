@@ -5,42 +5,48 @@ document.documentElement.className = document.documentElement.className.replace(
 
         const html     = document.querySelector("html");
         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
-        let mobile     = window.innerWidth < 768;
+        let mobile     = window.matchMedia("(max-width: 767px)").matches;
         
         /* ===================
            Text Lines Animate 
         ====================== */
         
-        function setLines(){    
+        function setLines(mobile){    
+            console.log("=== SET LINES ===");
 
-            let textBlock = document.querySelectorAll(".animate-text");        
-
+            let textBlock = document.querySelectorAll(".animate-text");
+            let blockWidth, fontSize, lineLength;   
+            
             textBlock.forEach(function(block){
-                let text = block.innerText || block.textContent;
-                let blockWidth = block.offsetWidth;
-                let fontSize = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
-                let lineLength = blockWidth / (fontSize * 0.64);
-                let resultArr = [];
+               
+                let text  = block.innerText || block.textContent || "";
+                let resultArr  = [];
                 let resultHTML;
-                
 
                 if (block.classList.contains("animate-text-hide")){
                     //let blockHide = document.querySelector("animate-text-hide");
+                    //let blockCal  = blockWrap.children[0].querySelector(.animate-text");
+                    //fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
+                    //lineLength = wrapWidth / (fontSize * 0.64);
+
                     let blockWrap = findParent(block, "animate-text-wrap");
-                    let blockCal  = blockWrap.children[0].querySelector(".animate-text");
-
                     blockWidth = blockWrap.offsetWidth;
-                    fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
-                    lineLength = blockWidth / (fontSize * 0.64);
 
-                    console.log(" width: " + blockWidth);
-                    
-                } else if (block.parentNode.classList.contains("feedback-item") && mobile){
-                    blockWidth = window.innerWidth - 35;
-                    fontSize = 13;
-                    lineLength = blockWidth / (fontSize * 0.64);
+                    if (mobile == "mobile"){  //block.parentNode.classList.contains("feedback-item")
+                        blockWidth = window.innerWidth - 35;
+                        fontSize = 13;
+                        lineLength = blockWidth / (fontSize * 0.64);
+                    }
+
+                }  else {
+                    blockWidth = block.offsetWidth;
                 }
 
+                fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
+                lineLength = blockWidth / (fontSize * 0.64);
+
+                insertToHTML();
+                
                 function linesWrap(text, maxLength){
                     
                     let line = [];
@@ -63,31 +69,53 @@ document.documentElement.className = document.documentElement.className.replace(
                     return resultArr;
                 };
 
-                linesWrap(text, lineLength);
-                resultHTML = resultArr.join("");
-                block.innerHTML = resultHTML;
+                function insertToHTML(){
+                    linesWrap(text, lineLength);
+                    resultHTML = resultArr.join("");
+                    block.innerHTML = resultHTML;
+                    console.log(resultHTML);
+                }
             });
 
-            console.log("=== SET LINES ===");
+            console.log("=== END SET LINES ===");
         }    
 
-        setLines();
+        function checkMobile(){
+            if (mobile){
+                setLines("mobile");
+
+                console.log("'It is mobile'");
+            } else {
+                setLines();
+
+                console.log("'It is not mobile'");
+            }
+        }
+
+        checkMobile();
+        
+        window.addEventListener("orientationchange", function(){
+            window.location.reload()
+            //setTimeout(checkMobile, 700);
+
+            // html.classList.add("orientation-change");
+        }, true);
+
+        // let mql = window.matchMedia("(orientation: portrait)");
+        
+        // mql.addListener(function(m) {
+        //     if(m.matches) {
+        //         setTimeout(setLines, 1000);
+        //     } else {
+        //         setTimeout(setLines, 1000);
+        //     }
+           
+        // });
 
         // window.addEventListener('resize', function(){
         //     //if (window.matchMedia("(max-width: 767px)").matches) setLines();
-        //     setTimeout(setLines, 1200);    
-        // });
-
-        // window.addEventListener("orientationchange", function(){
-        //     //html.classList.add("orientation-change");
-            
-        //     setTimeout(function(){
-        //        setLines();
-        //        //html.classList.remove("orientation-change");
-        //     }, 1200);
-
-        // }, true);
-
+        //     setTimeout(setLines, 600);    
+        // }, false);
 
         /* ===================
            Consultation 
@@ -1091,7 +1119,7 @@ document.documentElement.className = document.documentElement.className.replace(
                             
                             localStorage.setItem("currentSlide", nextSlide);
 
-                           // html.classList.remove("orientation-change");
+                            //html.classList.remove("orientation-change");
                         });
 
                         break;
@@ -1115,7 +1143,12 @@ document.documentElement.className = document.documentElement.className.replace(
                         break;
                 }
 
-                //setLines();
+                // setTimeout(
+                //     function(){
+                //         setLines();
+                //     }, 700
+                // );
+                
             }
 
             let movingMenuUnderline = document.querySelector(".menu .moving-underline");

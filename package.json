@@ -1,5 +1,5 @@
 {
-  "name": "Forpost",
+  "name": "forpost",
   "version": "0.0.1",
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -33,11 +33,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bohdan909/nuage.git"
+    "url": "git+https://github.com/Bohdan909/nuage.git"
   },
   "license": "UNLICENSED",
   "dependencies": {
     "npm": "^5.7.1"
   },
-  "optionalDependencies": {}
+  "optionalDependencies": {},
+  "description": "Have nodejs installed, then do",
+  "bugs": {
+    "url": "https://github.com/Bohdan909/nuage/issues"
+  },
+  "homepage": "https://github.com/Bohdan909/nuage#readme",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
 }
