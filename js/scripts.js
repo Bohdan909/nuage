@@ -906,7 +906,9 @@ document.documentElement.className = document.documentElement.className.replace(
                     }]
                 });
             }
-            
+            function displayFilterNoResults() {
+                console.log("No results for this filter criteria");
+            }
             // slider filter
             var filterItem = $(".filter-item");
 
@@ -925,23 +927,25 @@ document.documentElement.className = document.documentElement.className.replace(
                 jqElem = $(elem);
 
                 let dropsElem = findParent(elem, "drops");
-                if (dropsElem != null) {
-                    // remove "selected" from descendant options
-                    let allDrops = dropsElem.querySelectorAll(".filter-option");
-                    Array.prototype.forEach.call(allDrops, function (drop) {
-                        if (drop.classList.contains("selected")) {
-                            assortFilter.add($(drop).data("filter-option"), $(drop).data("filter-value"), true);
-                        }
-                        drop.classList.remove("selected");
-                    });
-                }
+                
                 
                 if (elem.classList.contains("selected")) {
                     elem.classList.remove("selected");
-                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), true);
+                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), true, displayFilterNoResults);
                 } else {
+                    if (dropsElem != null) {
+                        // remove "selected" from descendant options
+                        let allDrops = dropsElem.querySelectorAll(".filter-option");
+                        Array.prototype.forEach.call(allDrops, function (drop) {
+                            if (drop.classList.contains("selected")) {
+                                assortFilter.add($(drop).data("filter-option"), $(drop).data("filter-value"), true);
+                            }
+                            drop.classList.remove("selected");
+                        });
+                    }
+
                     elem.classList.add("selected");
-                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), false);
+                    assortFilter.add(jqElem.data("filter-option"), jqElem.data("filter-value"), false, displayFilterNoResults);
                 }
             });
 
@@ -1640,7 +1644,7 @@ document.documentElement.className = document.documentElement.className.replace(
              * @param {array} array Array of elements to display from data-filter-value.
              * @param {boolean} subtract Indicates that option is unselected and we need to subtract array 
             */
-            this.add = function(option, array, subtract) {
+            this.add = function(option, array, subtract, noresultCallback) {
                 // add array for same group
                 // subtract if unchecked
                 switch (option) {
@@ -1669,27 +1673,23 @@ document.documentElement.className = document.documentElement.className.replace(
                     default:
                         break;
                 }
-
-                // console.log("Surface array: [" + this.surface + "]");
-                // console.log("Absorbtion array: [" + this.absorbtion + "]");
-                // console.log("Quantity array: [" + this.quantity + "]");
                 
                 // find intersection for different groups
                 this.filterArray = this.mergeFilters();
 
                 console.log("filterArray after merging: " + this.filterArray);
 
+                if (this.filterArray.length <= 0) {
+                    if (noresultCallback) {
+                        noresultCallback();
+                        return;
+                    }
+                    
+                }
+
                 this.apply(this.filterArray);
 
             };
-
-            /** removes array from assortment filter */
-            this.remove = function(option, array) {
-
-            };
-
-            //this.load();
-
         }
         
     });
