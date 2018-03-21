@@ -19,10 +19,11 @@ document.documentElement.className = document.documentElement.className.replace(
             
             textBlock.forEach(function(block){
                
-                let text  = block.innerText || block.textContent || "";
-                let resultArr  = [];
+                const coef = 0.66;
+                let text = block.innerText || block.textContent || "";
+                let resultArr = [];
                 let resultHTML;
-
+                
                 if (block.classList.contains("animate-text-hide")){
                     //let blockHide = document.querySelector("animate-text-hide");
                     //let blockCal  = blockWrap.children[0].querySelector(.animate-text");
@@ -35,16 +36,15 @@ document.documentElement.className = document.documentElement.className.replace(
                     if (mobile == "mobile"){  //block.parentNode.classList.contains("feedback-item")
                         blockWidth = window.innerWidth - 35;
                         fontSize = 13;
-                        lineLength = blockWidth / (fontSize * 0.64);
+                        lineLength = blockWidth / (fontSize * coef);
                     }
 
-                }  else {
+                } else {
                     blockWidth = block.offsetWidth;
+                    fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
+                    lineLength = blockWidth / (fontSize * coef);
                 }
-
-                fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
-                lineLength = blockWidth / (fontSize * 0.64);
-
+                
                 insertToHTML();
                 
                 function linesWrap(text, maxLength){
@@ -94,7 +94,7 @@ document.documentElement.className = document.documentElement.className.replace(
         checkMobile();
         
         window.addEventListener("orientationchange", function(){
-            window.location.reload()
+            window.location.reload();
             //setTimeout(checkMobile, 700);
 
             // html.classList.add("orientation-change");
