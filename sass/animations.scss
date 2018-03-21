@@ -88,6 +88,7 @@ $textA: 15px;
     .orientation-change .loaded & {
 
         div {
+            display: inline;
             transform: translate3d(0, 0, 0) !important;
             animation: none !important;
             opacity: 1 !important;
