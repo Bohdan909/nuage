@@ -269,9 +269,34 @@ $prodFooterHeightMin: 85px;
     width: 100%;
     font-size: 0;
 
+    > div {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 5px;
+
+        span {
+            display: inline-block;
+            vertical-align: top;
+            line-height: 32px;
+            font-size: 12px;
+            font-family: $fontMed;
+
+            @include mobile {
+                font-size: 11px;
+            }
+        }
+
+        &.no-active {
+
+            span {
+                color: #c4cbd2;
+            }
+        }
+    }
+
     img {
         display: inline-block;
-        margin: 0 3px;
+        margin: 0 10px 0 0;
     }
 
     @include mobile {
