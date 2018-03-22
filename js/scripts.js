@@ -6,12 +6,12 @@ document.documentElement.className = document.documentElement.className.replace(
         const html     = document.querySelector("html");
         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
         let mobile     = window.matchMedia("(max-width: 767px)").matches;
-        
+
         /* ===================
            Text Lines Animate 
         ====================== */
         
-        function setLines(mobile){    
+        function setLines(){    
             console.log("=== SET LINES ===");
 
             let textBlock = document.querySelectorAll(".animate-text");
@@ -24,16 +24,16 @@ document.documentElement.className = document.documentElement.className.replace(
                 let resultArr = [];
                 let resultHTML;
                 
-                let blockWrap = findParent(block, "animate-text-wrap");
-                blockWidth = blockWrap.offsetWidth;
-                fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
-                lineLength = blockWidth / (fontSize * coef);
-                
-                // if (mobile == "mobile"){  //block.parentNode.classList.contains("feedback-item")
-                //     blockWidth = window.innerWidth - 35;
-                //     fontSize = 13;
-                //     lineLength = blockWidth / (fontSize * coef);
-                // }
+                if (block.parentNode.classList.contains("feedback-item") && mobile){  
+                    blockWidth = window.innerWidth - 35;
+                    fontSize   = 13;
+                    lineLength = blockWidth / (fontSize * coef);
+                } else {
+                    let blockWrap = findParent(block, "animate-text-wrap");
+                    blockWidth = blockWrap.offsetWidth;
+                    fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
+                    lineLength = blockWidth / (fontSize * coef);
+                }
 
                 insertToHTML();
                 

@@ -738,7 +738,7 @@ div.product-view-block {
         }
     }
 
-    span {
+    > span {
         @include border-rad(35px);
         transition: background-color 0.55s $easing, left 0.55s $easing, width 0.55s $easing;
         position: absolute;
