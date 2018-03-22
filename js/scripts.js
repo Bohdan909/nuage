@@ -1678,13 +1678,21 @@ document.documentElement.className = document.documentElement.className.replace(
 
                 console.log("filterArray after merging: " + this.filterArray);
 
-                if (this.filterArray.length <= 0) {
-                    if (noresultCallback) {
-                        noresultCallback();
-                        return;
-                    }
-                    
+                let noOptionsSelected = false;
+                if (this.surface.length == 0 && this.absorbtion.length == 0 && this.quantity.length == 0) {
+                    noOptionsSelected = true;
                 }
+
+                if (!noOptionsSelected) {
+                    if (this.filterArray.length <= 0) {
+                        if (noresultCallback) {
+                            noresultCallback();
+                            return;
+                        }
+                        
+                    }
+                }
+                
 
                 this.apply(this.filterArray);
 
