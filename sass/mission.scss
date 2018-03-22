@@ -869,10 +869,19 @@ div.mission-text-slider {
 }
 @media only screen
     and (min-width: 1280px) {
-        .video-calibrate:not(.open):hover,
+        .video-calibrate,
+        .mission-video-play {
+            transition: transform 0.5s $easing;
+        }
+        .video-calibrate:not(.open):hover {
+            transform: translate3d(356px,0,0) scale(0.8);
+            transition: transform 0.5s $easing;
+        }
         .video-calibrate:not(.open):hover .mission-video-play{
-            width: 380px;
-            height: 380px;
+            transform: translate(-50%, -50%) scale(1.2);
+            transition: transform 0.5s $easing;
+            // width: 380px;
+            // height: 380px;
         }
     }
     
