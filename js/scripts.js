@@ -19,32 +19,22 @@ document.documentElement.className = document.documentElement.className.replace(
             
             textBlock.forEach(function(block){
                
-                const coef = 0.66;
+                const coef = 0.7;
                 let text = block.innerText || block.textContent || "";
                 let resultArr = [];
                 let resultHTML;
                 
-                if (block.classList.contains("animate-text-hide")){
-                    //let blockHide = document.querySelector("animate-text-hide");
-                    //let blockCal  = blockWrap.children[0].querySelector(.animate-text");
-                    //fontSize   = parseInt(window.getComputedStyle(blockCal, null).getPropertyValue('font-size'));
-                    //lineLength = wrapWidth / (fontSize * 0.64);
-
-                    let blockWrap = findParent(block, "animate-text-wrap");
-                    blockWidth = blockWrap.offsetWidth;
-
-                    if (mobile == "mobile"){  //block.parentNode.classList.contains("feedback-item")
-                        blockWidth = window.innerWidth - 35;
-                        fontSize = 13;
-                        lineLength = blockWidth / (fontSize * coef);
-                    }
-
-                } else {
-                    blockWidth = block.offsetWidth;
-                    fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
-                    lineLength = blockWidth / (fontSize * coef);
-                }
+                let blockWrap = findParent(block, "animate-text-wrap");
+                blockWidth = blockWrap.offsetWidth;
+                fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
+                lineLength = blockWidth / (fontSize * coef);
                 
+                // if (mobile == "mobile"){  //block.parentNode.classList.contains("feedback-item")
+                //     blockWidth = window.innerWidth - 35;
+                //     fontSize = 13;
+                //     lineLength = blockWidth / (fontSize * coef);
+                // }
+
                 insertToHTML();
                 
                 function linesWrap(text, maxLength){
@@ -77,21 +67,23 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             console.log("=== END SET LINES ===");
-        }    
+        }   
 
-        function checkMobile(){
-            if (mobile){
-                setLines("mobile");
+        setLines(); 
 
-                console.log("'It is mobile'");
-            } else {
-                setLines();
+        // function checkMobile(){
+        //     if (mobile){
+        //         setLines("mobile");
 
-                console.log("'It is not mobile'");
-            }
-        }
+        //         console.log("'It is mobile'");
+        //     } else {
+        //         setLines();
 
-        checkMobile();
+        //         console.log("'It is not mobile'");
+        //     }
+        // }
+
+        //checkMobile();
         
         window.addEventListener("orientationchange", function(){
             window.location.reload();
