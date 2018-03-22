@@ -2228,8 +2228,7 @@
 		
 		<script async src="./js//dragscroll.js"></script>
 		<script>
-			function loadScript(url, callback)
-{
+			function loadScript(url, callback){
 				// Adding the script tag to the head as suggested before
 				var head = document.getElementsByTagName('head')[0];
 				var script = document.createElement('script');
@@ -2247,309 +2246,353 @@
 
 			function initMaps() {
 
-			let mapOptions = {
-				zoom: 14,
-				scrollwheel: false,
-			draggable: true,
-				center: new google.maps.LatLng(55.819515, 37.490370)
-			};
+				let mapOptions = {
+					zoom: 14,
+					scrollwheel: false,
+				draggable: true,
+					center: new google.maps.LatLng(55.819515, 37.490370)
+				};
 
 
-			let styles = [
-				{
-				"featureType": "all",
-				"elementType": "labels.text.fill",
-				"stylers": [
+				let styles = [
 					{
-						"saturation": 36
+					"featureType": "all",
+					"elementType": "labels.text.fill",
+					"stylers": [
+						{
+							"saturation": 36
+						},
+						{
+							"color": "#333333"
+						},
+						{
+							"lightness": 40
+						}
+					]
 					},
 					{
-						"color": "#333333"
+					"featureType": "all",
+					"elementType": "labels.text.stroke",
+					"stylers": [
+						{
+							"visibility": "on"
+						},
+						{
+							"color": "#ffffff"
+						},
+						{
+							"lightness": 16
+						}
+					]
 					},
 					{
-						"lightness": 40
-					}
-				]
-				},
-				{
-				"featureType": "all",
-				"elementType": "labels.text.stroke",
-				"stylers": [
-					{
-						"visibility": "on"
+					"featureType": "all",
+					"elementType": "labels.icon",
+					"stylers": [
+						{
+							"visibility": "off"
+						}
+					]
 					},
 					{
-						"color": "#ffffff"
+					"featureType": "administrative",
+					"elementType": "geometry.fill",
+					"stylers": [
+						{
+							"color": "#ffffff"
+						},
+						{
+							"lightness": 20
+						}
+					]
 					},
 					{
-						"lightness": 16
-					}
-				]
-				},
-				{
-				"featureType": "all",
-				"elementType": "labels.icon",
-				"stylers": [
-					{
-						"visibility": "off"
-					}
-				]
-				},
-				{
-				"featureType": "administrative",
-				"elementType": "geometry.fill",
-				"stylers": [
-					{
-						"color": "#ffffff"
+					"featureType": "administrative",
+					"elementType": "geometry.stroke",
+					"stylers": [
+						{
+							"color": "#ffffff"
+						},
+						{
+							"lightness": 17
+						},
+						{
+							"weight": 1.2
+						}
+					]
 					},
 					{
-						"lightness": 20
-					}
-				]
-				},
-				{
-				"featureType": "administrative",
-				"elementType": "geometry.stroke",
-				"stylers": [
-					{
-						"color": "#ffffff"
+					"featureType": "administrative",
+					"elementType": "labels.text",
+					"stylers": [
+						{
+							"saturation": "2"
+						}
+					]
 					},
 					{
-						"lightness": 17
+					"featureType": "administrative",
+					"elementType": "labels.text.fill",
+					"stylers": [
+						{
+							"saturation": "-1"
+						}
+					]
 					},
 					{
-						"weight": 1.2
-					}
-				]
-				},
-				{
-				"featureType": "administrative",
-				"elementType": "labels.text",
-				"stylers": [
-					{
-						"saturation": "2"
-					}
-				]
-				},
-				{
-				"featureType": "administrative",
-				"elementType": "labels.text.fill",
-				"stylers": [
-					{
-						"saturation": "-1"
-					}
-				]
-				},
-				{
-				"featureType": "administrative.country",
-				"elementType": "labels.text.fill",
-				"stylers": [
-					{
-						"saturation": "0"
-					}
-				]
-				},
-				{
-				"featureType": "landscape",
-				"elementType": "geometry",
-				"stylers": [
-					{
-						"color": "#f5f5f5"
+					"featureType": "administrative.country",
+					"elementType": "labels.text.fill",
+					"stylers": [
+						{
+							"saturation": "0"
+						}
+					]
 					},
 					{
-						"lightness": 20
-					}
-				]
-				},
-				{
-				"featureType": "poi",
-				"elementType": "all",
-				"stylers": [
-					{
-						"visibility": "off"
-					}
-				]
-				},
-				{
-				"featureType": "poi",
-				"elementType": "geometry",
-				"stylers": [
-					{
-						"color": "#f5f5f5"
+					"featureType": "landscape",
+					"elementType": "geometry",
+					"stylers": [
+						{
+							"color": "#f5f5f5"
+						},
+						{
+							"lightness": 20
+						}
+					]
 					},
 					{
-						"lightness": 21
-					}
-				]
-				},
-				{
-				"featureType": "poi.park",
-				"elementType": "geometry",
-				"stylers": [
-					{
-						"color": "#dedede"
+					"featureType": "poi",
+					"elementType": "all",
+					"stylers": [
+						{
+							"visibility": "off"
+						}
+					]
 					},
 					{
-						"lightness": 21
-					}
-				]
-				},
-				{
-				"featureType": "road.highway",
-				"elementType": "geometry.fill",
-				"stylers": [
-					{
-						"color": "#78bed6"
+					"featureType": "poi",
+					"elementType": "geometry",
+					"stylers": [
+						{
+							"color": "#f5f5f5"
+						},
+						{
+							"lightness": 21
+						}
+					]
 					},
 					{
-						"lightness": 17
-					}
-				]
-				},
-				{
-				"featureType": "road.highway",
-				"elementType": "geometry.stroke",
-				"stylers": [
-					{
-						"color": "#ffffff"
+					"featureType": "poi.park",
+					"elementType": "geometry",
+					"stylers": [
+						{
+							"color": "#dedede"
+						},
+						{
+							"lightness": 21
+						}
+					]
 					},
 					{
-						"lightness": 29
+					"featureType": "road.highway",
+					"elementType": "geometry.fill",
+					"stylers": [
+						{
+							"color": "#78bed6"
+						},
+						{
+							"lightness": 17
+						}
+					]
 					},
 					{
-						"weight": 0.2
-					}
-				]
-				},
-				{
-				"featureType": "road.arterial",
-				"elementType": "geometry",
-				"stylers": [
-					{
-						"color": "#ffffff"
+					"featureType": "road.highway",
+					"elementType": "geometry.stroke",
+					"stylers": [
+						{
+							"color": "#ffffff"
+						},
+						{
+							"lightness": 29
+						},
+						{
+							"weight": 0.2
+						}
+					]
 					},
 					{
-						"lightness": 18
-					}
-				]
-				},
-				{
-				"featureType": "road.local",
-				"elementType": "geometry",
-				"stylers": [
-					{
-						"color": "#ffffff"
+					"featureType": "road.arterial",
+					"elementType": "geometry",
+					"stylers": [
+						{
+							"color": "#ffffff"
+						},
+						{
+							"lightness": 18
+						}
+					]
 					},
 					{
-						"lightness": 16
-					}
-				]
-				},
-				{
-				"featureType": "transit",
-				"elementType": "geometry",
-				"stylers": [
-					{
-						"color": "#f2f2f2"
+					"featureType": "road.local",
+					"elementType": "geometry",
+					"stylers": [
+						{
+							"color": "#ffffff"
+						},
+						{
+							"lightness": 16
+						}
+					]
 					},
 					{
-						"lightness": 19
-					}
-				]
-				},
-				{
-				"featureType": "water",
-				"elementType": "geometry",
-				"stylers": [
-					{
-						"color": "#a7cdf0"
+					"featureType": "transit",
+					"elementType": "geometry",
+					"stylers": [
+						{
+							"color": "#f2f2f2"
+						},
+						{
+							"lightness": 19
+						}
+					]
 					},
 					{
-						"lightness": 17
+					"featureType": "water",
+					"elementType": "geometry",
+					"stylers": [
+						{
+							"color": "#a7cdf0"
+						},
+						{
+							"lightness": 17
+						}
+					]
 					}
-				]
-				}
-			]
+				];
 
-			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-			setStyles();
+				// Store locations
+				var locations = [
+					{
+						lat: 55.819515,
+						lng: 37.490370,
+						name: "Nuage Store",
+						address: "3-я Радиаторская улица"
+					}//,
+					// {
+					// 	lat: 55.830000,
+					// 	lng: 37.500370,
+					// 	name: "Nuage Store 1",
+					// 	address: "Some street, 18"
+					// }
+				];
 
-			var point = new google.maps.LatLng(55.819515, 37.490370);
-			var image = new google.maps.MarkerImage(
-			'images/marker.svg',
-			new google.maps.Size(33,45)
-			);
+				var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				setStyles();
 
-			setMarker();
+				var point = new google.maps.LatLng(55.819515, 37.490370);
+				var image = new google.maps.MarkerImage(
+					'images/marker.svg',
+					new google.maps.Size(33,45)
+				);
 
-			// Get Position  
-			var geocoder = new google.maps.Geocoder();
-			var submit = document.getElementById('submit');
-			var btnLoc = document.querySelectorAll('.ico-loc');
+				var markers = [];
+				var infoWindow;
+				infoWindow = new google.maps.InfoWindow();
 
-			submit.addEventListener('click', function(){
-				var address = document.getElementById('address').value;
-				geocodeAddress(geocoder, map, address);
-			});
+				setMarker();
 
-			Array.prototype.forEach.call(btnLoc, function(item){
-				item.addEventListener('click', function(){
-					navigator.geolocation.getCurrentPosition(function(position){
+				// Get Position  
+				var geocoder = new google.maps.Geocoder();
+				var submit = document.getElementById('submit');
+				var btnLoc = document.querySelectorAll('.ico-loc');
 
-					var userLat  = position.coords.latitude;
-					var userLong = position.coords.longitude;
+				submit.addEventListener('click', function(){
+					var address = document.getElementById('address').value;
+					geocodeAddress(geocoder, map, address);
+				});
 
-					address.value = "";
-					mapOptions.center = new google.maps.LatLng(userLat, userLong);
-					map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-					point = new google.maps.LatLng(userLat, userLong);
+				Array.prototype.forEach.call(btnLoc, function(item){
+					item.addEventListener('click', function(){
+						navigator.geolocation.getCurrentPosition(function(position){
 
-					setMarker();
-					setStyles();
+						var userLat  = position.coords.latitude;
+						var userLong = position.coords.longitude;
+
+						address.value = "";
+						mapOptions.center = new google.maps.LatLng(userLat, userLong);
+						map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+						point = new google.maps.LatLng(userLat, userLong);
+
+						setMarker();
+						setStyles();
+						});
 					});
 				});
-			});
 
-			function scrollSelectInit(){
-				$(".selectize-dropdown").perfectScrollbar({
-					wheelSpeed: 0.5,
-					wheelPropagation: false,
-					minScrollbarLength: 20
+				for (let i = 0; i < locations.length; i++) {
+					const location = locations[i];
+					let latLng = new google.maps.LatLng(location.lat, location.lng);
+					createMarker(latLng, location.name, location.address);
+				}
+
+				function scrollSelectInit(){
+					$(".selectize-dropdown").perfectScrollbar({
+						wheelSpeed: 0.5,
+						wheelPropagation: false,
+						minScrollbarLength: 20
+					});
+				}
+
+				loadScript("./js/selectize.min.js", function(){
+					console.log("selectize dynamically loaded");
+					
+					var selectize = $("#select-city").selectize({
+						allowEmptyOption: true,
+						create: true,
+
+						onChange: function(val){
+							var address = val;
+							geocodeAddress(geocoder, map, address);
+						},
+
+						onDropdownOpen: function(){
+							scrollSelectInit();
+						}
+					});
 				});
-			}
-
-			loadScript("./js/selectize.min.js", function(){
-				console.log("selectize dynamically loaded");
-				
-				var selectize = $("#select-city").selectize({
-					allowEmptyOption: true,
-					create: true,
-
-					onChange: function(val){
-						var address = val;
-						geocodeAddress(geocoder, map, address);
-					},
-
-					onDropdownOpen: function(){
-						scrollSelectInit();
-					}
-				});
-			});
 
 
-			function setMarker(){
-				new google.maps.Marker({
-					icon: image,
-					draggable: false,
-					raiseOnDrag: false,
-					map: map,
-					position: point
-				});
-			};
+				function setMarker(){
+					new google.maps.Marker({
+						icon: image,
+						draggable: false,
+						raiseOnDrag: false,
+						map: map,
+						position: point
+					});
+				};
 
-			function setStyles(){
-				map.setOptions({styles: styles});
-			}
+				function setStyles(){
+					map.setOptions({styles: styles});
+				}
+
+				// TODO: set multiple markers
+				// https://developers.google.com/maps/solutions/store-locator/clothing-store-locator
+				function createMarker(latlng, name, address) {
+					var html = "<b>" + name + "</b> <br/>" + address;
+					var marker = new google.maps.Marker({
+						icon: image,
+						draggable: false,
+						raiseOnDrag: false,
+						map: map,
+						position: latlng
+					});
+					google.maps.event.addListener(marker, 'click', function() {
+						infoWindow.setContent(html);
+						infoWindow.open(map, marker);
+					});
+					markers.push(marker);
+				}
 			}
 
 			//google.maps.event.addDomListener(window, 'load', initialize);
@@ -2568,6 +2611,9 @@
 					}
 				});
 			}
+
+			
+
 
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCffH-0iEsLpkHn31rDlWyWdLsZBC11XCY&v=3.exp&callback=initMaps"></script>
