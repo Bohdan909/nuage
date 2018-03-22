@@ -77,10 +77,11 @@
 					    animateReverseEnd = true;
 
 					    console.log("Auto: " + animateEnd);
-					}
+					} else {window.requestAnimationFrame(change);}
 				}
 
-				var timer = setInterval(change, 20); 
+				//var timer = setInterval(change, 20);
+				window.requestAnimationFrame(change);
 			}
 		}
 
@@ -100,10 +101,11 @@
 					animateReverseEnd = true;
 				 	if (!animateBackEnd) changeImgBack();console.log("- AUTOBACK -");
 				 	console.log("Reverse: " + animateReverseEnd);
-				}
+				} else {window.requestAnimationFrame(change);}
 			}		
 
-			var timer = setInterval(change, 50); 
+			//var timer = setInterval(change, 50);
+			window.requestAnimationFrame(change);
 		}
 
 		// Back
@@ -124,10 +126,11 @@
 					animateReverseEnd = true;
 
 					console.log("Back: " + animateEnd);
-				}
+				} else {window.requestAnimationFrame(change);}
 			}
 
-			var timer = setInterval(change, 50); 
+			//var timer = setInterval(change, 50);
+			window.requestAnimationFrame(change);
 		}
 		
 
@@ -182,27 +185,37 @@
 				return;
 			}
 			base.animateOpenEnd = false;
-            let i = 0;
+			let i = 0;
+			let startTime = null;
 
             function change(){
-                base.imageAttr(i);
-                i++;
+				if (!startTime) startTime = (new Date()).getTime();				
+				var currentTicks = (new Date).getTime();
 
-                if (i >= images.length){
-                    clearInterval(timer);       
+				if (currentTicks - startTime >= 30) {
+					startTime = currentTicks;
+					
+					base.imageAttr(i);
+					i++;
+				}
+
+				if (i >= images.length){
+					clearInterval(timer);       
 					base.animateOpenEnd = true;
 					base.isOpened = true;
-                    //if (!animateCloseEnd) animateClose();
+					//if (!animateCloseEnd) animateClose();
 					//setTimeout(animateClose, 700);
 					if (callback) {
 						callback();
+						
 					} 
-                }
+				} else {window.requestAnimationFrame(change);}
 
                 console.log(base.selector + " Open ended: " + base.animateOpenEnd);
             }       
 
-			var timer = setInterval(change, 40); 
+			//var timer = setInterval(change, 40); 
+			window.requestAnimationFrame(change);
 			
 			
         }
@@ -216,21 +229,31 @@
 				return;
 			} 
 			base.animateCloseEnd = false;
-            let i = options.count;
+			let i = options.count;
+			let startTime = null;
 
             function change(){
-                base.imageAttr(i);
-                i--;
+				if (!startTime) startTime = (new Date()).getTime();				
+				var currentTicks = (new Date).getTime();
+
+				if (currentTicks - startTime >= 30) {
+					startTime = currentTicks;
+
+					base.imageAttr(i);
+					i--;
+				}
 
                 if (i <= 0){
                     clearInterval(timer);       
 					base.animateCloseEnd = true;
 					base.isOpened = false;
-                }
+				} else {window.requestAnimationFrame(change);}
+				
                 console.log(base.selector + " Close ended: " + base.animateCloseEnd);
             }       
 
-            var timer = setInterval(change, 40); 
+			//var timer = setInterval(change, 40);
+			window.requestAnimationFrame(change);
         }
 
         // if ($(".page").is(".page-main")){
