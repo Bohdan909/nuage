@@ -75,12 +75,13 @@ $prodFooterHeightMin: 85px;
     position: absolute;
     width: 250px;
     height: 250px;
+    top: -50%;
+    left: -50%;
     border: 1px solid #000;
     background: #fff;
     visibility: hidden;
     overflow: hidden;
     z-index: 9999;
-    //transition: all 0.1s linear; 
     animation: fadeOut-l 0.3s linear forwards;
 
     // img {
@@ -738,7 +739,7 @@ div.product-view-block {
         }
     }
 
-    span {
+    > span {
         @include border-rad(35px);
         transition: background-color 0.55s $easing, left 0.55s $easing, width 0.55s $easing;
         position: absolute;

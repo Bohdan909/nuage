@@ -94,6 +94,10 @@ $heightPanel: 90px;
         cursor: grab;
         height: 100%;
 
+        @include ie10 {
+            cursor: url(../images/grab.cur), move;
+        }
+
         .ps-scrollbar-y-rail {
             opacity: 0;
         }
@@ -573,10 +577,10 @@ ul.feedback-filter {
 
 @include ie10 {
     .no-touchevents .cursor-target.hover {
-        cursor: default !important;
+        cursor: move !important;
 
         .scroll-block {
-            cursor: default !important;
+            cursor: move !important;
         }
     }
 }
