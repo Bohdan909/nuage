@@ -973,7 +973,7 @@ ul.desc-list {
 
         .filter-option {
             cursor: pointer;
-            filter: grayscale(100%);
+            filter: grayscale(80%);
         }
     }
 
@@ -1006,7 +1006,7 @@ ul.desc-list {
         .filter-option,
         .filter-option.selected ~ .filter-option {
             opacity: 0.5;
-            filter: grayscale(100%);
+            filter: grayscale(80%);
         }
 
         .filter-option:hover,

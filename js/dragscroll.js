@@ -83,6 +83,8 @@
                                 (scroller = _document.documentElement).scrollLeft -= newScrollX;
                                 scroller.scrollTop -= newScrollY;
                             }
+
+                            console.log(newScrollY);
                         }
                     }, 0
                 );

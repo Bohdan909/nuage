@@ -1,12 +1,12 @@
 jQuery(document).ready(function($){
 
-	var productViewer = function(element) {
+	var productViewer = function(element, wrap) {
 		this.element = element;
 		this.handleContainer = this.element.find('.cd-product-viewer-handle');
 		this.handleFill = this.handleContainer.children('.fill');
 		this.handle = this.handleContainer.children('.handle');
-		this.imageWrapper = this.element.find('.product-viewer');
-		this.slideShow = this.imageWrapper.children('.product-sprite');
+		this.imageWrapper = wrap;
+		this.slideShow = this.imageWrapper.find('.product-sprite');
 		this.frames = this.element.data('frame');
 		//increase this value to increase the friction while dragging on the image - it has to be bigger than zero
 		this.friction = this.element.data('friction');
@@ -139,7 +139,7 @@ jQuery(document).ready(function($){
 
 	        self.element.on('mousemove vmousemove', function (e) {
 	        	if( !self.animating) {
-	        		self.animating =  true;
+	        		self.animating = true;
 		        	( !window.requestAnimationFrame )
 		        		? setTimeout(function(){self.animateDraggedImage(e, containerOffset, containerWidth);}, 100)
 		        		: requestAnimationFrame(function(){self.animateDraggedImage(e, containerOffset, containerWidth);});
@@ -208,6 +208,6 @@ jQuery(document).ready(function($){
 
 	var productToursWrapper = $('.cd-product-viewer-wrapper');
 	productToursWrapper.each(function(){
-		new productViewer($(this));
+		new productViewer($(this), $(".product-view-wrap"));
 	});
 });
