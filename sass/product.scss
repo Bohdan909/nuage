@@ -754,7 +754,8 @@ div.product-view-block {
             cursor: pointer;
 
             a {
-                @extend .transDef;
+                //@extend .transDef;
+                transition: color 0.2s ease-out;
                 display: block;
                 padding: 0 20px;
                 height: 47px;

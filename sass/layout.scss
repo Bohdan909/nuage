@@ -196,7 +196,7 @@ body {
         }
 
         > a {
-            @extend .transDef;
+            //@extend .transDef;
             display: block;
             line-height: 16px;
             text-transform: uppercase;
@@ -318,7 +318,8 @@ body {
     }
 
     i {
-        @extend .transDef;
+        //@extend .transDef;
+        transition: transform 0.2s ease-out, top 0.2s ease-out, opacity 0.2s ease-out;
         position: absolute;
         top: 0;
         display: block;
@@ -665,7 +666,8 @@ body {
     z-index: 997;
 
     .like, .logo-f {
-        @extend .transDef;
+        //@extend .transDef;
+        transition: opacity 0.2s ease-out;
         position: absolute;
 
         &:hover {
@@ -713,7 +715,7 @@ body {
     }
 
     .social-drop {
-        @extend .transDef;
+        //@extend .transDef;
         @include border-rad(50px);
         width: 320px;
         height: 129px;

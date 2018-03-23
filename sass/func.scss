@@ -647,7 +647,7 @@ $ultra-hd-width  : 3840px;
 
 .btn-style {
     @include border-rad(30px);
-    @include trans(0.4s);
+    //@include trans(0.4s);
     position: relative;
     display: inline-block;
     padding: 0 25px;
