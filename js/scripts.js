@@ -1609,9 +1609,43 @@ document.documentElement.className = document.documentElement.className.replace(
             this.mergeFilters = function() {
                 // push into filterArray only values, that are common to merging arrays
                 let tempArray = [];
+                let exist1time = [];
+                let exist2times = [];
+                let exist3times = [];
+                //tempArray = this.arrayIntersect(this.arrayIntersect(this.absorbtion, this.quantity), this.surface);
 
-                tempArray = this.arrayIntersect(this.arrayIntersect(this.surface, this.absorbtion), this.quantity);
+                /*ALTERNATIVE IMPLEMENTATION*/
+                tempArray = this.surface.slice().concat(this.absorbtion.slice()).concat(this.quantity.slice());
                 //console.log("Merged Array: " + tempArray);
+                tempArray.sort();
+                let offset = 0;
+                let iter = 0;
+                while (iter < tempArray.length) {
+                    if (tempArray[iter] == tempArray[iter + 2]) {
+                        exist3times.push(tempArray[iter]);
+                        offset = 3;
+                    } else if (tempArray[iter] == tempArray[iter + 1]) {
+                        exist2times.push(tempArray[iter]);
+                        offset = 2;
+                    } else {
+                        exist1time.push(tempArray[iter]);
+                        offset = 1;
+                    }
+                    
+                    iter += offset;
+                }
+
+                console.log("exist1time: " + exist1time);
+                console.log("exist2times: " + exist2times);
+                console.log("exist3times: " + exist3times);
+                if (exist3times.length > 0) {
+                    tempArray = exist3times;
+                } else if (exist2times.length > 0) {
+                    tempArray = exist2times;
+                } else {
+                    tempArray = exist1time;
+                }
+
                 return tempArray;
             };
 
