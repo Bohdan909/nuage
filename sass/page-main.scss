@@ -1182,7 +1182,7 @@ ul.cubes-main {
     div.scroll-helper {
         @include border-rad(0px);
         @include transform(translateX(0));
-        @include transition(all, 0.5s, $easing);
+        transition: transform 0.5s $easing;
         position: fixed;
         width: 100%;
         height: 65px;

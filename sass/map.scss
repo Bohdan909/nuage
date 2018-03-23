@@ -156,7 +156,8 @@
             -webkit-box-shadow: 0px 15px 20px 1px rgba(143, 159, 174, 0.17);
             
             .option {
-                @extend .transDef;
+                //@extend .transDef;
+                transition: background-color 0.2s ease-out;
                 @extend .text-min;
                 padding-left: 20px;
                 height: 60px;

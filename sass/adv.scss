@@ -228,12 +228,6 @@
 				transition: opacity 0.2s linear;
 			}
 		}
-
-		img {
-			@include transition(all, 0.8s, ease-out);
-			@extend .sm;
-			position: absolute;
-		}
 	}
 
 	span {
@@ -294,9 +288,9 @@
 	.point-btn {
 		transition: color 0.1s linear 0.1s;
 
-		&:after {
-			@include transition(all, 0.2s, $easing);
-		}
+		// &:after {
+		// 	@include transition(all, 0.2s, $easing);
+		// }
 
 		&:hover {
 			color: #fff;
