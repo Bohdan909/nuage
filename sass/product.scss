@@ -608,25 +608,55 @@ div.product-view-block {
     height: 100%; 
     text-align: center;
 
-    @include tablet { 
-        top: 0;
-        //position: absolute;
-        // left: 0;
-        // right: 0;
-        // top: 0;
-        // bottom: 0;
-
-        img {
-            height: 167px;
-        }
-
-        ul {
-            display: none;
-        }
-    }
-
     img {
         max-width: 100%;
+
+        @media (min-width: 768px){
+            @media (max-height: 800px){
+                max-width: 85%;
+            }
+        }
+
+        .page-product-4 & {
+            max-width: 90%;
+
+            @media (min-width: 768px){
+                @media (max-height: 800px){
+                    max-width: 73%;
+                }
+            }
+        }
+
+        .page-product-5 & {
+            max-width: 80%;
+
+            @media (min-width: 768px){
+                @media (max-height: 790px){
+                    max-width: 65%;
+                }
+            }
+        }
+
+        .page-product-6 & {
+            max-width: 90%;
+
+            @media (min-width: 768px){
+                @media (max-height: 790px){
+                    max-width: 75%;
+                }
+            }
+        }
+
+        @include tablet {
+            img {
+                max-width: 100% !important;
+                height: 167px;
+            }
+
+            ul {
+                display: none;
+            }
+        }
     }
 
     ul {
@@ -947,12 +977,12 @@ div.product-view-block {
 
     .sizes-img {
         @include flex-vert(center);
+        top: 0;
+        width: 100%;
         height: auto;
-        
+
         img {
-            // @include transform(translateY(-50%));
-            // position: relative;
-            // top: 50%;
+            margin: auto;
         }
     }
 
@@ -960,6 +990,8 @@ div.product-view-block {
         @include flex(space-between);
         max-width: 170px;
         padding: 0 18px;
+
+        display: none;
 
         span {
             font-size: 11px;
@@ -1044,7 +1076,7 @@ div.product-view-block {
     }
 
     .sizes-img {
-        top: 5px;
+        //top: 5px;
 
         ul {
             display: none;
@@ -1165,6 +1197,14 @@ div.product-view-block {
 
     .product-view-section {
         display: block;
+    }
+
+    .sizes {
+        display: block;
+
+        span:first-child {
+            margin-right: 10px;
+        }
     }
 
     div.product-view-block {
