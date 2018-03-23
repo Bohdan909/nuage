@@ -1066,7 +1066,8 @@
 @include mobile {
 
 	.page-adv {
-		background: url(../images/scheme-img-mob.png) no-repeat 90% 485px;
+		background: url(../images/scheme-img-mob.png) no-repeat 90% 100%;
+		background-size: 90% auto;
 	}
 	
 	.object-scheme-block {
@@ -1143,10 +1144,6 @@
 	.scheme-desc .title-1 {
 		font-size: 25px;
 		line-height: 35px;
-	}
-
-	.page-adv {
-		background: none;
 	}
 }
 
