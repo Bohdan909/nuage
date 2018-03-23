@@ -25,6 +25,9 @@
     var addEventListener = 'add'+EventListener;
     var removeEventListener = 'remove'+EventListener;
     var newScrollX, newScrollY;
+    var friction = 0.97;
+    var velocityX = 0;
+    var velocityY = 0;
 
     var dragged = [];
     var reset = function(i, el) {
@@ -62,7 +65,13 @@
                 );
 
                 _window[addEventListener](
-                    mouseup, cont.mu = function() {
+                    mouseup, cont.mu = function(e) {
+                        if (pushed) {
+                            window.requestAnimationFrame(function() {
+                                inertialScroll(el);
+                            });
+                        }
+                        
                         pushed = 0;
                         el.style['webkitCursor'] = 'grab';
                         el.style['mozCursor'] = 'grab';
@@ -75,19 +84,40 @@
                     mousemove,
                     cont.mm = function(e) {
                         if (pushed) {
-                            (scroller = el.scroller||el).scrollLeft -=
-                                newScrollX = (- lastClientX + (lastClientX=e.clientX));
-                            scroller.scrollTop -=
-                                newScrollY = (- lastClientY + (lastClientY=e.clientY));
-                            if (el == _document.body) {
-                                (scroller = _document.documentElement).scrollLeft -= newScrollX;
-                                scroller.scrollTop -= newScrollY;
-                            }
-
-                            console.log(newScrollY);
+                            window.requestAnimationFrame(function(){
+                                (scroller = el.scroller||el).scrollLeft -=
+                                    newScrollX = (- lastClientX + (lastClientX=e.clientX));
+                                scroller.scrollTop -=
+                                    newScrollY = (- lastClientY + (lastClientY=e.clientY));
+                                if (el == _document.body) {
+                                    (scroller = _document.documentElement).scrollLeft -= newScrollX;
+                                    scroller.scrollTop -= newScrollY;
+                                }
+                                
+                                velocityX = newScrollX;
+                                velocityY = newScrollY;
+                            });
                         }
                     }, 0
                 );
+
+                function inertialScroll(element) {
+                    (scroller = element.scroller||element).scrollLeft -= velocityX;
+                    scroller.scrollTop -= velocityY;
+                    if (element == _document.body) {
+                        (scroller = _document.documentElement).scrollLeft -= velocityX;
+                        scroller.scrollTop -= velocityY;
+                    }
+                    velocityX *= friction;
+                    velocityY *= friction;
+                    
+                    if (Math.abs(velocityY) > 0.5) {
+                        window.requestAnimationFrame(function(){
+                            inertialScroll(element);
+                        });
+                    }
+                }
+
              })(dragged[i++]);
         }
     }
