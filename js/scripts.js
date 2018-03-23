@@ -19,7 +19,7 @@ document.documentElement.className = document.documentElement.className.replace(
             
             textBlock.forEach(function(block){
                
-                const coef = 0.7;
+                const coef = 0.57;
                 let text = block.innerText || block.textContent || "";
                 let resultArr = [];
                 let resultHTML;
