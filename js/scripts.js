@@ -1105,10 +1105,15 @@ document.documentElement.className = document.documentElement.className.replace(
                         
                         $slider.on( "click", ".slick-slider-inner", function( e ) {
                             if (!$(this).parent().hasClass("slick-current") || $(this).parent().hasClass("slick-cloned")) { 
-                                e.preventDefault();
-                                let currentSlideIndex = $slider.slick("slickCurrentSlide");
+                                console.log($slider[0].slick.slideCount);
                                 
-                                checkSliderEdge(currentSlideIndex);
+                                if ($slider[0].slick.slideCount > 3) {
+                                    e.preventDefault();
+                                    let currentSlideIndex = $slider.slick("slickCurrentSlide");
+                                    
+                                    checkSliderEdge(currentSlideIndex);
+                                }
+                                
                             }	
                         });
                                 
