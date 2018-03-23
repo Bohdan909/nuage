@@ -248,12 +248,12 @@ div.scroll-helper {
 }
 
 .title-main {
-    font-size: 120px;
+    font-size: 110px;
     margin-bottom: 30px;
     font-family: $fontBold;
 
     @include mid {
-        font-size: 100px;
+        font-size: 90px;
     }
 }
 
@@ -747,7 +747,7 @@ ul.cubes-main {
     }
 
     .title-main {
-        font-size: 95px;
+        font-size: 85px;
     }
 
     .quote-wrap .slide {
@@ -843,7 +843,7 @@ ul.cubes-main {
 @include tablet {
 
     .title-main {
-        font-size: 85px;
+        font-size: 75px;
         margin-bottom: 20px;
     }
 
@@ -1019,7 +1019,7 @@ ul.cubes-main {
     @media screen and (max-height: 740px){
 
         .title-main {
-            font-size: 85px;
+            font-size: 75px;
         }
 
         // .page-main {
@@ -1128,7 +1128,7 @@ ul.cubes-main {
         padding-bottom: 65px;
 
         .title-main {
-            font-size: 45px;
+            font-size: 35px;
             margin-bottom: 20px;
         }
 
@@ -1246,7 +1246,7 @@ ul.cubes-main {
         padding-bottom: 0;
 
         .title-main {
-            font-size: 45px;
+            font-size: 35px;
         }
 
         .lic-wrap {
