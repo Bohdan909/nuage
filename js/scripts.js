@@ -71,6 +71,12 @@ document.documentElement.className = document.documentElement.className.replace(
 
         setLines(); 
 
+        window.addEventListener("orientationchange", function(){
+            window.location.reload();
+            // html.classList.add("orientation-change");
+        }, true);
+
+
         // function checkMobile(){
         //     if (mobile){
         //         setLines("mobile");
@@ -85,13 +91,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
         //checkMobile();
         
-        window.addEventListener("orientationchange", function(){
-            window.location.reload();
-            //setTimeout(checkMobile, 700);
-
-            // html.classList.add("orientation-change");
-        }, true);
-
         // let mql = window.matchMedia("(orientation: portrait)");
         
         // mql.addListener(function(m) {
