@@ -67,8 +67,6 @@
     }
 }
 
-
-
 .page-main {
     
     .text-block {
@@ -1216,7 +1214,8 @@ ul.cubes-main {
         }
 
         .page-main .text-block {
-            padding: 35px 0 30px 350px;
+            padding: 35px 0 30px;
+            margin-left: 330px;
             // width: 200px;
             // width: calc(100vw - 329px);
             // width: -webkit-calc(100vw - 329px);

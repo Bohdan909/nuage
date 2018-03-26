@@ -454,7 +454,8 @@ div.mission-text-slider {
     background-position: 50% 50%;
 }
 
-@include mobile {
+@media screen and (max-width: 767px), 
+       screen and (max-width: 815px) and (orientation: landscape){
 
     .page-mission .cubes {
         display: none;
@@ -578,8 +579,6 @@ div.mission-text-slider {
 
 @include tablet-only {
 
-    
-
     .mission-text-slider-wrap section > span {
         margin-bottom: 2px;
     }
@@ -644,6 +643,7 @@ div.mission-text-slider {
             width: 400px;
             height: 400px;
         }
+
         .video-calibrate {
             left: calc(-100% - 400px);
             transform: translate3d(356px, 0, 0);
@@ -661,7 +661,8 @@ div.mission-text-slider {
     }
 }
 
-@include mobile {
+@media screen and (max-width: 767px), 
+       screen and (max-width: 815px) and (orientation: landscape){
 
     .mission-video-play,
     .video-calibrate {
@@ -684,9 +685,11 @@ div.mission-text-slider {
     div.mission-text {
         padding: 35px 0 0;
         border: none;
+
+        p {
+            max-height: 100%;
+        }
     }
-
-
 
     .mission-text-slider-wrap {
         padding-top: 35px;
@@ -761,7 +764,6 @@ div.mission-text-slider {
     }
 
     .video-calibrate {
-        
         left: calc(-100% + 200px);
 
         &.open {
@@ -800,9 +802,9 @@ div.mission-text-slider {
     }
 }
 
-// Tablets porttrait
+// Tablets portrait
 @media (min-width: 426px) 
-  and (max-width: 767px) {
+   and (max-width: 767px) {
     @include port {
         .video-calibrate,
         .mission-video-play {
@@ -876,21 +878,22 @@ div.mission-text-slider {
 }
 @media only screen
     and (min-width: 1280px) {
-        .mission-video-play {
-            transition: transform 0.6s $easing, width 0.6s $easing, height 0.6s $easing;
-        }
-        .video-calibrate.open {
-            transition: transform 0.6s $easing, width 1.0s $easing, height 1.0s $easing;
-        }
-        .video-calibrate:not(.open):hover {
-            transform: translate3d(356px,0,0) scale(0.86);
-            transition: transform 0.6s $easing 0.16s, width 1.0s $easing, height 1.0s $easing;
-        }
-        .video-calibrate:not(.open):hover .mission-video-play{
-            transform: translate(-50%, -50%) scale(1.14);
-            transition: transform 0.6s $easing;
-            // width: 380px;
-            // height: 380px;
-        }
+
+    .mission-video-play {
+        transition: transform 0.6s $easing, width 0.6s $easing, height 0.6s $easing;
     }
+    .video-calibrate.open {
+        transition: transform 0.6s $easing, width 1.0s $easing, height 1.0s $easing;
+    }
+    .video-calibrate:not(.open):hover {
+        transform: translate3d(356px,0,0) scale(0.86);
+        transition: transform 0.6s $easing 0.16s, width 1.0s $easing, height 1.0s $easing;
+    }
+    .video-calibrate:not(.open):hover .mission-video-play{
+        transform: translate(-50%, -50%) scale(1.14);
+        transition: transform 0.6s $easing;
+        // width: 380px;
+        // height: 380px;
+    }
+}
     
