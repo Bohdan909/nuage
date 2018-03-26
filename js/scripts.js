@@ -19,7 +19,7 @@ document.documentElement.className = document.documentElement.className.replace(
             
             textBlock.forEach(function(block){
                
-                const coef = 0.57;
+                const coef = 0.6;
                 let text = block.innerText || block.textContent || "";
                 let resultArr = [];
                 let resultHTML;
@@ -30,9 +30,10 @@ document.documentElement.className = document.documentElement.className.replace(
                     lineLength = blockWidth / (fontSize * coef);
                 } else {
                     let blockWrap = findParent(block, "animate-text-wrap");
-                    blockWidth = blockWrap.offsetWidth;
+                    blockWidth = (block.classList.contains("animate-text-p")) ? blockWrap.offsetWidth - 80 : blockWrap.offsetWidth;
                     fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
                     lineLength = blockWidth / (fontSize * coef);
+                    console.log(blockWidth);
                 }
 
                 insertToHTML();
