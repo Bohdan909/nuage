@@ -42,6 +42,7 @@ $arrowPos: -52%;
         outline: none;
         text-align: left;
         line-height: 47px;
+        transition: box-shadow 0.35s linear;
 
         &.btn-inline {
             min-width: auto;

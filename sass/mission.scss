@@ -15,8 +15,15 @@
     }
 
     .cubes {
+        transition: opacity 0.8s linear 1.2s;
         top: auto;
-        z-index: 0;
+        z-index: 999;
+
+        &.hide {
+            opacity: 0;
+            transition-delay: 0.2s;
+            transition-duration: 0.4s;
+        }
 
         li:nth-child(1) {
             bottom: 85px;
@@ -519,7 +526,7 @@ div.mission-text-slider {
 
         .title-3 {
             font-size: 22px !important;
-            line-height: 25px !important;
+            line-height: 27px !important;
         }
 
         p {

@@ -19,7 +19,7 @@ document.documentElement.className = document.documentElement.className.replace(
             
             textBlock.forEach(function(block){
                
-                const coef = 0.6;
+                const coef = 0.60;
                 let text = block.innerText || block.textContent || "";
                 let resultArr = [];
                 let resultHTML;
@@ -33,7 +33,6 @@ document.documentElement.className = document.documentElement.className.replace(
                     blockWidth = (block.classList.contains("animate-text-p")) ? blockWrap.offsetWidth - 80 : blockWrap.offsetWidth;
                     fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
                     lineLength = blockWidth / (fontSize * coef);
-                    console.log(blockWidth);
                 }
 
                 insertToHTML();
@@ -957,6 +956,7 @@ document.documentElement.className = document.documentElement.className.replace(
             let videoPlay  = document.querySelector(".mission-video-play");
             let videoCloseBtn = document.querySelector(".mission-video-close");
             let siteHeader = document.getElementById("header");
+            let videoCubes = document.querySelector(".page-mission .cubes");
             
             // var supportsVideo = !!document.createElement('video').canPlayType;
             // if (supportsVideo) {
@@ -975,6 +975,7 @@ document.documentElement.className = document.documentElement.className.replace(
                 videoWrap.addEventListener("click", function() {
                     if (!videoWrap.classList.contains("open")){
                         timer = setTimeout(videoOpen, 600);
+                        videoCubes.classList.add("hide");
                     }
                 });
 
@@ -985,6 +986,7 @@ document.documentElement.className = document.documentElement.className.replace(
     
                 videoCloseBtn.addEventListener("click", function(){
                     setTimeout(videoClose, 200);
+                    videoCubes.classList.remove("hide");
                 });
 
                 window.addEventListener('blur', function() {

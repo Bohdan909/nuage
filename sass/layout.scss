@@ -655,6 +655,10 @@ body {
     .page, .content {
         height: 100%;
     }
+
+    .page-adv .content {
+        height: calc( 600px - 98px);
+    }
 }
 
 .footer {
