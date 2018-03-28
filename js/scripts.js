@@ -438,30 +438,34 @@ document.documentElement.className = document.documentElement.className.replace(
         var ffItem = document.querySelectorAll(".feedback-filter div");
         var feedback = document.querySelectorAll(".feedback-item");
 
-        ffItem.forEach(function (item) {
-            item.addEventListener("click", function () {
-                var filterPar = item.getAttribute("data-filter");
-                var scrollY = document.querySelector(".scroll-block");
+        function ffSet(){
+            ffItem.forEach(function (item) {
+                item.addEventListener("click", function () {
+                    var filterPar = item.getAttribute("data-filter");
+                    var scrollY = document.querySelector(".scroll-block");
 
-                for (let i = 0; i < ffItem.length; i++) {
-                    ffItem[i].classList.remove("active");
-                }
-
-                scrollBar(true);
-                item.classList.remove("active");
-                this.classList.add("active");
-
-                for (let i = 0; i < feedback.length; i++) {
-                    feedback[i].classList.remove("show");
-
-                    if (filterPar == "all") {
-                        feedback[i].classList.add("show");
-                    } else if (feedback[i].getAttribute("data-feedback") === filterPar) {
-                        feedback[i].classList.add("show");
+                    for (let i = 0; i < ffItem.length; i++) {
+                        ffItem[i].classList.remove("active");
                     }
-                }
+
+                    scrollBar(true);
+                    item.classList.remove("active");
+                    this.classList.add("active");
+
+                    for (let i = 0; i < feedback.length; i++) {
+                        feedback[i].classList.remove("show");
+
+                        if (filterPar == "all") {
+                            feedback[i].classList.add("show");
+                        } else if (feedback[i].getAttribute("data-feedback") === filterPar) {
+                            feedback[i].classList.add("show");
+                        }
+                    }
+                });
             });
-        });
+        }
+
+        
 
         /* ================
            Product Hover
@@ -1160,6 +1164,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         break;
                     case "faq":
                         videoClose();
+                        ffSet();
                         break;
                     case "buy":
                         videoClose();

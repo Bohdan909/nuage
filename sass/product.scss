@@ -533,7 +533,7 @@ div.product-view-block {
 .ttl-line {
     position: relative;
     padding-bottom: 15px;
-    font-size: 10px;
+    font-size: 15px;
     margin-bottom: 12px;    
     font-family: $fontSemiBold;
     text-transform: uppercase;
@@ -1061,6 +1061,7 @@ div.product-view-block {
 @media (min-width: 768px) and (max-height: 700px){
 
     .ttl-line {
+        font-size: 11px;
         padding-bottom: 0;
         margin-bottom: 5px;
 

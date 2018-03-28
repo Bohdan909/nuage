@@ -575,6 +575,13 @@ div.mission-text-slider {
             right: -40px;
         }
     }
+
+    @media (max-height: 650px) and (min-width: 768px){
+
+        .page-mission .cubes {
+            display: none;
+        }
+    }
 }
 
 @include tablet-only {
