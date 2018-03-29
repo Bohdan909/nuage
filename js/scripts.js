@@ -1120,7 +1120,6 @@ document.documentElement.className = document.documentElement.className.replace(
                                     
                                     checkSliderEdge(currentSlideIndex);
                                 }
-                                
                             }	
                         });
                                 
