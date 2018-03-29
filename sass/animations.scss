@@ -452,16 +452,6 @@ $textA: 15px;
 }
 
 // Feedback
-.feedback-title .title-1 {
-    transition: letter-spacing 1s $easing;
-    transition-delay: 0.4s;
-    letter-spacing: 5px;
-
-    .loaded & {
-        letter-spacing: 0.3px;
-    }
-}
-
 @for $i from 1 through 17 {
 
     .answer-item:nth-child(#{$i}) .answer-head span i {
