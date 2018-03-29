@@ -125,7 +125,7 @@
 					animateBackEnd = true;
 					animateReverseEnd = true;
 
-					console.log("Back: " + animateEnd);
+					//console.log("Back: " + animateEnd);
 				} else {window.requestAnimationFrame(change);}
 			}
 
@@ -211,7 +211,7 @@
 					} 
 				} else {window.requestAnimationFrame(change);}
 
-                console.log(base.selector + " Open ended: " + base.animateOpenEnd);
+                //console.log(base.selector + " Open ended: " + base.animateOpenEnd);
             }       
 
 			//var timer = setInterval(change, 40); 
@@ -249,7 +249,7 @@
 					base.isOpened = false;
 				} else {window.requestAnimationFrame(change);}
 				
-                console.log(base.selector + " Close ended: " + base.animateCloseEnd);
+                //console.log(base.selector + " Close ended: " + base.animateCloseEnd);
             }       
 
 			//var timer = setInterval(change, 40);
@@ -266,15 +266,21 @@
 		////////// END MAIN OBJECT //////////
 
 		if (base.hasClass("object-hover")) {
+			
+			
+			var hoverArea = base.children(".hover-area");
+			if(hoverArea.length <= 0) {
+				hoverArea = base;
+			}
 
-			base.on("mouseover", function(){
+			hoverArea.on("mouseover", function(){
 				base.isHovered = true;
 				base.animateOpen(false);
 
 				//base.animateOpenEnd = false;
 			}); 
 	
-			base.on("mouseleave", function(){
+			hoverArea.on("mouseleave", function(){
 				base.isHovered = false;
 				if (!base.isOpened && !base.animateOpenEnd) {
 					setTimeout(base.animateClose, 2000);
