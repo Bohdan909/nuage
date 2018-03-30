@@ -1322,10 +1322,8 @@ document.documentElement.className = document.documentElement.className.replace(
 
             }
 
-            function ScrollManager(parentSelector, pagesArray, currentId, pageIndicatorId){
-                this.scrollParent = document.querySelector(parentSelector);
+            function ScrollManager(pagesArray, currentId, pageIndicatorId){
                 this.pageIndicator;
-                //this.pages = this.scrollParent.querySelectorAll(pagesSelector);
                 this.currentPage = null;
                 this.previousPage = null;
                 this.nextPage = null;
@@ -1405,7 +1403,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     if (pageIndicatorId != null) {
                         this.pageIndicator = document.getElementById(pageIndicatorId);
                     }
-
+                    
                     if (null != this.pagesArray && this.pagesArray.length > 1) {
                         this.clearLoadedState();
                         if (currentId != null) {
@@ -1459,18 +1457,21 @@ document.documentElement.className = document.documentElement.className.replace(
             // initialize variable by hashtag from url if it present
             let currentHashtag = window.location.hash.substr(1);
             if (currentHashtag.length == 0) {
-                currentHashtag = "main";
+                currentHashtag = null;
             }
 
-            let scrollManager = new ScrollManager('.main', [
-                new Page('main', 'Главная'),
-                new Page('advantages', 'Преимущества'),
-                new Page('assortment', 'Ассортимент'),
-                new Page('mission', 'Миссия'),
-                new Page('faq', 'Вопрос-Ответ'),
-                new Page('buy', 'Где купить?'),
-                new Page('consultation', 'Консультация')
-            ], currentHashtag, 'page-indicator');
+            let scrollManager = null;
+            if (pageScroll) {
+                scrollManager = new ScrollManager([
+                    new Page('main', 'Главная'),
+                    new Page('advantages', 'Преимущества'),
+                    new Page('assortment', 'Ассортимент'),
+                    new Page('mission', 'Миссия'),
+                    new Page('faq', 'Вопрос-Ответ'),
+                    new Page('buy', 'Где купить?'),
+                    new Page('consultation', 'Консультация')
+                ], currentHashtag, 'page-indicator');
+            }
           
             //let allBlocks = document.querySelectorAll(".page");
             
