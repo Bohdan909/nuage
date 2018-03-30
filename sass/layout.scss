@@ -304,19 +304,27 @@ body {
     }
 }
 
-.btn-menu {
+.menu-btn-block {
     position: absolute;
     top: 28px;
     right: 40px;
-    width: 21px;
+    width: 116px;
     height: 18px;
-    background: none;
     display: none;
 
     @include tablet {
         display: block;
     }
+}
 
+.btn-menu {
+    width: 21px;
+    height: 18px;
+    background: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    
     i {
         //@extend .transDef;
         transition: transform 0.2s ease-out, top 0.2s ease-out, opacity 0.2s ease-out;
@@ -889,6 +897,15 @@ body {
 
 .popup-policy {
     height: 430px;
+}
+
+#page-indicator {
+    position: absolute;
+    margin-right: 30px;
+    margin-left: -90px;
+    right: 0;
+    bottom: 0;
+    text-align: right;
 }
 
 

@@ -1210,8 +1210,9 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             // SCROLL MANAGER DEFINITION
-            function Page(pageId){
+            function Page(pageId, title){
                 this.id = pageId;
+                this.title = title;
                 this.pageElement = document.getElementById(pageId);
 
                 this.setLoaded = function(){
@@ -1302,14 +1303,21 @@ document.documentElement.className = document.documentElement.className.replace(
 
             }
 
-            function ScrollManager(parentSelector, pagesArray, currentId){
+            function ScrollManager(parentSelector, pagesArray, currentId, pageIndicatorId){
                 this.scrollParent = document.querySelector(parentSelector);
+                this.pageIndicator;
                 //this.pages = this.scrollParent.querySelectorAll(pagesSelector);
                 this.currentPage = null;
                 this.previousPage = null;
                 this.nextPage = null;
                 this.pagesArray = pagesArray;
                 this.currentPageIndex = 0;
+
+                this.displayCurrentPageTitle = function (title) {
+                    if (this.pageIndicator != null) {
+                        this.pageIndicator.querySelector('.current-page-title').innerHTML = title;
+                    }
+                }
 
                 this.displayPageByIndex = function (index) {
                     if (this.currentPage) {
@@ -1318,6 +1326,7 @@ document.documentElement.className = document.documentElement.className.replace(
                     this.currentPageIndex = index;
                     this.currentPage = this.pagesArray[index];
                     this.currentPage.load();
+                    this.displayCurrentPageTitle(this.currentPage.title);
 
                     if (index > 0) {
                         this.previousPage = this.pagesArray[index - 1];
@@ -1374,6 +1383,10 @@ document.documentElement.className = document.documentElement.className.replace(
                 };
 
                 this.init = function() {
+                    if (pageIndicatorId != null) {
+                        this.pageIndicator = document.getElementById(pageIndicatorId);
+                    }
+
                     if (null != this.pagesArray && this.pagesArray.length > 1) {
                         this.clearLoadedState();
                         if (currentId != null) {
@@ -1381,6 +1394,7 @@ document.documentElement.className = document.documentElement.className.replace(
                         } else {
                             this.displayPageByIndex(0);
                         }
+                        
                     }
                 };
                 this.init();
@@ -1430,14 +1444,14 @@ document.documentElement.className = document.documentElement.className.replace(
             }
 
             let scrollManager = new ScrollManager('.main', [
-                new Page('main'),
-                new Page('advantages'),
-                new Page('assortment'),
-                new Page('mission'),
-                new Page('faq'),
-                new Page('buy'),
-                new Page('consultation')
-            ], currentHashtag);
+                new Page('main', 'Главная'),
+                new Page('advantages', 'Преимущества'),
+                new Page('assortment', 'Ассортимент'),
+                new Page('mission', 'Миссия'),
+                new Page('faq', 'Вопрос-Ответ'),
+                new Page('buy', 'Где купить?'),
+                new Page('consultation', 'Консультация')
+            ], currentHashtag, 'page-indicator');
           
             //let allBlocks = document.querySelectorAll(".page");
             
