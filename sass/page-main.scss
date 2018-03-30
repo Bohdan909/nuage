@@ -65,6 +65,15 @@
     &:hover svg {
         opacity: 0;
     }
+
+    .hover-area {
+        position: absolute;
+        width: 48%;
+        height: 77%;
+        left: 20%;
+        top: 13%;
+        z-index: 1;
+    }
 }
 
 .page-main {
@@ -698,6 +707,11 @@ ul.cubes-main {
         // svg {
         //     display: none;
         // }
+    }
+
+    .object-main .hover-area {
+        height: 121%;
+        top: -8%;
     }
 
     @media (max-height: 1000px){
