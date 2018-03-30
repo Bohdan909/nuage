@@ -465,8 +465,27 @@ document.documentElement.className = document.documentElement.className.replace(
             });
         }
 
-        
+        /* ================
+           Map Filter
+        =================== */
 
+        if (document.body.contains(document.querySelector(".map-filter-btn"))){
+            let mapFilterBtn  = document.querySelector(".map-filter-btn");
+            let mapFilter     = document.querySelector(".map-filter");
+            let mapFilterWrap = mapFilterBtn.parentNode;
+            let mapFilterBtnSpan = mapFilterBtn.querySelector("span");
+            
+            mapFilterBtn.addEventListener("click", function(){
+                let textTgl = mapFilterBtnSpan.getAttribute("data-text-tgl");
+                let text = mapFilterBtnSpan.innerText || mapFilterBtnSpan.textContent || "";
+
+                mapFilterBtnSpan.innerHTML = textTgl;
+                mapFilterBtnSpan.setAttribute("data-text-tgl", text);
+
+                (mapFilterWrap.classList.contains("hide-filter")) ? mapFilterWrap.classList.remove("hide-filter") : mapFilterWrap.classList.add("hide-filter");
+            });
+        }    
+        
         /* ================
            Product Hover
         =================== */
