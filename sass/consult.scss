@@ -524,7 +524,8 @@ ul.tabs.tabs-panel {
     }
 }
 
-@include mobile {
+@media screen and (max-width: 767px), 
+       screen and (max-width: 815px) and (orientation: landscape){
 
     .popup-wrap {
         display: none;
@@ -532,6 +533,11 @@ ul.tabs.tabs-panel {
 
     .consult-top {
         padding-right: 0;
+        text-align: center;
+
+        .title-1, p {
+            text-align: left;
+        }
 
         ul.tabs.tabs-panel {
             position: relative;
