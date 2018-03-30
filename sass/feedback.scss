@@ -436,11 +436,17 @@ ul.feedback-filter {
     }
 }
 
-@include mobile {
+@media screen and (max-width: 767px), 
+       screen and (max-width: 815px) and (orientation: landscape){
+
+    .cursor-target {
+        text-align: center;
+    }
 
     .tab-pane.feedback-column {
         @include animation(fadeOut, 0.1s, linear);
         display: none;
+        text-align: left;
 
         &.active {
             @include animation(fadeIn, 0.1s, linear);
