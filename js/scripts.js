@@ -785,7 +785,7 @@ document.documentElement.className = document.documentElement.className.replace(
             
             if ($scheme.length) {
                 $scheme.rotate3d({
-                    'source': 'images/scheme/1_000',
+                    'source': 'images/scheme/1_00',
                     'count' : 70,
                     'auto'  : true
                 });
