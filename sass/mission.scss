@@ -526,13 +526,13 @@ div.mission-text-slider {
     .page-mission {
 
         .title-3 {
-            font-size: 22px !important;
-            line-height: 27px !important;
+            font-size: 23px !important;
+            line-height: 31px !important;
         }
 
         p {
-            font-size: 12px !important;
-            line-height: 18px !important;
+            font-size: 14px !important;
+            line-height: 22px !important;
         }
     }
 
@@ -553,6 +553,21 @@ div.mission-text-slider {
 
         p {
             height: 40px;
+        }
+    }
+
+    @media (max-width: 1280px){
+
+        .page-mission {
+
+            .title-3 {
+                font-size: 22px !important;
+            }
+
+            p {
+                font-size: 13px !important;
+                line-height: 18px !important;
+            }
         }
     }
 }
