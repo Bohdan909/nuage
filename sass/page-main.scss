@@ -136,9 +136,9 @@ div.scroll-helper {
         @include transform(translateX(-50%) scale(1));
     }
 
-    @include heightMin {
-        display: none;
-    }
+    // @include heightMin {
+    //     display: none;
+    // }
 }
 
 .ico-swipe, .ico-mouse {
