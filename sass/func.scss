@@ -666,12 +666,3 @@ $ultra-hd-width  : 3840px;
     letter-spacing: 0.7px;
     text-transform: uppercase;
 }
-
-.sm {
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    -moz-perspective: 1000;
-    perspective: 1000;
-}
