@@ -418,9 +418,12 @@ document.documentElement.className = document.documentElement.className.replace(
             let activeTab = tabs.querySelector(".tab.active");
             if (line) {
                 // setTimeout(function(){
+                    let lineWidth = activeTab.querySelector("span").offsetWidth;
                     let offset = activeTab.getBoundingClientRect().left - tabs.getBoundingClientRect().left;
-                    let leftValue = offset + (activeTab.offsetWidth - 35) / 2;
+                    let leftValue = offset + (activeTab.offsetWidth - (lineWidth - 26));
+                    console.log(offset);
                     line.style.left = leftValue + "px";
+                    line.style.width = lineWidth - 52 + "px";
                 // }, 250);
             }
         }

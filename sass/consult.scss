@@ -91,10 +91,9 @@ ul.tabs.tabs-panel {
         opacity: 0;
         bottom: 0;
         height: 2px;
-        width: 35px;
+        min-width: 35px;
         background-color: #a4caef;
-
-        transition: left 0.3s $easing, opacity 0.2s linear 0.5s;
+        transition: left 0.5s $easing, width 0.5s $easing, opacity 0.2s linear 0.5s;
 
         .loaded & {
             opacity: 1;

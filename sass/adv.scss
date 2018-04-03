@@ -91,7 +91,6 @@
 	float: left;
 }
 
-
 // Points
 .points {
 	position: absolute;
@@ -917,17 +916,17 @@
 		top: -75px;
 	}
 
-	.scheme-nav {
-		display: block;
-	}
+	// .scheme-nav {
+	// 	display: block;
+	// }
 
 	.scheme-desc-inner {
 		top: 50px;
 	}
 
-	.object-scheme-wrap .points {
-		display: none;		
-	}
+	// .object-scheme-wrap .points {
+	// 	display: none;		
+	// }
 }
 
 @media (min-width: 768px) and (max-height: 650px){
