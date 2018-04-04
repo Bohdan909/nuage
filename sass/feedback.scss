@@ -540,7 +540,7 @@ ul.feedback-filter {
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    background-color: #a6ccf0;
+    background-color: #8faddb;
     transform: scale(0);
     z-index: 99999;
     font-family: $fontMed;
@@ -557,12 +557,12 @@ ul.feedback-filter {
 
     &:before {
         @include st(6px, #fff, -45deg);
-        top: 11px;
+        top: 10px;
     }
 
     &:after {
         @include st(6px, #fff, 135deg);  
-        bottom: 11px; 
+        bottom: 10px; 
     }
 
     .touchevents & {
