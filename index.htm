@@ -2010,8 +2010,8 @@
 						</ul>
 					</div>
 				</div>
-
 			</div>
+
 			<div id="consultation" class="page page-consult loaded">
 				
 				<!-- Content -->
@@ -2041,28 +2041,42 @@
 									<div class="consult-form-block">
 										<div class="consult-form-left animate-slide">
 											<div class="form-item">
-												<input placeholder="фио" type="text">
+												<input type="text" required>
+												<label>фио</label>
+												<div class="form-item-line"></div>
 											</div>	
 											<div class="form-item">
-												<input placeholder="ваш e-mail" type="email">
+												<input type="email" required>
+												<label>ваш e-mail</label>
+												<div class="form-item-line"></div>
 											</div>	
 											<div class="form-item">
-												<input placeholder="ваш город" type="text">
+												<input type="text" required>
+												<label>ваш город</label>
+												<div class="form-item-line"></div>
 											</div>	
 											<div class="form-item">
-												<input placeholder="ваш телефон" type="tel">
+												<input type="tel" required>
+												<label>ваш телефон</label>
+												<div class="form-item-line"></div>
 											</div>	
 											<div class="form-item">
-												<input placeholder="дата рождения" type="text">
+												<input type="text" required>
+												<label>дата рождения</label>
+												<div class="form-item-line"></div>
 											</div>	
 											<div class="form-item">
-												<input placeholder="тема обращения" type="text">
+												<input type="text" required>
+												<label>тема обращения</label>
+												<div class="form-item-line"></div>
 											</div>	
 										</div>
 
 										<div class="consult-form-right animate-slide">
 											<div class="form-item ta-item">
-												<textarea placeholder="текст обращения" cols="30" rows="10"></textarea>
+												<textarea cols="30" rows="10" required></textarea>
+												<label>текст обращения</label>
+												<div class="form-item-line"></div>
 											</div>
 										</div>
 									</div>
@@ -2738,6 +2752,15 @@
 						popupWrap.classList.remove("open");
 					});
 				});
+
+				// Consultation Form 
+				let inputItem = document.querySelectorAll(".form-item input, .form-item textarea");
+				
+				inputItem.forEach(function(input){
+					input.addEventListener("blur", function(){
+						if (!input.validity.valid) input.value = "";
+					});
+				})
 
 				// IE forEach
 				(function(){

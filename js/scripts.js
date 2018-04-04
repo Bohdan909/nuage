@@ -766,17 +766,6 @@ document.documentElement.className = document.documentElement.className.replace(
             ElementCursor.setCursor();
         });
 
-
-        /* ==============
-           Forms
-        ================= */
-
-        $("input, textarea").focus(function(){
-            $(this).data("placeholder", $(this).attr("placeholder")).attr("placeholder", "");
-        }).blur(function () {
-            $(this).attr("placeholder", $(this).data("placeholder"));
-        });
-
         scrollBar();
 
         windowSize();
