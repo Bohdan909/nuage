@@ -234,6 +234,7 @@
 		font-size: 15px;
 		letter-spacing: 0.5px;
 		white-space: nowrap;
+		text-transform: uppercase;
 		font-family: $fontMed;
 	}
 }
@@ -1143,6 +1144,10 @@
 	.scheme-desc .title-1 {
 		font-size: 25px;
 		line-height: 35px;
+	}
+
+	.point-name span {
+		font-size: 12px;
 	}
 }
 

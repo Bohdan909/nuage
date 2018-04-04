@@ -466,6 +466,20 @@ body {
     }
 }
 
+@include mobile-min {
+
+    #header {
+
+        .logo {
+            left: 32px;
+        }
+
+        .menu-btn-block {
+            right: 32px;
+        }
+    }
+}
+
 
 @media (min-width: 1025px) {
 
