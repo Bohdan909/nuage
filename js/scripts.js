@@ -978,6 +978,8 @@ document.documentElement.className = document.documentElement.className.replace(
             let timer = null;
 
             let touch = document.querySelector("html").classList.contains("touchevents");
+            let videoWrapper = document.querySelector(".video-block-wrapper");
+            let videoContent = videoWrapper.querySelector(".mission-video-content");
             let videoWrap  = document.querySelector(".video-calibrate");
             let videoPlay  = document.querySelector(".mission-video-play");
             let videoCloseBtn = document.querySelector(".mission-video-close");
@@ -993,20 +995,21 @@ document.documentElement.className = document.documentElement.className.replace(
                 video.addEventListener('canplay', function() {
                     console.log("Video state: " + video.readyState);
                     
-                    if(video.readyState >= 3) {
-                        videoPlay.querySelector(".preview-image").style.opacity = "0";
-                    }
+                    // if(video.readyState >= 3) {
+                    //     videoPlay.querySelector(".preview-image").style.opacity = "0";
+                    // }
                 }, false);
 
                 videoWrap.addEventListener("click", function() {
-                    if (!videoWrap.classList.contains("open")){
-                        timer = setTimeout(videoOpen, 600);
+                    if (!videoWrapper.classList.contains("open")){
+                        //timer = setTimeout(videoOpen, 600);
+                        videoOpen()
                         videoCubes.classList.add("hide");
                     }
                 });
 
                 videoWrap.addEventListener("mouseleave", function(){
-                    clearTimeout(timer);
+                    //clearTimeout(timer);
                     //setTimeout(videoClose, 200);
                 });
     
@@ -1064,10 +1067,10 @@ document.documentElement.className = document.documentElement.className.replace(
                 //video.play();
                 playVideoFromStart(video, false);
                 
-                videoWrap.classList.add("open");
+                videoWrapper.classList.add("open");
                 
-                videoWrap.addEventListener("mousemove", handleVideoTouch, false);
-                videoWrap.addEventListener("touchstart", handleVideoTouch, false);
+                videoContent.addEventListener("mousemove", handleVideoTouch, false);
+                videoContent.addEventListener("touchstart", handleVideoTouch, false);
             }
 
             function videoClose(){
@@ -1075,11 +1078,11 @@ document.documentElement.className = document.documentElement.className.replace(
                 video.muted = true;
                 showSiteHeader();
                 //setCirclePos(radius);
-                videoWrap.classList.remove("open");
+                videoWrapper.classList.remove("open");
                 setTimeout(function(){ video.pause() }, 500);
                 
-                videoWrap.removeEventListener("mousemove", handleVideoTouch, false);
-                videoWrap.removeEventListener("touchstart", handleVideoTouch, false);
+                videoContent.removeEventListener("mousemove", handleVideoTouch, false);
+                videoContent.removeEventListener("touchstart", handleVideoTouch, false);
             }
 
             

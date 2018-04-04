@@ -741,3 +741,24 @@ $textA: 15px;
         }
     }
 }
+
+@keyframes videoFadeIn {
+
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes videoFadeOut {
+    1% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
