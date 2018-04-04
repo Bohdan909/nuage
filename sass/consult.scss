@@ -135,6 +135,7 @@ ul.tabs.tabs-panel {
 
     .consult-form-left, .consult-form-right {
         @include border-rad(10px);
+        overflow: hidden;
         background-image: linear-gradient(-180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 10%, rgb(255,255,255) 100%);
         box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
         -webkit-box-shadow: 0px 8px 7px 0px rgba(235, 238, 241, 0.35);
@@ -172,33 +173,104 @@ ul.tabs.tabs-panel {
 
 
 .form-item {
+    position: relative;
     height: 73px;
+    cursor: pointer;
     border-bottom: 1px solid $borColor;
-
-    input, textarea {
-        padding-left: 30px;
+    cursor: pointer;
+    
+    input, textarea, label {
         width: 100%;
-        height: 100%;
+        padding-left: 30px;
         font-family: $fontMed;
-        border: none;
-        background: none;
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 0.8px;
+    }
 
+    label {
+        @extend .ctrVert;
+        transition: transform 0.2s linear;
+        position: absolute;
+        display: block;
+    }
+
+    .form-item-line {
+        position: absolute;
+        height: 2px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        &:after, &:before {
+            @extend .ps;
+            transition: width 0.3s linear;
+            height: 100%;
+            background: $textCol;
+            width: 0;
+        }
+
+        &:before {
+            right: 50%;
+        }
+
+        &:after {
+            left: 50%;
+        }
+    }
+
+    input {
+        height: 50px;
+    }
+
+    input, textarea {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+        border: none;
+        background: none;
+        
         @include ph {
             color: $textCol;
+        }
+
+        &:focus {
+
+            ~ .form-item-line {
+
+                &:before, &:after {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
+    input:focus, input:valid,
+    textarea:focus, textarea:valid {
+
+        ~ label {
+            transform: translateY(-18px) !important;
+            font-size: 9px;
+            color: #919fb2;
         }
     }
 
     &.ta-item {
         height: auto;
         border: none;
+        height: 219px;
+
+        label {
+            @include transform(translateY(0px));
+            top: 32px;
+        }
 
         textarea {
-            padding: 31px 25px 25px;
+            padding: 31px 30px 25px;
+            height: 100%;
             line-height: 15px;
-            resize:none;
+            resize: none;
         }
     }
 }
@@ -630,8 +702,6 @@ ul.tabs.tabs-panel {
             background-size: cover;
         }
     }
-
-
 }
 
 @include mobile-min {
@@ -646,7 +716,7 @@ ul.tabs.tabs-panel {
 
     .form-item {
 
-        input, textarea {
+        input, textarea, label {
             padding-left: 15px;
         }
 
