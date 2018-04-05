@@ -68,6 +68,14 @@ body { margin: 0; -ms-overflow-style: scrollbar; line-height: 1; }
 
     input { line-height: normal; }
 
+    input:-webkit-autofill { 
+        background-color: rgba(255,255,255,0) !important; 
+        box-shadow: 0 0 0 30px white inset; 
+        -webkit-box-shadow: 0 0 0 30px white inset; 
+        color: $textCol !important;  
+        -webkit-text-fill-color: $textCol !important;  
+    }
+
     input::-ms-clear { display: none; }
 
     textarea:focus, input:focus { outline: none; }
