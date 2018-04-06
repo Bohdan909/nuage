@@ -781,7 +781,6 @@ document.documentElement.className = document.documentElement.className.replace(
             //////////////////////////////
             // ONE-TIME INITIALIZATIONS 
             /// for single-page app   ////
-            
 
             var $object = $('.object-main');
             var $scheme = $('.object-scheme');
@@ -796,8 +795,8 @@ document.documentElement.className = document.documentElement.className.replace(
             
             if ($scheme.length) {
                 $scheme.rotate3d({
-                    'source': 'images/scheme/1_00',
-                    'count' : 70,
+                    'source': 'images/scheme/scheme_',
+                    'count' : 63,
                     'auto'  : true
                 });
             }
@@ -963,17 +962,17 @@ document.documentElement.className = document.documentElement.className.replace(
             });
 
             // VIDEO
-            let video = document.querySelector(".mission-video video");
-            let timer = null;
+                let video = document.querySelector(".mission-video video");document.querySelector(".mission-video video");
+                let timer = null;
 
-            let touch = document.querySelector("html").classList.contains("touchevents");
-            let videoWrapper = document.querySelector(".video-block-wrapper");
-            let videoContent = videoWrapper.querySelector(".mission-video-content");
-            let videoWrap  = document.querySelector(".video-calibrate");
-            let videoPlay  = document.querySelector(".mission-video-play");
-            let videoCloseBtn = document.querySelector(".mission-video-close");
-            let siteHeader = document.getElementById("header");
-            let videoCubes = document.querySelector(".page-mission .cubes");
+                let touch = document.querySelector("html").classList.contains("touchevents");
+                let videoWrapper = document.querySelector(".video-block-wrapper");
+                let videoContent = document.querySelector(".mission-video-content");
+                let videoWrap  = document.querySelector(".video-calibrate");
+                let videoPlay  = document.querySelector(".mission-video-play");
+                let videoCloseBtn = document.querySelector(".mission-video-close");
+                let siteHeader = document.getElementById("header");
+                let videoCubes = document.querySelector(".page-mission .cubes");
             
             // var supportsVideo = !!document.createElement('video').canPlayType;
             // if (supportsVideo) {
