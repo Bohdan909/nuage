@@ -188,6 +188,11 @@ ul.tabs.tabs-panel {
         letter-spacing: 0.8px;
     }
 
+    input, textarea {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
     label {
         @extend .ctrVert;
         transition: transform 0.2s linear;
@@ -453,7 +458,7 @@ ul.tabs.tabs-panel {
     position: absolute;
     z-index: 1;
     display: none;
-    width: 500px;
+    width: 600px;
     left: 50%;
     margin-left: -235px;
     text-align: center;

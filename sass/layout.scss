@@ -448,7 +448,6 @@ body {
     }
 }
 
-
 @include mobile {
 
     .menu {
@@ -484,8 +483,8 @@ body {
 @media (min-width: 1025px) {
 
     #header {
-      transform: translateX(-50%);
-      left: 50%; 
+        transform: translateX(-50%);
+        left: 50%; 
     } 
 }
 
@@ -582,7 +581,6 @@ body {
     }
 }
 
-
 .page {
     position: relative;
     z-index: 1;
@@ -613,7 +611,6 @@ body {
         visibility: visible;
         z-index: 1;
     }
-
 }
 
 @media screen and (min-width: 1025px) {
@@ -664,6 +661,11 @@ body {
 
 @media screen and (max-width: 767px), 
        screen and (max-width: 815px) and (orientation: landscape){
+
+    #header .logo img {
+        width: 76px;
+        height: 23px;
+    }
 
     .page {
         height: auto;
@@ -915,6 +917,8 @@ body {
 
 #page-indicator {
     position: absolute;
+    height: 18px;
+    line-height: 18px;
     margin-right: 30px;
     margin-left: -90px;
     right: 0;
@@ -922,4 +926,6 @@ body {
     text-align: right;
 }
 
-
+.current-page-title {
+    @extend .text-min;
+}

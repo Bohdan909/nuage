@@ -475,7 +475,7 @@ document.documentElement.className = document.documentElement.className.replace(
         if (document.body.contains(document.querySelector(".map-filter-btn"))){
             let mapFilterBtn  = document.querySelector(".map-filter-btn");
             let mapFilter     = document.querySelector(".map-filter");
-            let mapFilterWrap = mapFilterBtn.parentNode;
+            let mapFilterWrap = document.querySelector(".map-column");
             let mapFilterBtnSpan = mapFilterBtn.querySelector("span");
             
             mapFilterBtn.addEventListener("click", function(){
@@ -485,7 +485,13 @@ document.documentElement.className = document.documentElement.className.replace(
                 mapFilterBtnSpan.innerHTML = textTgl;
                 mapFilterBtnSpan.setAttribute("data-text-tgl", text);
 
-                (mapFilterWrap.classList.contains("hide-filter")) ? mapFilterWrap.classList.remove("hide-filter") : mapFilterWrap.classList.add("hide-filter");
+                if (mapFilterWrap.classList.contains("hide-filter")) { 
+                    mapFilterWrap.classList.remove("hide-filter");
+                    mapFilterBtn.classList.remove("hide"); 
+                } else {
+                    mapFilterWrap.classList.add("hide-filter");
+                    mapFilterBtn.classList.add("hide"); 
+                } 
             });
         }    
         

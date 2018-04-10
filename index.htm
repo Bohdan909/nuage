@@ -104,10 +104,10 @@
 								личной гигиены Nuage.
 							</p>
 
-							<a class="btn btn-next animate-slide" href="#assortment">
+							<!-- <a class="btn btn-next animate-slide" href="#assortment">
 								<span>ассортимент</span>
 								<img width="15" height="12" src="images/arrow-right-f.svg" alt="">
-							</a>
+							</a> -->
 							
 							<div class="lic-wrap">
 								<ul class="lic-list">
@@ -1804,10 +1804,6 @@
 				
 				<!-- Map Column -->
 				<div class="map-column">
-					<button class="map-filter-btn">
-						<span data-text-tgl="открыть">закрыть</span>
-					</button>
-
 					<div class="map-filter">
 						<div class="loc-search animate-slide">
 							<div id="btn-loc" class="ico-loc"></div>
@@ -2010,6 +2006,10 @@
 						</ul>
 					</div>
 				</div>
+
+				<button class="map-filter-btn">
+					<span data-text-tgl="открыть">закрыть</span>
+				</button>
 			</div>
 
 			<div id="consultation" class="page page-consult loaded">
@@ -2760,13 +2760,17 @@
 					input.addEventListener("blur", function(){
 						if (!input.validity.valid) input.value = "";
 					});
+
+					input.addEventListener("focus", function(){
+						console.log("INPUT");
+					});
 				})
 
 				// IE forEach
-				(function(){
-					if (typeof NodeList.prototype.forEach === "function") return false;
-					NodeList.prototype.forEach = Array.prototype.forEach;
-				}());
+				// (function(){
+				// 	if (typeof NodeList.prototype.forEach === "function") return false;
+				// 	NodeList.prototype.forEach = Array.prototype.forEach;
+				// }());
 
 			});
 		</script>
