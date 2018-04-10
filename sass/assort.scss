@@ -1494,6 +1494,10 @@ ul.desc-list {
             transition: none;
             filter: none;
 
+            .assort-slider-img {
+                text-align: center;
+            }
+
             img {
                 @include transform(scale(1));
                 height: 210px;
@@ -1505,6 +1509,7 @@ ul.desc-list {
         }
     }
 
+    
     div.assort-desc-item {
         position: static;
         margin-right: 0;
