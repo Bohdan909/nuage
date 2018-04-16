@@ -582,10 +582,10 @@ ul.cubes-main {
     .page-main {
         .lic-desc { top: -115px; }
 
-        .text-block {
-            @include transform(translateY(0));
-            top: 27px;
-        }
+        // .text-block {
+        //     @include transform(translateY(0));
+        //     top: 27px;
+        // }
     }
 
     div.scroll-helper .ico-mouse {
