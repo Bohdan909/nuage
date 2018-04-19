@@ -53,7 +53,7 @@ $prodFooterHeightMin: 85px;
     }
 
     &.product-sprite-3 {
-        width: 31850px;
+        width: 30800px;
         background-image: url(../images/sprites/img-sprite-3.png);
     }
 
@@ -62,6 +62,7 @@ $prodFooterHeightMin: 85px;
     }
 
     &.product-sprite-5 {
+        width: 30800px;
         background-image: url(../images/sprites/img-sprite-5.png);
     }
 
@@ -754,11 +755,11 @@ div.product-view-block {
     .object-360-wrap {
 
         .btn-comp {
-            left: -35px;
+            left: -65px;
         }
 
         .btn-consist {
-            right: -35px;
+            right: -65px;
         }
     }
 
