@@ -44,28 +44,34 @@ $prodFooterHeightMin: 85px;
     background-position: center center;
     background-repeat: no-repeat;
     
+    &.product-sprite-light,
     &.product-sprite-1 {
         background-image: url(../images/sprites/img-sprite-1.png);
     }
 
+    &.product-sprite-normal,
     &.product-sprite-2 {
         background-image: url(../images/sprites/img-sprite-2.png);
     }
 
+    &.product-sprite-super,
     &.product-sprite-3 {
         width: 30800px;
         background-image: url(../images/sprites/img-sprite-3.png);
     }
 
+    &.product-sprite-night,
     &.product-sprite-4 {
         background-image: url(../images/sprites/img-sprite-4.png);
     }
 
+    &.product-sprite-night_plus,
     &.product-sprite-5 {
         width: 30800px;
         background-image: url(../images/sprites/img-sprite-5.png);
     }
 
+    &.product-sprite-daily,
     &.product-sprite-6 {
         background-image: url(../images/sprites/img-sprite-6.png);
     }

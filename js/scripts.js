@@ -7,18 +7,16 @@ document.documentElement.className = document.documentElement.className.replace(
         let pageScroll = document.querySelector(".main").classList.contains("page-scroll");
         let mobile     = window.matchMedia("(max-width: 767px)").matches;
 
-        /* ===================
-           Text Lines Animate 
-        ====================== */
-        
         function setLines(){    
             console.log("=== SET LINES ===");
-
+    
             let textBlock = document.querySelectorAll(".animate-text");
             let blockWidth, fontSize, lineLength;   
+    
+            console.log(textBlock);
             
             textBlock.forEach(function(block){
-               
+                
                 const coef = 0.60;
                 let text = block.innerText || block.textContent || "";
                 let resultArr = [];
@@ -34,43 +32,43 @@ document.documentElement.className = document.documentElement.className.replace(
                     fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
                     lineLength = blockWidth / (fontSize * coef);
                 }
-
+    
                 insertToHTML();
                 
                 function linesWrap(text, maxLength){
                     
                     let line = [];
                     let length = 0;
-
+    
                     text.split(" ").forEach(function(word){
-
+    
                         if ((length + word.length) >= maxLength){
                             resultArr.push("<div>" + line.join(" ") + "</div>");
                             line = []; 
                             length = 0;
                         }
-
+    
                         length += word.length + 1;
                         line.push(word);
                     });
-
+    
                     if (line.length > 0) resultArr.push("<div>" + line.join(" ") + "</div>");
-
+    
                     return resultArr;
                 };
-
+    
                 function insertToHTML(){
                     linesWrap(text, lineLength);
                     resultHTML = resultArr.join("");
                     block.innerHTML = resultHTML;
                 }
             });
-
+    
             console.log("=== END SET LINES ===");
         }   
-
+    
         setLines(); 
-
+    
         window.addEventListener("orientationchange", function(){
             window.location.reload();
             // html.classList.add("orientation-change");
@@ -468,239 +466,9 @@ document.documentElement.className = document.documentElement.className.replace(
             });
         }
 
-        /* ================
-           Map Filter
-        =================== */
+       
 
-        if (document.body.contains(document.querySelector(".map-filter-btn"))){
-            let mapFilterBtn  = document.querySelector(".map-filter-btn");
-            let mapFilter     = document.querySelector(".map-filter");
-            let mapFilterWrap = document.querySelector(".map-column");
-            let mapFilterBtnSpan = mapFilterBtn.querySelector("span");
-            
-            mapFilterBtn.addEventListener("click", function(){
-                let textTgl = mapFilterBtnSpan.getAttribute("data-text-tgl");
-                let text = mapFilterBtnSpan.innerText || mapFilterBtnSpan.textContent || "";
-
-                mapFilterBtnSpan.innerHTML = textTgl;
-                mapFilterBtnSpan.setAttribute("data-text-tgl", text);
-
-                if (mapFilterWrap.classList.contains("hide-filter")) { 
-                    mapFilterWrap.classList.remove("hide-filter");
-                    mapFilterBtn.classList.remove("hide"); 
-                } else {
-                    mapFilterWrap.classList.add("hide-filter");
-                    mapFilterBtn.classList.add("hide"); 
-                } 
-            });
-        }    
         
-        /* ================
-           Product Hover
-        =================== */
-
-        if (document.body.contains(document.querySelector(".product-list"))){
-            let point = document.querySelectorAll(".product-list section > div");
-            let pointAct = findPointAct(point);
-            let pointWidth = pointAct.offsetWidth;
-            let pointPos = pointAct.offsetLeft;
-            let pointBg = document.querySelector(".product-list > span");
-
-            setBg(pointWidth, pointPos);
-
-            for (let i = 0; i < point.length; i++){
-                
-                point[i].addEventListener("mouseover", function(){
-                    changeBg(this);
-                });
-
-                point[i].addEventListener("mouseleave", function(){
-                    if (!this.classList.contains("active")){
-                        pointAct = findPointAct(point);
-                        changeBg(pointAct);
-                    }
-                });
-
-                point[i].addEventListener("click", function(){                    
-                    changeBg(this);
-                });
-            }
-
-            window.addEventListener("resize", function(){
-                pointAct = findPointAct(point);
-                changeBg(pointAct);
-            });
-
-            function changeBg(pnt){
-                pointWidth = pnt.offsetWidth;
-                pointPos = pnt.offsetLeft;
-                setBg(pointWidth, pointPos);
-            }
-
-            function setBg(width, pos){
-                pointBg.setAttribute("style", "width: " + width + "px; left: " + pos + "px");
-            }
-
-            function findPointAct(point){
-
-                for (let i = 0; i < point.length; i++){
-                    if (point[i].classList.contains("active")){
-                        return point[i];
-                    }
-                }
-            }
-        }
-
-        /* ==============
-           Product Zoom
-        ================= */
-
-        (function(){
-            // const prodImg      = document.querySelector(".product-popup");
-            // const prodImgStart = document.querySelector(".product-viewer-wrap");
-            // const prodBg       = document.querySelector(".product-popup-bg");
-            // const prodImgBtn   = document.querySelectorAll(".product-popup-btns li");
-            // const img      = document.querySelector(".product-popup-img");
-            // const imgFront = document.querySelector(".product-front");
-            // const imgBack  = document.querySelector(".product-back");
-
-            // if (document.body.contains(prodImg)){
-            //     prodImgStart.addEventListener("click", function(){
-            //         if (window.innerWidth > 767){
-            //             prodImg.classList.add("open");
-            //             prodImg.classList.remove("close");
-            //         }
-            //     });
-
-            //     prodBg.addEventListener("click", function(){
-            //         prodImg.classList.remove("open");
-            //         prodImg.classList.add("close");
-            //     });
-
-            //     prodImgBtn.forEach(function(btn){
-            //         btn.addEventListener("click", function(){
-            //             let cls = btn.classList;
-
-            //             if (!cls.contains("active")){    
-            //                 prodImgBtn.forEach(function(btnAll){
-            //                     btnAll.classList.remove("active");
-            //                 });
-            //                 img.classList.toggle("flip");
-            //                 btn.classList.add("active");
-            //             }
-
-            //             // switch(true){
-            //             //     case cls.contains("front"):
-            //             //         btn.classList.add("active");
-            //             //     break;
-
-            //             //     case cls.contains("back"):
-            //             //         btn.classList.add("active");    
-            //             //     break;
-            //             // }
-            //         });
-            //     });
-            // }
-
-            const prodWrap  = document.querySelector(".product-viewer-wrap"); 
-            const prodZoom  = document.querySelector(".product-zoom");
-            const zoomImg   = document.querySelectorAll(".zoom-img");
-            
-            if (document.body.contains(prodWrap) && 
-                html.classList.contains("no-touchevents") &&
-                (prodWrap.classList.contains("product-viewer-front") ||
-                 prodWrap.classList.contains("product-viewer-back"))){
-
-                let zoomSpeed = "100ms",
-                    zoomFunction = "ease",
-                    zoomMoveSpeed = "100ms",
-                    zoomMoveFunction = "linear",
-                    scale = 1.05, mouseX, mouseY, offsetX, offsetY, zoomPosX, zoomPosY, showedImg;
-
-                var initZoomableEventHandlers = function (){
-
-                    prodWrap.addEventListener("mouseenter", function(e){
-                        
-                        for (let i = 0; i < zoomImg.length; i++){
-                            zoomImg[i].classList.remove("show");
-                        }
-
-                        if (prodWrap.classList.contains("product-viewer-front")){
-                            showedImg = prodZoom.querySelector(".zoom-img-front");
-                            showedImg.classList.add("show");
-                            prodZoom.classList.add("show");
-                        } else if (prodWrap.classList.contains("product-viewer-back")){
-                            showedImg = prodZoom.querySelector(".zoom-img-back");
-                            showedImg.classList.add("show");
-                            prodZoom.classList.add("show");
-                        }
-                        
-                        mouseX = e.pageX - this.getBoundingClientRect().left;
-                        mouseY = e.pageY - this.getBoundingClientRect().top;
-
-                        offsetX = -1 * 1.95 * mouseX;
-                        offsetY = -1 * 1.7 * mouseY;
-
-                        zoomPosX = e.pageX - 270;
-                        zoomPosY = e.pageY - 260;
-
-                        prodZoom.setAttribute("style", "left:" + zoomPosX + "px; top: " + zoomPosY + "px;");
-
-                        styles = "transform: matrix(" + scale + ",0,0," + scale + "," + offsetX + "," + offsetY + "); transition: transform " + zoomSpeed + " " + zoomFunction;
-                        showedImg.setAttribute("style", styles);
-                        
-                        showedImg.addEventListener("transitionend", function(){
-                            showedImg.classList.remove("z-entering");
-                        });
-                        
-                    });
-
-                    prodWrap.addEventListener("mousemove", function(e){
-
-                        if (!showedImg.classList.contains("z-entering") && !showedImg.classList.contains("z-exiting")) {
-                            mouseX = e.pageX - this.getBoundingClientRect().left;
-                            mouseY = e.pageY - this.getBoundingClientRect().top;
-
-                            offsetX = -1 * 1.95 * mouseX;
-                            offsetY = -1 * 1.7 * mouseY;
-
-                            zoomPosX = e.pageX - 270;
-                            zoomPosY = e.pageY - 260;
-
-                            prodZoom.setAttribute("style", "left:" + zoomPosX + "px; top: " + zoomPosY + "px;");
-
-                            styles = "transform: matrix(" + scale + ",0,0," + scale + "," + offsetX + "," + offsetY + "); transition: transform " + zoomSpeed + " " + zoomFunction;
-                            showedImg.setAttribute("style", styles);
-                        }
-                    });
-
-                    prodWrap.addEventListener("mouseleave", function(e){
-                        
-                        setTimeout(function(){
-                            prodZoom.classList.remove("show");
-                        }, 400);
-                        
-                        styles = "transform: matrix(1,0,0,1,0,0); transition: transform " + zoomSpeed + " " + zoomFunction;
-
-                        if (scale !== 1) showedImg.classList.add("z-exiting");
-                        
-                        showedImg.classList.add("z-exiting");
-                        setTimeout(function(){
-                            showedImg.setAttribute("style", styles);
-                        }, 1000);
-                        
-
-                        showedImg.addEventListener("transitionend", function(){
-                            showedImg.classList.remove("z-exiting");
-                        });
-                    });
-                };
-
-                initZoomableEventHandlers();
-            }
-            
-        }());
-
         /* ==================
            FAQ Custom Cursor
         ===================== */
@@ -1078,9 +846,6 @@ document.documentElement.className = document.documentElement.className.replace(
                 videoContent.removeEventListener("mousemove", handleVideoTouch, false);
                 videoContent.removeEventListener("touchstart", handleVideoTouch, false);
             }
-
-            
-
             
             // window.addEventListener("resize", function(){
     
@@ -1270,7 +1035,6 @@ document.documentElement.className = document.documentElement.className.replace(
                         this.pageElement.classList.remove('loaded');
                         this.pageElement.removeEventListener("transitionend", this.unload, true);
                     }
-                    
                 };
                 this.unload = this.unload.bind(this);
 
@@ -1549,7 +1313,6 @@ document.documentElement.className = document.documentElement.className.replace(
                         lastScrollTime = Date.now();
                     }
                 }
-                
             }
 
             function customScrollForScrollable(e) {
@@ -1777,7 +1540,6 @@ document.documentElement.className = document.documentElement.className.replace(
 
             };
         }
-        
     });
 
 
@@ -1792,10 +1554,8 @@ document.documentElement.className = document.documentElement.className.replace(
         // Resize Mobile
         if (winWidth !== cachedWidth) {
 
-
             cachedWidth = winWidth;
         }
-
     };
 
     (function getPerspective(){

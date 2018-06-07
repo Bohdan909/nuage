@@ -318,3 +318,31 @@ function geocodeAddress(geocoder, resultsMap, address){
     }
   });
 }
+
+document.addEventListener("load", function(){
+    
+    if (document.body.contains(document.querySelector(".map-filter-btn"))){
+        let mapFilterBtn  = document.querySelector(".map-filter-btn");
+        let mapFilter     = document.querySelector(".map-filter");
+        let mapFilterWrap = document.querySelector(".map-column");
+        let mapFilterBtnSpan = mapFilterBtn.querySelector("span");
+        
+        mapFilterBtn.addEventListener("click", function(){
+            let textTgl = mapFilterBtnSpan.getAttribute("data-text-tgl");
+            let text = mapFilterBtnSpan.innerText || mapFilterBtnSpan.textContent || "";
+
+            mapFilterBtnSpan.innerHTML = textTgl;
+            mapFilterBtnSpan.setAttribute("data-text-tgl", text);
+
+            if (mapFilterWrap.classList.contains("hide-filter")) { 
+                mapFilterWrap.classList.remove("hide-filter");
+                mapFilterBtn.classList.remove("hide"); 
+            } else {
+                mapFilterWrap.classList.add("hide-filter");
+                mapFilterBtn.classList.add("hide"); 
+            } 
+        });
+    }    
+});
+
+        

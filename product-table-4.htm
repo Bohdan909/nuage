@@ -95,7 +95,7 @@
 
 						<!-- Product Table -->
 						<div class="product-table-block animate-slide">
-							<div class="table-block table-product animate-fade">
+							<div class="table-block table-product table-product-night animate-fade">
 								<table>
 									<thead>
 										<tr>
@@ -131,13 +131,13 @@
 												</div>
 											</td>
 											<td>
-												light
+												<span>light</span>
 											</td>
 											<td>
-												light
+												<span>light</span>
 											</td>
 											<td>
-												normal
+												<span>normal</span>
 											</td>
 										</tr>
 										<tr>
@@ -150,13 +150,13 @@
 												</div>
 											</td>
 											<td>
-												normal
+												<span>normal</span>
 											</td>
 											<td>
-												normal
+												<span>normal</span>
 											</td>
 											<td>
-												normal
+												<span>normal</span>
 											</td>
 										</tr>
 										<tr>
@@ -169,10 +169,10 @@
 												</div>
 											</td>
 											<td>
-												super
+												<span>super</span>
 											</td>
 											<td>
-												super
+												<span>super</span>
 											</td>
 											<td>
 												<span>super/night</span>
@@ -194,7 +194,7 @@
 												<span>night/night plus</span>
 											</td>
 											<td>
-												night plus
+												<span>night plus</span>
 											</td>
 										</tr>
 										<tr>
@@ -213,7 +213,7 @@
 												<span>night</span>
 											</td>
 											<td>
-												night plus
+												<span>night plus</span>
 											</td>
 										</tr>
 										<tr>
@@ -226,13 +226,13 @@
 												</div>
 											</td>
 											<td>
-												daily
+												<span>daily</span>
 											</td>
 											<td>
-												daily
+												<span>daily</span>
 											</td>
 											<td>
-												daily
+												<span>daily</span>
 											</td>
 										</tr>								
 									</tbody>
@@ -257,36 +257,9 @@
         <script src="./js/modernizr-custom.js"></script> 
 		<script src="./js/jquery.mousewheel.min.js"></script>
         <script src="./js/perfect-scrollbar.jquery.min.js"></script>
-		<script src="./js/scripts.js"></script> 
+		<script src="./js/textLineAnimate.js" defer></script>
+		<script src="./js/compare.js" defer></script>
 
-		<script>
-			window.addEventListener("load", function(){
-				
-				let volItem = document.querySelectorAll(".touchevents .vol-item");
-				let bodyTouch =  document.querySelector(".touchevents body");
-
-				for (let i = 0; i < volItem.length; i++){
-
-					volItem[i].addEventListener("touchstart", function(){
-
-						for (let j = 0; j < volItem.length; j++){
-							volItem[j].classList.remove("hover");
-						}
-
-						this.classList.toggle("hover");
-					});
-
-					bodyTouch.addEventListener("touchstart", function(e){
-
-						if (!e.target.classList.contains("img")){
-							volItem[i].classList.remove("hover");
-						}
-					});
-				}
-
-				document.querySelector(".page").classList.add("loaded");
-			});
-		</script>
 
 		<!-- Live Reload -->
 		<script src="http://localhost:35729/livereload.js"></script>
