@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="ru" class="no-js"><head><meta charset="utf-8"><title>Nuage</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimal-ui"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="address=no"><link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"><link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><link type="text/css" rel="stylesheet" href="css/perfect-scrollbar.min.css"><link type="text/css" rel="stylesheet" href="css/main.css"></head><body><div class="main"><div class="page page-product"><!-- Header --><header id="header"><nav class="menu"><a href="index.htm" class="logo"><img src="images/logo.svg" alt="logo"></a><ul><li class="menu-item"><a href="index.htm#advantages">преимущества</a></li><li class="menu-item active"><a href="index.htm#assortment">ассортимент</a></li><li class="menu-item"><a href="index.htm#mission">миссия</a></li><li class="menu-item"><a href="index.htm#faq">вопрос-ответ</a></li><li class="menu-item"><a href="index.htm#buy">где купить?</a></li><li class="menu-item"><a href="index.htm#consultation">консультация</a></li></ul><div class="menu-btn-block"><div id="page-indicator"><span class="current-page-title"></span></div><button class="btn-menu"><i></i> <i></i> <i></i></button></div></nav></header><!-- / Header --><!-- Content --><div class="content"><div class="socket"><!-- Product Image --><div class="product-image-block"><div class="product-image"><div class="image animate-slide"><img src="images/a-img-1.png" alt=""></div><div class="product-text animate-text-wrap"><div class="title-2 animate-slide">Nuage Light</div><p class="animate-text">Прокладки Nuage Light специально созданы для женщин с необильными менструальными выделениями. Комфортное применение в качестве дополнительной защиты при использовании тампонов в критические дни.</p></div></div><!-- Cubes --><ul class="cubes cubes-1 figures"><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul><!-- / Cubes --></div><!-- / Product Image --><!-- Product Table --><div class="product-table-block animate-slide"><div class="table-block table-product"><table><thead><tr><th><div class="title-3">Обьем впитываемости</div></th><th><span>xs-s</span></th><th><div><div class="title-3">Размер одежды</div><span>m</span></div></th><th><span>l-xl</span></th></tr></thead><tbody><tr><td><div class="vol-item"><div class="vol-img"><img class="img" width="18" height="28" src="images/vol-1.svg" alt=""></div><span>Легкая степень</span></div></td><td><span>light</span></td><td><span>light</span></td><td>normal</td></tr><tr><td><div class="vol-item"><div class="vol-img"><img class="img" width="18" height="28" src="images/vol-2.svg" alt=""></div><span>Средняя степень</span></div></td><td>normal</td><td>normal</td><td>normal</td></tr><tr><td><div class="vol-item"><div class="vol-img"><img class="img" width="18" height="28" src="images/vol-3.svg" alt=""></div><span>Обильные</span></div></td><td>super</td><td>super</td><td>super/night</td></tr><tr><td><div class="vol-item"><div class="vol-img"><img class="img" width="18" height="28" src="images/vol-4.svg" alt=""></div><span>Очень обильные</span></div></td><td>night</td><td>night/night plus</td><td>night plus</td></tr><tr><td><div class="vol-item"><div class="vol-img"><img class="img" width="26" height="20" src="images/vol-5.svg" alt=""></div><span>Дополнительная защита ночью</span></div></td><td>night</td><td>night</td><td>night plus</td></tr><tr><td><div class="vol-item"><div class="vol-img"><img class="img" width="28" height="28" src="images/vol-6.svg" alt=""></div><span>Ежедневная защита</span></div></td><td>daily</td><td>daily</td><td>daily</td></tr></tbody></table></div><a class="btn btn-prev animate-slide" href="product-1.htm"><span>назад к nuage light</span> <img width="14" height="12" src="images/arrow-right-b.svg" alt=""></a></div><!-- / Product Table --></div></div><!-- / Content --></div></div><!-- / Main --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script><script src="./js/modernizr-custom.js"></script><script src="./js/jquery.mousewheel.min.js"></script><script src="./js/perfect-scrollbar.jquery.min.js"></script><script src="./js/scripts.js"></script><script>window.addEventListener("load", function(){
+				
+				let volItem = document.querySelectorAll(".touchevents .vol-item");
+				let bodyTouch =  document.querySelector(".touchevents body");
+
+				for (let i = 0; i < volItem.length; i++){
+
+					volItem[i].addEventListener("touchstart", function(){
+
+						for (let j = 0; j < volItem.length; j++){
+							volItem[j].classList.remove("hover");
+						}
+
+						this.classList.toggle("hover");
+					});
+
+					bodyTouch.addEventListener("touchstart", function(e){
+
+						if (!e.target.classList.contains("img")){
+							volItem[i].classList.remove("hover");
+						}
+					});
+				}
+
+				document.querySelector(".page").classList.add("loaded");
+			});</script><!-- Live Reload --><script src="http://localhost:35729/livereload.js"></script></body></html>
