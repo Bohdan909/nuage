@@ -2,7 +2,21 @@
 document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '');
 
 window.addEventListener("load", function(){
+    
+    document.querySelector(".page").classList.add("loaded");
+    localStorage.setItem("currentSlide", 0);
 
+    var preloader = document.getElementById("loader");
+    preloader.classList.add("finished");
+    var hidePreloader = function(event) {
+        preloader.classList.add("up");
+        preloader.removeEventListener("animationend",hidePreloader);
+        preloader.removeEventListener("oAnimationEnd",hidePreloader);
+        preloader.removeEventListener("webkitAnimationEnd",hidePreloader);
+    };
+    preloader.addEventListener("animationend",hidePreloader);
+    preloader.addEventListener("oAnimationEnd",hidePreloader);
+    preloader.addEventListener("webkitAnimationEnd",hidePreloader);
 
     /* ==============
         Product Zoom
