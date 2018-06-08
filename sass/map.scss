@@ -273,6 +273,8 @@
             img {
                 @include vertCenter;
                 position: absolute;
+                left: 35px;
+                max-width: 70%;
             }
         }
 
@@ -280,6 +282,26 @@
             line-height: 60px;
             white-space: nowrap;
             margin-bottom: 0;
+        }
+
+        &:nth-child(2) img {
+            width: 150px;
+            height: 15px;
+        }
+
+        &:nth-child(3) img {
+            width: 134px;
+            height: 28px;
+        }
+
+        &:nth-child(4) img {
+            width: 92px;
+            height: 30px;
+        }
+
+        &:nth-child(5) img {
+            width: 60px;
+            height: 18px;
         }
     }
 
