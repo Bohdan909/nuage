@@ -197,6 +197,25 @@ $textA: 15px;
             animation-delay: 1.5s !important;
         }
     }
+
+    @include mobile {
+        transform: translateY(15px);
+        opacity: 0;
+        transition: transform 0.9s linear, opacity 0.4s linear;
+
+        div {
+            display: inline;
+            transform: translate3d(0, 0, 0) !important;
+            animation: none !important;
+            opacity: 1 !important;
+            animation-delay: 0 !important;
+        }
+
+        .loaded & {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 }
 
 @keyframes textUp {

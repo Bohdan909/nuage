@@ -129,6 +129,7 @@
         border: none;
         background: none;
         color: $textCol;
+        height: 100%;
 
         @include ph {
             color: $textCol;

@@ -13,7 +13,7 @@ document.documentElement.className = document.documentElement.className.replace(
             let textBlock = document.querySelectorAll(".animate-text");
             let blockWidth, fontSize, lineLength;   
     
-            console.log(textBlock);
+            //console.log(textBlock);
             
             textBlock.forEach(function(block){
                 
@@ -32,35 +32,68 @@ document.documentElement.className = document.documentElement.className.replace(
                     fontSize   = parseInt(window.getComputedStyle(block, null).getPropertyValue('font-size'));
                     lineLength = blockWidth / (fontSize * coef);
                 }
-    
+
                 insertToHTML();
                 
                 function linesWrap(text, maxLength){
+
+                    if (text.indexOf('br') >= 0) {
+                        var re = /br/gi;
+                        let newText = text.replace(re, "</div><div>");
+
+                        resultArr.push("<div>" + newText + "</div>");
+                        return resultArr;
+                    } else {
+                        let line = [];
+                        let length = 0;
+
+                        text.split(" ").forEach(function(word){
+
+                            if ((length + word.length) >= maxLength) {
+                                resultArr.push("<div>" + line.join(" ") + "</div>");
+                                line = []; 
+                                length = 0;
+                            }
+                            
+                            length += word.length + 1;
+                            line.push(word);
+                        });
+
+                        if (line.length > 0) resultArr.push("<div>" + line.join(" ") + "</div>");
                     
-                    let line = [];
-                    let length = 0;
+                        return resultArr;
+                    }
+                }
+
+                function linesBreak() {
+                    let br;
+
+                    let textArr = text.split(" ");
+                    console.log(textArr);
+
+                    // text.split(" ").forEach(function(word){
+                    //     if (word == "br") {
+                    //         word = "</div><div>";
+                    //     }
+                    //     resultArr.push("<div>" + br + "</div>");
+                    // });
+
+                    //return resultArr;
+                }
     
-                    text.split(" ").forEach(function(word){
-    
-                        if ((length + word.length) >= maxLength){
-                            resultArr.push("<div>" + line.join(" ") + "</div>");
-                            line = []; 
-                            length = 0;
-                        }
-    
-                        length += word.length + 1;
-                        line.push(word);
-                    });
-    
-                    if (line.length > 0) resultArr.push("<div>" + line.join(" ") + "</div>");
-    
-                    return resultArr;
-                };
-    
-                function insertToHTML(){
+                function insertToHTML() {
                     linesWrap(text, lineLength);
                     resultHTML = resultArr.join("");
                     block.innerHTML = resultHTML;
+                }
+
+                function textSplit(text) {
+                    let wordArr = [];
+                    text.split(" ").forEach(function(word){
+                        wordArr.push(word);
+                    });
+
+                    return wordArr;
                 }
             });
     
