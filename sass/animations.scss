@@ -199,12 +199,12 @@ $textA: 15px;
     }
 
     @include mobile {
-        transform: translateY(15px);
         opacity: 0;
-        transition: transform 0.9s linear, opacity 0.4s linear;
+        transform: translate3d(0, $textA, 0);
 
         div {
             display: inline;
+            margin: 0 5px 0 0;
             transform: translate3d(0, 0, 0) !important;
             animation: none !important;
             opacity: 1 !important;
@@ -212,8 +212,7 @@ $textA: 15px;
         }
 
         .loaded & {
-            transform: translateY(0);
-            opacity: 1;
+            animation: textUp 1.3s linear forwards;
         }
     }
 }
